@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#FDF8F3">
+<title>小图鉴 · Pico Atlas</title>
+<style>
+  :root{
+    --bg:#FDF8F3; --card:#FFFFFF; --ink:#2E2A26; --ink-soft:#8A8178;
+    --brand:#F5904A; --brand-soft:#FFE8D6; --line:#EFE6DC;
+    --zh:#2E2A26; --en:#3C7DD9;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;margin:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+    display:flex; flex-direction:column; overflow:hidden;
+    padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+    user-select:none;
+  }
+
+  /* ---------- 顶栏 ---------- */
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 18px 8px;
+  }
+  .logo{font-size:19px; font-weight:800; letter-spacing:.5px}
+  .logo span{color:var(--brand)}
+  .stages{display:flex; gap:6px; background:#F2EAE0; padding:4px; border-radius:14px}
+  .stage{
+    border:0; background:transparent; font-size:13px; font-weight:700;
+    color:var(--ink-soft); padding:7px 12px; border-radius:11px; cursor:pointer;
+    font-family:inherit; transition:.18s;
+  }
+  .stage.on{background:#fff; color:var(--brand); box-shadow:0 2px 6px rgba(0,0,0,.07)}
+
+  /* ---------- 分类 ---------- */
+  nav{
+    display:flex; gap:8px; overflow-x:auto; padding:10px 18px 12px;
+    scrollbar-width:none;
+  }
+  nav::-webkit-scrollbar{display:none}
+  .chip{
+    flex:0 0 auto; border:0; cursor:pointer; font-family:inherit;
+    background:#fff; color:var(--ink-soft); font-size:14px; font-weight:600;
+    padding:10px 17px; border-radius:999px; white-space:nowrap;
+    box-shadow:0 1px 3px rgba(0,0,0,.05); transition:.18s;
+  }
+  .chip.on{background:var(--brand); color:#fff; box-shadow:0 4px 12px rgba(245,144,74,.35)}
+
+  /* ---------- 卡片 ---------- */
+  main{flex:1; display:flex; align-items:center; justify-content:center; padding:0 18px; min-height:0}
+  .card{
+    width:100%; max-width:420px; height:100%; max-height:560px;
+    border-radius:34px; background:var(--card);
+    box-shadow:0 12px 36px rgba(120,90,60,.13);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:26px 24px; gap:6px; position:relative; overflow:hidden;
+    transition:background .35s ease;
+  }
+  .pic{
+    font-size:clamp(84px,26vw,132px); line-height:1.05;
+    filter:drop-shadow(0 10px 22px rgba(0,0,0,.12));
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .card:active .pic{transform:scale(.94)}
+
+  /* 中文 / 拼音 / 英文 —— 朗读哪一段就点亮哪一段 */
+  .zh{
+    font-size:clamp(38px,11vw,54px); font-weight:800; letter-spacing:2px;
+    margin-top:10px; transition:.22s; color:var(--zh);
+  }
+  .pinyin{font-size:19px; color:var(--ink-soft); letter-spacing:1px; margin-top:2px}
+  .en{
+    font-size:clamp(22px,6.5vw,30px); font-weight:700; color:var(--en);
+    margin-top:10px; letter-spacing:.5px; transition:.22s;
+  }
+  .sent{font-size:19px; color:var(--ink-soft); text-align:center; margin-top:14px; line-height:1.5}
+  .fact{
+    font-size:14px; color:#B9AFA4; margin-top:10px; text-align:center;
+    border-top:1px dashed var(--line); padding-top:10px; line-height:1.5; width:100%;
+  }
+  .lit{opacity:1; text-shadow:0 0 24px currentColor}
+  .dim{opacity:.28}
+
+  .lines{display:flex; flex-direction:column; gap:10px; margin-top:22px; align-items:center}
+  .line{font-size:clamp(21px,6vw,27px); font-weight:700; letter-spacing:3px;
+        transition:.22s; color:var(--zh); text-align:center}
+  .line.dim{opacity:.3}
+
+  /* 古诗标题 */
+  .poem-title{font-size:16px; color:var(--ink-soft); letter-spacing:2px; margin-top:16px}
+
+  /* ---------- 底部控制 ---------- */
+  footer{
+    display:flex; align-items:center; justify-content:center; gap:22px;
+    padding:14px 24px 22px;
+  }
+  .nav-btn{
+    width:54px; height:54px; border-radius:50%; border:0; cursor:pointer;
+    background:#fff; color:var(--ink-soft); font-size:22px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08); font-family:inherit;
+    display:grid; place-items:center; transition:.18s;
+  }
+  .nav-btn:active{transform:scale(.92)}
+  .nav-btn:disabled{opacity:.3; cursor:default}
+
+  .play{
+    width:74px; height:74px; border-radius:50%; border:0; cursor:pointer;
+    background:var(--brand); color:#fff; font-size:26px; font-family:inherit;
+    display:grid; place-items:center;
+    box-shadow:0 6px 20px rgba(245,144,74,.42); transition:.18s;
+  }
+  .play:active{transform:scale(.93)}
+  .play.playing{animation:pulse 1.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 6px 20px rgba(245,144,74,.42)}50%{box-shadow:0 6px 34px rgba(245,144,74,.7)}}
+
+  /* ---------- 顶部分隔 ---------- */
+  .counter{font-size:13px; color:#C4B9AD; font-weight:600; letter-spacing:1px}
+
+  /* ---------- 提示 ---------- */
+  .toast{
+    position:fixed; bottom:112px; left:50%; transform:translateX(-50%) translateY(12px);
+    background:rgba(46,42,38,.9); color:#fff; font-size:14px;
+    padding:10px 18px; border-radius:999px; opacity:0; pointer-events:none;
+    transition:.28s; white-space:nowrap; backdrop-filter:blur(8px);
+  }
+  .toast.on{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  .todo-note{
+    position:fixed; top:0; left:0; right:0; background:#FFF3CD; color:#8A6D3B;
+    font-size:11px; text-align:center; padding:3px; letter-spacing:.5px;
+  }
+</style>
+</head>
+<body>
+
+<div class="todo-note">原型 v0.1 · 图片为 emoji 占位，待替换为统一插画</div>
+
+<header>
+  <div class="logo">小<span>图鉴</span></div>
+  <div class="stages" id="stages"></div>
+</header>
+
+<nav id="cats"></nav>
+
+<main>
+  <div class="card" id="card">
+    <div id="cardBody"></div>
+  </div>
+</main>
+
+<footer>
+  <button class="nav-btn" id="prev" aria-label="上一个">‹</button>
+  <button class="play" id="play" aria-label="连读">▶</button>
+  <button class="nav-btn" id="next" aria-label="下一个">›</button>
+</footer>
+
+<div class="counter" style="text-align:center;padding-bottom:10px" id="counter"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   数据（原型阶段：emoji 占位 + 分层内容）
+   ========================================================= */
+const S = {
+  items: [
+    // ---------- 水果 ----------
+    {id:'apple',cat:'fruits',emoji:'🍎',bg:'#FFF1E8',zh:'苹果',en:'apple',py:'píng guǒ',
+      l2:{zh:'红红的苹果',en:'A red apple.'},l3:{zh:'苹果红红的，甜甜的。',en:'Apples are red and sweet.',fact:'苹果长在树上。'}},
+    {id:'banana',cat:'fruits',emoji:'🍌',bg:'#FFF9E0',zh:'香蕉',en:'banana',py:'xiāng jiāo',
+      l2:{zh:'黄黄的香蕉',en:'A yellow banana.'},l3:{zh:'香蕉弯弯的，像月亮。',en:'A banana is curved like the moon.',fact:'香蕉要剥皮吃。'}},
+    {id:'orange',cat:'fruits',emoji:'🍊',bg:'#FFF2E2',zh:'橘子',en:'orange',py:'jú zi',
+      l2:{zh:'酸酸的橘子',en:'A sour orange.'},l3:{zh:'橘子一瓣一瓣的。',en:'An orange has many pieces.',fact:'橘子皮是橙色的。'}},
+    {id:'grape',cat:'fruits',emoji:'🍇',bg:'#F3EEFB',zh:'葡萄',en:'grape',py:'pú tao',
+      l2:{zh:'一串葡萄',en:'A bunch of grapes.'},l3:{zh:'葡萄一颗一颗，甜甜的。',en:'Grapes are small and sweet.',fact:'葡萄长在藤上。'}},
+    {id:'watermelon',cat:'fruits',emoji:'🍉',bg:'#FFECEC',zh:'西瓜',en:'watermelon',py:'xī guā',
+      l2:{zh:'大大的西瓜',en:'A big watermelon.'},l3:{zh:'西瓜红红的，有很多汁。',en:'Watermelon is red and juicy.',fact:'西瓜里有黑色的籽。'}},
+
+    // ---------- 动物 ----------
+    {id:'cat',cat:'animals',emoji:'🐱',bg:'#FFF5E8',zh:'猫',en:'cat',py:'māo',
+      l2:{zh:'小猫喵喵叫',en:'A cat says meow.'},l3:{zh:'小猫喜欢晒太阳。',en:'Cats like to sit in the sun.',fact:'猫的胡子可以量宽度。'}},
+    {id:'dog',cat:'animals',emoji:'🐶',bg:'#FFF6EE',zh:'狗',en:'dog',py:'gǒu',
+      l2:{zh:'小狗汪汪叫',en:'A dog says woof.'},l3:{zh:'小狗会摇尾巴。',en:'Dogs wag their tails.',fact:'狗的鼻子很灵。'}},
+    {id:'fish',cat:'animals',emoji:'🐟',bg:'#EAF6FB',zh:'鱼',en:'fish',py:'yú',
+      l2:{zh:'鱼在水里游',en:'A fish swims.'},l3:{zh:'小鱼在水里游来游去。',en:'Fish swim in the water.',fact:'鱼用鳃呼吸。'}},
+    {id:'rabbit',cat:'animals',emoji:'🐰',bg:'#FFF0F4',zh:'兔子',en:'rabbit',py:'tù zi',
+      l2:{zh:'长耳朵兔子',en:'A rabbit has long ears.'},l3:{zh:'兔子爱吃胡萝卜。',en:'Rabbits like carrots.',fact:'兔子跳着走路。'}},
+    {id:'chicken',cat:'animals',emoji:'🐔',bg:'#FFF7E6',zh:'鸡',en:'chicken',py:'jī',
+      l2:{zh:'小鸡叽叽叫',en:'A chick says cheep.'},l3:{zh:'鸡会下蛋。',en:'Hens lay eggs.',fact:'公鸡早上打鸣。'}},
+
+    // ---------- 电器 ----------
+    {id:'tv',cat:'appliance',emoji:'📺',bg:'#EEF1F6',zh:'电视',en:'TV',py:'diàn shì',
+      l2:{zh:'看电视',en:'Watch TV.'},l3:{zh:'看电视要离远一点。',en:'Sit far from the TV.',fact:'看完电视要关掉。'}},
+    {id:'phone',cat:'appliance',emoji:'📱',bg:'#EFF3F8',zh:'手机',en:'phone',py:'shǒu jī',
+      l2:{zh:'小小的手机',en:'A small phone.'},l3:{zh:'手机可以打电话。',en:'A phone can make calls.',fact:'看手机时间不要太长。'}},
+    {id:'fridge',cat:'appliance',emoji:'❄️',bg:'#EAF7FB',zh:'冰箱',en:'fridge',py:'bīng xiāng',
+      l2:{zh:'冷冷的冰箱',en:'A cold fridge.'},l3:{zh:'冰箱里放着好吃的。',en:'Food stays cold in a fridge.',fact:'冰箱门要关紧。'}},
+    {id:'clock',cat:'appliance',emoji:'⏰',bg:'#FFF3F2',zh:'钟',en:'clock',py:'zhōng',
+      l2:{zh:'会响的钟',en:'A clock rings.'},l3:{zh:'钟告诉我们几点钟。',en:'A clock tells the time.',fact:'钟上的针会转圈。'}},
+
+    // ---------- 日常 ----------
+    {id:'cup',cat:'daily',emoji:'🥛',bg:'#F2F7FB',zh:'杯子',en:'cup',py:'bēi zi',
+      l2:{zh:'一个杯子',en:'A cup.'},l3:{zh:'用杯子喝水。',en:'Drink water from a cup.',fact:'杯子要轻拿轻放。'}},
+    {id:'spoon',cat:'daily',emoji:'🥄',bg:'#F5F5F2',zh:'勺子',en:'spoon',py:'sháo zi',
+      l2:{zh:'小小的勺子',en:'A small spoon.'},l3:{zh:'用勺子吃饭。',en:'Eat with a spoon.',fact:'勺子可以舀汤。'}},
+    {id:'chair',cat:'daily',emoji:'🪑',bg:'#FBF4EA',zh:'椅子',en:'chair',py:'yǐ zi',
+      l2:{zh:'坐椅子',en:'Sit on a chair.'},l3:{zh:'椅子有四条腿。',en:'A chair has four legs.',fact:'坐好，不要摇椅子。'}},
+    {id:'door',cat:'daily',emoji:'🚪',bg:'#F7F0E6',zh:'门',en:'door',py:'mén',
+      l2:{zh:'打开门',en:'Open the door.'},l3:{zh:'进门要先敲门。',en:'Knock before you open the door.',fact:'门有把手。'}},
+
+    // ---------- 玩具 ----------
+    {id:'ball',cat:'toys',emoji:'⚽',bg:'#EEF7EF',zh:'球',en:'ball',py:'qiú',
+      l2:{zh:'圆圆的球',en:'A round ball.'},l3:{zh:'球会滚来滚去。',en:'A ball rolls.',fact:'球是圆的。'}},
+    {id:'blocks',cat:'toys',emoji:'🧱',bg:'#FFF6EC',zh:'积木',en:'blocks',py:'jī mù',
+      l2:{zh:'一块积木',en:'A block.'},l3:{zh:'积木可以搭高高。',en:'Blocks can build a tower.',fact:'一块一块往上放。'}},
+    {id:'doll',cat:'toys',emoji:'🧸',bg:'#FCF0EE',zh:'娃娃',en:'doll',py:'wá wa',
+      l2:{zh:'可爱的娃娃',en:'A cute doll.'},l3:{zh:'抱着娃娃睡觉。',en:'Sleep with your doll.',fact:'娃娃要轻轻抱。'}}
+  ],
+  poems: [
+    {id:'yonge',cat:'poems',emoji:'🦢',bg:'#EAF6FB',title:'咏鹅',dynasty:'唐',author:'骆宾王',
+      l1:['鹅，鹅，鹅'],l2:['鹅，鹅，鹅','曲项向天歌'],
+      l3:['鹅，鹅，鹅','曲项向天歌','白毛浮绿水','红掌拨清波'],en:'Ode to the Goose'},
+    {id:'jingyesi',cat:'poems',emoji:'🌙',bg:'#EDF0FA',title:'静夜思',dynasty:'唐',author:'李白',
+      l1:['床前明月光'],l2:['床前明月光','疑是地上霜'],
+      l3:['床前明月光','疑是地上霜','举头望明月','低头思故乡'],en:'Quiet Night Thought'},
+    {id:'chunxiao',cat:'poems',emoji:'🌸',bg:'#FFF0F5',title:'春晓',dynasty:'唐',author:'孟浩然',
+      l1:['春眠不觉晓'],l2:['春眠不觉晓','处处闻啼鸟'],
+      l3:['春眠不觉晓','处处闻啼鸟','夜来风雨声','花落知多少'],en:'Spring Dawn'},
+    {id:'minnong',cat:'poems',emoji:'🌾',bg:'#FBF6E7',title:'悯农',dynasty:'唐',author:'李绅',
+      l1:['锄禾日当午'],l2:['锄禾日当午','汗滴禾下土'],
+      l3:['锄禾日当午','汗滴禾下土','谁知盘中餐','粒粒皆辛苦'],en:'The Farmer'}
+  ]
+};
+
+const CATS = [
+  {id:'fruits',label:'水果'},
+  {id:'animals',label:'动物'},
+  {id:'appliance',label:'电器'},
+  {id:'daily',label:'日常'},
+  {id:'toys',label:'玩具'},
+  {id:'poems',label:'古诗'}
+];
+
+const LEVELS = {
+  L1:{label:'3-4',name:'3–4 岁'},
+  L2:{label:'4-5',name:'4–5 岁'},
+  L3:{label:'5-6',name:'5–6 岁'}
+};
+
+/* =========================================================
+   状态
+   ========================================================= */
+let level = 'L1';
+let cat = 'fruits';
+let idx = 0;
+let playing = false;
+let stopped = false;
+
+const $ = id => document.getElementById(id);
+const cardBody = $('cardBody');
+const card = $('card');
+
+/* =========================================================
+   语音
+   ========================================================= */
+const hasTTS = 'speechSynthesis' in window;
+let zhVoice = null, enVoice = null;
+
+function loadVoices(){
+  if(!hasTTS) return;
+  const vs = speechSynthesis.getVoices();
+  zhVoice = vs.find(v => /zh|cmn/i.test(v.lang)) || null;
+  enVoice = vs.find(v => /^en(-|_)/i.test(v.lang)) || null;
+}
+if(hasTTS){
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
+}
+
+function speak(text, lang){
+  return new Promise(resolve => {
+    if(!hasTTS || !text){ setTimeout(resolve, 260); return; }
+    try{
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = lang === 'en' ? 'en-US' : 'zh-CN';
+      u.rate = lang === 'en' ? 0.9 : 0.85;
+      u.pitch = 1.05;
+      if(lang === 'en' && enVoice) u.voice = enVoice;
+      if(lang !== 'en' && zhVoice) u.voice = zhVoice;
+      u.onend = resolve;
+      u.onerror = resolve;
+      speechSynthesis.speak(u);
+    }catch(e){ resolve(); }
+  });
+}
+
+const wait = ms => new Promise(r => setTimeout(r, ms));
+function guard(){ return stopped; }
+
+function toast(msg){
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('on');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('on'), 1600);
+}
+
+/* =========================================================
+   渲染
+   ========================================================= */
+function currentList(){
+  return cat === 'poems' ? S.poems : S.items.filter(i => i.cat === cat);
+}
+function current(){
+  const list = currentList();
+  return list[Math.min(idx, list.length - 1)];
+}
+
+function renderStages(){
+  $('stages').innerHTML = Object.entries(LEVELS).map(([k,v]) =>
+    `<button class="stage ${k===level?'on':''}" data-lv="${k}">${v.name}</button>`
+  ).join('');
+}
+
+function renderCats(){
+  $('cats').innerHTML = CATS.map(c =>
+    `<button class="chip ${c.id===cat?'on':''}" data-cat="${c.id}">${c.label}</button>`
+  ).join('');
+}
+
+function renderCard(){
+  const it = current();
+  if(!it) return;
+  card.style.background = it.bg || '#fff';
+
+  if(cat === 'poems'){
+    const lines = it[level] || it.l1;
+    cardBody.innerHTML = `
+      <div class="pic">${it.emoji}</div>
+      <div class="lines" id="lines">
+        ${lines.map((l,i) => `<div class="line" data-i="${i}">${l}</div>`).join('')}
+      </div>
+      <div class="poem-title">${it.dynasty}·${it.author}《${it.title}》</div>
+    `;
+  } else {
+    const showPinyin = level !== 'L1';
+    const extra = level === 'L2' ? it.l2 : (level === 'L3' ? it.l3 : null);
+    cardBody.innerHTML = `
+      <div class="pic" id="pic">${it.emoji}</div>
+      <div class="zh" id="zh">${it.zh}</div>
+      ${showPinyin ? `<div class="pinyin" id="pinyin">${it.py}</div>` : ''}
+      <div class="en" id="en">${it.en}</div>
+      ${extra ? `<div class="sent" id="sentZh">${extra.zh}</div>
+                 <div class="sent" id="sentEn" style="color:var(--en);font-weight:600">${extra.en}</div>` : ''}
+      ${level === 'L3' && extra?.fact ? `<div class="fact">${extra.fact}</div>` : ''}
+    `;
+  }
+  updateCounter();
+  highlight(null);
+}
+
+function updateCounter(){
+  const list = currentList();
+  $('counter').textContent = `${idx + 1} / ${list.length}`;
+  $('prev').disabled = idx === 0;
+  $('next').disabled = idx === list.length - 1;
+}
+
+function highlight(which){
+  document.querySelectorAll('.lit,.dim').forEach(e => e.classList.remove('lit','dim'));
+  if(!which) return;
+  const map = {zh:'zh', en:'en', sentZh:'sentZh', sentEn:'sentEn'};
+  const el = document.getElementById(map[which]);
+  if(el){ el.classList.add('lit'); }
+  document.querySelectorAll('#cardBody > *').forEach(e => {
+    if(e.id && e.id !== map[which]) e.classList.add('dim');
+  });
+}
+
+/* =========================================================
+   播放：连读模式（中文 ×2 → 英文 ×2 → 下一张）
+   ========================================================= */
+async function playAll(){
+  if(playing){ stopAll(); return; }
+  playing = true; stopped = false;
+  $('play').classList.add('playing');
+  $('play').textContent = '■';
+
+  while(playing && !guard()){
+    const it = current();
+
+    if(cat === 'poems'){
+      const lines = it[level] || it.l1;
+      for(let r = 0; r < 2 && !guard(); r++){
+        for(let i = 0; i < lines.length && !guard(); i++){
+          document.querySelectorAll('.line').forEach((e,j) => {
+            e.classList.toggle('dim', j !== i);
+            e.classList.toggle('lit', j === i);
+          });
+          await speak(lines[i], 'zh');
+          await wait(280);
+        }
+      }
+      document.querySelectorAll('.line').forEach(e => e.classList.remove('dim','lit'));
+    } else {
+      const extra = level === 'L2' ? it.l2 : (level === 'L3' ? it.l3 : null);
+
+      // 中文 ×2
+      for(let r = 0; r < 2 && !guard(); r++){
+        highlight('zh'); await speak(it.zh, 'zh'); await wait(600);
+        if(level !== 'L1' && extra){
+          highlight('sentZh'); await speak(extra.zh, 'zh'); await wait(600);
+        }
+      }
+      if(guard()) break;
+      await wait(300);
+
+      // 英文 ×2
+      for(let r = 0; r < 2 && !guard(); r++){
+        highlight('en'); await speak(it.en, 'en'); await wait(600);
+        if(level !== 'L1' && extra){
+          highlight('sentEn'); await speak(extra.en, 'en'); await wait(600);
+        }
+      }
+      highlight(null);
+    }
+
+    if(guard()) break;
+    await wait(1100);
+
+    if(idx < currentList().length - 1){ go(1); await wait(500); }
+    else { break; }
+  }
+  stopAll();
+}
+
+function stopAll(){
+  playing = false; stopped = true;
+  if(hasTTS) try{ speechSynthesis.cancel(); }catch(e){}
+  const p = $('play');
+  p.classList.remove('playing');
+  p.textContent = '▶';
+  highlight(null);
+  document.querySelectorAll('.line').forEach(e => e.classList.remove('dim','lit'));
+}
+
+/* 单读：点卡片任意位置，读当前内容一次 */
+async function readOne(){
+  if(playing) return;
+  const it = current();
+  if(cat === 'poems'){
+    const lines = it[level] || it.l1;
+    for(const l of lines){ await speak(l, 'zh'); await wait(200); }
+  } else {
+    await speak(it.zh, 'zh');
+    if(level !== 'L1'){
+      const extra = level === 'L2' ? it.l2 : it.l3;
+      if(extra) { await wait(300); await speak(extra.zh, 'zh'); }
+    }
+  }
+}
+
+/* =========================================================
+   导航
+   ========================================================= */
+function go(step){
+  const list = currentList();
+  const n = idx + step;
+  if(n < 0 || n >= list.length) return;
+  idx = n;
+  renderCard();
+}
+
+function switchCat(id){
+  cat = id; idx = 0;
+  renderCats(); renderCard();
+}
+
+function switchLevel(lv){
+  level = lv;
+  renderStages(); renderCard();
+  toast(`已切换到 ${LEVELS[lv].name}`);
+}
+
+/* =========================================================
+   事件
+   ========================================================= */
+document.addEventListener('click', e => {
+  const st = e.target.closest('[data-lv]');
+  if(st){ stopAll(); switchLevel(st.dataset.lv); return; }
+  const ch = e.target.closest('[data-cat]');
+  if(ch){ stopAll(); switchCat(ch.dataset.cat); return; }
+});
+
+$('prev').onclick = () => { stopAll(); go(-1); };
+$('next').onclick = () => { stopAll(); go(1); };
+$('play').onclick = e => { e.stopPropagation(); playAll(); };
+
+card.addEventListener('click', e => {
+  const line = e.target.closest('.line');
+  if(line && cat === 'poems'){ if(!playing) speak(line.textContent, 'zh'); return; }
+  if(!playing) readOne();
+});
+
+// 滑动手势
+let sx = 0, sy = 0;
+card.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+card.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - sx;
+  const dy = e.changedTouches[0].clientY - sy;
+  if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)){ stopAll(); go(dx < 0 ? 1 : -1); }
+}, {passive:true});
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight'){ stopAll(); go(1); }
+  if(e.key === 'ArrowLeft'){ stopAll(); go(-1); }
+  if(e.key === ' '){ e.preventDefault(); playAll(); }
+});
+
+/* =========================================================
+   启动
+   ========================================================= */
+renderStages();
+renderCats();
+renderCard();
+
+if(!hasTTS) toast('当前浏览器不支持语音，将只显示文字');
+</script>
+</body>
+</html>
