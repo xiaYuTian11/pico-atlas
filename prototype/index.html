@@ -8,433 +8,678 @@
 <title>小图鉴 · Pico Atlas</title>
 <style>
   :root{
-    --bg:#FDF8F3; --card:#FFFFFF; --ink:#2E2A26; --ink-soft:#8A8178;
-    --brand:#F5904A; --brand-soft:#FFE8D6; --line:#EFE6DC;
-    --zh:#2E2A26; --en:#3C7DD9;
+    --bg:#FDF8F3; --ink:#2E2A26; --ink2:#8A8178; --ink3:#B9AFA4;
+    --en:#3C7DD9; --brand:#F5904A; --line:#EFE6DC;
+    --pic:65;                       /* 图片区 flex 比例，按年龄改 */
+    --f-zh:56px; --f-py:20px; --f-en:30px; --f-sent:22px; --f-fact:18px;
+    --f-line:27px; --f-story:26px; --f-pic:clamp(112px,29vh,320px);
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{height:100%;margin:0}
+  html,body{height:100%;margin:0;overflow:hidden}
   body{
     background:var(--bg); color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
-    display:flex; flex-direction:column; overflow:hidden;
+    user-select:none; display:flex; flex-direction:column;
     padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
-    user-select:none;
   }
+  .screen{display:none;flex:1;min-height:0;flex-direction:column}
+  .screen.on{display:flex}
 
-  /* ---------- 顶栏 ---------- */
-  header{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px 18px 8px;
+  /* ══════════ 年龄选择（仅首次） ══════════ */
+  #ageScreen{padding:32px 24px;justify-content:center;gap:14px}
+  .age-title{font-size:26px;font-weight:800;text-align:center;margin-bottom:8px}
+  .age-sub{font-size:15px;color:var(--ink2);text-align:center;margin-bottom:26px}
+  .age-btn{
+    border:0;cursor:pointer;font-family:inherit;
+    background:#fff;color:var(--ink);font-size:24px;font-weight:800;
+    padding:34px;border-radius:26px;
+    box-shadow:0 4px 16px rgba(120,90,60,.10);
+    transition:.18s;
   }
-  .logo{font-size:19px; font-weight:800; letter-spacing:.5px}
+  .age-btn small{display:block;font-size:14px;font-weight:500;color:var(--ink2);margin-top:6px}
+  .age-btn:active{transform:scale(.97);background:#FFF6EE}
+
+  /* ══════════ 首页：三个入口 ══════════ */
+  #homeScreen{padding:0}
+  .home-top{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 6px}
+  .logo{font-size:20px;font-weight:800;letter-spacing:.5px}
   .logo span{color:var(--brand)}
-  .stages{display:flex; gap:6px; background:#F2EAE0; padding:4px; border-radius:14px}
-  .stage{
-    border:0; background:transparent; font-size:13px; font-weight:700;
-    color:var(--ink-soft); padding:7px 12px; border-radius:11px; cursor:pointer;
-    font-family:inherit; transition:.18s;
+  .age-tag{
+    border:0;cursor:pointer;font-family:inherit;
+    font-size:12px;font-weight:700;color:var(--ink3);
+    background:#F2EAE0;padding:6px 11px;border-radius:9px;
   }
-  .stage.on{background:#fff; color:var(--brand); box-shadow:0 2px 6px rgba(0,0,0,.07)}
+  .entries{flex:1;display:flex;flex-direction:column;gap:14px;padding:10px 20px 26px;min-height:0}
+  .entry{
+    flex:1;border:0;cursor:pointer;font-family:inherit;
+    display:flex;align-items:center;gap:22px;padding:0 30px;
+    border-radius:28px;background:#fff;color:var(--ink);
+    box-shadow:0 6px 20px rgba(120,90,60,.10);
+    transition:.18s;
+  }
+  .entry:active{transform:scale(.975)}
+  .entry .ico{font-size:52px;line-height:1}
+  .entry .txt{text-align:left}
+  .entry .t1{font-size:30px;font-weight:800;letter-spacing:2px}
+  .entry .t2{font-size:14px;color:var(--ink2);margin-top:4px;letter-spacing:1px}
+  .entry .prog{margin-left:auto;font-size:12px;color:var(--ink3);font-weight:700}
 
-  /* ---------- 分类 ---------- */
-  nav{
-    display:flex; gap:8px; overflow-x:auto; padding:10px 18px 12px;
-    scrollbar-width:none;
+  /* ══════════ 卡片流 ══════════ */
+  #cardScreen{position:relative}
+  .topbar{display:flex;align-items:center;gap:12px;padding:12px 18px 8px}
+  .home-btn{
+    width:44px;height:44px;flex:0 0 44px;border:0;border-radius:50%;cursor:pointer;
+    background:#fff;font-size:19px;box-shadow:0 2px 8px rgba(0,0,0,.07);
+    display:grid;place-items:center;font-family:inherit;
   }
-  nav::-webkit-scrollbar{display:none}
-  .chip{
-    flex:0 0 auto; border:0; cursor:pointer; font-family:inherit;
-    background:#fff; color:var(--ink-soft); font-size:14px; font-weight:600;
-    padding:10px 17px; border-radius:999px; white-space:nowrap;
-    box-shadow:0 1px 3px rgba(0,0,0,.05); transition:.18s;
-  }
-  .chip.on{background:var(--brand); color:#fff; box-shadow:0 4px 12px rgba(245,144,74,.35)}
+  .home-btn:active{transform:scale(.92)}
+  .bar-wrap{flex:1}
+  .bar{height:5px;background:#EFE6DC;border-radius:99px;overflow:hidden}
+  .bar > i{display:block;height:100%;background:var(--brand);border-radius:99px;transition:width .3s}
+  .counter{font-size:12px;color:var(--ink3);font-weight:700;margin-top:5px;text-align:right;letter-spacing:.5px}
 
-  /* ---------- 卡片 ---------- */
-  main{flex:1; display:flex; align-items:center; justify-content:center; padding:0 18px; min-height:0}
+  .stage{flex:1;display:flex;align-items:center;justify-content:center;padding:6px 18px;min-height:0}
+
   .card{
-    width:100%; max-width:420px; height:100%; max-height:560px;
-    border-radius:34px; background:var(--card);
-    box-shadow:0 12px 36px rgba(120,90,60,.13);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    padding:26px 24px; gap:6px; position:relative; overflow:hidden;
-    transition:background .35s ease;
+    width:100%;max-width:420px;height:100%;
+    border-radius:34px;overflow:hidden;
+    box-shadow:0 14px 40px rgba(120,90,60,.14);
+    display:flex;flex-direction:column;
+    transition:background .35s ease, transform .28s;
+    position:relative;
+  }
+  .pic-area{
+    flex:1 1 auto; min-height:0; overflow:hidden;
+    display:flex;align-items:center;justify-content:center;padding:14px;
   }
   .pic{
-    font-size:clamp(84px,26vw,132px); line-height:1.05;
-    filter:drop-shadow(0 10px 22px rgba(0,0,0,.12));
-    transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+    font-size:max(68px,var(--f-pic));line-height:1;
+    filter:drop-shadow(0 10px 22px rgba(0,0,0,.13));
+    transition:transform .25s cubic-bezier(.34,1.56,.64,1);
   }
-  .card:active .pic{transform:scale(.94)}
+  .card:active .pic{transform:scale(.95)}
 
-  /* 中文 / 拼音 / 英文 —— 朗读哪一段就点亮哪一段 */
-  .zh{
-    font-size:clamp(38px,11vw,54px); font-weight:800; letter-spacing:2px;
-    margin-top:10px; transition:.22s; color:var(--zh);
+  .text-area{
+    flex:0 0 auto; position:relative; z-index:1;
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+    padding:4px 22px 30px;gap:3px;
   }
-  .pinyin{font-size:19px; color:var(--ink-soft); letter-spacing:1px; margin-top:2px}
-  .en{
-    font-size:clamp(22px,6.5vw,30px); font-weight:700; color:var(--en);
-    margin-top:10px; letter-spacing:.5px; transition:.22s;
-  }
-  .sent{font-size:19px; color:var(--ink-soft); text-align:center; margin-top:14px; line-height:1.5}
+
+  .zh{font-size:var(--f-zh);font-weight:800;letter-spacing:2px;line-height:1.15;transition:.22s}
+  .py{font-size:var(--f-py);color:var(--ink2);letter-spacing:.5px}
+  .en{font-size:var(--f-en);font-weight:700;color:var(--en);letter-spacing:.4px;transition:.22s}
+  .sent-zh{font-size:var(--f-sent);color:var(--ink2);text-align:center;margin-top:8px;line-height:1.45}
+  .sent-en{font-size:var(--f-sent);color:var(--en);font-weight:600;text-align:center;line-height:1.45}
   .fact{
-    font-size:14px; color:#B9AFA4; margin-top:10px; text-align:center;
-    border-top:1px dashed var(--line); padding-top:10px; line-height:1.5; width:100%;
+    font-size:var(--f-fact);color:var(--ink3);text-align:center;
+    margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);width:100%;line-height:1.4;
   }
-  .lit{opacity:1; text-shadow:0 0 24px currentColor}
-  .dim{opacity:.28}
+  .lit{opacity:1}
+  .dim{opacity:.25}
 
-  .lines{display:flex; flex-direction:column; gap:10px; margin-top:22px; align-items:center}
-  .line{font-size:clamp(21px,6vw,27px); font-weight:700; letter-spacing:3px;
-        transition:.22s; color:var(--zh); text-align:center}
-  .line.dim{opacity:.3}
-
-  /* 古诗标题 */
-  .poem-title{font-size:16px; color:var(--ink-soft); letter-spacing:2px; margin-top:16px}
-
-  /* ---------- 底部控制 ---------- */
-  footer{
-    display:flex; align-items:center; justify-content:center; gap:22px;
-    padding:14px 24px 22px;
+  /* 古诗 */
+  .lines{display:flex;flex-direction:column;gap:9px;align-items:center}
+  .line{
+    font-size:var(--f-line);font-weight:700;letter-spacing:3px;
+    transition:.22s;text-align:center;white-space:nowrap;
   }
+  .poem-meta{font-size:14px;color:var(--ink2);letter-spacing:1.5px;margin-top:14px}
+  .poem-explain{font-size:15px;color:var(--ink3);text-align:center;margin-top:8px;line-height:1.4;padding:0 8px}
+
+  /* 故事 */
+  .story-tag{
+    position:absolute;top:14px;left:14px;font-size:12px;font-weight:800;
+    background:rgba(255,255,255,.85);color:var(--ink2);
+    padding:5px 11px;border-radius:9px;letter-spacing:1px;backdrop-filter:blur(6px);
+  }
+  .story-title{font-size:15px;color:var(--ink2);letter-spacing:1px;margin-bottom:6px}
+  .story-text{font-size:var(--f-story);font-weight:700;text-align:center;line-height:1.5;letter-spacing:1px}
+
+  /* 数数 */
+  .num-visual{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;max-width:260px}
+  .num-visual span{font-size:clamp(48px,9.5vh,82px);line-height:1}
+  .num-big{font-size:clamp(76px,22vw,104px);font-weight:900;line-height:1;color:var(--brand)}
+
+  /* 形状 */
+  .shape-visual{display:grid;place-items:center} .shape-visual svg{width:100%;height:100%;display:block}
+  
+
+  /* 底部控制 */
+  .controls{display:flex;align-items:center;justify-content:center;gap:26px;padding:10px 24px 22px}
   .nav-btn{
-    width:54px; height:54px; border-radius:50%; border:0; cursor:pointer;
-    background:#fff; color:var(--ink-soft); font-size:22px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08); font-family:inherit;
-    display:grid; place-items:center; transition:.18s;
+    width:54px;height:54px;border-radius:50%;border:0;cursor:pointer;
+    background:#fff;color:var(--ink2);font-size:22px;font-family:inherit;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);display:grid;place-items:center;transition:.18s;
   }
   .nav-btn:active{transform:scale(.92)}
-  .nav-btn:disabled{opacity:.3; cursor:default}
-
+  .nav-btn:disabled{opacity:.28}
   .play{
-    width:74px; height:74px; border-radius:50%; border:0; cursor:pointer;
-    background:var(--brand); color:#fff; font-size:26px; font-family:inherit;
-    display:grid; place-items:center;
-    box-shadow:0 6px 20px rgba(245,144,74,.42); transition:.18s;
+    width:74px;height:74px;border-radius:50%;border:0;cursor:pointer;
+    background:var(--brand);color:#fff;font-size:25px;font-family:inherit;
+    display:grid;place-items:center;box-shadow:0 6px 20px rgba(245,144,74,.42);
+    transition:.18s;
   }
   .play:active{transform:scale(.93)}
   .play.playing{animation:pulse 1.4s ease-in-out infinite}
-  @keyframes pulse{0%,100%{box-shadow:0 6px 20px rgba(245,144,74,.42)}50%{box-shadow:0 6px 34px rgba(245,144,74,.7)}}
+  @keyframes pulse{0%,100%{box-shadow:0 6px 20px rgba(245,144,74,.42)}50%{box-shadow:0 6px 36px rgba(245,144,74,.75)}}
 
-  /* ---------- 顶部分隔 ---------- */
-  .counter{font-size:13px; color:#C4B9AD; font-weight:600; letter-spacing:1px}
-
-  /* ---------- 提示 ---------- */
+  /* 提示 */
   .toast{
-    position:fixed; bottom:112px; left:50%; transform:translateX(-50%) translateY(12px);
-    background:rgba(46,42,38,.9); color:#fff; font-size:14px;
-    padding:10px 18px; border-radius:999px; opacity:0; pointer-events:none;
-    transition:.28s; white-space:nowrap; backdrop-filter:blur(8px);
+    position:fixed;bottom:118px;left:50%;transform:translateX(-50%) translateY(12px);
+    background:rgba(46,42,38,.9);color:#fff;font-size:14px;padding:10px 18px;
+    border-radius:999px;opacity:0;pointer-events:none;transition:.28s;
+    white-space:nowrap;backdrop-filter:blur(8px);z-index:99;
   }
-  .toast.on{opacity:1; transform:translateX(-50%) translateY(0)}
-
-  .todo-note{
-    position:fixed; top:0; left:0; right:0; background:#FFF3CD; color:#8A6D3B;
-    font-size:11px; text-align:center; padding:3px; letter-spacing:.5px;
-  }
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 
-<div class="todo-note">原型 v0.1 · 图片为 emoji 占位，待替换为统一插画</div>
+<!-- ══════════ 年龄选择 ══════════ -->
+<div class="screen" id="ageScreen">
+  <div class="age-title">小朋友几岁啦？</div>
+  <div class="age-sub">选一次就好，以后可以改</div>
+  <button class="age-btn" data-age="L1">3 – 4 岁<small>看图片，认东西</small></button>
+  <button class="age-btn" data-age="L2">4 – 5 岁<small>加拼音和小短句</small></button>
+  <button class="age-btn" data-age="L3">5 – 6 岁<small>加汉字和小知识</small></button>
+</div>
 
-<header>
-  <div class="logo">小<span>图鉴</span></div>
-  <div class="stages" id="stages"></div>
-</header>
-
-<nav id="cats"></nav>
-
-<main>
-  <div class="card" id="card">
-    <div id="cardBody"></div>
+<!-- ══════════ 首页 ══════════ -->
+<div class="screen" id="homeScreen">
+  <div class="home-top">
+    <div class="logo">小<span>图鉴</span></div>
+    <button class="age-tag" id="ageTag">3–4 岁</button>
   </div>
-</main>
+  <div class="entries">
+    <button class="entry" data-lane="look">
+      <div class="ico">🍎</div>
+      <div class="txt"><div class="t1">认东西</div><div class="t2">水果 · 动物 · 电器</div></div>
+      <div class="prog" data-prog="look"></div>
+    </button>
+    <button class="entry" data-lane="read">
+      <div class="ico">📖</div>
+      <div class="txt"><div class="t1">读一读</div><div class="t2">古诗 · 小故事</div></div>
+      <div class="prog" data-prog="read"></div>
+    </button>
+    <button class="entry" data-lane="play">
+      <div class="ico">🎨</div>
+      <div class="txt"><div class="t1">玩一玩</div><div class="t2">数数 · 形状</div></div>
+      <div class="prog" data-prog="play"></div>
+    </button>
+  </div>
+</div>
 
-<footer>
-  <button class="nav-btn" id="prev" aria-label="上一个">‹</button>
-  <button class="play" id="play" aria-label="连读">▶</button>
-  <button class="nav-btn" id="next" aria-label="下一个">›</button>
-</footer>
+<!-- ══════════ 卡片流 ══════════ -->
+<div class="screen" id="cardScreen">
+  <div class="topbar">
+    <button class="home-btn" id="homeBtn">🏠</button>
+    <div class="bar-wrap">
+      <div class="bar"><i id="barFill" style="width:0%"></i></div>
+      <div class="counter" id="counter">1 / 1</div>
+    </div>
+  </div>
+  <div class="stage"><div class="card" id="card"><div id="cardInner" style="display:flex;flex-direction:column;height:100%"></div></div></div>
+  <div class="controls">
+    <button class="nav-btn" id="prev">‹</button>
+    <button class="play" id="play">▶</button>
+    <button class="nav-btn" id="next">›</button>
+  </div>
+</div>
 
-<div class="counter" style="text-align:center;padding-bottom:10px" id="counter"></div>
 <div class="toast" id="toast"></div>
 
 <script>
-/* =========================================================
-   数据（原型阶段：emoji 占位 + 分层内容）
-   ========================================================= */
-const S = {
-  items: [
-    // ---------- 水果 ----------
-    {id:'apple',cat:'fruits',emoji:'🍎',bg:'#FFF1E8',zh:'苹果',en:'apple',py:'píng guǒ',
-      l2:{zh:'红红的苹果',en:'A red apple.'},l3:{zh:'苹果红红的，甜甜的。',en:'Apples are red and sweet.',fact:'苹果长在树上。'}},
-    {id:'banana',cat:'fruits',emoji:'🍌',bg:'#FFF9E0',zh:'香蕉',en:'banana',py:'xiāng jiāo',
-      l2:{zh:'黄黄的香蕉',en:'A yellow banana.'},l3:{zh:'香蕉弯弯的，像月亮。',en:'A banana is curved like the moon.',fact:'香蕉要剥皮吃。'}},
-    {id:'orange',cat:'fruits',emoji:'🍊',bg:'#FFF2E2',zh:'橘子',en:'orange',py:'jú zi',
-      l2:{zh:'酸酸的橘子',en:'A sour orange.'},l3:{zh:'橘子一瓣一瓣的。',en:'An orange has many pieces.',fact:'橘子皮是橙色的。'}},
-    {id:'grape',cat:'fruits',emoji:'🍇',bg:'#F3EEFB',zh:'葡萄',en:'grape',py:'pú tao',
-      l2:{zh:'一串葡萄',en:'A bunch of grapes.'},l3:{zh:'葡萄一颗一颗，甜甜的。',en:'Grapes are small and sweet.',fact:'葡萄长在藤上。'}},
-    {id:'watermelon',cat:'fruits',emoji:'🍉',bg:'#FFECEC',zh:'西瓜',en:'watermelon',py:'xī guā',
-      l2:{zh:'大大的西瓜',en:'A big watermelon.'},l3:{zh:'西瓜红红的，有很多汁。',en:'Watermelon is red and juicy.',fact:'西瓜里有黑色的籽。'}},
+/* ═════════════════════════════════════════════════════════
+   一、状态（localStorage 持久化）
+   ═════════════════════════════════════════════════════════ */
+const KEY = 'pico-atlas';
+const DEFAULT = () => ({
+  v: 1,
+  ageBand: null,
+  progress: {
+    look: { lastId: null, seen: [] },
+    read: { lastId: null, seen: [] },
+    play: { lastId: null, seen: [] }
+  },
+  prefs: { autoPlay: false },
+  stats: { totalSeconds: 0, lastOpenAt: null }
+});
 
-    // ---------- 动物 ----------
-    {id:'cat',cat:'animals',emoji:'🐱',bg:'#FFF5E8',zh:'猫',en:'cat',py:'māo',
-      l2:{zh:'小猫喵喵叫',en:'A cat says meow.'},l3:{zh:'小猫喜欢晒太阳。',en:'Cats like to sit in the sun.',fact:'猫的胡子可以量宽度。'}},
-    {id:'dog',cat:'animals',emoji:'🐶',bg:'#FFF6EE',zh:'狗',en:'dog',py:'gǒu',
-      l2:{zh:'小狗汪汪叫',en:'A dog says woof.'},l3:{zh:'小狗会摇尾巴。',en:'Dogs wag their tails.',fact:'狗的鼻子很灵。'}},
-    {id:'fish',cat:'animals',emoji:'🐟',bg:'#EAF6FB',zh:'鱼',en:'fish',py:'yú',
-      l2:{zh:'鱼在水里游',en:'A fish swims.'},l3:{zh:'小鱼在水里游来游去。',en:'Fish swim in the water.',fact:'鱼用鳃呼吸。'}},
-    {id:'rabbit',cat:'animals',emoji:'🐰',bg:'#FFF0F4',zh:'兔子',en:'rabbit',py:'tù zi',
-      l2:{zh:'长耳朵兔子',en:'A rabbit has long ears.'},l3:{zh:'兔子爱吃胡萝卜。',en:'Rabbits like carrots.',fact:'兔子跳着走路。'}},
-    {id:'chicken',cat:'animals',emoji:'🐔',bg:'#FFF7E6',zh:'鸡',en:'chicken',py:'jī',
-      l2:{zh:'小鸡叽叽叫',en:'A chick says cheep.'},l3:{zh:'鸡会下蛋。',en:'Hens lay eggs.',fact:'公鸡早上打鸣。'}},
+let S = DEFAULT();
 
-    // ---------- 电器 ----------
-    {id:'tv',cat:'appliance',emoji:'📺',bg:'#EEF1F6',zh:'电视',en:'TV',py:'diàn shì',
-      l2:{zh:'看电视',en:'Watch TV.'},l3:{zh:'看电视要离远一点。',en:'Sit far from the TV.',fact:'看完电视要关掉。'}},
-    {id:'phone',cat:'appliance',emoji:'📱',bg:'#EFF3F8',zh:'手机',en:'phone',py:'shǒu jī',
-      l2:{zh:'小小的手机',en:'A small phone.'},l3:{zh:'手机可以打电话。',en:'A phone can make calls.',fact:'看手机时间不要太长。'}},
-    {id:'fridge',cat:'appliance',emoji:'❄️',bg:'#EAF7FB',zh:'冰箱',en:'fridge',py:'bīng xiāng',
-      l2:{zh:'冷冷的冰箱',en:'A cold fridge.'},l3:{zh:'冰箱里放着好吃的。',en:'Food stays cold in a fridge.',fact:'冰箱门要关紧。'}},
-    {id:'clock',cat:'appliance',emoji:'⏰',bg:'#FFF3F2',zh:'钟',en:'clock',py:'zhōng',
-      l2:{zh:'会响的钟',en:'A clock rings.'},l3:{zh:'钟告诉我们几点钟。',en:'A clock tells the time.',fact:'钟上的针会转圈。'}},
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw){
+      const o = JSON.parse(raw);
+      if(o && o.v === 1){ S = Object.assign(DEFAULT(), o); return true; }
+    }
+  }catch(e){}
+  return false;
+}
+let canStore = true;
+function save(){
+  if(!canStore) return;
+  try{ localStorage.setItem(KEY, JSON.stringify(S)); }
+  catch(e){ canStore = false; }
+}
+load();
 
-    // ---------- 日常 ----------
-    {id:'cup',cat:'daily',emoji:'🥛',bg:'#F2F7FB',zh:'杯子',en:'cup',py:'bēi zi',
-      l2:{zh:'一个杯子',en:'A cup.'},l3:{zh:'用杯子喝水。',en:'Drink water from a cup.',fact:'杯子要轻拿轻放。'}},
-    {id:'spoon',cat:'daily',emoji:'🥄',bg:'#F5F5F2',zh:'勺子',en:'spoon',py:'sháo zi',
-      l2:{zh:'小小的勺子',en:'A small spoon.'},l3:{zh:'用勺子吃饭。',en:'Eat with a spoon.',fact:'勺子可以舀汤。'}},
-    {id:'chair',cat:'daily',emoji:'🪑',bg:'#FBF4EA',zh:'椅子',en:'chair',py:'yǐ zi',
-      l2:{zh:'坐椅子',en:'Sit on a chair.'},l3:{zh:'椅子有四条腿。',en:'A chair has four legs.',fact:'坐好，不要摇椅子。'}},
-    {id:'door',cat:'daily',emoji:'🚪',bg:'#F7F0E6',zh:'门',en:'door',py:'mén',
-      l2:{zh:'打开门',en:'Open the door.'},l3:{zh:'进门要先敲门。',en:'Knock before you open the door.',fact:'门有把手。'}},
-
-    // ---------- 玩具 ----------
-    {id:'ball',cat:'toys',emoji:'⚽',bg:'#EEF7EF',zh:'球',en:'ball',py:'qiú',
-      l2:{zh:'圆圆的球',en:'A round ball.'},l3:{zh:'球会滚来滚去。',en:'A ball rolls.',fact:'球是圆的。'}},
-    {id:'blocks',cat:'toys',emoji:'🧱',bg:'#FFF6EC',zh:'积木',en:'blocks',py:'jī mù',
-      l2:{zh:'一块积木',en:'A block.'},l3:{zh:'积木可以搭高高。',en:'Blocks can build a tower.',fact:'一块一块往上放。'}},
-    {id:'doll',cat:'toys',emoji:'🧸',bg:'#FCF0EE',zh:'娃娃',en:'doll',py:'wá wa',
-      l2:{zh:'可爱的娃娃',en:'A cute doll.'},l3:{zh:'抱着娃娃睡觉。',en:'Sleep with your doll.',fact:'娃娃要轻轻抱。'}}
-  ],
-  poems: [
-    {id:'yonge',cat:'poems',emoji:'🦢',bg:'#EAF6FB',title:'咏鹅',dynasty:'唐',author:'骆宾王',
-      l1:['鹅，鹅，鹅'],l2:['鹅，鹅，鹅','曲项向天歌'],
-      l3:['鹅，鹅，鹅','曲项向天歌','白毛浮绿水','红掌拨清波'],en:'Ode to the Goose'},
-    {id:'jingyesi',cat:'poems',emoji:'🌙',bg:'#EDF0FA',title:'静夜思',dynasty:'唐',author:'李白',
-      l1:['床前明月光'],l2:['床前明月光','疑是地上霜'],
-      l3:['床前明月光','疑是地上霜','举头望明月','低头思故乡'],en:'Quiet Night Thought'},
-    {id:'chunxiao',cat:'poems',emoji:'🌸',bg:'#FFF0F5',title:'春晓',dynasty:'唐',author:'孟浩然',
-      l1:['春眠不觉晓'],l2:['春眠不觉晓','处处闻啼鸟'],
-      l3:['春眠不觉晓','处处闻啼鸟','夜来风雨声','花落知多少'],en:'Spring Dawn'},
-    {id:'minnong',cat:'poems',emoji:'🌾',bg:'#FBF6E7',title:'悯农',dynasty:'唐',author:'李绅',
-      l1:['锄禾日当午'],l2:['锄禾日当午','汗滴禾下土'],
-      l3:['锄禾日当午','汗滴禾下土','谁知盘中餐','粒粒皆辛苦'],en:'The Farmer'}
-  ]
+/* ═════════════════════════════════════════════════════════
+   二、内容（一切皆卡片）
+   ═════════════════════════════════════════════════════════ */
+const SECTION_ORDER = {
+  look:  ['fruits','vegetables','animals','appliance','daily','toys','clothing','vehicle','body'],
+  read:  ['poems','stories'],
+  play:  ['numbers','shapes','drawing']
 };
 
-const CATS = [
-  {id:'fruits',label:'水果'},
-  {id:'animals',label:'动物'},
-  {id:'appliance',label:'电器'},
-  {id:'daily',label:'日常'},
-  {id:'toys',label:'玩具'},
-  {id:'poems',label:'古诗'}
+const CARDS = [
+  /* ───── 认东西 · 水果 ───── */
+  {id:'apple',lane:'look',type:'object',section:'fruits',emoji:'🍎',palette:'#FFF1E8',zh:'苹果',en:'apple',pinyin:'píng guǒ',
+    levels:{L1:{},L2:{sentence_zh:'红红的苹果',sentence_en:'A red apple.'},L3:{sentence_zh:'苹果红红的，甜甜的。',sentence_en:'Apples are red and sweet.',fact:'苹果长在树上。'}}},
+  {id:'banana',lane:'look',type:'object',section:'fruits',emoji:'🍌',palette:'#FFF9E0',zh:'香蕉',en:'banana',pinyin:'xiāng jiāo',
+    levels:{L1:{},L2:{sentence_zh:'黄黄的香蕉',sentence_en:'A yellow banana.'},L3:{sentence_zh:'香蕉弯弯的，像月亮。',sentence_en:'A banana is curved like the moon.',fact:'香蕉要剥皮吃。'}}},
+  {id:'orange',lane:'look',type:'object',section:'fruits',emoji:'🍊',palette:'#FFF2E2',zh:'橘子',en:'orange',pinyin:'jú zi',
+    levels:{L1:{},L2:{sentence_zh:'酸酸的橘子',sentence_en:'A sour orange.'},L3:{sentence_zh:'橘子一瓣一瓣的。',sentence_en:'An orange has many pieces.',fact:'橘子皮是橙色的。'}}},
+  {id:'grape',lane:'look',type:'object',section:'fruits',emoji:'🍇',palette:'#F3EEFB',zh:'葡萄',en:'grape',pinyin:'pú tao',
+    levels:{L1:{},L2:{sentence_zh:'一串葡萄',sentence_en:'A bunch of grapes.'},L3:{sentence_zh:'葡萄一颗一颗，甜甜的。',sentence_en:'Grapes are small and sweet.',fact:'葡萄长在藤上。'}}},
+  {id:'watermelon',lane:'look',type:'object',section:'fruits',emoji:'🍉',palette:'#FFECEC',zh:'西瓜',en:'watermelon',pinyin:'xī guā',
+    levels:{L1:{},L2:{sentence_zh:'大大的西瓜',sentence_en:'A big watermelon.'},L3:{sentence_zh:'西瓜红红的，有很多汁。',sentence_en:'Watermelon is red and juicy.',fact:'西瓜里有黑色的籽。'}}},
+
+  /* ───── 认东西 · 蔬菜 ───── */
+  {id:'carrot',lane:'look',type:'object',section:'vegetables',emoji:'🥕',palette:'#FFF0E4',zh:'胡萝卜',en:'carrot',pinyin:'hú luó bo',
+    levels:{L1:{},L2:{sentence_zh:'橙色的胡萝卜',sentence_en:'An orange carrot.'},L3:{sentence_zh:'兔子爱吃胡萝卜。',sentence_en:'Rabbits like carrots.',fact:'胡萝卜长在土里。'}}},
+  {id:'tomato',lane:'look',type:'object',section:'vegetables',emoji:'🍅',palette:'#FFEEEC',zh:'西红柿',en:'tomato',pinyin:'xī hóng shì',
+    levels:{L1:{},L2:{sentence_zh:'圆圆的西红柿',sentence_en:'A round tomato.'},L3:{sentence_zh:'西红柿可以炒鸡蛋。',sentence_en:'Tomatoes can be cooked with eggs.',fact:'西红柿是红色的。'}}},
+  {id:'corn',lane:'look',type:'object',section:'vegetables',emoji:'🌽',palette:'#FFFAE5',zh:'玉米',en:'corn',pinyin:'yù mǐ',
+    levels:{L1:{},L2:{sentence_zh:'黄黄的玉米',sentence_en:'Yellow corn.'},L3:{sentence_zh:'玉米一粒一粒的。',sentence_en:'Corn has many little seeds.',fact:'玉米长在秆子上。'}}},
+
+  /* ───── 认东西 · 动物 ───── */
+  {id:'cat',lane:'look',type:'object',section:'animals',emoji:'🐱',palette:'#FFF5E8',zh:'猫',en:'cat',pinyin:'māo',
+    levels:{L1:{},L2:{sentence_zh:'小猫喵喵叫',sentence_en:'A cat says meow.'},L3:{sentence_zh:'小猫喜欢晒太阳。',sentence_en:'Cats like to sit in the sun.',fact:'猫的胡子可以量宽度。'}}},
+  {id:'dog',lane:'look',type:'object',section:'animals',emoji:'🐶',palette:'#FFF6EE',zh:'狗',en:'dog',pinyin:'gǒu',
+    levels:{L1:{},L2:{sentence_zh:'小狗汪汪叫',sentence_en:'A dog says woof.'},L3:{sentence_zh:'小狗会摇尾巴。',sentence_en:'Dogs wag their tails.',fact:'狗的鼻子很灵。'}}},
+  {id:'fish',lane:'look',type:'object',section:'animals',emoji:'🐟',palette:'#EAF6FB',zh:'鱼',en:'fish',pinyin:'yú',
+    levels:{L1:{},L2:{sentence_zh:'鱼在水里游',sentence_en:'A fish swims.'},L3:{sentence_zh:'小鱼在水里游来游去。',sentence_en:'Fish swim in the water.',fact:'鱼用鳃呼吸。'}}},
+  {id:'rabbit',lane:'look',type:'object',section:'animals',emoji:'🐰',palette:'#FFF0F4',zh:'兔子',en:'rabbit',pinyin:'tù zi',
+    levels:{L1:{},L2:{sentence_zh:'长耳朵兔子',sentence_en:'A rabbit has long ears.'},L3:{sentence_zh:'兔子爱吃胡萝卜。',sentence_en:'Rabbits like carrots.',fact:'兔子跳着走路。'}}},
+  {id:'chicken',lane:'look',type:'object',section:'animals',emoji:'🐔',palette:'#FFF7E6',zh:'鸡',en:'chicken',pinyin:'jī',
+    levels:{L1:{},L2:{sentence_zh:'小鸡叽叽叫',sentence_en:'A chick says cheep.'},L3:{sentence_zh:'鸡会下蛋。',sentence_en:'Hens lay eggs.',fact:'公鸡早上打鸣。'}}},
+  {id:'elephant',lane:'look',type:'object',section:'animals',emoji:'🐘',palette:'#F1F3F7',zh:'大象',en:'elephant',pinyin:'dà xiàng',
+    levels:{L1:{},L2:{sentence_zh:'鼻子长长的大象',sentence_en:'An elephant has a long nose.'},L3:{sentence_zh:'大象的耳朵像扇子。',sentence_en:'An elephant has big ears.',fact:'大象是最大的陆地动物。'}}},
+
+  /* ───── 认东西 · 电器 ───── */
+  {id:'tv',lane:'look',type:'object',section:'appliance',emoji:'📺',palette:'#EEF1F6',zh:'电视',en:'TV',pinyin:'diàn shì',
+    levels:{L1:{},L2:{sentence_zh:'看电视',sentence_en:'Watch TV.'},L3:{sentence_zh:'看电视要离远一点。',sentence_en:'Sit far from the TV.',fact:'看完电视要关掉。'}}},
+  {id:'phone',lane:'look',type:'object',section:'appliance',emoji:'📱',palette:'#EFF3F8',zh:'手机',en:'phone',pinyin:'shǒu jī',
+    levels:{L1:{},L2:{sentence_zh:'小小的手机',sentence_en:'A small phone.'},L3:{sentence_zh:'手机可以打电话。',sentence_en:'A phone can make calls.',fact:'看手机时间不要太长。'}}},
+  {id:'fridge',lane:'look',type:'object',section:'appliance',emoji:'❄️',palette:'#E9F6FA',zh:'冰箱',en:'fridge',pinyin:'bīng xiāng',
+    levels:{L1:{},L2:{sentence_zh:'冷冷的冰箱',sentence_en:'A cold fridge.'},L3:{sentence_zh:'冰箱里放着好吃的。',sentence_en:'Food stays cold in a fridge.',fact:'冰箱门要关紧。'}}},
+  {id:'fan',lane:'look',type:'object',section:'appliance',emoji:'🌀',palette:'#EEF4F6',zh:'风扇',en:'fan',pinyin:'fēng shàn',
+    levels:{L1:{},L2:{sentence_zh:'转呀转的风扇',sentence_en:'A fan spins.'},L3:{sentence_zh:'风扇吹出凉凉的风。',sentence_en:'A fan blows cool air.',fact:'夏天用风扇。'}}},
+
+  /* ───── 认东西 · 日常 ───── */
+  {id:'cup',lane:'look',type:'object',section:'daily',emoji:'🥛',palette:'#F2F7FB',zh:'杯子',en:'cup',pinyin:'bēi zi',
+    levels:{L1:{},L2:{sentence_zh:'一个杯子',sentence_en:'A cup.'},L3:{sentence_zh:'用杯子喝水。',sentence_en:'Drink water from a cup.',fact:'杯子要轻拿轻放。'}}},
+  {id:'spoon',lane:'look',type:'object',section:'daily',emoji:'🥄',palette:'#F5F5F2',zh:'勺子',en:'spoon',pinyin:'sháo zi',
+    levels:{L1:{},L2:{sentence_zh:'小小的勺子',sentence_en:'A small spoon.'},L3:{sentence_zh:'用勺子吃饭。',sentence_en:'Eat with a spoon.',fact:'勺子可以舀汤。'}}},
+  {id:'chair',lane:'look',type:'object',section:'daily',emoji:'🪑',palette:'#FBF4EA',zh:'椅子',en:'chair',pinyin:'yǐ zi',
+    levels:{L1:{},L2:{sentence_zh:'坐椅子',sentence_en:'Sit on a chair.'},L3:{sentence_zh:'椅子有四条腿。',sentence_en:'A chair has four legs.',fact:'坐好，不要摇椅子。'}}},
+  {id:'door',lane:'look',type:'object',section:'daily',emoji:'🚪',palette:'#F7F0E6',zh:'门',en:'door',pinyin:'mén',
+    levels:{L1:{},L2:{sentence_zh:'打开门',sentence_en:'Open the door.'},L3:{sentence_zh:'进门要先敲门。',sentence_en:'Knock before you open the door.',fact:'门有把手。'}}},
+
+  /* ───── 认东西 · 玩具 ───── */
+  {id:'ball',lane:'look',type:'object',section:'toys',emoji:'⚽',palette:'#EEF7EF',zh:'球',en:'ball',pinyin:'qiú',
+    levels:{L1:{},L2:{sentence_zh:'圆圆的球',sentence_en:'A round ball.'},L3:{sentence_zh:'球会滚来滚去。',sentence_en:'A ball rolls.',fact:'球是圆的。'}}},
+  {id:'blocks',lane:'look',type:'object',section:'toys',emoji:'🧱',palette:'#FFF6EC',zh:'积木',en:'blocks',pinyin:'jī mù',
+    levels:{L1:{},L2:{sentence_zh:'一块积木',sentence_en:'A block.'},L3:{sentence_zh:'积木可以搭高高。',sentence_en:'Blocks can build a tower.',fact:'一块一块往上放。'}}},
+  {id:'doll',lane:'look',type:'object',section:'toys',emoji:'🧸',palette:'#FCF0EE',zh:'娃娃',en:'doll',pinyin:'wá wa',
+    levels:{L1:{},L2:{sentence_zh:'可爱的娃娃',sentence_en:'A cute doll.'},L3:{sentence_zh:'抱着娃娃睡觉。',sentence_en:'Sleep with your doll.',fact:'娃娃要轻轻抱。'}}},
+
+  /* ───── 读一读 · 古诗（一张卡） ───── */
+  {id:'yonge',lane:'read',type:'poem',section:'poems',emoji:'🦢',palette:'#EAF6FB',title:'咏鹅',dynasty:'唐',author:'骆宾王',
+    levels:{L1:{lines:['鹅，鹅，鹅']},L2:{lines:['鹅，鹅，鹅','曲项向天歌']},
+      L3:{lines:['鹅，鹅，鹅','曲项向天歌','白毛浮绿水','红掌拨清波'],explain:'大白鹅弯着脖子对天唱歌。'}}},
+  {id:'jingyesi',lane:'read',type:'poem',section:'poems',emoji:'🌙',palette:'#EDF0FA',title:'静夜思',dynasty:'唐',author:'李白',
+    levels:{L1:{lines:['床前明月光']},L2:{lines:['床前明月光','疑是地上霜']},
+      L3:{lines:['床前明月光','疑是地上霜','举头望明月','低头思故乡'],explain:'月光照在床前，像地上结了霜。'}}},
+  {id:'chunxiao',lane:'read',type:'poem',section:'poems',emoji:'🌸',palette:'#FFF0F5',title:'春晓',dynasty:'唐',author:'孟浩然',
+    levels:{L1:{lines:['春眠不觉晓']},L2:{lines:['春眠不觉晓','处处闻啼鸟']},
+      L3:{lines:['春眠不觉晓','处处闻啼鸟','夜来风雨声','花落知多少'],explain:'春天睡得香，醒来听见鸟儿叫。'}}},
+  {id:'minnong',lane:'read',type:'poem',section:'poems',emoji:'🌾',palette:'#FBF6E7',title:'悯农',dynasty:'唐',author:'李绅',
+    levels:{L1:{lines:['锄禾日当午']},L2:{lines:['锄禾日当午','汗滴禾下土']},
+      L3:{lines:['锄禾日当午','汗滴禾下土','谁知盘中餐','粒粒皆辛苦'],explain:'农民伯伯很辛苦，我们要爱惜粮食。'}}},
+
+  /* ───── 读一读 · 故事（每页一张卡） ───── */
+  {id:'rabbit-1',lane:'read',type:'story',section:'stories',storyId:'rabbit',page:1,pageCount:5,title:'小兔子找妈妈',emoji:'🐰',palette:'#FFF0F4',
+    levels:{L1:{text:'小兔子醒了。'},L2:{text:'小兔子睡醒了，妈妈不见了。'},L3:{text:'小兔子睡醒了，发现妈妈不在身边，有点着急。'}}},
+  {id:'rabbit-2',lane:'read',type:'story',section:'stories',storyId:'rabbit',page:2,pageCount:5,title:'小兔子找妈妈',emoji:'🌳',palette:'#F2F8EE',
+    levels:{L1:{text:'它去问大树。'},L2:{text:'它跑去问大树，看见妈妈了吗？'},L3:{text:'它跑去问大树：“大树大树，你看见我妈妈了吗？”'}}},
+  {id:'rabbit-3',lane:'read',type:'story',section:'stories',storyId:'rabbit',page:3,pageCount:5,title:'小兔子找妈妈',emoji:'🦋',palette:'#F6F2FB',
+    levels:{L1:{text:'它去问蝴蝶。'},L2:{text:'它又问蝴蝶，看见妈妈了吗？'},L3:{text:'它又问蝴蝶：“蝴蝶蝴蝶，你看见我妈妈了吗？”'}}},
+  {id:'rabbit-4',lane:'read',type:'story',section:'stories',storyId:'rabbit',page:4,pageCount:5,title:'小兔子找妈妈',emoji:'🥕',palette:'#FFF4E8',
+    levels:{L1:{text:'妈妈在拔萝卜。'},L2:{text:'原来妈妈在菜园里拔萝卜。'},L3:{text:'原来妈妈在菜园里拔萝卜，拔了一大筐。'}}},
+  {id:'rabbit-5',lane:'read',type:'story',section:'stories',storyId:'rabbit',page:5,pageCount:5,title:'小兔子找妈妈',emoji:'🤗',palette:'#FFF5F0',
+    levels:{L1:{text:'抱抱妈妈。'},L2:{text:'小兔子跑过去，抱住了妈妈。'},L3:{text:'小兔子跑过去，紧紧抱住妈妈，笑得很开心。'}}},
+
+  /* ───── 玩一玩 · 数数 ───── */
+  {id:'count-1',lane:'play',type:'number',section:'numbers',emoji:'🍎',count:1,palette:'#FFF1E8',zh:'一',en:'one',pinyin:'yī'},
+  {id:'count-2',lane:'play',type:'number',section:'numbers',emoji:'🍌',count:2,palette:'#FFF9E0',zh:'二',en:'two',pinyin:'èr'},
+  {id:'count-3',lane:'play',type:'number',section:'numbers',emoji:'🍊',count:3,palette:'#FFF2E2',zh:'三',en:'three',pinyin:'sān'},
+  {id:'count-4',lane:'play',type:'number',section:'numbers',emoji:'🍇',count:4,palette:'#F3EEFB',zh:'四',en:'four',pinyin:'sì'},
+  {id:'count-5',lane:'play',type:'number',section:'numbers',emoji:'🍓',count:5,palette:'#FFEEF1',zh:'五',en:'five',pinyin:'wǔ'},
+
+  /* ───── 玩一玩 · 形状 ───── */
+  {id:'shape-circle',lane:'play',type:'shape',section:'shapes',shape:'round',palette:'#FDF1E8',zh:'圆形',en:'circle',pinyin:'yuán xíng'},
+  {id:'shape-square',lane:'play',type:'shape',section:'shapes',shape:'square',palette:'#EDF7F2',zh:'方形',en:'square',pinyin:'fāng xíng'},
+  {id:'shape-triangle',lane:'play',type:'shape',section:'shapes',shape:'triangle',palette:'#EDF3FB',zh:'三角形',en:'triangle',pinyin:'sān jiǎo xíng'}
 ];
 
-const LEVELS = {
-  L1:{label:'3-4',name:'3–4 岁'},
-  L2:{label:'4-5',name:'4–5 岁'},
-  L3:{label:'5-6',name:'5–6 岁'}
-};
+/* 按 lane 取列表，按 section 顺序排序 */
+function listOf(lane){
+  const order = SECTION_ORDER[lane] || [];
+  return CARDS.filter(c => c.lane === lane)
+    .map((c,i) => ({c, i}))
+    .sort((a,b) => {
+      const d = order.indexOf(a.c.section) - order.indexOf(b.c.section);
+      return d !== 0 ? d : a.i - b.i;
+    })
+    .map(x => x.c);
+}
 
-/* =========================================================
-   状态
-   ========================================================= */
-let level = 'L1';
-let cat = 'fruits';
+/* ═════════════════════════════════════════════════════════
+   三、运行态
+   ═════════════════════════════════════════════════════════ */
+let lane = null;      // 'look' | 'read' | 'play'
+let list = [];        // 当前 lane 的卡片
 let idx = 0;
 let playing = false;
 let stopped = false;
+let enterAt = 0;
 
-const $ = id => document.getElementById(id);
-const cardBody = $('cardBody');
-const card = $('card');
+const $ = s => document.querySelector(s);
+const show = id => {
+  document.querySelectorAll('.screen').forEach(e => e.classList.remove('on'));
+  $('#' + id).classList.add('on');
+};
 
-/* =========================================================
-   语音
-   ========================================================= */
+const AGE_NAME = { L1:'3–4 岁', L2:'4–5 岁', L3:'5–6 岁' };
+const AGE_CSS = {
+  L1: { '--pic':65, '--f-zh':'56px', '--f-py':'20px', '--f-en':'30px', '--f-sent':'22px', '--f-fact':'18px', '--f-line':'30px', '--f-story':'28px', '--f-pic':'clamp(120px,34vh,370px)' },
+  L2: { '--pic':55, '--f-zh':'52px', '--f-py':'20px', '--f-en':'28px', '--f-sent':'22px', '--f-fact':'18px', '--f-line':'28px', '--f-story':'26px', '--f-pic':'clamp(110px,27vh,300px)' },
+  L3: { '--pic':45, '--f-zh':'48px', '--f-py':'18px', '--f-en':'26px', '--f-sent':'20px', '--f-fact':'18px', '--f-line':'26px', '--f-story':'24px', '--f-pic':'clamp(96px,21vh,250px)' }
+};
+function applyAge(){
+  const v = AGE_CSS[S.ageBand] || AGE_CSS.L1;
+  for(const k in v) document.documentElement.style.setProperty(k, v[k]);
+  $('#ageTag').textContent = AGE_NAME[S.ageBand] || '3–4 岁';
+}
+
+/* ═════════════════════════════════════════════════════════
+   四、语音
+   ═════════════════════════════════════════════════════════ */
 const hasTTS = 'speechSynthesis' in window;
 let zhVoice = null, enVoice = null;
-
 function loadVoices(){
   if(!hasTTS) return;
   const vs = speechSynthesis.getVoices();
-  zhVoice = vs.find(v => /zh|cmn/i.test(v.lang)) || null;
-  enVoice = vs.find(v => /^en(-|_)/i.test(v.lang)) || null;
+  // Google 语音是网络语音，离线或代理环境下会静默失败 → 优先本地语音
+  const pick = re => {
+    const m = vs.filter(v => re.test(v.lang));
+    if(!m.length) return null;
+    const local = m.filter(v => !/google/i.test(v.name));
+    return (local.length ? local : m)[0];
+  };
+  zhVoice = pick(/^(zh|cmn)/i);
+  enVoice = pick(/^en([-_]|$)/i);
 }
-if(hasTTS){
-  loadVoices();
-  speechSynthesis.onvoiceschanged = loadVoices;
-}
+if(hasTTS){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
 
 function speak(text, lang){
-  return new Promise(resolve => {
-    if(!hasTTS || !text){ setTimeout(resolve, 260); return; }
+  return new Promise(res => {
+    if(!hasTTS || !text){ setTimeout(res, 220); return; }
+    let done = false;
+    const fin = () => { if(done) return; done = true; clearTimeout(tm); res(); };
+    const tm = setTimeout(fin, 6000);           // 语音引擎无响应时不卡死流程
     try{
-      speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
       u.lang = lang === 'en' ? 'en-US' : 'zh-CN';
       u.rate = lang === 'en' ? 0.9 : 0.85;
       u.pitch = 1.05;
+      u.volume = 1;
       if(lang === 'en' && enVoice) u.voice = enVoice;
       if(lang !== 'en' && zhVoice) u.voice = zhVoice;
-      u.onend = resolve;
-      u.onerror = resolve;
+      u.onend = fin;
+      u.onerror = fin;
       speechSynthesis.speak(u);
-    }catch(e){ resolve(); }
+    }catch(e){ fin(); }
   });
 }
-
 const wait = ms => new Promise(r => setTimeout(r, ms));
-function guard(){ return stopped; }
+const guard = () => stopped;
 
 function toast(msg){
-  const t = $('toast');
-  t.textContent = msg;
-  t.classList.add('on');
-  clearTimeout(t._timer);
-  t._timer = setTimeout(() => t.classList.remove('on'), 1600);
+  const t = $('#toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('on'), 1500);
 }
 
-/* =========================================================
-   渲染
-   ========================================================= */
-function currentList(){
-  return cat === 'poems' ? S.poems : S.items.filter(i => i.cat === cat);
-}
-function current(){
-  const list = currentList();
-  return list[Math.min(idx, list.length - 1)];
-}
-
-function renderStages(){
-  $('stages').innerHTML = Object.entries(LEVELS).map(([k,v]) =>
-    `<button class="stage ${k===level?'on':''}" data-lv="${k}">${v.name}</button>`
-  ).join('');
-}
-
-function renderCats(){
-  $('cats').innerHTML = CATS.map(c =>
-    `<button class="chip ${c.id===cat?'on':''}" data-cat="${c.id}">${c.label}</button>`
-  ).join('');
+/* ═════════════════════════════════════════════════════════
+   五、渲染
+   ═════════════════════════════════════════════════════════ */
+function renderHome(){
+  applyAge();
+  ['look','read','play'].forEach(l => {
+    const el = document.querySelector(`[data-prog="${l}"]`);
+    if(!el) return;
+    const all = listOf(l).length;
+    const seen = S.progress[l]?.seen?.length || 0;
+    el.textContent = seen ? `${Math.min(seen, all)}/${all}` : `${all} 张`;
+  });
+  show('homeScreen');
 }
 
 function renderCard(){
-  const it = current();
-  if(!it) return;
-  card.style.background = it.bg || '#fff';
+  const c = list[idx];
+  if(!c) return;
+  const L = S.ageBand, lv = c.levels?.[L] || c.levels?.L1 || {};
+  const card = $('#card');
+  card.style.background = c.palette || '#fff';
+  // 按内容类型分配图/文比例（文字多的内容给图少一点空间）
+  const TYPE_PIC = { object:[65,55,45], poem:[38,33,28], story:[50,42,36], number:[58,48,42], shape:[56,50,44] };
+  const li = ({L1:0, L2:1, L3:2})[S.ageBand] || 0;
+  const pic = (TYPE_PIC[c.type] || [65,55,45])[li];
+  card.style.setProperty('--pic', pic);
+  card.style.setProperty('--f-pic', (34 * pic / 65).toFixed(1) + 'vh');
+  const inner = $('#cardInner');
+  let html = '';
 
-  if(cat === 'poems'){
-    const lines = it[level] || it.l1;
-    cardBody.innerHTML = `
-      <div class="pic">${it.emoji}</div>
-      <div class="lines" id="lines">
-        ${lines.map((l,i) => `<div class="line" data-i="${i}">${l}</div>`).join('')}
-      </div>
-      <div class="poem-title">${it.dynasty}·${it.author}《${it.title}》</div>
-    `;
-  } else {
-    const showPinyin = level !== 'L1';
-    const extra = level === 'L2' ? it.l2 : (level === 'L3' ? it.l3 : null);
-    cardBody.innerHTML = `
-      <div class="pic" id="pic">${it.emoji}</div>
-      <div class="zh" id="zh">${it.zh}</div>
-      ${showPinyin ? `<div class="pinyin" id="pinyin">${it.py}</div>` : ''}
-      <div class="en" id="en">${it.en}</div>
-      ${extra ? `<div class="sent" id="sentZh">${extra.zh}</div>
-                 <div class="sent" id="sentEn" style="color:var(--en);font-weight:600">${extra.en}</div>` : ''}
-      ${level === 'L3' && extra?.fact ? `<div class="fact">${extra.fact}</div>` : ''}
-    `;
+  if(c.type === 'object'){
+    html = `
+      <div class="pic-area"><div class="pic">${c.emoji}</div></div>
+      <div class="text-area">
+        <div class="zh" id="zh">${c.zh}</div>
+        ${L !== 'L1' ? `<div class="py" id="py">${c.pinyin || ''}</div>` : ''}
+        <div class="en" id="en">${c.en}</div>
+        ${lv.sentence_zh ? `<div class="sent-zh" id="sZh">${lv.sentence_zh}</div>` : ''}
+        ${lv.sentence_en ? `<div class="sent-en" id="sEn">${lv.sentence_en}</div>` : ''}
+        ${lv.fact ? `<div class="fact">${lv.fact}</div>` : ''}
+      </div>`;
   }
-  updateCounter();
-  highlight(null);
+  else if(c.type === 'poem'){
+    const lines = lv.lines || c.levels.L1.lines;
+    html = `
+      <div class="pic-area"><div class="pic">${c.emoji}</div></div>
+      <div class="text-area">
+        <div class="lines">${lines.map((t,i) => `<div class="line" data-l="${i}">${t}</div>`).join('')}</div>
+        <div class="poem-meta">${c.dynasty}·${c.author}《${c.title}》</div>
+        ${lv.explain ? `<div class="poem-explain">${lv.explain}</div>` : ''}
+      </div>`;
+  }
+  else if(c.type === 'story'){
+    html = `
+      <div class="story-tag">${c.page} / ${c.pageCount}</div>
+      <div class="pic-area"><div class="pic">${c.emoji}</div></div>
+      <div class="text-area">
+        <div class="story-title">${c.title}</div>
+        <div class="story-text" id="szh">${lv.text || ''}</div>
+      </div>`;
+  }
+  else if(c.type === 'number'){
+    html = `
+      <div class="pic-area">
+        <div class="num-visual">${Array.from({length:c.count}, () => `<span>${c.emoji}</span>`).join('')}</div>
+      </div>
+      <div class="text-area">
+        <div class="num-big" id="zh">${c.count}</div>
+        ${L !== 'L1' ? `<div class="py">${c.pinyin}</div>` : ''}
+        <div class="en" id="en">${c.en}</div>
+      </div>`;
+  }
+  else if(c.type === 'shape'){
+    const SVG = {
+      round:    '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#F5904A"/></svg>',
+      square:   '<svg viewBox="0 0 100 100"><rect x="6" y="6" width="88" height="88" rx="12" fill="#7BC4A8"/></svg>',
+      triangle: '<svg viewBox="0 0 100 100"><polygon points="50,8 94,90 6,90" fill="#6FA8E8"/></svg>'
+    };
+    html = `
+      <div class="pic-area"><div class="shape-visual">${SVG[c.shape] || ''}</div></div>
+      <div class="text-area">
+        <div class="zh" id="zh">${c.zh}</div>
+        ${L !== 'L1' ? `<div class="py">${c.pinyin}</div>` : ''}
+        <div class="en" id="en">${c.en}</div>
+      </div>`;
+  }
+
+  inner.innerHTML = html;
+
+  $('#counter').textContent = `${idx + 1} / ${list.length}`;
+  $('#barFill').style.width = ((idx + 1) / list.length * 100).toFixed(1) + '%';
+  $('#prev').disabled = idx === 0;
+  $('#next').disabled = idx === list.length - 1;
+
+  card.style.transform = 'translateX(0)';
+  enterAt = Date.now();
+  markSeen();
+  requestAnimationFrame(fitPic);
 }
 
-function updateCounter(){
-  const list = currentList();
-  $('counter').textContent = `${idx + 1} / ${list.length}`;
-  $('prev').disabled = idx === 0;
-  $('next').disabled = idx === list.length - 1;
+/* 根据图片区实际尺寸计算主体大小，保证永远不溢出、不遮挡文字 */
+function fitPic(){
+  const pa = document.querySelector('.pic-area');
+  if(!pa) return;
+  const h = Math.max(0, pa.clientHeight - 24);
+  const w = Math.max(0, pa.clientWidth - 24);
+  const base = Math.max(56, Math.min(h * 0.86, w * 0.86));
+
+  const pic = pa.querySelector('.pic');
+  if(pic) pic.style.fontSize = base + 'px';
+
+  const nv = pa.querySelector('.num-visual');
+  if(nv){
+    const n = nv.children.length || 1;
+    const s = Math.max(30, Math.min(base / Math.max(1.55, Math.sqrt(n) * 1.5), 200));
+    Array.from(nv.children).forEach(el => { el.style.fontSize = s + 'px'; });
+  }
+
+  const sv = pa.querySelector('.shape-visual');
+  if(sv){
+    const side = Math.max(60, Math.min(h, w));
+    sv.style.width = side + 'px';
+    sv.style.height = side + 'px';
+  }
+}
+
+function markSeen(){
+  const c = list[idx];
+  if(!c) return;
+  setTimeout(() => {
+    if(Date.now() - enterAt < 1800) return;
+    const p = S.progress[lane];
+    if(!p.seen.includes(c.id)){
+      p.seen.push(c.id);
+      save();
+    }
+  }, 2000);
 }
 
 function highlight(which){
   document.querySelectorAll('.lit,.dim').forEach(e => e.classList.remove('lit','dim'));
-  if(!which) return;
-  const map = {zh:'zh', en:'en', sentZh:'sentZh', sentEn:'sentEn'};
-  const el = document.getElementById(map[which]);
-  if(el){ el.classList.add('lit'); }
-  document.querySelectorAll('#cardBody > *').forEach(e => {
-    if(e.id && e.id !== map[which]) e.classList.add('dim');
+  const map = { zh:'zh', en:'en', sZh:'sZh', sEn:'sEn' };
+  const target = map[which];
+  if(!target) return;
+  document.querySelectorAll('.text-area > *').forEach(e => {
+    if(e.id) e.classList.add(e.id === target ? 'lit' : 'dim');
   });
 }
 
-/* =========================================================
-   播放：连读模式（中文 ×2 → 英文 ×2 → 下一张）
-   ========================================================= */
+/* ═════════════════════════════════════════════════════════
+   六、播放
+   ═════════════════════════════════════════════════════════ */
+function unitParts(c){
+  if(c.type === 'object'){
+    const lv = c.levels[S.ageBand] || {};
+    return { zh:[c.zh, ...(lv.sentence_zh ? [lv.sentence_zh] : [])],
+             en:[c.en, ...(lv.sentence_en ? [lv.sentence_en] : [])] };
+  }
+  if(c.type === 'poem'){
+    const lv = c.levels[S.ageBand] || c.levels.L1;
+    return { zh: lv.lines || [], en: [] };
+  }
+  if(c.type === 'story'){
+    const lv = c.levels[S.ageBand] || c.levels.L1;
+    return { zh: lv.text ? [lv.text] : [], en: [] };
+  }
+  if(c.type === 'number') return { zh:[c.zh], en:[c.en] };
+  if(c.type === 'shape')  return { zh:[c.zh], en:[c.en] };
+  return { zh:[], en:[] };
+}
+
 async function playAll(){
   if(playing){ stopAll(); return; }
   playing = true; stopped = false;
-  $('play').classList.add('playing');
-  $('play').textContent = '■';
+  if(hasTTS) try{ speechSynthesis.cancel(); }catch(e){}
+  $('#play').classList.add('playing');
+  $('#play').textContent = '■';
 
   while(playing && !guard()){
-    const it = current();
+    const c = list[idx];
+    const { zh, en } = unitParts(c);
 
-    if(cat === 'poems'){
-      const lines = it[level] || it.l1;
-      for(let r = 0; r < 2 && !guard(); r++){
-        for(let i = 0; i < lines.length && !guard(); i++){
+    // 中文 ×2
+    for(let r = 0; r < 2 && !guard(); r++){
+      for(let i = 0; i < zh.length && !guard(); i++){
+        if(c.type === 'poem'){
           document.querySelectorAll('.line').forEach((e,j) => {
             e.classList.toggle('dim', j !== i);
             e.classList.toggle('lit', j === i);
           });
-          await speak(lines[i], 'zh');
-          await wait(280);
-        }
+        } else highlight(i === 0 ? 'zh' : 'sZh');
+        await speak(zh[i], 'zh');
+        await wait(560);
       }
-      document.querySelectorAll('.line').forEach(e => e.classList.remove('dim','lit'));
-    } else {
-      const extra = level === 'L2' ? it.l2 : (level === 'L3' ? it.l3 : null);
-
-      // 中文 ×2
-      for(let r = 0; r < 2 && !guard(); r++){
-        highlight('zh'); await speak(it.zh, 'zh'); await wait(600);
-        if(level !== 'L1' && extra){
-          highlight('sentZh'); await speak(extra.zh, 'zh'); await wait(600);
-        }
-      }
-      if(guard()) break;
-      await wait(300);
-
-      // 英文 ×2
-      for(let r = 0; r < 2 && !guard(); r++){
-        highlight('en'); await speak(it.en, 'en'); await wait(600);
-        if(level !== 'L1' && extra){
-          highlight('sentEn'); await speak(extra.en, 'en'); await wait(600);
-        }
-      }
-      highlight(null);
     }
-
     if(guard()) break;
-    await wait(1100);
+    await wait(280);
 
-    if(idx < currentList().length - 1){ go(1); await wait(500); }
-    else { break; }
+    // 英文 ×2（口语切换前先清掉中文高亮 → 视觉变化）
+    if(en.length){
+      for(let r = 0; r < 2 && !guard(); r++){
+        for(let i = 0; i < en.length && !guard(); i++){
+          highlight(i === 0 ? 'en' : 'sEn');
+          await speak(en[i], 'en');
+          await wait(560);
+        }
+      }
+    }
+    highlight(null);
+    document.querySelectorAll('.line').forEach(e => e.classList.remove('dim','lit'));
+    if(guard()) break;
+
+    await wait(1100);
+    if(idx < list.length - 1){ go(1); await wait(480); }
+    else break;
   }
   stopAll();
 }
@@ -442,94 +687,128 @@ async function playAll(){
 function stopAll(){
   playing = false; stopped = true;
   if(hasTTS) try{ speechSynthesis.cancel(); }catch(e){}
-  const p = $('play');
+  const p = $('#play');
   p.classList.remove('playing');
   p.textContent = '▶';
   highlight(null);
   document.querySelectorAll('.line').forEach(e => e.classList.remove('dim','lit'));
 }
 
-/* 单读：点卡片任意位置，读当前内容一次 */
 async function readOne(){
   if(playing) return;
-  const it = current();
-  if(cat === 'poems'){
-    const lines = it[level] || it.l1;
-    for(const l of lines){ await speak(l, 'zh'); await wait(200); }
-  } else {
-    await speak(it.zh, 'zh');
-    if(level !== 'L1'){
-      const extra = level === 'L2' ? it.l2 : it.l3;
-      if(extra) { await wait(300); await speak(extra.zh, 'zh'); }
-    }
+  const c = list[idx];
+  if(!c) return;
+  const { zh } = unitParts(c);
+  if(c.type === 'poem'){
+    for(const t of zh){ await speak(t, 'zh'); await wait(200); }
+  }else{
+    for(const t of zh){ await speak(t, 'zh'); await wait(240); }
   }
+  S.prefs.autoPlay = false; save();
 }
 
-/* =========================================================
-   导航
-   ========================================================= */
+/* ═════════════════════════════════════════════════════════
+   七、导航（记 id 不记序号）
+   ═════════════════════════════════════════════════════════ */
+function openLane(l){
+  lane = l;
+  list = listOf(l);
+  const lastId = S.progress[l]?.lastId;
+  const found = lastId ? list.findIndex(c => c.id === lastId) : -1;
+  idx = found >= 0 ? found : 0;          // 找不到 → 退回开头，不报错
+  stopAll();
+  renderCard();
+  show('cardScreen');
+}
+
 function go(step){
-  const list = currentList();
   const n = idx + step;
   if(n < 0 || n >= list.length) return;
   idx = n;
+  S.progress[lane].lastId = list[idx].id;   // 记 id
+  save();
   renderCard();
 }
 
-function switchCat(id){
-  cat = id; idx = 0;
-  renderCats(); renderCard();
+function backHome(){
+  stopAll();
+  if(lane && list[idx]) { S.progress[lane].lastId = list[idx].id; save(); }
+  renderHome();
 }
 
-function switchLevel(lv){
-  level = lv;
-  renderStages(); renderCard();
-  toast(`已切换到 ${LEVELS[lv].name}`);
-}
-
-/* =========================================================
-   事件
-   ========================================================= */
+/* ═════════════════════════════════════════════════════════
+   八、事件
+   ═════════════════════════════════════════════════════════ */
 document.addEventListener('click', e => {
-  const st = e.target.closest('[data-lv]');
-  if(st){ stopAll(); switchLevel(st.dataset.lv); return; }
-  const ch = e.target.closest('[data-cat]');
-  if(ch){ stopAll(); switchCat(ch.dataset.cat); return; }
+  const ageBtn = e.target.closest('[data-age]');
+  if(ageBtn){
+    S.ageBand = ageBtn.dataset.age; save();
+    renderHome(); return;
+  }
+  const entry = e.target.closest('[data-lane]');
+  if(entry){ openLane(entry.dataset.lane); return; }
 });
 
-$('prev').onclick = () => { stopAll(); go(-1); };
-$('next').onclick = () => { stopAll(); go(1); };
-$('play').onclick = e => { e.stopPropagation(); playAll(); };
+$('#ageTag').onclick = () => {
+  // 家长改年龄：直接回年龄页
+  stopAll();
+  show('ageScreen');
+};
 
-card.addEventListener('click', e => {
+$('#homeBtn').onclick = backHome;
+$('#prev').onclick = () => { stopAll(); go(-1); };
+$('#next').onclick = () => { stopAll(); go(1); };
+$('#play').onclick = e => { e.stopPropagation(); S.prefs.autoPlay = true; save(); playAll(); };
+
+$('#card').addEventListener('click', e => {
+  if(playing) return;
   const line = e.target.closest('.line');
-  if(line && cat === 'poems'){ if(!playing) speak(line.textContent, 'zh'); return; }
-  if(!playing) readOne();
+  if(line){ speak(line.textContent, 'zh'); return; }
+  readOne();
 });
 
-// 滑动手势
+// 滑动翻页
 let sx = 0, sy = 0;
-card.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
-card.addEventListener('touchend', e => {
+$('#card').addEventListener('touchstart', e => {
+  sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+}, {passive:true});
+$('#card').addEventListener('touchend', e => {
   const dx = e.changedTouches[0].clientX - sx;
   const dy = e.changedTouches[0].clientY - sy;
-  if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)){ stopAll(); go(dx < 0 ? 1 : -1); }
+  if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)){ stopAll(); go(dx < 0 ? 1 : -1); }
 }, {passive:true});
 
 document.addEventListener('keydown', e => {
+  if(!$('#cardScreen').classList.contains('on')) return;
   if(e.key === 'ArrowRight'){ stopAll(); go(1); }
   if(e.key === 'ArrowLeft'){ stopAll(); go(-1); }
   if(e.key === ' '){ e.preventDefault(); playAll(); }
+  if(e.key === 'Escape'){ backHome(); }
 });
 
-/* =========================================================
-   启动
-   ========================================================= */
-renderStages();
-renderCats();
-renderCard();
+// 离开时保存
+let openedAt = Date.now();
+function saveStats(){
+  S.stats.totalSeconds = (S.stats.totalSeconds || 0) + Math.round((Date.now() - openedAt) / 1000);
+  S.stats.lastOpenAt = new Date().toISOString();
+  save();
+}
+window.addEventListener('pagehide', saveStats);
+document.addEventListener('visibilitychange', () => { if(document.hidden) saveStats(); });
 
-if(!hasTTS) toast('当前浏览器不支持语音，将只显示文字');
+/* ═════════════════════════════════════════════════════════
+   九、启动
+   ═════════════════════════════════════════════════════════ */
+(function boot(){
+  applyAge();
+  if(!S.ageBand){
+    show('ageScreen');          // 首次：选年龄
+  }else{
+    renderHome();               // 有记录：直接进首页
+  }
+  if(!canStore) toast('当前模式无法保存进度');
+  if(!hasTTS) toast('当前浏览器不支持语音，将只显示文字');
+})();
 </script>
 </body>
 </html>
