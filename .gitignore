@@ -1,0 +1,40 @@
+# ---------- 系统 ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- 编辑器 / IDE ----------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# ---------- Node ----------
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+dist/
+build/
+.next/
+out/
+.env
+.env.*
+!.env.example
+
+# ---------- 缓存 ----------
+.cache/
+.temp/
+*.log
+
+# ---------- 素材大文件 ----------
+# 图片/音频先用占位，超过 10MB 的原始素材不入库
+assets/**/*.psd
+assets/**/*.ai
+assets/raw/
+
+# ---------- 其他 ----------
+*.local
