@@ -145,15 +145,15 @@
 
 ---
 
-## 7. 技术架构与资产工程管线
-
 ## 7. 技术架构与资产工程管线（全免费高音质落地路线）
 
+> 完整参数表、各分类生图 Prompt 模板与 Python 自动化脚本详见：[`docs/asset-pipeline-spec.md`](asset-pipeline-spec.md)。
+
 ### 7.1 语音工程：Edge-TTS 离线预烘焙（100% 免费、高质量、零版权费）
-- **核心原理**：利用开源的 `edge-tts`（Python/Node.js 开源工具），直接免费调用微软部署在大模型边缘节点的真实神经语音（Neural TTS），无需申请付费 Azure API Key，无需信用卡，完全公开可用。
+- **核心原理**：利用开源的 `edge-tts`（Python/Node.js 开源工具），直接免费调用微软在大模型边缘节点的真实神经语音（Neural TTS），无需申请付费 Azure API Key，无需信用卡，完全公开可用。
 - **推荐音色配置**：
-  - **中文发音与故事**：`zh-CN-XiaoxiaoNeural`（温暖生动的亲子讲故事体，富有起伏的情感表达，语速 `rate: -15%`）与 `zh-CN-YunxiNeural`（活泼清脆的小男孩童声）；
-  - **英文启蒙单词**：`en-US-AnaNeural`（专为少儿启蒙设计的自然美语童音，发音饱满清晰，语速 `rate: -10%`）；
+  - **中文发音与故事**：`zh-CN-XiaoxiaoNeural`（温暖生动的亲子讲故事体，富有起伏的情感表达，语速 `rate: -24%`，音调 `pitch: +5Hz`，从容慢速适合幼儿捕捉）；
+  - **英文启蒙单词**：`en-US-AnaNeural`（专为少儿启蒙设计的自然美语童音，发音饱满清晰，语速 `rate: -20%`）；
   - **拟声音效**：通过纯离线 Web Audio 实时合成 + 本地无版权高清环境实录音效库（FreeSound CC0 授权）；
 - **打包与体积**：开发期通过脚本一键批量下载生成本地 `.mp3` 资源池，全库 500+ 音频深度压缩为 64kbps，总大小 **≤ 12MB**，100% 随应用离线打包，秒开零延迟。
 
@@ -162,14 +162,14 @@
 
 | 方案 | 免费机制与调用方式 | 风格表现力 | 推荐指数 |
 | :--- | :--- | :--- | :--- |
-| **方案 A (最推荐自动化)<br>Pollinations.ai** | **完全免费、无速率限制、无需注册账号/Key**。<br>直接发送 HTTP GET 请求获取图片：<br>`https://image.pollinations.ai/prompt/{prompt}?width=800&height=800&model=flux&nologo=true` | 基于 FLUX.1 模型，水彩绘本细节温润，画风极易控制 | **★★★★★<br>(脚本批量自动化首选)** |
+| **方案 A (最推荐自动化)<br>Pollinations.ai** | **完全免费、无需注册账号/Key**。<br>直接发送 HTTP GET 请求获取图片：<br>`https://image.pollinations.ai/prompt/{prompt}?width=600&height=600&model=flux&seed=2026`<br>*(免费限制：单 IP 45 秒间隔，脚本自动休眠控制)* | 基于 FLUX.1 模型，水彩绘本细节温润，大色块鲜艳 | **★★★★★<br>(脚本批量自动化首选)** |
 | **方案 B (开发者标准)<br>Hugging Face Inference API** | **完全免费 Serverless 端点**。<br>注册免费账号获取 Token，调用 `black-forest-labs/FLUX.1-schnell` 或 `stabilityai/stable-diffusion-xl-base-1.0`。<br>支持通过 Python 脚本 `requests.post` 并发请求。 | 顶尖开源生图模型，构图精准，色彩干净 | **★★★★☆<br>(画质最高)** |
 | **方案 C (专业插画设计)<br>Recraft.ai / Leonardo.ai** | **每日提供丰厚的免费点数**（Recraft 每天免费几十张；Leonardo 每天送 150 算力点）。<br>自带“Kids Illustration (儿童插画)”与“Vector Illustration (矢量插画)”预设模式。 | 商业级儿童插画质感，大色块纯净，支持直接导出纯白底 WebP | **★★★★☆<br>(设计品质最佳)** |
 | **方案 D (纯本地零外网)<br>本地 ComfyUI / WebUI** | 若本机拥有 6GB+ 独立显卡，直接本地运行 FLUX.1-schnell GGUF 量化版或 SDXL + 儿童绘本 LoRA，完全私有、无限制离线出图。 | 风格高度定制，完全不依赖网络 | **★★★★☆<br>(有显卡优选)** |
 
 #### 统一插画的提示词配方模板 (Prompt Recipe)：
 ```
-A lovely children's picture book illustration of a [cute red apple], warm pastel gouache texture, soft rounded shapes, pure white solid background, vibrant colors, minimal clean design, friendly and inviting, charming storybook art style, no text, no watermark --v 6.1 --ar 1:1
+flat 2D vector graphic of a [SUBJECT & DETAILS], thick bold clean outlines, vibrant saturated colors, isolated on pure solid white background, minimal clean clipart for preschool toddlers, simple and sweet, centered, no 3D, no realism, no shadow, no text, no watermark
 ```
 
 ### 7.3 终端跨端架构 (Shell)

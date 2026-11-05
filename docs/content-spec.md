@@ -390,16 +390,18 @@ interface UniversalCard {
 
 ---
 
-## 3. 离线预烘焙音频资产契约 (Audio Asset Naming Scheme)
+## 3. 离线预烘焙音画资产与黄金参数契约
 
-为保障 100% 离线、高音质、中英双语发音绝对稳定，音频资产统一按照以下结构存储：
+具体音质参数（语速 `-24%`、音调 `+5Hz`、句间停顿 800ms）及 AI 绘本插画 Prompt 模板，详见：[`docs/asset-pipeline-spec.md`](asset-pipeline-spec.md)。
+
+音频资产统一按照以下结构存储：
 
 ```
 assets/audio/
-  ├── zh/                 # 中文单词发音 (XiaoxiaoNeural, 0.85x)
-  ├── en/                 # 英文单词发音 (AnaNeural, 0.9x)
-  ├── zh_sent/            # 中文短句发音
-  ├── en_sent/            # 英文短句发音
+  ├── zh/                 # 中文单词发音 (XiaoxiaoNeural, rate: -24%, pitch: +5Hz)
+  ├── en/                 # 英文单词发音 (AnaNeural, rate: -20%)
+  ├── zh_sent/            # 中文短句发音 (XiaoxiaoNeural, rate: -22%)
+  ├── en_sent/            # 英文短句发音 (AnaNeural, rate: -20%)
   ├── poem/               # 古诗整首与逐句音频 (yonge_full.mp3, yonge_1.mp3)
   ├── story/              # 故事单页音频 (rabbit_1.mp3)
   └── sfx/                # 真实拟声与益智音效 (meow.mp3, bark.mp3, pop.mp3, chime.mp3)
