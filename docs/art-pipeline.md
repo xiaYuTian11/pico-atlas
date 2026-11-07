@@ -15,8 +15,30 @@ npm run media:audio      # 出语音（edge-tts，免费）
 npm run media:sheet      # 审片：把所有插图拼成一张总览图
 ```
 
-加一张卡片 = 往 `cards.json` 里加一条，跑一次 `media:images` + `media:audio`。
-**永远不需要改 `.vue`。**
+加一张卡片 = 往 `cards.json`（或词库 `cards-auto.json`）里加一条，
+跑一次 `media:images` + `media:audio`。**永远不需要改 `.vue`。**
+
+### 内容分两份
+
+| 文件 | 来源 | 用途 |
+| --- | --- | --- |
+| `src/content/cards.json` | 手写 | 精修版：短句、亲子锦囊、古诗、故事、益智题 |
+| `src/content/cards-auto.json` | `node tools/gen-cards.mjs` | 词库批量版：从 `tools/wordlist.json` 生成中英 + 拼音 + emoji |
+
+同 id 时**手写版覆盖词库版**。所以想把某张词库卡升级成精修卡：
+在 `cards.json` 里写一条同 id 即可。
+
+新增词库：改 `tools/wordlist.json` → `node tools/gen-cards.mjs`。
+
+### 分区图标
+
+```powershell
+.venv\Scripts\python.exe tools/gen_icons.py          # 30 个分区图标（水彩 + 透明底）
+.venv\Scripts\python.exe tools/gen_icons.py --ids fruits,animals --force
+```
+
+产物在 `public/media/images/section/<id>.webp`，
+`media.ts` 的 `sectionImage()` 会自动优先用它，缺了才回退 emoji。
 
 ---
 

@@ -13,11 +13,17 @@ import { sectionImage } from '@/content/media';
 import PaIcon from '@/ui/PaIcon.vue';
 import { playSfx } from '@/audio/engine';
 
-const emit = defineEmits<{ openLane: [lane: 'look' | 'read' | 'play']; openFavorites: []; openGate: [] }>();
+const emit = defineEmits<{
+  openLane: [lane: 'look' | 'read' | 'play'];
+  openFavorites: [];
+  openRecent: [];
+  openGate: [];
+}>();
 
 const counts = computed(() => laneCounts());
 
 const favCount = computed(() => state.favorites.length);
+const recentCount = computed(() => state.recent.length);
 
 function go(lane: 'look' | 'read' | 'play'): void {
   playSfx('pop');
@@ -27,6 +33,11 @@ function go(lane: 'look' | 'read' | 'play'): void {
 function goFav(): void {
   playSfx('pop');
   emit('openFavorites');
+}
+
+function goRecent(): void {
+  playSfx('pop');
+  emit('openRecent');
 }
 
 function openGate(): void {
@@ -75,6 +86,23 @@ void PaIcon;
           <span class="pa-home__entry-desc">{{ lane.desc }}</span>
         </span>
         <span class="pa-home__entry-count">{{ counts[lane.id] }}</span>
+      </button>
+
+      <button
+        v-if="recentCount >= 3"
+        type="button"
+        class="pa-home__entry pa-home__entry--recent"
+        :aria-label="`最近看过，共 ${recentCount} 张`"
+        @click="goRecent"
+      >
+        <span class="pa-home__entry-icon">
+          <PaIcon name="loop" class="pa-home__recent-icon" />
+        </span>
+        <span class="pa-home__entry-text">
+          <span class="pa-home__entry-zh">最近看过</span>
+          <span class="pa-home__entry-desc">复习一下刚才看过的</span>
+        </span>
+        <span class="pa-home__entry-count">{{ recentCount }}</span>
       </button>
 
       <button
@@ -248,6 +276,17 @@ void PaIcon;
 .pa-home__entry--fav {
   background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
   border: 2px dashed #ffa39e;
+}
+
+.pa-home__entry--recent {
+  background: linear-gradient(135deg, #f3f7ff 0%, #ffffff 100%);
+  border: 2px dashed #9fc0f0;
+}
+
+.pa-home__recent-icon {
+  width: 38px;
+  height: 38px;
+  color: var(--pa-blue, #5b8fd6);
 }
 
 /* ---------- 底注 ---------- */

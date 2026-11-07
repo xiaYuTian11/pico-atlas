@@ -18,17 +18,35 @@ const progress = computed(() => Math.min(1, passes.value / required.value));
 const done = computed(() => passes.value >= required.value);
 const dirty = computed(() => !done.value);
 
+/** 一次真正"抹"掉一格：需要拖过一段距离，而不是点一下就完成 */
+let dragDist = 0;
+let lastX = 0;
+let lastY = 0;
+const STROKE_UNIT = 64;
+
+function down(e: PointerEvent): void {
+  if (done.value) return;
+  lastX = e.clientX;
+  lastY = e.clientY;
+  dragDist = 0;
+  playSfx('soft');
+}
+
 function scrub(e: PointerEvent): void {
   if (done.value) return;
-  // 只在移动时计数（防止长按刷）
+  const dx = e.clientX - lastX;
+  const dy = e.clientY - lastY;
+  lastX = e.clientX;
+  lastY = e.clientY;
+  dragDist += Math.hypot(dx, dy);
+  if (dragDist < STROKE_UNIT) return;
+  dragDist = 0;
   passes.value++;
-  playSfx(payload.value.beforeState.emoji === '🐶' ? 'water' : 'soft');
+  playSfx(payload.value.toolEmoji === '💧' ? 'water' : 'soft');
   if (passes.value >= required.value) {
     setTimeout(() => playSfx(payload.value.afterState.sound ?? 'chime'), 60);
     setTimeout(() => playSfx('sparkle'), 260);
   }
-  // 防止坐标计算被优化掉
-  void e;
 }
 
 function reset(): void {
@@ -57,7 +75,7 @@ function reset(): void {
         <!-- 触摸层 -->
         <div
           class="pa-habit__touch"
-          @pointerdown.stop.prevent="scrub"
+          @pointerdown.stop.prevent="down"
           @pointermove.stop.prevent="scrub"
         />
       </div>

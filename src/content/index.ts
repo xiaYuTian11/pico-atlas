@@ -1,20 +1,24 @@
 import type { Card, Lane, SectionDef } from './types';
 import rawCards from './cards.json';
+import autoCards from './cards-auto.json';
 import { SECTIONS, SECTION_MAP, sectionsOfLane } from './sections';
 
 /**
  * 内容索引 —— 应用运行时唯一的内容入口。
- * 卡片 JSON 一改，这里全部自动跟着变，不需要动任何组件代码。
+ *
+ * 两份 JSON：
+ *   cards.json      手写精修版（有短句、亲子锦囊、古诗、故事）
+ *   cards-auto.json 词库批量生成版（中英 + 拼音 + emoji + 出图提示词）
+ * 同 id 时以手写版为准（后写覆盖前写）。
  */
-
-const ALL_CARDS = rawCards as unknown as Card[];
+const MERGED = new Map<string, Card>();
+for (const c of autoCards as unknown as Card[]) MERGED.set(c.id, c);
+for (const c of rawCards as unknown as Card[]) MERGED.set(c.id, c);
+const ALL_CARDS: Card[] = [...MERGED.values()];
 
 /** 按 id 建索引，O(1) 查找 */
 const byId = new Map<string, Card>();
 for (const c of ALL_CARDS) {
-  if (byId.has(c.id)) {
-    console.error(`[content] 卡片 id 重复: ${c.id} —— 后一条会覆盖前一条`);
-  }
   byId.set(c.id, c);
 }
 

@@ -32,7 +32,7 @@ const gridSection = ref<string | undefined>(undefined);
 /* 舞台上下文 */
 const stageCards = ref<Card[]>([]);
 const stageIndex = ref(0);
-const stageLane = ref<Lane | 'favorites'>('look');
+const stageLane = ref<Lane | 'favorites' | 'recent'>('look');
 const stageSection = ref<string | undefined>(undefined);
 
 /* 浮层 */
@@ -80,6 +80,19 @@ function openFavorites(): void {
   screen.value = 'stage';
 }
 
+/** 最近看过：按时间倒序复习 */
+function openRecent(): void {
+  stageCards.value = state.recent.map((id) => getCard(id)).filter((c): c is Card => !!c);
+  if (stageCards.value.length === 0) {
+    toast('还没有看过的卡片');
+    return;
+  }
+  stageIndex.value = 0;
+  stageLane.value = 'recent';
+  stageSection.value = undefined;
+  screen.value = 'stage';
+}
+
 function backFromGrid(): void {
   stopAll();
   screen.value = 'home';
@@ -87,8 +100,8 @@ function backFromGrid(): void {
 
 function backFromStage(): void {
   stopAll();
-  // 从最爱进 → 回首页；从分区进 → 回网格
-  if (stageLane.value === 'favorites') {
+  // 从最爱 / 最近看过进 → 回首页；从分区进 → 回网格
+  if (stageLane.value === 'favorites' || stageLane.value === 'recent') {
     screen.value = 'home';
   } else {
     gridSection.value = stageSection.value;
@@ -202,6 +215,7 @@ void cardsOfLane;
         v-else-if="screen === 'home'"
         @open-lane="openLane"
         @open-favorites="openFavorites"
+        @open-recent="openRecent"
         @open-gate="openGate"
       />
 

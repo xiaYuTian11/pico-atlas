@@ -54,3 +54,9 @@ desktop.ini
 release/
 assets/queue/
 
+
+gen_icons.log
+gen_images.log
+gen_audio.log
+pyinstall.log
+

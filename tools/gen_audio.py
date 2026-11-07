@@ -48,6 +48,7 @@ os.environ.setdefault("PYTHONIOENCODING", "utf-8")
 
 ROOT = Path(__file__).resolve().parent.parent
 CARDS = ROOT / "src" / "content" / "cards.json"
+CARDS_AUTO = ROOT / "src" / "content" / "cards-auto.json"
 OUT = ROOT / "public" / "media" / "audio"
 
 VOICE = {
@@ -81,7 +82,14 @@ BANDS = ("L1", "L2", "L3")
 
 
 def load_cards() -> list[dict]:
-    return json.loads(CARDS.read_text(encoding="utf-8"))
+    """手写版 + 词库版合并（同 id 以手写版为准）。"""
+    merged: dict[str, dict] = {}
+    if CARDS_AUTO.exists():
+        for c in json.loads(CARDS_AUTO.read_text(encoding="utf-8")):
+            merged[c["id"]] = c
+    for c in json.loads(CARDS.read_text(encoding="utf-8")):
+        merged[c["id"]] = c
+    return list(merged.values())
 
 
 def jobs_for(card: dict) -> list[tuple[Path, str, str]]:

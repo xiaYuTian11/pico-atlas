@@ -1,0 +1,5228 @@
+[
+  {
+    "id": "watermelon",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "西瓜",
+    "en": "watermelon",
+    "pinyin": "xī guā",
+    "emoji": "🍉",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute watermelon"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是西瓜。",
+        "sentence_en": "This is a watermelon."
+      },
+      "L3": {
+        "sentence_zh": "这是西瓜。",
+        "sentence_en": "This is a watermelon."
+      }
+    }
+  },
+  {
+    "id": "grapes",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "葡萄",
+    "en": "grapes",
+    "pinyin": "pú táo",
+    "emoji": "🍇",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute grapes"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是葡萄。",
+        "sentence_en": "This is a grapes."
+      },
+      "L3": {
+        "sentence_zh": "这是葡萄。",
+        "sentence_en": "This is a grapes."
+      }
+    }
+  },
+  {
+    "id": "orange",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "橙子",
+    "en": "orange",
+    "pinyin": "chéng zǐ",
+    "emoji": "🍊",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute orange"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是橙子。",
+        "sentence_en": "This is a orange."
+      },
+      "L3": {
+        "sentence_zh": "这是橙子。",
+        "sentence_en": "This is a orange."
+      }
+    }
+  },
+  {
+    "id": "peach",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "桃子",
+    "en": "peach",
+    "pinyin": "táo zǐ",
+    "emoji": "🍑",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute peach"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是桃子。",
+        "sentence_en": "This is a peach."
+      },
+      "L3": {
+        "sentence_zh": "这是桃子。",
+        "sentence_en": "This is a peach."
+      }
+    }
+  },
+  {
+    "id": "pear",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "梨",
+    "en": "pear",
+    "pinyin": "lí",
+    "emoji": "🍐",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute pear"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是梨。",
+        "sentence_en": "This is a pear."
+      },
+      "L3": {
+        "sentence_zh": "这是梨。",
+        "sentence_en": "This is a pear."
+      }
+    }
+  },
+  {
+    "id": "pineapple",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "菠萝",
+    "en": "pineapple",
+    "pinyin": "bō luó",
+    "emoji": "🍍",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute pineapple"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是菠萝。",
+        "sentence_en": "This is a pineapple."
+      },
+      "L3": {
+        "sentence_zh": "这是菠萝。",
+        "sentence_en": "This is a pineapple."
+      }
+    }
+  },
+  {
+    "id": "cherry",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "樱桃",
+    "en": "cherry",
+    "pinyin": "yīng táo",
+    "emoji": "🍒",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute cherry"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是樱桃。",
+        "sentence_en": "This is a cherry."
+      },
+      "L3": {
+        "sentence_zh": "这是樱桃。",
+        "sentence_en": "This is a cherry."
+      }
+    }
+  },
+  {
+    "id": "lemon",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "柠檬",
+    "en": "lemon",
+    "pinyin": "níng méng",
+    "emoji": "🍋",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute lemon"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是柠檬。",
+        "sentence_en": "This is a lemon."
+      },
+      "L3": {
+        "sentence_zh": "这是柠檬。",
+        "sentence_en": "This is a lemon."
+      }
+    }
+  },
+  {
+    "id": "mango",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "芒果",
+    "en": "mango",
+    "pinyin": "máng guǒ",
+    "emoji": "🥭",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute mango"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是芒果。",
+        "sentence_en": "This is a mango."
+      },
+      "L3": {
+        "sentence_zh": "这是芒果。",
+        "sentence_en": "This is a mango."
+      }
+    }
+  },
+  {
+    "id": "blueberry",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "蓝莓",
+    "en": "blueberry",
+    "pinyin": "lán méi",
+    "emoji": "🫐",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute blueberry"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是蓝莓。",
+        "sentence_en": "This is a blueberry."
+      },
+      "L3": {
+        "sentence_zh": "这是蓝莓。",
+        "sentence_en": "This is a blueberry."
+      }
+    }
+  },
+  {
+    "id": "kiwi",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "猕猴桃",
+    "en": "kiwi",
+    "pinyin": "mí hóu táo",
+    "emoji": "🥝",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute kiwi"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是猕猴桃。",
+        "sentence_en": "This is a kiwi."
+      },
+      "L3": {
+        "sentence_zh": "这是猕猴桃。",
+        "sentence_en": "This is a kiwi."
+      }
+    }
+  },
+  {
+    "id": "coconut",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "椰子",
+    "en": "coconut",
+    "pinyin": "yē zǐ",
+    "emoji": "🥥",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute coconut"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是椰子。",
+        "sentence_en": "This is a coconut."
+      },
+      "L3": {
+        "sentence_zh": "这是椰子。",
+        "sentence_en": "This is a coconut."
+      }
+    }
+  },
+  {
+    "id": "melon",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "哈密瓜",
+    "en": "melon",
+    "pinyin": "hā mì guā",
+    "emoji": "🍈",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute melon"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是哈密瓜。",
+        "sentence_en": "This is a melon."
+      },
+      "L3": {
+        "sentence_zh": "这是哈密瓜。",
+        "sentence_en": "This is a melon."
+      }
+    }
+  },
+  {
+    "id": "pomegranate",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "石榴",
+    "en": "pomegranate",
+    "pinyin": "shí liú",
+    "emoji": "🍎",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute pomegranate"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是石榴。",
+        "sentence_en": "This is a pomegranate."
+      },
+      "L3": {
+        "sentence_zh": "这是石榴。",
+        "sentence_en": "This is a pomegranate."
+      }
+    }
+  },
+  {
+    "id": "cabbage",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "白菜",
+    "en": "cabbage",
+    "pinyin": "bái cài",
+    "emoji": "🥬",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute cabbage"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是白菜。",
+        "sentence_en": "This is a cabbage."
+      },
+      "L3": {
+        "sentence_zh": "这是白菜。",
+        "sentence_en": "This is a cabbage."
+      }
+    }
+  },
+  {
+    "id": "potato",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "土豆",
+    "en": "potato",
+    "pinyin": "tǔ dòu",
+    "emoji": "🥔",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute potato"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是土豆。",
+        "sentence_en": "This is a potato."
+      },
+      "L3": {
+        "sentence_zh": "这是土豆。",
+        "sentence_en": "This is a potato."
+      }
+    }
+  },
+  {
+    "id": "cucumber",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "黄瓜",
+    "en": "cucumber",
+    "pinyin": "huáng guā",
+    "emoji": "🥒",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute cucumber"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是黄瓜。",
+        "sentence_en": "This is a cucumber."
+      },
+      "L3": {
+        "sentence_zh": "这是黄瓜。",
+        "sentence_en": "This is a cucumber."
+      }
+    }
+  },
+  {
+    "id": "eggplant",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "茄子",
+    "en": "eggplant",
+    "pinyin": "qié zi",
+    "emoji": "🍆",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute eggplant"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是茄子。",
+        "sentence_en": "This is a eggplant."
+      },
+      "L3": {
+        "sentence_zh": "这是茄子。",
+        "sentence_en": "This is a eggplant."
+      }
+    }
+  },
+  {
+    "id": "pumpkin",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "南瓜",
+    "en": "pumpkin",
+    "pinyin": "nán guā",
+    "emoji": "🎃",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute pumpkin"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是南瓜。",
+        "sentence_en": "This is a pumpkin."
+      },
+      "L3": {
+        "sentence_zh": "这是南瓜。",
+        "sentence_en": "This is a pumpkin."
+      }
+    }
+  },
+  {
+    "id": "onion",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "洋葱",
+    "en": "onion",
+    "pinyin": "yáng cōng",
+    "emoji": "🧅",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute onion"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是洋葱。",
+        "sentence_en": "This is a onion."
+      },
+      "L3": {
+        "sentence_zh": "这是洋葱。",
+        "sentence_en": "This is a onion."
+      }
+    }
+  },
+  {
+    "id": "mushroom",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "蘑菇",
+    "en": "mushroom",
+    "pinyin": "mó gu",
+    "emoji": "🍄",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute mushroom"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是蘑菇。",
+        "sentence_en": "This is a mushroom."
+      },
+      "L3": {
+        "sentence_zh": "这是蘑菇。",
+        "sentence_en": "This is a mushroom."
+      }
+    }
+  },
+  {
+    "id": "broccoli",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "西兰花",
+    "en": "broccoli",
+    "pinyin": "xī lán huā",
+    "emoji": "🥦",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute broccoli"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是西兰花。",
+        "sentence_en": "This is a broccoli."
+      },
+      "L3": {
+        "sentence_zh": "这是西兰花。",
+        "sentence_en": "This is a broccoli."
+      }
+    }
+  },
+  {
+    "id": "chili",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "辣椒",
+    "en": "chili",
+    "pinyin": "là jiāo",
+    "emoji": "🌶️",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute chili"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是辣椒。",
+        "sentence_en": "This is a chili."
+      },
+      "L3": {
+        "sentence_zh": "这是辣椒。",
+        "sentence_en": "This is a chili."
+      }
+    }
+  },
+  {
+    "id": "pea",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "豌豆",
+    "en": "pea",
+    "pinyin": "wān dòu",
+    "emoji": "🫛",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute pea"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是豌豆。",
+        "sentence_en": "This is a pea."
+      },
+      "L3": {
+        "sentence_zh": "这是豌豆。",
+        "sentence_en": "This is a pea."
+      }
+    }
+  },
+  {
+    "id": "sweet-potato",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "红薯",
+    "en": "sweet potato",
+    "pinyin": "hóng shǔ",
+    "emoji": "🍠",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute sweet potato"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是红薯。",
+        "sentence_en": "This is a sweet potato."
+      },
+      "L3": {
+        "sentence_zh": "这是红薯。",
+        "sentence_en": "This is a sweet potato."
+      }
+    }
+  },
+  {
+    "id": "lettuce",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "生菜",
+    "en": "lettuce",
+    "pinyin": "shēng cài",
+    "emoji": "🥗",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute lettuce"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是生菜。",
+        "sentence_en": "This is a lettuce."
+      },
+      "L3": {
+        "sentence_zh": "这是生菜。",
+        "sentence_en": "This is a lettuce."
+      }
+    }
+  },
+  {
+    "id": "elephant",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "大象",
+    "en": "elephant",
+    "pinyin": "dà xiàng",
+    "emoji": "🐘",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute elephant"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是大象。",
+        "sentence_en": "This is a elephant."
+      },
+      "L3": {
+        "sentence_zh": "这是大象。",
+        "sentence_en": "This is a elephant."
+      }
+    }
+  },
+  {
+    "id": "lion",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "狮子",
+    "en": "lion",
+    "pinyin": "shī zi",
+    "emoji": "🦁",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute lion"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是狮子。",
+        "sentence_en": "This is a lion."
+      },
+      "L3": {
+        "sentence_zh": "这是狮子。",
+        "sentence_en": "This is a lion."
+      }
+    }
+  },
+  {
+    "id": "tiger",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "老虎",
+    "en": "tiger",
+    "pinyin": "lǎo hǔ",
+    "emoji": "🐯",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute tiger"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是老虎。",
+        "sentence_en": "This is a tiger."
+      },
+      "L3": {
+        "sentence_zh": "这是老虎。",
+        "sentence_en": "This is a tiger."
+      }
+    }
+  },
+  {
+    "id": "monkey",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "猴子",
+    "en": "monkey",
+    "pinyin": "hóu zi",
+    "emoji": "🐒",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute monkey"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是猴子。",
+        "sentence_en": "This is a monkey."
+      },
+      "L3": {
+        "sentence_zh": "这是猴子。",
+        "sentence_en": "This is a monkey."
+      }
+    }
+  },
+  {
+    "id": "panda",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "熊猫",
+    "en": "panda",
+    "pinyin": "xióng māo",
+    "emoji": "🐼",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute panda"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是熊猫。",
+        "sentence_en": "This is a panda."
+      },
+      "L3": {
+        "sentence_zh": "这是熊猫。",
+        "sentence_en": "This is a panda."
+      }
+    }
+  },
+  {
+    "id": "giraffe",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "长颈鹿",
+    "en": "giraffe",
+    "pinyin": "cháng jǐng lù",
+    "emoji": "🦒",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute giraffe"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是长颈鹿。",
+        "sentence_en": "This is a giraffe."
+      },
+      "L3": {
+        "sentence_zh": "这是长颈鹿。",
+        "sentence_en": "This is a giraffe."
+      }
+    }
+  },
+  {
+    "id": "zebra",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "斑马",
+    "en": "zebra",
+    "pinyin": "bān mǎ",
+    "emoji": "🦓",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute zebra"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是斑马。",
+        "sentence_en": "This is a zebra."
+      },
+      "L3": {
+        "sentence_zh": "这是斑马。",
+        "sentence_en": "This is a zebra."
+      }
+    }
+  },
+  {
+    "id": "hippo",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "河马",
+    "en": "hippo",
+    "pinyin": "hé mǎ",
+    "emoji": "🦛",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute hippo"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是河马。",
+        "sentence_en": "This is a hippo."
+      },
+      "L3": {
+        "sentence_zh": "这是河马。",
+        "sentence_en": "This is a hippo."
+      }
+    }
+  },
+  {
+    "id": "kangaroo",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "袋鼠",
+    "en": "kangaroo",
+    "pinyin": "dài shǔ",
+    "emoji": "🦘",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute kangaroo"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是袋鼠。",
+        "sentence_en": "This is a kangaroo."
+      },
+      "L3": {
+        "sentence_zh": "这是袋鼠。",
+        "sentence_en": "This is a kangaroo."
+      }
+    }
+  },
+  {
+    "id": "bear",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "熊",
+    "en": "bear",
+    "pinyin": "xióng",
+    "emoji": "🐻",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute bear"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是熊。",
+        "sentence_en": "This is a bear."
+      },
+      "L3": {
+        "sentence_zh": "这是熊。",
+        "sentence_en": "This is a bear."
+      }
+    }
+  },
+  {
+    "id": "fox",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "狐狸",
+    "en": "fox",
+    "pinyin": "hú li",
+    "emoji": "🦊",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute fox"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是狐狸。",
+        "sentence_en": "This is a fox."
+      },
+      "L3": {
+        "sentence_zh": "这是狐狸。",
+        "sentence_en": "This is a fox."
+      }
+    }
+  },
+  {
+    "id": "wolf",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "狼",
+    "en": "wolf",
+    "pinyin": "láng",
+    "emoji": "🐺",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute wolf"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是狼。",
+        "sentence_en": "This is a wolf."
+      },
+      "L3": {
+        "sentence_zh": "这是狼。",
+        "sentence_en": "This is a wolf."
+      }
+    }
+  },
+  {
+    "id": "pig",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "猪",
+    "en": "pig",
+    "pinyin": "zhū",
+    "emoji": "🐷",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute pig"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是猪。",
+        "sentence_en": "This is a pig."
+      },
+      "L3": {
+        "sentence_zh": "这是猪。",
+        "sentence_en": "This is a pig."
+      }
+    }
+  },
+  {
+    "id": "cow",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "牛",
+    "en": "cow",
+    "pinyin": "niú",
+    "emoji": "🐮",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute cow"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是牛。",
+        "sentence_en": "This is a cow."
+      },
+      "L3": {
+        "sentence_zh": "这是牛。",
+        "sentence_en": "This is a cow."
+      }
+    }
+  },
+  {
+    "id": "sheep",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "羊",
+    "en": "sheep",
+    "pinyin": "yáng",
+    "emoji": "🐑",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute sheep"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是羊。",
+        "sentence_en": "This is a sheep."
+      },
+      "L3": {
+        "sentence_zh": "这是羊。",
+        "sentence_en": "This is a sheep."
+      }
+    }
+  },
+  {
+    "id": "horse",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "马",
+    "en": "horse",
+    "pinyin": "mǎ",
+    "emoji": "🐴",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute horse"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是马。",
+        "sentence_en": "This is a horse."
+      },
+      "L3": {
+        "sentence_zh": "这是马。",
+        "sentence_en": "This is a horse."
+      }
+    }
+  },
+  {
+    "id": "chicken",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "鸡",
+    "en": "chicken",
+    "pinyin": "jī",
+    "emoji": "🐔",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute chicken"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是鸡。",
+        "sentence_en": "This is a chicken."
+      },
+      "L3": {
+        "sentence_zh": "这是鸡。",
+        "sentence_en": "This is a chicken."
+      }
+    }
+  },
+  {
+    "id": "duck",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "鸭子",
+    "en": "duck",
+    "pinyin": "yā zi",
+    "emoji": "🦆",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute duck"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是鸭子。",
+        "sentence_en": "This is a duck."
+      },
+      "L3": {
+        "sentence_zh": "这是鸭子。",
+        "sentence_en": "This is a duck."
+      }
+    }
+  },
+  {
+    "id": "goose",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "鹅",
+    "en": "goose",
+    "pinyin": "é",
+    "emoji": "🦢",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute goose"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是鹅。",
+        "sentence_en": "This is a goose."
+      },
+      "L3": {
+        "sentence_zh": "这是鹅。",
+        "sentence_en": "This is a goose."
+      }
+    }
+  },
+  {
+    "id": "bird",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "小鸟",
+    "en": "bird",
+    "pinyin": "xiǎo niǎo",
+    "emoji": "🐦",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute bird"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是小鸟。",
+        "sentence_en": "This is a bird."
+      },
+      "L3": {
+        "sentence_zh": "这是小鸟。",
+        "sentence_en": "This is a bird."
+      }
+    }
+  },
+  {
+    "id": "owl",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "猫头鹰",
+    "en": "owl",
+    "pinyin": "māo tóu yīng",
+    "emoji": "🦉",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute owl"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是猫头鹰。",
+        "sentence_en": "This is a owl."
+      },
+      "L3": {
+        "sentence_zh": "这是猫头鹰。",
+        "sentence_en": "This is a owl."
+      }
+    }
+  },
+  {
+    "id": "penguin",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "企鹅",
+    "en": "penguin",
+    "pinyin": "qǐ é",
+    "emoji": "🐧",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute penguin"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是企鹅。",
+        "sentence_en": "This is a penguin."
+      },
+      "L3": {
+        "sentence_zh": "这是企鹅。",
+        "sentence_en": "This is a penguin."
+      }
+    }
+  },
+  {
+    "id": "fish",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "鱼",
+    "en": "fish",
+    "pinyin": "yú",
+    "emoji": "🐟",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute fish"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是鱼。",
+        "sentence_en": "This is a fish."
+      },
+      "L3": {
+        "sentence_zh": "这是鱼。",
+        "sentence_en": "This is a fish."
+      }
+    }
+  },
+  {
+    "id": "dolphin",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "海豚",
+    "en": "dolphin",
+    "pinyin": "hǎi tún",
+    "emoji": "🐬",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute dolphin"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是海豚。",
+        "sentence_en": "This is a dolphin."
+      },
+      "L3": {
+        "sentence_zh": "这是海豚。",
+        "sentence_en": "This is a dolphin."
+      }
+    }
+  },
+  {
+    "id": "whale",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "鲸鱼",
+    "en": "whale",
+    "pinyin": "jīng yú",
+    "emoji": "🐳",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute whale"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是鲸鱼。",
+        "sentence_en": "This is a whale."
+      },
+      "L3": {
+        "sentence_zh": "这是鲸鱼。",
+        "sentence_en": "This is a whale."
+      }
+    }
+  },
+  {
+    "id": "octopus",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "章鱼",
+    "en": "octopus",
+    "pinyin": "zhāng yú",
+    "emoji": "🐙",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute octopus"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是章鱼。",
+        "sentence_en": "This is a octopus."
+      },
+      "L3": {
+        "sentence_zh": "这是章鱼。",
+        "sentence_en": "This is a octopus."
+      }
+    }
+  },
+  {
+    "id": "crab",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "螃蟹",
+    "en": "crab",
+    "pinyin": "páng xiè",
+    "emoji": "🦀",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute crab"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是螃蟹。",
+        "sentence_en": "This is a crab."
+      },
+      "L3": {
+        "sentence_zh": "这是螃蟹。",
+        "sentence_en": "This is a crab."
+      }
+    }
+  },
+  {
+    "id": "shrimp",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "虾",
+    "en": "shrimp",
+    "pinyin": "xiā",
+    "emoji": "🦐",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute shrimp"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是虾。",
+        "sentence_en": "This is a shrimp."
+      },
+      "L3": {
+        "sentence_zh": "这是虾。",
+        "sentence_en": "This is a shrimp."
+      }
+    }
+  },
+  {
+    "id": "turtle",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "乌龟",
+    "en": "turtle",
+    "pinyin": "wū guī",
+    "emoji": "🐢",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute turtle"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是乌龟。",
+        "sentence_en": "This is a turtle."
+      },
+      "L3": {
+        "sentence_zh": "这是乌龟。",
+        "sentence_en": "This is a turtle."
+      }
+    }
+  },
+  {
+    "id": "snake",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "蛇",
+    "en": "snake",
+    "pinyin": "shé",
+    "emoji": "🐍",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute snake"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是蛇。",
+        "sentence_en": "This is a snake."
+      },
+      "L3": {
+        "sentence_zh": "这是蛇。",
+        "sentence_en": "This is a snake."
+      }
+    }
+  },
+  {
+    "id": "frog",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "青蛙",
+    "en": "frog",
+    "pinyin": "qīng wā",
+    "emoji": "🐸",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute frog"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是青蛙。",
+        "sentence_en": "This is a frog."
+      },
+      "L3": {
+        "sentence_zh": "这是青蛙。",
+        "sentence_en": "This is a frog."
+      }
+    }
+  },
+  {
+    "id": "butterfly",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "蝴蝶",
+    "en": "butterfly",
+    "pinyin": "hú dié",
+    "emoji": "🦋",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute butterfly"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是蝴蝶。",
+        "sentence_en": "This is a butterfly."
+      },
+      "L3": {
+        "sentence_zh": "这是蝴蝶。",
+        "sentence_en": "This is a butterfly."
+      }
+    }
+  },
+  {
+    "id": "bee",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "蜜蜂",
+    "en": "bee",
+    "pinyin": "mì fēng",
+    "emoji": "🐝",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute bee"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是蜜蜂。",
+        "sentence_en": "This is a bee."
+      },
+      "L3": {
+        "sentence_zh": "这是蜜蜂。",
+        "sentence_en": "This is a bee."
+      }
+    }
+  },
+  {
+    "id": "ant",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "蚂蚁",
+    "en": "ant",
+    "pinyin": "mǎ yǐ",
+    "emoji": "🐜",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute ant"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是蚂蚁。",
+        "sentence_en": "This is a ant."
+      },
+      "L3": {
+        "sentence_zh": "这是蚂蚁。",
+        "sentence_en": "This is a ant."
+      }
+    }
+  },
+  {
+    "id": "ladybug",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "瓢虫",
+    "en": "ladybug",
+    "pinyin": "piáo chóng",
+    "emoji": "🐞",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute ladybug"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是瓢虫。",
+        "sentence_en": "This is a ladybug."
+      },
+      "L3": {
+        "sentence_zh": "这是瓢虫。",
+        "sentence_en": "This is a ladybug."
+      }
+    }
+  },
+  {
+    "id": "snail",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "蜗牛",
+    "en": "snail",
+    "pinyin": "wō niú",
+    "emoji": "🐌",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute snail"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是蜗牛。",
+        "sentence_en": "This is a snail."
+      },
+      "L3": {
+        "sentence_zh": "这是蜗牛。",
+        "sentence_en": "This is a snail."
+      }
+    }
+  },
+  {
+    "id": "squirrel",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "松鼠",
+    "en": "squirrel",
+    "pinyin": "sōng shǔ",
+    "emoji": "🐿️",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute squirrel"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是松鼠。",
+        "sentence_en": "This is a squirrel."
+      },
+      "L3": {
+        "sentence_zh": "这是松鼠。",
+        "sentence_en": "This is a squirrel."
+      }
+    }
+  },
+  {
+    "id": "hedgehog",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "刺猬",
+    "en": "hedgehog",
+    "pinyin": "cì wei",
+    "emoji": "🦔",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute hedgehog"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是刺猬。",
+        "sentence_en": "This is a hedgehog."
+      },
+      "L3": {
+        "sentence_zh": "这是刺猬。",
+        "sentence_en": "This is a hedgehog."
+      }
+    }
+  },
+  {
+    "id": "dinosaur",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "恐龙",
+    "en": "dinosaur",
+    "pinyin": "kǒng lóng",
+    "emoji": "🦕",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute dinosaur"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是恐龙。",
+        "sentence_en": "This is a dinosaur."
+      },
+      "L3": {
+        "sentence_zh": "这是恐龙。",
+        "sentence_en": "This is a dinosaur."
+      }
+    }
+  },
+  {
+    "id": "rice",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "米饭",
+    "en": "rice",
+    "pinyin": "mǐ fàn",
+    "emoji": "🍚",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute rice"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是米饭。",
+        "sentence_en": "This is a rice."
+      },
+      "L3": {
+        "sentence_zh": "这是米饭。",
+        "sentence_en": "This is a rice."
+      }
+    }
+  },
+  {
+    "id": "noodles",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "面条",
+    "en": "noodles",
+    "pinyin": "miàn tiáo",
+    "emoji": "🍜",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute noodles"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是面条。",
+        "sentence_en": "This is a noodles."
+      },
+      "L3": {
+        "sentence_zh": "这是面条。",
+        "sentence_en": "This is a noodles."
+      }
+    }
+  },
+  {
+    "id": "bread",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "面包",
+    "en": "bread",
+    "pinyin": "miàn bāo",
+    "emoji": "🍞",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute bread"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是面包。",
+        "sentence_en": "This is a bread."
+      },
+      "L3": {
+        "sentence_zh": "这是面包。",
+        "sentence_en": "This is a bread."
+      }
+    }
+  },
+  {
+    "id": "cake",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "蛋糕",
+    "en": "cake",
+    "pinyin": "dàn gāo",
+    "emoji": "🍰",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute cake"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是蛋糕。",
+        "sentence_en": "This is a cake."
+      },
+      "L3": {
+        "sentence_zh": "这是蛋糕。",
+        "sentence_en": "This is a cake."
+      }
+    }
+  },
+  {
+    "id": "cookie",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "饼干",
+    "en": "cookie",
+    "pinyin": "bǐng gān",
+    "emoji": "🍪",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute cookie"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是饼干。",
+        "sentence_en": "This is a cookie."
+      },
+      "L3": {
+        "sentence_zh": "这是饼干。",
+        "sentence_en": "This is a cookie."
+      }
+    }
+  },
+  {
+    "id": "ice-cream",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "冰淇淋",
+    "en": "ice cream",
+    "pinyin": "bīng qí lín",
+    "emoji": "🍦",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute ice cream"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是冰淇淋。",
+        "sentence_en": "This is a ice cream."
+      },
+      "L3": {
+        "sentence_zh": "这是冰淇淋。",
+        "sentence_en": "This is a ice cream."
+      }
+    }
+  },
+  {
+    "id": "egg",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "鸡蛋",
+    "en": "egg",
+    "pinyin": "jī dàn",
+    "emoji": "🥚",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute egg"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是鸡蛋。",
+        "sentence_en": "This is a egg."
+      },
+      "L3": {
+        "sentence_zh": "这是鸡蛋。",
+        "sentence_en": "This is a egg."
+      }
+    }
+  },
+  {
+    "id": "milk",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "牛奶",
+    "en": "milk",
+    "pinyin": "niú nǎi",
+    "emoji": "🥛",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute milk"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是牛奶。",
+        "sentence_en": "This is a milk."
+      },
+      "L3": {
+        "sentence_zh": "这是牛奶。",
+        "sentence_en": "This is a milk."
+      }
+    }
+  },
+  {
+    "id": "bun",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "包子",
+    "en": "bun",
+    "pinyin": "bāo zǐ",
+    "emoji": "🥟",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute bun"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是包子。",
+        "sentence_en": "This is a bun."
+      },
+      "L3": {
+        "sentence_zh": "这是包子。",
+        "sentence_en": "This is a bun."
+      }
+    }
+  },
+  {
+    "id": "dumpling",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "饺子",
+    "en": "dumpling",
+    "pinyin": "jiǎo zǐ",
+    "emoji": "🥟",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute dumpling"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是饺子。",
+        "sentence_en": "This is a dumpling."
+      },
+      "L3": {
+        "sentence_zh": "这是饺子。",
+        "sentence_en": "This is a dumpling."
+      }
+    }
+  },
+  {
+    "id": "hamburger",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "汉堡",
+    "en": "hamburger",
+    "pinyin": "hàn bǎo",
+    "emoji": "🍔",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute hamburger"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是汉堡。",
+        "sentence_en": "This is a hamburger."
+      },
+      "L3": {
+        "sentence_zh": "这是汉堡。",
+        "sentence_en": "This is a hamburger."
+      }
+    }
+  },
+  {
+    "id": "pizza",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "披萨",
+    "en": "pizza",
+    "pinyin": "pī sà",
+    "emoji": "🍕",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute pizza"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是披萨。",
+        "sentence_en": "This is a pizza."
+      },
+      "L3": {
+        "sentence_zh": "这是披萨。",
+        "sentence_en": "This is a pizza."
+      }
+    }
+  },
+  {
+    "id": "candy",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "糖果",
+    "en": "candy",
+    "pinyin": "táng guǒ",
+    "emoji": "🍬",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute candy"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是糖果。",
+        "sentence_en": "This is a candy."
+      },
+      "L3": {
+        "sentence_zh": "这是糖果。",
+        "sentence_en": "This is a candy."
+      }
+    }
+  },
+  {
+    "id": "chocolate",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "巧克力",
+    "en": "chocolate",
+    "pinyin": "qiǎo kè lì",
+    "emoji": "🍫",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute chocolate"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是巧克力。",
+        "sentence_en": "This is a chocolate."
+      },
+      "L3": {
+        "sentence_zh": "这是巧克力。",
+        "sentence_en": "This is a chocolate."
+      }
+    }
+  },
+  {
+    "id": "honey",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "蜂蜜",
+    "en": "honey",
+    "pinyin": "fēng mì",
+    "emoji": "🍯",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute honey"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是蜂蜜。",
+        "sentence_en": "This is a honey."
+      },
+      "L3": {
+        "sentence_zh": "这是蜂蜜。",
+        "sentence_en": "This is a honey."
+      }
+    }
+  },
+  {
+    "id": "juice",
+    "lane": "look",
+    "type": "object",
+    "section": "food",
+    "zh": "果汁",
+    "en": "juice",
+    "pinyin": "guǒ zhī",
+    "emoji": "🧃",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute juice"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是果汁。",
+        "sentence_en": "This is a juice."
+      },
+      "L3": {
+        "sentence_zh": "这是果汁。",
+        "sentence_en": "This is a juice."
+      }
+    }
+  },
+  {
+    "id": "car",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "汽车",
+    "en": "car",
+    "pinyin": "qì chē",
+    "emoji": "🚗",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute car"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是汽车。",
+        "sentence_en": "This is a car."
+      },
+      "L3": {
+        "sentence_zh": "这是汽车。",
+        "sentence_en": "This is a car."
+      }
+    }
+  },
+  {
+    "id": "bus",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "公交车",
+    "en": "bus",
+    "pinyin": "gōng jiāo chē",
+    "emoji": "🚌",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute bus"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是公交车。",
+        "sentence_en": "This is a bus."
+      },
+      "L3": {
+        "sentence_zh": "这是公交车。",
+        "sentence_en": "This is a bus."
+      }
+    }
+  },
+  {
+    "id": "train",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "火车",
+    "en": "train",
+    "pinyin": "huǒ chē",
+    "emoji": "🚂",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute train"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是火车。",
+        "sentence_en": "This is a train."
+      },
+      "L3": {
+        "sentence_zh": "这是火车。",
+        "sentence_en": "This is a train."
+      }
+    }
+  },
+  {
+    "id": "airplane",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "飞机",
+    "en": "airplane",
+    "pinyin": "fēi jī",
+    "emoji": "✈️",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute airplane"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是飞机。",
+        "sentence_en": "This is a airplane."
+      },
+      "L3": {
+        "sentence_zh": "这是飞机。",
+        "sentence_en": "This is a airplane."
+      }
+    }
+  },
+  {
+    "id": "ship",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "轮船",
+    "en": "ship",
+    "pinyin": "lún chuán",
+    "emoji": "🚢",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute ship"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是轮船。",
+        "sentence_en": "This is a ship."
+      },
+      "L3": {
+        "sentence_zh": "这是轮船。",
+        "sentence_en": "This is a ship."
+      }
+    }
+  },
+  {
+    "id": "bicycle",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "自行车",
+    "en": "bicycle",
+    "pinyin": "zì xíng chē",
+    "emoji": "🚲",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute bicycle"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是自行车。",
+        "sentence_en": "This is a bicycle."
+      },
+      "L3": {
+        "sentence_zh": "这是自行车。",
+        "sentence_en": "This is a bicycle."
+      }
+    }
+  },
+  {
+    "id": "motorcycle",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "摩托车",
+    "en": "motorcycle",
+    "pinyin": "mó tuō chē",
+    "emoji": "🏍️",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute motorcycle"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是摩托车。",
+        "sentence_en": "This is a motorcycle."
+      },
+      "L3": {
+        "sentence_zh": "这是摩托车。",
+        "sentence_en": "This is a motorcycle."
+      }
+    }
+  },
+  {
+    "id": "ambulance",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "救护车",
+    "en": "ambulance",
+    "pinyin": "jiù hù chē",
+    "emoji": "🚑",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute ambulance"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是救护车。",
+        "sentence_en": "This is a ambulance."
+      },
+      "L3": {
+        "sentence_zh": "这是救护车。",
+        "sentence_en": "This is a ambulance."
+      }
+    }
+  },
+  {
+    "id": "fire-truck",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "消防车",
+    "en": "fire truck",
+    "pinyin": "xiāo fáng chē",
+    "emoji": "🚒",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute fire truck"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是消防车。",
+        "sentence_en": "This is a fire truck."
+      },
+      "L3": {
+        "sentence_zh": "这是消防车。",
+        "sentence_en": "This is a fire truck."
+      }
+    }
+  },
+  {
+    "id": "police-car",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "警车",
+    "en": "police car",
+    "pinyin": "jǐng chē",
+    "emoji": "🚓",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute police car"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是警车。",
+        "sentence_en": "This is a police car."
+      },
+      "L3": {
+        "sentence_zh": "这是警车。",
+        "sentence_en": "This is a police car."
+      }
+    }
+  },
+  {
+    "id": "excavator",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "挖掘机",
+    "en": "excavator",
+    "pinyin": "wā jué jī",
+    "emoji": "🚜",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute excavator"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是挖掘机。",
+        "sentence_en": "This is a excavator."
+      },
+      "L3": {
+        "sentence_zh": "这是挖掘机。",
+        "sentence_en": "This is a excavator."
+      }
+    }
+  },
+  {
+    "id": "tanker",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "洒水车",
+    "en": "tanker",
+    "pinyin": "sǎ shuǐ chē",
+    "emoji": "🚛",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute tanker"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是洒水车。",
+        "sentence_en": "This is a tanker."
+      },
+      "L3": {
+        "sentence_zh": "这是洒水车。",
+        "sentence_en": "This is a tanker."
+      }
+    }
+  },
+  {
+    "id": "balloon",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "热气球",
+    "en": "balloon",
+    "pinyin": "rè qì qiú",
+    "emoji": "🎈",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute balloon"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是热气球。",
+        "sentence_en": "This is a balloon."
+      },
+      "L3": {
+        "sentence_zh": "这是热气球。",
+        "sentence_en": "This is a balloon."
+      }
+    }
+  },
+  {
+    "id": "rocket",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "火箭",
+    "en": "rocket",
+    "pinyin": "huǒ jiàn",
+    "emoji": "🚀",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute rocket"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是火箭。",
+        "sentence_en": "This is a rocket."
+      },
+      "L3": {
+        "sentence_zh": "这是火箭。",
+        "sentence_en": "This is a rocket."
+      }
+    }
+  },
+  {
+    "id": "helicopter",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "直升机",
+    "en": "helicopter",
+    "pinyin": "zhí shēng jī",
+    "emoji": "🚁",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute helicopter"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是直升机。",
+        "sentence_en": "This is a helicopter."
+      },
+      "L3": {
+        "sentence_zh": "这是直升机。",
+        "sentence_en": "This is a helicopter."
+      }
+    }
+  },
+  {
+    "id": "scooter",
+    "lane": "look",
+    "type": "object",
+    "section": "vehicle",
+    "zh": "滑板车",
+    "en": "scooter",
+    "pinyin": "huá bǎn chē",
+    "emoji": "🛴",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute scooter"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是滑板车。",
+        "sentence_en": "This is a scooter."
+      },
+      "L3": {
+        "sentence_zh": "这是滑板车。",
+        "sentence_en": "This is a scooter."
+      }
+    }
+  },
+  {
+    "id": "chair",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "椅子",
+    "en": "chair",
+    "pinyin": "yǐ zi",
+    "emoji": "🪑",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute chair"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是椅子。",
+        "sentence_en": "This is a chair."
+      },
+      "L3": {
+        "sentence_zh": "这是椅子。",
+        "sentence_en": "This is a chair."
+      }
+    }
+  },
+  {
+    "id": "bed",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "床",
+    "en": "bed",
+    "pinyin": "chuáng",
+    "emoji": "🛏️",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute bed"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是床。",
+        "sentence_en": "This is a bed."
+      },
+      "L3": {
+        "sentence_zh": "这是床。",
+        "sentence_en": "This is a bed."
+      }
+    }
+  },
+  {
+    "id": "door",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "门",
+    "en": "door",
+    "pinyin": "mén",
+    "emoji": "🚪",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute door"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是门。",
+        "sentence_en": "This is a door."
+      },
+      "L3": {
+        "sentence_zh": "这是门。",
+        "sentence_en": "This is a door."
+      }
+    }
+  },
+  {
+    "id": "window",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "窗户",
+    "en": "window",
+    "pinyin": "chuāng hù",
+    "emoji": "🪟",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute window"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是窗户。",
+        "sentence_en": "This is a window."
+      },
+      "L3": {
+        "sentence_zh": "这是窗户。",
+        "sentence_en": "This is a window."
+      }
+    }
+  },
+  {
+    "id": "clock",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "钟表",
+    "en": "clock",
+    "pinyin": "zhōng biǎo",
+    "emoji": "🕐",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute clock"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是钟表。",
+        "sentence_en": "This is a clock."
+      },
+      "L3": {
+        "sentence_zh": "这是钟表。",
+        "sentence_en": "This is a clock."
+      }
+    }
+  },
+  {
+    "id": "toothbrush",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "牙刷",
+    "en": "toothbrush",
+    "pinyin": "yá shuā",
+    "emoji": "🪥",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute toothbrush"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是牙刷。",
+        "sentence_en": "This is a toothbrush."
+      },
+      "L3": {
+        "sentence_zh": "这是牙刷。",
+        "sentence_en": "This is a toothbrush."
+      }
+    }
+  },
+  {
+    "id": "cup",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "杯子",
+    "en": "cup",
+    "pinyin": "bēi zi",
+    "emoji": "🥤",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute cup"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是杯子。",
+        "sentence_en": "This is a cup."
+      },
+      "L3": {
+        "sentence_zh": "这是杯子。",
+        "sentence_en": "This is a cup."
+      }
+    }
+  },
+  {
+    "id": "spoon",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "勺子",
+    "en": "spoon",
+    "pinyin": "sháo zǐ",
+    "emoji": "🥄",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute spoon"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是勺子。",
+        "sentence_en": "This is a spoon."
+      },
+      "L3": {
+        "sentence_zh": "这是勺子。",
+        "sentence_en": "This is a spoon."
+      }
+    }
+  },
+  {
+    "id": "bowl",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "碗",
+    "en": "bowl",
+    "pinyin": "wǎn",
+    "emoji": "🥣",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute bowl"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是碗。",
+        "sentence_en": "This is a bowl."
+      },
+      "L3": {
+        "sentence_zh": "这是碗。",
+        "sentence_en": "This is a bowl."
+      }
+    }
+  },
+  {
+    "id": "umbrella",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "雨伞",
+    "en": "umbrella",
+    "pinyin": "yǔ sǎn",
+    "emoji": "☂️",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute umbrella"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是雨伞。",
+        "sentence_en": "This is a umbrella."
+      },
+      "L3": {
+        "sentence_zh": "这是雨伞。",
+        "sentence_en": "This is a umbrella."
+      }
+    }
+  },
+  {
+    "id": "key",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "钥匙",
+    "en": "key",
+    "pinyin": "yào shi",
+    "emoji": "🔑",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute key"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是钥匙。",
+        "sentence_en": "This is a key."
+      },
+      "L3": {
+        "sentence_zh": "这是钥匙。",
+        "sentence_en": "This is a key."
+      }
+    }
+  },
+  {
+    "id": "broom",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "扫帚",
+    "en": "broom",
+    "pinyin": "sào zhou",
+    "emoji": "🧹",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute broom"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是扫帚。",
+        "sentence_en": "This is a broom."
+      },
+      "L3": {
+        "sentence_zh": "这是扫帚。",
+        "sentence_en": "This is a broom."
+      }
+    }
+  },
+  {
+    "id": "towel",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "毛巾",
+    "en": "towel",
+    "pinyin": "máo jīn",
+    "emoji": "🧺",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute towel"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是毛巾。",
+        "sentence_en": "This is a towel."
+      },
+      "L3": {
+        "sentence_zh": "这是毛巾。",
+        "sentence_en": "This is a towel."
+      }
+    }
+  },
+  {
+    "id": "mirror",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "镜子",
+    "en": "mirror",
+    "pinyin": "jìng zi",
+    "emoji": "🪞",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute mirror"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是镜子。",
+        "sentence_en": "This is a mirror."
+      },
+      "L3": {
+        "sentence_zh": "这是镜子。",
+        "sentence_en": "This is a mirror."
+      }
+    }
+  },
+  {
+    "id": "soap",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "肥皂",
+    "en": "soap",
+    "pinyin": "féi zào",
+    "emoji": "🧼",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute soap"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是肥皂。",
+        "sentence_en": "This is a soap."
+      },
+      "L3": {
+        "sentence_zh": "这是肥皂。",
+        "sentence_en": "This is a soap."
+      }
+    }
+  },
+  {
+    "id": "basket",
+    "lane": "look",
+    "type": "object",
+    "section": "daily",
+    "zh": "篮子",
+    "en": "basket",
+    "pinyin": "lán zi",
+    "emoji": "🧺",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute basket"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是篮子。",
+        "sentence_en": "This is a basket."
+      },
+      "L3": {
+        "sentence_zh": "这是篮子。",
+        "sentence_en": "This is a basket."
+      }
+    }
+  },
+  {
+    "id": "television",
+    "lane": "look",
+    "type": "object",
+    "section": "appliance",
+    "zh": "电视机",
+    "en": "television",
+    "pinyin": "diàn shì jī",
+    "emoji": "📺",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute television"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是电视机。",
+        "sentence_en": "This is a television."
+      },
+      "L3": {
+        "sentence_zh": "这是电视机。",
+        "sentence_en": "This is a television."
+      }
+    }
+  },
+  {
+    "id": "refrigerator",
+    "lane": "look",
+    "type": "object",
+    "section": "appliance",
+    "zh": "冰箱",
+    "en": "refrigerator",
+    "pinyin": "bīng xiāng",
+    "emoji": "🧊",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute refrigerator"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是冰箱。",
+        "sentence_en": "This is a refrigerator."
+      },
+      "L3": {
+        "sentence_zh": "这是冰箱。",
+        "sentence_en": "This is a refrigerator."
+      }
+    }
+  },
+  {
+    "id": "washing-machine",
+    "lane": "look",
+    "type": "object",
+    "section": "appliance",
+    "zh": "洗衣机",
+    "en": "washing machine",
+    "pinyin": "xǐ yī jī",
+    "emoji": "🧺",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute washing machine"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是洗衣机。",
+        "sentence_en": "This is a washing machine."
+      },
+      "L3": {
+        "sentence_zh": "这是洗衣机。",
+        "sentence_en": "This is a washing machine."
+      }
+    }
+  },
+  {
+    "id": "fan",
+    "lane": "look",
+    "type": "object",
+    "section": "appliance",
+    "zh": "电风扇",
+    "en": "fan",
+    "pinyin": "diàn fēng shàn",
+    "emoji": "🌀",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute fan"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是电风扇。",
+        "sentence_en": "This is a fan."
+      },
+      "L3": {
+        "sentence_zh": "这是电风扇。",
+        "sentence_en": "This is a fan."
+      }
+    }
+  },
+  {
+    "id": "air-conditioner",
+    "lane": "look",
+    "type": "object",
+    "section": "appliance",
+    "zh": "空调",
+    "en": "air conditioner",
+    "pinyin": "kōng tiáo",
+    "emoji": "❄️",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute air conditioner"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是空调。",
+        "sentence_en": "This is a air conditioner."
+      },
+      "L3": {
+        "sentence_zh": "这是空调。",
+        "sentence_en": "This is a air conditioner."
+      }
+    }
+  },
+  {
+    "id": "lamp",
+    "lane": "look",
+    "type": "object",
+    "section": "appliance",
+    "zh": "台灯",
+    "en": "lamp",
+    "pinyin": "tái dēng",
+    "emoji": "💡",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute lamp"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是台灯。",
+        "sentence_en": "This is a lamp."
+      },
+      "L3": {
+        "sentence_zh": "这是台灯。",
+        "sentence_en": "This is a lamp."
+      }
+    }
+  },
+  {
+    "id": "phone",
+    "lane": "look",
+    "type": "object",
+    "section": "appliance",
+    "zh": "手机",
+    "en": "phone",
+    "pinyin": "shǒu jī",
+    "emoji": "📱",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute phone"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是手机。",
+        "sentence_en": "This is a phone."
+      },
+      "L3": {
+        "sentence_zh": "这是手机。",
+        "sentence_en": "This is a phone."
+      }
+    }
+  },
+  {
+    "id": "computer",
+    "lane": "look",
+    "type": "object",
+    "section": "appliance",
+    "zh": "电脑",
+    "en": "computer",
+    "pinyin": "diàn nǎo",
+    "emoji": "💻",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute computer"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是电脑。",
+        "sentence_en": "This is a computer."
+      },
+      "L3": {
+        "sentence_zh": "这是电脑。",
+        "sentence_en": "This is a computer."
+      }
+    }
+  },
+  {
+    "id": "rice-cooker",
+    "lane": "look",
+    "type": "object",
+    "section": "appliance",
+    "zh": "电饭锅",
+    "en": "rice cooker",
+    "pinyin": "diàn fàn guō",
+    "emoji": "🍲",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute rice cooker"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是电饭锅。",
+        "sentence_en": "This is a rice cooker."
+      },
+      "L3": {
+        "sentence_zh": "这是电饭锅。",
+        "sentence_en": "This is a rice cooker."
+      }
+    }
+  },
+  {
+    "id": "hair-dryer",
+    "lane": "look",
+    "type": "object",
+    "section": "appliance",
+    "zh": "吹风机",
+    "en": "hair dryer",
+    "pinyin": "chuī fēng jī",
+    "emoji": "💨",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute hair dryer"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是吹风机。",
+        "sentence_en": "This is a hair dryer."
+      },
+      "L3": {
+        "sentence_zh": "这是吹风机。",
+        "sentence_en": "This is a hair dryer."
+      }
+    }
+  },
+  {
+    "id": "vacuum",
+    "lane": "look",
+    "type": "object",
+    "section": "appliance",
+    "zh": "吸尘器",
+    "en": "vacuum",
+    "pinyin": "xī chén qì",
+    "emoji": "🧹",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute vacuum"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是吸尘器。",
+        "sentence_en": "This is a vacuum."
+      },
+      "L3": {
+        "sentence_zh": "这是吸尘器。",
+        "sentence_en": "This is a vacuum."
+      }
+    }
+  },
+  {
+    "id": "clock-appliance",
+    "lane": "look",
+    "type": "object",
+    "section": "appliance",
+    "zh": "时钟",
+    "en": "clock",
+    "pinyin": "shí zhōng",
+    "emoji": "⏰",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute clock"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是时钟。",
+        "sentence_en": "This is a clock."
+      },
+      "L3": {
+        "sentence_zh": "这是时钟。",
+        "sentence_en": "This is a clock."
+      }
+    }
+  },
+  {
+    "id": "blocks",
+    "lane": "look",
+    "type": "object",
+    "section": "toys",
+    "zh": "积木",
+    "en": "blocks",
+    "pinyin": "jī mù",
+    "emoji": "🧱",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute blocks"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是积木。",
+        "sentence_en": "This is a blocks."
+      },
+      "L3": {
+        "sentence_zh": "这是积木。",
+        "sentence_en": "This is a blocks."
+      }
+    }
+  },
+  {
+    "id": "balloon-toys",
+    "lane": "look",
+    "type": "object",
+    "section": "toys",
+    "zh": "气球",
+    "en": "balloon",
+    "pinyin": "qì qiú",
+    "emoji": "🎈",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute balloon"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是气球。",
+        "sentence_en": "This is a balloon."
+      },
+      "L3": {
+        "sentence_zh": "这是气球。",
+        "sentence_en": "This is a balloon."
+      }
+    }
+  },
+  {
+    "id": "ball",
+    "lane": "look",
+    "type": "object",
+    "section": "toys",
+    "zh": "皮球",
+    "en": "ball",
+    "pinyin": "pí qiú",
+    "emoji": "⚽",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute ball"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是皮球。",
+        "sentence_en": "This is a ball."
+      },
+      "L3": {
+        "sentence_zh": "这是皮球。",
+        "sentence_en": "This is a ball."
+      }
+    }
+  },
+  {
+    "id": "toy-car",
+    "lane": "look",
+    "type": "object",
+    "section": "toys",
+    "zh": "小汽车",
+    "en": "toy car",
+    "pinyin": "xiǎo qì chē",
+    "emoji": "🚗",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute toy car"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是小汽车。",
+        "sentence_en": "This is a toy car."
+      },
+      "L3": {
+        "sentence_zh": "这是小汽车。",
+        "sentence_en": "This is a toy car."
+      }
+    }
+  },
+  {
+    "id": "doll",
+    "lane": "look",
+    "type": "object",
+    "section": "toys",
+    "zh": "娃娃",
+    "en": "doll",
+    "pinyin": "wá wa",
+    "emoji": "🧸",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute doll"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是娃娃。",
+        "sentence_en": "This is a doll."
+      },
+      "L3": {
+        "sentence_zh": "这是娃娃。",
+        "sentence_en": "This is a doll."
+      }
+    }
+  },
+  {
+    "id": "puzzle",
+    "lane": "look",
+    "type": "object",
+    "section": "toys",
+    "zh": "拼图",
+    "en": "puzzle",
+    "pinyin": "pīn tú",
+    "emoji": "🧩",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute puzzle"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是拼图。",
+        "sentence_en": "This is a puzzle."
+      },
+      "L3": {
+        "sentence_zh": "这是拼图。",
+        "sentence_en": "This is a puzzle."
+      }
+    }
+  },
+  {
+    "id": "kite",
+    "lane": "look",
+    "type": "object",
+    "section": "toys",
+    "zh": "风筝",
+    "en": "kite",
+    "pinyin": "fēng zheng",
+    "emoji": "🪁",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute kite"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是风筝。",
+        "sentence_en": "This is a kite."
+      },
+      "L3": {
+        "sentence_zh": "这是风筝。",
+        "sentence_en": "This is a kite."
+      }
+    }
+  },
+  {
+    "id": "drum",
+    "lane": "look",
+    "type": "object",
+    "section": "toys",
+    "zh": "小鼓",
+    "en": "drum",
+    "pinyin": "xiǎo gǔ",
+    "emoji": "🥁",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute drum"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是小鼓。",
+        "sentence_en": "This is a drum."
+      },
+      "L3": {
+        "sentence_zh": "这是小鼓。",
+        "sentence_en": "This is a drum."
+      }
+    }
+  },
+  {
+    "id": "pinwheel",
+    "lane": "look",
+    "type": "object",
+    "section": "toys",
+    "zh": "风车",
+    "en": "pinwheel",
+    "pinyin": "fēng chē",
+    "emoji": "🎡",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute pinwheel"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是风车。",
+        "sentence_en": "This is a pinwheel."
+      },
+      "L3": {
+        "sentence_zh": "这是风车。",
+        "sentence_en": "This is a pinwheel."
+      }
+    }
+  },
+  {
+    "id": "bucket",
+    "lane": "look",
+    "type": "object",
+    "section": "toys",
+    "zh": "沙滩桶",
+    "en": "bucket",
+    "pinyin": "shā tān tǒng",
+    "emoji": "🪣",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute bucket"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是沙滩桶。",
+        "sentence_en": "This is a bucket."
+      },
+      "L3": {
+        "sentence_zh": "这是沙滩桶。",
+        "sentence_en": "This is a bucket."
+      }
+    }
+  },
+  {
+    "id": "toy-train",
+    "lane": "look",
+    "type": "object",
+    "section": "toys",
+    "zh": "积木火车",
+    "en": "toy train",
+    "pinyin": "jī mù huǒ chē",
+    "emoji": "🚂",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute toy train"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是积木火车。",
+        "sentence_en": "This is a toy train."
+      },
+      "L3": {
+        "sentence_zh": "这是积木火车。",
+        "sentence_en": "This is a toy train."
+      }
+    }
+  },
+  {
+    "id": "yo-yo",
+    "lane": "look",
+    "type": "object",
+    "section": "toys",
+    "zh": "溜溜球",
+    "en": "yo-yo",
+    "pinyin": "liū liū qiú",
+    "emoji": "🪀",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute yo-yo"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是溜溜球。",
+        "sentence_en": "This is a yo-yo."
+      },
+      "L3": {
+        "sentence_zh": "这是溜溜球。",
+        "sentence_en": "This is a yo-yo."
+      }
+    }
+  },
+  {
+    "id": "eye",
+    "lane": "look",
+    "type": "object",
+    "section": "body",
+    "zh": "眼睛",
+    "en": "eye",
+    "pinyin": "yǎn jīng",
+    "emoji": "👀",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute eye"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是眼睛。",
+        "sentence_en": "This is a eye."
+      },
+      "L3": {
+        "sentence_zh": "这是眼睛。",
+        "sentence_en": "This is a eye."
+      }
+    }
+  },
+  {
+    "id": "nose",
+    "lane": "look",
+    "type": "object",
+    "section": "body",
+    "zh": "鼻子",
+    "en": "nose",
+    "pinyin": "bí zi",
+    "emoji": "👃",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute nose"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是鼻子。",
+        "sentence_en": "This is a nose."
+      },
+      "L3": {
+        "sentence_zh": "这是鼻子。",
+        "sentence_en": "This is a nose."
+      }
+    }
+  },
+  {
+    "id": "mouth",
+    "lane": "look",
+    "type": "object",
+    "section": "body",
+    "zh": "嘴巴",
+    "en": "mouth",
+    "pinyin": "zuǐ ba",
+    "emoji": "👄",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute mouth"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是嘴巴。",
+        "sentence_en": "This is a mouth."
+      },
+      "L3": {
+        "sentence_zh": "这是嘴巴。",
+        "sentence_en": "This is a mouth."
+      }
+    }
+  },
+  {
+    "id": "ear",
+    "lane": "look",
+    "type": "object",
+    "section": "body",
+    "zh": "耳朵",
+    "en": "ear",
+    "pinyin": "ěr duo",
+    "emoji": "👂",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute ear"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是耳朵。",
+        "sentence_en": "This is a ear."
+      },
+      "L3": {
+        "sentence_zh": "这是耳朵。",
+        "sentence_en": "This is a ear."
+      }
+    }
+  },
+  {
+    "id": "hand",
+    "lane": "look",
+    "type": "object",
+    "section": "body",
+    "zh": "手",
+    "en": "hand",
+    "pinyin": "shǒu",
+    "emoji": "✋",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute hand"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是手。",
+        "sentence_en": "This is a hand."
+      },
+      "L3": {
+        "sentence_zh": "这是手。",
+        "sentence_en": "This is a hand."
+      }
+    }
+  },
+  {
+    "id": "foot",
+    "lane": "look",
+    "type": "object",
+    "section": "body",
+    "zh": "脚",
+    "en": "foot",
+    "pinyin": "jiǎo",
+    "emoji": "🦶",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute foot"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是脚。",
+        "sentence_en": "This is a foot."
+      },
+      "L3": {
+        "sentence_zh": "这是脚。",
+        "sentence_en": "This is a foot."
+      }
+    }
+  },
+  {
+    "id": "hair",
+    "lane": "look",
+    "type": "object",
+    "section": "body",
+    "zh": "头发",
+    "en": "hair",
+    "pinyin": "tóu fa",
+    "emoji": "💇",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute hair"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是头发。",
+        "sentence_en": "This is a hair."
+      },
+      "L3": {
+        "sentence_zh": "这是头发。",
+        "sentence_en": "This is a hair."
+      }
+    }
+  },
+  {
+    "id": "tooth",
+    "lane": "look",
+    "type": "object",
+    "section": "body",
+    "zh": "牙齿",
+    "en": "tooth",
+    "pinyin": "yá chǐ",
+    "emoji": "🦷",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute tooth"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是牙齿。",
+        "sentence_en": "This is a tooth."
+      },
+      "L3": {
+        "sentence_zh": "这是牙齿。",
+        "sentence_en": "This is a tooth."
+      }
+    }
+  },
+  {
+    "id": "tongue",
+    "lane": "look",
+    "type": "object",
+    "section": "body",
+    "zh": "舌头",
+    "en": "tongue",
+    "pinyin": "shé tou",
+    "emoji": "👅",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute tongue"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是舌头。",
+        "sentence_en": "This is a tongue."
+      },
+      "L3": {
+        "sentence_zh": "这是舌头。",
+        "sentence_en": "This is a tongue."
+      }
+    }
+  },
+  {
+    "id": "cheek",
+    "lane": "look",
+    "type": "object",
+    "section": "body",
+    "zh": "脸蛋",
+    "en": "cheek",
+    "pinyin": "liǎn dàn",
+    "emoji": "😊",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute cheek"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是脸蛋。",
+        "sentence_en": "This is a cheek."
+      },
+      "L3": {
+        "sentence_zh": "这是脸蛋。",
+        "sentence_en": "This is a cheek."
+      }
+    }
+  },
+  {
+    "id": "sun",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "太阳",
+    "en": "sun",
+    "pinyin": "tài yáng",
+    "emoji": "☀️",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute sun"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是太阳。",
+        "sentence_en": "This is a sun."
+      },
+      "L3": {
+        "sentence_zh": "这是太阳。",
+        "sentence_en": "This is a sun."
+      }
+    }
+  },
+  {
+    "id": "moon",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "月亮",
+    "en": "moon",
+    "pinyin": "yuè liàng",
+    "emoji": "🌙",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute moon"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是月亮。",
+        "sentence_en": "This is a moon."
+      },
+      "L3": {
+        "sentence_zh": "这是月亮。",
+        "sentence_en": "This is a moon."
+      }
+    }
+  },
+  {
+    "id": "star",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "星星",
+    "en": "star",
+    "pinyin": "xīng xīng",
+    "emoji": "⭐",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute star"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是星星。",
+        "sentence_en": "This is a star."
+      },
+      "L3": {
+        "sentence_zh": "这是星星。",
+        "sentence_en": "This is a star."
+      }
+    }
+  },
+  {
+    "id": "cloud",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "云",
+    "en": "cloud",
+    "pinyin": "yún",
+    "emoji": "☁️",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute cloud"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是云。",
+        "sentence_en": "This is a cloud."
+      },
+      "L3": {
+        "sentence_zh": "这是云。",
+        "sentence_en": "This is a cloud."
+      }
+    }
+  },
+  {
+    "id": "rain",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "雨",
+    "en": "rain",
+    "pinyin": "yǔ",
+    "emoji": "🌧️",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute rain"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是雨。",
+        "sentence_en": "This is a rain."
+      },
+      "L3": {
+        "sentence_zh": "这是雨。",
+        "sentence_en": "This is a rain."
+      }
+    }
+  },
+  {
+    "id": "snow",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "雪",
+    "en": "snow",
+    "pinyin": "xuě",
+    "emoji": "❄️",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute snow"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是雪。",
+        "sentence_en": "This is a snow."
+      },
+      "L3": {
+        "sentence_zh": "这是雪。",
+        "sentence_en": "This is a snow."
+      }
+    }
+  },
+  {
+    "id": "rainbow",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "彩虹",
+    "en": "rainbow",
+    "pinyin": "cǎi hóng",
+    "emoji": "🌈",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute rainbow"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是彩虹。",
+        "sentence_en": "This is a rainbow."
+      },
+      "L3": {
+        "sentence_zh": "这是彩虹。",
+        "sentence_en": "This is a rainbow."
+      }
+    }
+  },
+  {
+    "id": "wind",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "风",
+    "en": "wind",
+    "pinyin": "fēng",
+    "emoji": "🌬️",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute wind"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是风。",
+        "sentence_en": "This is a wind."
+      },
+      "L3": {
+        "sentence_zh": "这是风。",
+        "sentence_en": "This is a wind."
+      }
+    }
+  },
+  {
+    "id": "lightning",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "雷电",
+    "en": "lightning",
+    "pinyin": "léi diàn",
+    "emoji": "⚡",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute lightning"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是雷电。",
+        "sentence_en": "This is a lightning."
+      },
+      "L3": {
+        "sentence_zh": "这是雷电。",
+        "sentence_en": "This is a lightning."
+      }
+    }
+  },
+  {
+    "id": "sea",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "大海",
+    "en": "sea",
+    "pinyin": "dà hǎi",
+    "emoji": "🌊",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute sea"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是大海。",
+        "sentence_en": "This is a sea."
+      },
+      "L3": {
+        "sentence_zh": "这是大海。",
+        "sentence_en": "This is a sea."
+      }
+    }
+  },
+  {
+    "id": "mountain",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "山",
+    "en": "mountain",
+    "pinyin": "shān",
+    "emoji": "⛰️",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute mountain"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是山。",
+        "sentence_en": "This is a mountain."
+      },
+      "L3": {
+        "sentence_zh": "这是山。",
+        "sentence_en": "This is a mountain."
+      }
+    }
+  },
+  {
+    "id": "stone",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "石头",
+    "en": "stone",
+    "pinyin": "shí tou",
+    "emoji": "🪨",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute stone"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是石头。",
+        "sentence_en": "This is a stone."
+      },
+      "L3": {
+        "sentence_zh": "这是石头。",
+        "sentence_en": "This is a stone."
+      }
+    }
+  },
+  {
+    "id": "beach",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "沙滩",
+    "en": "beach",
+    "pinyin": "shā tān",
+    "emoji": "🏖️",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute beach"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是沙滩。",
+        "sentence_en": "This is a beach."
+      },
+      "L3": {
+        "sentence_zh": "这是沙滩。",
+        "sentence_en": "This is a beach."
+      }
+    }
+  },
+  {
+    "id": "fire",
+    "lane": "look",
+    "type": "object",
+    "section": "nature",
+    "zh": "火",
+    "en": "fire",
+    "pinyin": "huǒ",
+    "emoji": "🔥",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute fire"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是火。",
+        "sentence_en": "This is a fire."
+      },
+      "L3": {
+        "sentence_zh": "这是火。",
+        "sentence_en": "This is a fire."
+      }
+    }
+  },
+  {
+    "id": "hat",
+    "lane": "look",
+    "type": "object",
+    "section": "clothing",
+    "zh": "帽子",
+    "en": "hat",
+    "pinyin": "mào zi",
+    "emoji": "🧢",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute hat"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是帽子。",
+        "sentence_en": "This is a hat."
+      },
+      "L3": {
+        "sentence_zh": "这是帽子。",
+        "sentence_en": "This is a hat."
+      }
+    }
+  },
+  {
+    "id": "shoes",
+    "lane": "look",
+    "type": "object",
+    "section": "clothing",
+    "zh": "鞋子",
+    "en": "shoes",
+    "pinyin": "xié zǐ",
+    "emoji": "👟",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute shoes"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是鞋子。",
+        "sentence_en": "This is a shoes."
+      },
+      "L3": {
+        "sentence_zh": "这是鞋子。",
+        "sentence_en": "This is a shoes."
+      }
+    }
+  },
+  {
+    "id": "socks",
+    "lane": "look",
+    "type": "object",
+    "section": "clothing",
+    "zh": "袜子",
+    "en": "socks",
+    "pinyin": "wà zi",
+    "emoji": "🧦",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute socks"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是袜子。",
+        "sentence_en": "This is a socks."
+      },
+      "L3": {
+        "sentence_zh": "这是袜子。",
+        "sentence_en": "This is a socks."
+      }
+    }
+  },
+  {
+    "id": "coat",
+    "lane": "look",
+    "type": "object",
+    "section": "clothing",
+    "zh": "外套",
+    "en": "coat",
+    "pinyin": "wài tào",
+    "emoji": "🧥",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute coat"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是外套。",
+        "sentence_en": "This is a coat."
+      },
+      "L3": {
+        "sentence_zh": "这是外套。",
+        "sentence_en": "This is a coat."
+      }
+    }
+  },
+  {
+    "id": "dress",
+    "lane": "look",
+    "type": "object",
+    "section": "clothing",
+    "zh": "裙子",
+    "en": "dress",
+    "pinyin": "qún zǐ",
+    "emoji": "👗",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute dress"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是裙子。",
+        "sentence_en": "This is a dress."
+      },
+      "L3": {
+        "sentence_zh": "这是裙子。",
+        "sentence_en": "This is a dress."
+      }
+    }
+  },
+  {
+    "id": "pants",
+    "lane": "look",
+    "type": "object",
+    "section": "clothing",
+    "zh": "裤子",
+    "en": "pants",
+    "pinyin": "kù zǐ",
+    "emoji": "👖",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute pants"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是裤子。",
+        "sentence_en": "This is a pants."
+      },
+      "L3": {
+        "sentence_zh": "这是裤子。",
+        "sentence_en": "This is a pants."
+      }
+    }
+  },
+  {
+    "id": "scarf",
+    "lane": "look",
+    "type": "object",
+    "section": "clothing",
+    "zh": "围巾",
+    "en": "scarf",
+    "pinyin": "wéi jīn",
+    "emoji": "🧣",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute scarf"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是围巾。",
+        "sentence_en": "This is a scarf."
+      },
+      "L3": {
+        "sentence_zh": "这是围巾。",
+        "sentence_en": "This is a scarf."
+      }
+    }
+  },
+  {
+    "id": "gloves",
+    "lane": "look",
+    "type": "object",
+    "section": "clothing",
+    "zh": "手套",
+    "en": "gloves",
+    "pinyin": "shǒu tào",
+    "emoji": "🧤",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute gloves"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是手套。",
+        "sentence_en": "This is a gloves."
+      },
+      "L3": {
+        "sentence_zh": "这是手套。",
+        "sentence_en": "This is a gloves."
+      }
+    }
+  },
+  {
+    "id": "backpack",
+    "lane": "look",
+    "type": "object",
+    "section": "clothing",
+    "zh": "书包",
+    "en": "backpack",
+    "pinyin": "shū bāo",
+    "emoji": "🎒",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute backpack"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是书包。",
+        "sentence_en": "This is a backpack."
+      },
+      "L3": {
+        "sentence_zh": "这是书包。",
+        "sentence_en": "This is a backpack."
+      }
+    }
+  },
+  {
+    "id": "glasses",
+    "lane": "look",
+    "type": "object",
+    "section": "clothing",
+    "zh": "眼镜",
+    "en": "glasses",
+    "pinyin": "yǎn jìng",
+    "emoji": "👓",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute glasses"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是眼镜。",
+        "sentence_en": "This is a glasses."
+      },
+      "L3": {
+        "sentence_zh": "这是眼镜。",
+        "sentence_en": "This is a glasses."
+      }
+    }
+  },
+  {
+    "id": "doctor",
+    "lane": "look",
+    "type": "object",
+    "section": "roles",
+    "zh": "医生",
+    "en": "doctor",
+    "pinyin": "yī shēng",
+    "emoji": "👩‍⚕️",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute doctor"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是医生。",
+        "sentence_en": "This is a doctor."
+      },
+      "L3": {
+        "sentence_zh": "这是医生。",
+        "sentence_en": "This is a doctor."
+      }
+    }
+  },
+  {
+    "id": "teacher",
+    "lane": "look",
+    "type": "object",
+    "section": "roles",
+    "zh": "老师",
+    "en": "teacher",
+    "pinyin": "lǎo shī",
+    "emoji": "👩‍🏫",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute teacher"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是老师。",
+        "sentence_en": "This is a teacher."
+      },
+      "L3": {
+        "sentence_zh": "这是老师。",
+        "sentence_en": "This is a teacher."
+      }
+    }
+  },
+  {
+    "id": "police-officer",
+    "lane": "look",
+    "type": "object",
+    "section": "roles",
+    "zh": "警察",
+    "en": "police officer",
+    "pinyin": "jǐng chá",
+    "emoji": "👮",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute police officer"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是警察。",
+        "sentence_en": "This is a police officer."
+      },
+      "L3": {
+        "sentence_zh": "这是警察。",
+        "sentence_en": "This is a police officer."
+      }
+    }
+  },
+  {
+    "id": "firefighter",
+    "lane": "look",
+    "type": "object",
+    "section": "roles",
+    "zh": "消防员",
+    "en": "firefighter",
+    "pinyin": "xiāo fáng yuán",
+    "emoji": "👨‍🚒",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute firefighter"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是消防员。",
+        "sentence_en": "This is a firefighter."
+      },
+      "L3": {
+        "sentence_zh": "这是消防员。",
+        "sentence_en": "This is a firefighter."
+      }
+    }
+  },
+  {
+    "id": "chef",
+    "lane": "look",
+    "type": "object",
+    "section": "roles",
+    "zh": "厨师",
+    "en": "chef",
+    "pinyin": "chú shī",
+    "emoji": "👨‍🍳",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute chef"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是厨师。",
+        "sentence_en": "This is a chef."
+      },
+      "L3": {
+        "sentence_zh": "这是厨师。",
+        "sentence_en": "This is a chef."
+      }
+    }
+  },
+  {
+    "id": "farmer",
+    "lane": "look",
+    "type": "object",
+    "section": "roles",
+    "zh": "农民",
+    "en": "farmer",
+    "pinyin": "nóng mín",
+    "emoji": "👨‍🌾",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute farmer"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是农民。",
+        "sentence_en": "This is a farmer."
+      },
+      "L3": {
+        "sentence_zh": "这是农民。",
+        "sentence_en": "This is a farmer."
+      }
+    }
+  },
+  {
+    "id": "astronaut",
+    "lane": "look",
+    "type": "object",
+    "section": "roles",
+    "zh": "宇航员",
+    "en": "astronaut",
+    "pinyin": "yǔ háng yuán",
+    "emoji": "👨‍🚀",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute astronaut"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是宇航员。",
+        "sentence_en": "This is a astronaut."
+      },
+      "L3": {
+        "sentence_zh": "这是宇航员。",
+        "sentence_en": "This is a astronaut."
+      }
+    }
+  },
+  {
+    "id": "driver",
+    "lane": "look",
+    "type": "object",
+    "section": "roles",
+    "zh": "司机",
+    "en": "driver",
+    "pinyin": "sī jī",
+    "emoji": "🚕",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute driver"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是司机。",
+        "sentence_en": "This is a driver."
+      },
+      "L3": {
+        "sentence_zh": "这是司机。",
+        "sentence_en": "This is a driver."
+      }
+    }
+  },
+  {
+    "id": "painter",
+    "lane": "look",
+    "type": "object",
+    "section": "roles",
+    "zh": "画家",
+    "en": "painter",
+    "pinyin": "huà jiā",
+    "emoji": "🎨",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute painter"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是画家。",
+        "sentence_en": "This is a painter."
+      },
+      "L3": {
+        "sentence_zh": "这是画家。",
+        "sentence_en": "This is a painter."
+      }
+    }
+  },
+  {
+    "id": "musician",
+    "lane": "look",
+    "type": "object",
+    "section": "roles",
+    "zh": "音乐家",
+    "en": "musician",
+    "pinyin": "yīn yuè jiā",
+    "emoji": "🎻",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute musician"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是音乐家。",
+        "sentence_en": "This is a musician."
+      },
+      "L3": {
+        "sentence_zh": "这是音乐家。",
+        "sentence_en": "This is a musician."
+      }
+    }
+  },
+  {
+    "id": "flower",
+    "lane": "look",
+    "type": "object",
+    "section": "plants",
+    "zh": "花",
+    "en": "flower",
+    "pinyin": "huā",
+    "emoji": "🌸",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute flower"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是花。",
+        "sentence_en": "This is a flower."
+      },
+      "L3": {
+        "sentence_zh": "这是花。",
+        "sentence_en": "This is a flower."
+      }
+    }
+  },
+  {
+    "id": "tree",
+    "lane": "look",
+    "type": "object",
+    "section": "plants",
+    "zh": "树",
+    "en": "tree",
+    "pinyin": "shù",
+    "emoji": "🌳",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute tree"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是树。",
+        "sentence_en": "This is a tree."
+      },
+      "L3": {
+        "sentence_zh": "这是树。",
+        "sentence_en": "This is a tree."
+      }
+    }
+  },
+  {
+    "id": "grass",
+    "lane": "look",
+    "type": "object",
+    "section": "plants",
+    "zh": "草",
+    "en": "grass",
+    "pinyin": "cǎo",
+    "emoji": "🌿",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute grass"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是草。",
+        "sentence_en": "This is a grass."
+      },
+      "L3": {
+        "sentence_zh": "这是草。",
+        "sentence_en": "This is a grass."
+      }
+    }
+  },
+  {
+    "id": "leaf",
+    "lane": "look",
+    "type": "object",
+    "section": "plants",
+    "zh": "叶子",
+    "en": "leaf",
+    "pinyin": "yè zi",
+    "emoji": "🍃",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute leaf"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是叶子。",
+        "sentence_en": "This is a leaf."
+      },
+      "L3": {
+        "sentence_zh": "这是叶子。",
+        "sentence_en": "This is a leaf."
+      }
+    }
+  },
+  {
+    "id": "seed",
+    "lane": "look",
+    "type": "object",
+    "section": "plants",
+    "zh": "种子",
+    "en": "seed",
+    "pinyin": "zhǒng zi",
+    "emoji": "🌱",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute seed"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是种子。",
+        "sentence_en": "This is a seed."
+      },
+      "L3": {
+        "sentence_zh": "这是种子。",
+        "sentence_en": "This is a seed."
+      }
+    }
+  },
+  {
+    "id": "sunflower",
+    "lane": "look",
+    "type": "object",
+    "section": "plants",
+    "zh": "向日葵",
+    "en": "sunflower",
+    "pinyin": "xiàng rì kuí",
+    "emoji": "🌻",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute sunflower"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是向日葵。",
+        "sentence_en": "This is a sunflower."
+      },
+      "L3": {
+        "sentence_zh": "这是向日葵。",
+        "sentence_en": "This is a sunflower."
+      }
+    }
+  },
+  {
+    "id": "rose",
+    "lane": "look",
+    "type": "object",
+    "section": "plants",
+    "zh": "玫瑰",
+    "en": "rose",
+    "pinyin": "méi guī",
+    "emoji": "🌹",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute rose"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是玫瑰。",
+        "sentence_en": "This is a rose."
+      },
+      "L3": {
+        "sentence_zh": "这是玫瑰。",
+        "sentence_en": "This is a rose."
+      }
+    }
+  },
+  {
+    "id": "bamboo",
+    "lane": "look",
+    "type": "object",
+    "section": "plants",
+    "zh": "竹子",
+    "en": "bamboo",
+    "pinyin": "zhú zi",
+    "emoji": "🎋",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute bamboo"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是竹子。",
+        "sentence_en": "This is a bamboo."
+      },
+      "L3": {
+        "sentence_zh": "这是竹子。",
+        "sentence_en": "This is a bamboo."
+      }
+    }
+  },
+  {
+    "id": "cactus",
+    "lane": "look",
+    "type": "object",
+    "section": "plants",
+    "zh": "仙人掌",
+    "en": "cactus",
+    "pinyin": "xiān rén zhǎng",
+    "emoji": "🌵",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute cactus"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是仙人掌。",
+        "sentence_en": "This is a cactus."
+      },
+      "L3": {
+        "sentence_zh": "这是仙人掌。",
+        "sentence_en": "This is a cactus."
+      }
+    }
+  },
+  {
+    "id": "mushroom-plants",
+    "lane": "look",
+    "type": "object",
+    "section": "plants",
+    "zh": "蘑菇",
+    "en": "mushroom",
+    "pinyin": "mó gu",
+    "emoji": "🍄",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute mushroom"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是蘑菇。",
+        "sentence_en": "This is a mushroom."
+      },
+      "L3": {
+        "sentence_zh": "这是蘑菇。",
+        "sentence_en": "This is a mushroom."
+      }
+    }
+  },
+  {
+    "id": "home",
+    "lane": "look",
+    "type": "object",
+    "section": "places",
+    "zh": "家",
+    "en": "home",
+    "pinyin": "jiā",
+    "emoji": "🏠",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute home"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是家。",
+        "sentence_en": "This is a home."
+      },
+      "L3": {
+        "sentence_zh": "这是家。",
+        "sentence_en": "This is a home."
+      }
+    }
+  },
+  {
+    "id": "school",
+    "lane": "look",
+    "type": "object",
+    "section": "places",
+    "zh": "学校",
+    "en": "school",
+    "pinyin": "xué xiào",
+    "emoji": "🏫",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute school"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是学校。",
+        "sentence_en": "This is a school."
+      },
+      "L3": {
+        "sentence_zh": "这是学校。",
+        "sentence_en": "This is a school."
+      }
+    }
+  },
+  {
+    "id": "hospital",
+    "lane": "look",
+    "type": "object",
+    "section": "places",
+    "zh": "医院",
+    "en": "hospital",
+    "pinyin": "yī yuàn",
+    "emoji": "🏥",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute hospital"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是医院。",
+        "sentence_en": "This is a hospital."
+      },
+      "L3": {
+        "sentence_zh": "这是医院。",
+        "sentence_en": "This is a hospital."
+      }
+    }
+  },
+  {
+    "id": "park",
+    "lane": "look",
+    "type": "object",
+    "section": "places",
+    "zh": "公园",
+    "en": "park",
+    "pinyin": "gōng yuán",
+    "emoji": "🏞️",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute park"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是公园。",
+        "sentence_en": "This is a park."
+      },
+      "L3": {
+        "sentence_zh": "这是公园。",
+        "sentence_en": "This is a park."
+      }
+    }
+  },
+  {
+    "id": "supermarket",
+    "lane": "look",
+    "type": "object",
+    "section": "places",
+    "zh": "超市",
+    "en": "supermarket",
+    "pinyin": "chāo shì",
+    "emoji": "🏪",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute supermarket"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是超市。",
+        "sentence_en": "This is a supermarket."
+      },
+      "L3": {
+        "sentence_zh": "这是超市。",
+        "sentence_en": "This is a supermarket."
+      }
+    }
+  },
+  {
+    "id": "zoo",
+    "lane": "look",
+    "type": "object",
+    "section": "places",
+    "zh": "动物园",
+    "en": "zoo",
+    "pinyin": "dòng wù yuán",
+    "emoji": "🦁",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute zoo"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是动物园。",
+        "sentence_en": "This is a zoo."
+      },
+      "L3": {
+        "sentence_zh": "这是动物园。",
+        "sentence_en": "This is a zoo."
+      }
+    }
+  },
+  {
+    "id": "library",
+    "lane": "look",
+    "type": "object",
+    "section": "places",
+    "zh": "图书馆",
+    "en": "library",
+    "pinyin": "tú shū guǎn",
+    "emoji": "📚",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute library"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是图书馆。",
+        "sentence_en": "This is a library."
+      },
+      "L3": {
+        "sentence_zh": "这是图书馆。",
+        "sentence_en": "This is a library."
+      }
+    }
+  },
+  {
+    "id": "playground",
+    "lane": "look",
+    "type": "object",
+    "section": "places",
+    "zh": "游乐场",
+    "en": "playground",
+    "pinyin": "yóu lè chǎng",
+    "emoji": "🎠",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute playground"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是游乐场。",
+        "sentence_en": "This is a playground."
+      },
+      "L3": {
+        "sentence_zh": "这是游乐场。",
+        "sentence_en": "This is a playground."
+      }
+    }
+  },
+  {
+    "id": "station",
+    "lane": "look",
+    "type": "object",
+    "section": "places",
+    "zh": "车站",
+    "en": "station",
+    "pinyin": "chē zhàn",
+    "emoji": "🚉",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute station"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是车站。",
+        "sentence_en": "This is a station."
+      },
+      "L3": {
+        "sentence_zh": "这是车站。",
+        "sentence_en": "This is a station."
+      }
+    }
+  },
+  {
+    "id": "seaside",
+    "lane": "look",
+    "type": "object",
+    "section": "places",
+    "zh": "海边",
+    "en": "seaside",
+    "pinyin": "hǎi biān",
+    "emoji": "🌊",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "art": {
+      "subject": "a single cute seaside"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "这是海边。",
+        "sentence_en": "This is a seaside."
+      },
+      "L3": {
+        "sentence_zh": "这是海边。",
+        "sentence_en": "This is a seaside."
+      }
+    }
+  }
+]

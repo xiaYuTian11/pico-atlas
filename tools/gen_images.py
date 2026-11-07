@@ -34,6 +34,7 @@ os.environ.setdefault("PYTHONIOENCODING", "utf-8")
 
 ROOT = Path(__file__).resolve().parent.parent
 CARDS = ROOT / "src" / "content" / "cards.json"
+CARDS_AUTO = ROOT / "src" / "content" / "cards-auto.json"
 CONFIG = ROOT / "tools" / "art.config.json"
 RAW_DIR = ROOT / "assets" / "gen_raw"
 OUT_DIR = ROOT / "public" / "media" / "images"
@@ -62,8 +63,14 @@ def sha_seed(text: str, base: int = 0) -> int:
 
 
 def load_cards() -> list[dict]:
-    raw = CARDS.read_text(encoding="utf-8")
-    return json.loads(raw)
+    """手写版 + 词库版合并（同 id 以手写版为准）。"""
+    merged: dict[str, dict] = {}
+    if CARDS_AUTO.exists():
+        for c in json.loads(CARDS_AUTO.read_text(encoding="utf-8")):
+            merged[c["id"]] = c
+    for c in json.loads(CARDS.read_text(encoding="utf-8")):
+        merged[c["id"]] = c
+    return list(merged.values())
 
 
 def build_prompt(card: dict) -> tuple[str, str, int, bool]:

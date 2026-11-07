@@ -19,6 +19,7 @@ import {
 import { playSfx, speak, newSession } from '@/audio/engine';
 import { audioZh } from '@/content/media';
 import UpdatePanel from './UpdatePanel.vue';
+import BackupPanel from './BackupPanel.vue';
 import PaIcon from './PaIcon.vue';
 
 const props = defineProps<{ open: boolean }>();
@@ -197,6 +198,15 @@ function resetTimer(): void {
           <button type="button" class="pa-settings__danger" @click="clearFavorites">
             清空「我的最爱」（当前 {{ state.favorites.length }} 张）
           </button>
+        </section>
+
+        <!-- 备份与恢复 -->
+        <section class="pa-settings__group">
+          <div class="pa-settings__label">
+            存档备份
+            <span class="pa-settings__hint">（换手机时用：收藏、进度、家长设置）</span>
+          </div>
+          <BackupPanel />
         </section>
 
         <!-- 关于与更新 -->

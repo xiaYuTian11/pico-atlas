@@ -24,7 +24,8 @@ const AppUpdater = registerPlugin<UpdaterPlugin>('AppUpdater');
 
 /** 改成你自己的仓库 / 更新源 */
 export const UPDATE_REPO = 'xiaYuTian11/pico-atlas';
-export const UPDATE_FEED = `https://raw.githubusercontent.com/${UPDATE_REPO}/main/public/updates/latest.json`;
+export const UPDATE_FEED =
+  'https://gist.githubusercontent.com/xiaYuTian11/9d35ae995de3782a380e948b1ab0dd9c/raw/latest.json';
 
 export interface UpdateInfo {
   current: string;

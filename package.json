@@ -18,7 +18,9 @@
     "review": "node tools/walkthrough.mjs",
     "android:sync": "vite build && cap sync android",
     "android:open": "cap open android",
-    "apk": "npm run build:only && npx cap sync android && cd android && gradlew.bat assembleDebug"
+    "apk": "npm run build:only && npx cap sync android && cd android && gradlew.bat assembleDebug",
+    "version": "node tools/bump-version.mjs",
+    "release": "npm run version -- patch && npm run apk"
   },
   "dependencies": {
     "@capacitor/android": "^6.2.3",
@@ -30,6 +32,7 @@
     "@capacitor/cli": "^6.2.3",
     "@types/node": "^26.6.6",
     "@vitejs/plugin-vue": "^5.2.1",
+    "pinyin-pro": "^3.29.5",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
     "vite": "^6.0.7",

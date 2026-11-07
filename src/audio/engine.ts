@@ -268,6 +268,17 @@ export function playSfx(name: string): void {
   synth(name as SfxName);
 }
 
+/**
+ * 合成音效（无素材时的兜底）。
+ *
+ * 原则：**宁可"像"，不可"响"**。
+ * 3 岁对声音的辨识比成人敏感 —— 一声假猫叫会立刻被识破，
+ * 所以这里用"基频滑移 + 共振峰滤波 + 噪声气息"三层叠加，
+ * 而不是一个正弦音敷衍过去。
+ *
+ * 想更真实：把真实录音放进 public/media/audio/sfx/<name>.mp3，
+ * playSfx 会优先用它，这里就自动退居兜底。
+ */
 function synth(name: SfxName): void {
   const c = ctx();
   if (!c) return;
@@ -276,76 +287,155 @@ function synth(name: SfxName): void {
   master.gain.value = 1;
   master.connect(c.destination);
 
+  /** 单音：可给起点/终点频率做滑音 */
   const tone = (
     freq: number,
     type: OscillatorType,
     dur: number,
     peak: number,
-    ramp: 'exp' | 'lin' = 'exp',
     delay = 0,
+    endFreq?: number,
   ): void => {
     const osc = c.createOscillator();
     const gain = c.createGain();
     osc.type = type;
     osc.frequency.setValueAtTime(freq, t + delay);
+    if (endFreq) osc.frequency.exponentialRampToValueAtTime(Math.max(30, endFreq), t + delay + dur);
     gain.gain.setValueAtTime(peak, t + delay);
-    if (ramp === 'exp') gain.gain.exponentialRampToValueAtTime(0.008, t + delay + dur);
-    else gain.gain.linearRampToValueAtTime(0.008, t + delay + dur);
+    gain.gain.exponentialRampToValueAtTime(0.004, t + delay + dur);
     osc.connect(gain);
     gain.connect(master);
     osc.start(t + delay);
-    osc.stop(t + delay + dur + 0.01);
+    osc.stop(t + delay + dur + 0.02);
+  };
+
+  /** 噪声：气息、水、脚步、火车都靠它 */
+  const noise = (
+    dur: number,
+    type: BiquadFilterType,
+    freq: number,
+    q: number,
+    peak: number,
+    delay = 0,
+    endFreq?: number,
+  ): void => {
+    const len = Math.max(1, Math.floor(c.sampleRate * dur));
+    const buf = c.createBuffer(1, len, c.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+    const src = c.createBufferSource();
+    src.buffer = buf;
+    const filt = c.createBiquadFilter();
+    filt.type = type;
+    filt.Q.value = q;
+    filt.frequency.setValueAtTime(freq, t + delay);
+    if (endFreq) filt.frequency.exponentialRampToValueAtTime(Math.max(60, endFreq), t + delay + dur);
+    const g = c.createGain();
+    g.gain.setValueAtTime(peak, t + delay);
+    g.gain.exponentialRampToValueAtTime(0.002, t + delay + dur);
+    src.connect(filt);
+    filt.connect(g);
+    g.connect(master);
+    src.start(t + delay);
+    src.stop(t + delay + dur + 0.02);
+  };
+
+  /** 滑音 + 颤音：猫叫、羊叫这类"活物"的声音 */
+  const voice = (
+    startFreq: number,
+    midFreq: number,
+    endFreq: number,
+    dur: number,
+    peak: number,
+    vibratoHz = 6,
+  ): void => {
+    const osc = c.createOscillator();
+    const gain = c.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(startFreq, t);
+    osc.frequency.linearRampToValueAtTime(midFreq, t + dur * 0.45);
+    osc.frequency.linearRampToValueAtTime(endFreq, t + dur);
+
+    const lfo = c.createOscillator();
+    const lfoGain = c.createGain();
+    lfo.frequency.value = vibratoHz;
+    lfoGain.gain.value = midFreq * 0.03;
+    lfo.connect(lfoGain);
+    lfoGain.connect(osc.frequency);
+
+    const formant = c.createBiquadFilter();
+    formant.type = 'bandpass';
+    formant.frequency.setValueAtTime(midFreq * 2.4, t);
+    formant.Q.value = 1.6;
+
+    gain.gain.setValueAtTime(0.001, t);
+    gain.gain.linearRampToValueAtTime(peak, t + 0.06);
+    gain.gain.setValueAtTime(peak, t + dur * 0.7);
+    gain.gain.exponentialRampToValueAtTime(0.002, t + dur);
+
+    osc.connect(formant);
+    formant.connect(gain);
+    gain.connect(master);
+    osc.start(t);
+    osc.stop(t + dur + 0.02);
+    lfo.start(t);
+    lfo.stop(t + dur + 0.02);
   };
 
   switch (name) {
     case 'chime':
-      tone(523.25, 'sine', 0.4, 0.22, 'exp', 0);
-      tone(659.25, 'sine', 0.4, 0.2, 'exp', 0.06);
-      tone(783.99, 'sine', 0.42, 0.18, 'exp', 0.12);
+      tone(523.25, 'sine', 0.42, 0.2, 0);
+      tone(659.25, 'sine', 0.42, 0.18, 0.06);
+      tone(783.99, 'sine', 0.45, 0.16, 0.12);
       break;
+
     case 'sparkle':
-      [880, 1100, 1320, 1540].forEach((f, i) => tone(f, 'sine', 0.22, 0.14, 'exp', i * 0.05));
+      [880, 1100, 1320, 1540].forEach((f, i) => tone(f, 'sine', 0.22, 0.13, i * 0.05));
+      noise(0.3, 'highpass', 6000, 0.7, 0.05, 0);
       break;
-    case 'meow': {
-      const osc = c.createOscillator();
-      const gain = c.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(430, t);
-      osc.frequency.linearRampToValueAtTime(820, t + 0.16);
-      osc.frequency.linearRampToValueAtTime(520, t + 0.4);
-      gain.gain.setValueAtTime(0.02, t);
-      gain.gain.linearRampToValueAtTime(0.3, t + 0.1);
-      gain.gain.exponentialRampToValueAtTime(0.01, t + 0.44);
-      osc.connect(gain);
-      gain.connect(master);
-      osc.start(t);
-      osc.stop(t + 0.46);
+
+    case 'meow':
+      voice(430, 780, 520, 0.46, 0.16, 7);
+      noise(0.18, 'bandpass', 1400, 1.4, 0.05, 0.04);
       break;
-    }
+
     case 'bark':
-      tone(260, 'sawtooth', 0.1, 0.24, 'exp', 0);
-      tone(260, 'sawtooth', 0.1, 0.22, 'exp', 0.14);
+      noise(0.12, 'bandpass', 900, 1.1, 0.34, 0, 420);
+      tone(190, 'square', 0.1, 0.12, 0, 120);
+      noise(0.12, 'bandpass', 900, 1.1, 0.3, 0.16, 420);
+      tone(190, 'square', 0.1, 0.11, 0.16, 120);
       break;
+
     case 'didi':
-      tone(330, 'sawtooth', 0.26, 0.18, 'lin', 0);
-      tone(395, 'sawtooth', 0.26, 0.16, 'lin', 0);
+      tone(330, 'square', 0.22, 0.14, 0);
+      tone(392, 'square', 0.22, 0.12, 0.26);
       break;
+
     case 'train':
-      tone(350, 'triangle', 0.7, 0.22, 'exp', 0);
-      tone(440, 'triangle', 0.7, 0.2, 'exp', 0);
+      tone(220, 'sawtooth', 1.15, 0.14, 0);
+      tone(277, 'sawtooth', 1.15, 0.12, 0);
+      noise(1.0, 'lowpass', 700, 0.8, 0.06, 0);
+      [0, 0.18, 0.36, 0.54, 0.72].forEach((d) => tone(90, 'sine', 0.1, 0.1, d, 70));
       break;
+
     case 'water':
-      [0, 0.07, 0.14].forEach((d, i) => tone(520 + i * 130, 'sine', 0.1, 0.18, 'exp', d));
+      noise(0.55, 'bandpass', 1500, 0.7, 0.1, 0, 900);
+      [0, 0.09, 0.17, 0.26].forEach((d, i) => tone(600 + i * 160, 'sine', 0.11, 0.1, d, 900 + i * 180));
       break;
+
     case 'yawn':
-      tone(320, 'sine', 0.9, 0.18, 'lin', 0);
+      tone(320, 'sine', 0.95, 0.14, 0, 190);
+      noise(0.5, 'bandpass', 800, 0.9, 0.04, 0.15);
       break;
+
     case 'soft':
-      tone(300, 'sine', 0.14, 0.1);
+      tone(300, 'sine', 0.13, 0.09);
       break;
+
     case 'pop':
     default:
-      tone(420, 'sine', 0.09, 0.26);
+      tone(520, 'sine', 0.1, 0.22, 0, 260);
+      noise(0.05, 'bandpass', 1200, 0.9, 0.04);
       break;
   }
 }

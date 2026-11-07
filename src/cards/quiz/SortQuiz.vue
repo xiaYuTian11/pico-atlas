@@ -81,6 +81,11 @@ function itemsInBucket(bucketId: string): SortItem[] {
       </button>
     </div>
 
+    <div v-if="!allDone" class="pa-quiz-sort__hint" :class="{ 'is-pick': !!selected }">
+      <template v-if="selected">已选中「{{ selected.label }}」，放进哪个篮子？</template>
+      <template v-else>① 先点一个小图　② 再点上面的篮子</template>
+    </div>
+
     <div class="pa-quiz-sort__pool">
       <button
         v-for="it in remaining"
@@ -202,6 +207,27 @@ function itemsInBucket(bucketId: string): SortItem[] {
   justify-content: center;
   gap: clamp(8px, 2.5vw, 16px);
   padding: 6px var(--pa-gutter);
+}
+
+/* ① ② 步骤引导：孩子不识字，但家长读一遍就懂怎么玩 */
+.pa-quiz-sort__hint {
+  flex: 0 0 auto;
+  text-align: center;
+  font-size: var(--pa-fs-fact);
+  font-weight: 700;
+  color: var(--pa-ink-muted);
+  padding: 0 var(--pa-gutter) 2px;
+}
+.pa-quiz-sort__hint.is-pick {
+  color: var(--pa-accent-deep);
+}
+
+.pa-quiz-sort__done {
+  width: 100%;
+  text-align: center;
+  font-size: var(--pa-fs-quiz);
+  font-weight: 900;
+  color: var(--pa-green, #4fa88b);
 }
 
 .pa-quiz-sort__item {

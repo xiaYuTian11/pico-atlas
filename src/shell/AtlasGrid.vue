@@ -127,7 +127,8 @@ function sectionIcon(id: string, fallback: string): string | undefined {
         @click="openCard(c)"
       >
         <span class="pa-grid__cell-visual">
-          <CardImage :card-id="c.id" :emoji="c.emoji" :alt="c.zh" size="small" />
+          <span v-if="c.type === 'number'" class="pa-grid__cell-num">{{ c.count }}</span>
+          <CardImage v-else :card-id="c.id" :emoji="c.emoji" :alt="c.zh" size="small" />
         </span>
         <span class="pa-grid__cell-zh">{{ c.zh }}</span>
         <span v-if="c.en" class="pa-grid__cell-en">{{ c.en }}</span>
@@ -324,6 +325,15 @@ function sectionIcon(id: string, fallback: string): string | undefined {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* 数数卡在网格里直接显示阿拉伯数字，比一个苹果图标好认 */
+.pa-grid__cell-num {
+  font-size: clamp(42px, 13vw, 64px);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--pa-accent);
+  text-shadow: 0 6px 18px rgba(245, 144, 74, 0.25);
 }
 
 .pa-grid__cell-zh {

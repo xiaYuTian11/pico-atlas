@@ -1,11 +1,13 @@
 <script setup lang="ts">
 /**
- * 数数卡 —— 阿拉伯数字当主角，中文数字做辅助。
+ * 数数卡 —— 阿拉伯数字当主角，十格阵（ten-frame）当数量模型。
  *
- * 3–5 岁先认"形"再认"数"：屏幕中央必须是 3 这个符号，
- * 而不是"三"。—— 所以数字在图区顶部，中文字退到第二行。
+ * 为什么是十格阵：
+ *   5 和 10 是人类直觉的锚点。排成 2 行 × 5 格，
+ *   孩子一眼就能看出"6 比 5 多一个"、"9 差一个就满十"。
+ *   散乱的 emoji 阵列做不到这一点。
  *
- * 互动：点小物体会打勾并报数序，点满后给一个"数完啦"的反馈。
+ * 互动：点苹果打勾并标序号，点满给"数完啦"。
  */
 import { computed, ref, watch } from 'vue';
 import type { Card } from '@/content/types';
@@ -17,10 +19,10 @@ const props = defineProps<{ card: Card; highlight: string | null }>();
 
 const band = computed(() => state.ageBand ?? 'L1');
 const count = computed(() => props.card.count ?? 1);
-const items = computed(() => Array.from({ length: count.value }, (_, i) => i));
+/** 十格阵固定 10 格，第二行永远存在，'满十' 是可感知的 */
+const cells = computed(() => Array.from({ length: 10 }, (_, i) => i));
 const showPinyin = computed(() => band.value !== 'L1' && !!props.card.pinyin);
 
-/** 已数过的序号（点一下打一个勾） */
 const counted = ref<number[]>([]);
 const justFinished = ref(false);
 
@@ -33,6 +35,7 @@ watch(
 );
 
 function tapItem(i: number): void {
+  if (i >= count.value) return;
   if (counted.value.includes(i)) {
     playSfx('soft');
     return;
@@ -56,18 +59,25 @@ function tapItem(i: number): void {
         <span v-if="showPinyin" class="pa-number__py">{{ card.pinyin }}</span>
       </div>
 
-      <div class="pa-number__items" :class="{ 'is-done': justFinished }">
+      <div class="pa-number__frame" :class="{ 'is-done': justFinished }">
         <button
-          v-for="i in items"
+          v-for="i in cells"
           :key="i"
           type="button"
-          class="pa-number__item"
-          :class="{ 'is-counted': counted.includes(i) }"
-          :aria-label="`第 ${i + 1} 个 ${card.zh}`"
+          class="pa-number__cell"
+          :class="{
+            'is-filled': i < count,
+            'is-counted': counted.includes(i),
+          }"
+          :disabled="i >= count"
+          :aria-label="i < count ? `第 ${i + 1} 个 ${card.zh}` : '空格子'"
           @click.stop="tapItem(i)"
         >
-          <span class="pa-number__emoji">{{ card.emoji }}</span>
-          <span v-if="counted.includes(i)" class="pa-number__ord">{{ counted.indexOf(i) + 1 }}</span>
+          <template v-if="i < count">
+            <span class="pa-number__emoji">{{ card.emoji }}</span>
+            <span v-if="counted.includes(i)" class="pa-number__ord">{{ counted.indexOf(i) + 1 }}</span>
+          </template>
+          <span v-else class="pa-number__empty" aria-hidden="true" />
         </button>
       </div>
     </div>
@@ -94,7 +104,7 @@ function tapItem(i: number): void {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(10px, 3vh, 26px);
+  gap: clamp(10px, 2.6vh, 22px);
   padding: 8px var(--pa-gutter);
 }
 
@@ -108,7 +118,7 @@ function tapItem(i: number): void {
 
 /* 阿拉伯数字是主角 */
 .pa-number__digit {
-  font-size: clamp(96px, 30vw, 168px);
+  font-size: clamp(76px, 24vw, 132px);
   font-weight: 900;
   line-height: 0.9;
   color: var(--pa-accent);
@@ -117,7 +127,7 @@ function tapItem(i: number): void {
 }
 
 .pa-number__zh {
-  font-size: clamp(22px, 6vw, 30px);
+  font-size: clamp(20px, 5.6vw, 28px);
   font-weight: 900;
   color: var(--pa-ink-muted);
   letter-spacing: 4px;
@@ -125,20 +135,24 @@ function tapItem(i: number): void {
 }
 
 .pa-number__py {
-  font-size: clamp(14px, 4vw, 18px);
+  font-size: clamp(13px, 3.6vw, 16px);
   font-weight: 600;
   color: var(--pa-ink-faint);
 }
 
-.pa-number__items {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(8px, 2.4vw, 18px);
+/* ---------- 十格阵 ---------- */
+.pa-number__frame {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(4px, 1.4vw, 8px);
+  width: min(86vw, 340px);
+  padding: clamp(6px, 2vw, 10px);
+  border-radius: var(--pa-r-lg);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: var(--pa-shadow-sm);
   transition: transform var(--pa-dur-base) var(--pa-ease-spring);
 }
-.pa-number__items.is-done {
+.pa-number__frame.is-done {
   animation: paCountDone 0.7s var(--pa-ease-spring);
 }
 
@@ -148,54 +162,59 @@ function tapItem(i: number): void {
     transform: scale(1);
   }
   45% {
-    transform: scale(1.12);
+    transform: scale(1.08);
   }
 }
 
-.pa-number__item {
+.pa-number__cell {
   position: relative;
-  font-size: clamp(40px, 13vw, 82px);
-  line-height: 1;
-  filter: drop-shadow(0 6px 14px rgba(120, 90, 60, 0.18));
+  aspect-ratio: 1;
+  border-radius: clamp(8px, 2vw, 12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition:
     transform var(--pa-dur-fast) var(--pa-ease-spring),
-    opacity var(--pa-dur-base);
+    background var(--pa-dur-base);
 }
-.pa-number__item:active {
-  transform: scale(0.86);
+.pa-number__cell.is-filled {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: inset 0 0 0 2px rgba(245, 144, 74, 0.28);
 }
-.pa-number__item.is-counted {
-  opacity: 0.95;
+.pa-number__cell.is-filled:active {
+  transform: scale(0.9);
 }
-.pa-number__item.is-counted::after {
-  content: '';
-  position: absolute;
-  inset: -6px;
-  border: 3px solid var(--pa-green, #4fa88b);
-  border-radius: 24px;
-  opacity: 0.55;
+.pa-number__cell.is-counted {
+  box-shadow: inset 0 0 0 3px var(--pa-green, #4fa88b);
 }
 
 .pa-number__emoji {
-  display: block;
+  font-size: clamp(22px, 6.4vw, 34px);
+  line-height: 1;
+}
+
+.pa-number__empty {
+  width: 22%;
+  height: 22%;
+  border-radius: 50%;
+  background: rgba(46, 42, 38, 0.08);
 }
 
 .pa-number__ord {
   position: absolute;
-  right: -6px;
-  top: -6px;
-  min-width: 22px;
-  height: 22px;
-  padding: 0 5px;
+  right: -2px;
+  top: -2px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 3px;
   border-radius: 999px;
   background: var(--pa-green, #4fa88b);
   color: #fff;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
 }
 
 .pa-number__content {

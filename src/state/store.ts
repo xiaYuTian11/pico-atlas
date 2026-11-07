@@ -66,6 +66,8 @@ export interface AppState {
   ageBand: AgeBand | null;
   progress: Record<Lane | 'favorites', LaneProgress>;
   favorites: string[];
+  /** 最近看过（新的在前，最多 24 张）—— 复习用 */
+  recent: string[];
   prefs: {
     playMode: PlayMode;
     /** 家长可锁定模式，防止孩子在舞台乱点 */
@@ -103,6 +105,7 @@ function defaultState(): AppState {
     },
     // 默认空！不给孩子"不是自己收的"假数据
     favorites: [],
+    recent: [],
     prefs: {
       playMode: 'flip_and_read',
       modeLocked: false,
@@ -126,6 +129,7 @@ function mergeState(base: AppState, loaded: Partial<AppState>): AppState {
     session: { ...base.session, ...(loaded.session ?? {}) },
     stats: { ...base.stats, ...(loaded.stats ?? {}) },
     favorites: Array.isArray(loaded.favorites) ? loaded.favorites : [],
+    recent: Array.isArray(loaded.recent) ? loaded.recent.slice(0, 24) : [],
   };
 }
 
@@ -229,10 +233,20 @@ export function markSeen(lane: Lane, id: string): void {
   const p = state.progress[lane];
   if (!p.seen.includes(id)) p.seen.push(id);
   p.lastId = id;
+  pushRecent(id);
 }
 
-export function setLastId(lane: Lane | 'favorites', id: string): void {
-  const p = state.progress[lane];
+/** 维护"最近看过"：去重 + 新的在前 + 上限 24 */
+export function pushRecent(id: string): void {
+  const i = state.recent.indexOf(id);
+  if (i >= 0) state.recent.splice(i, 1);
+  state.recent.unshift(id);
+  if (state.recent.length > 24) state.recent.length = 24;
+}
+
+export function setLastId(lane: Lane | 'favorites' | 'recent', id: string): void {
+  const key = lane === 'recent' ? 'favorites' : lane;
+  const p = state.progress[key];
   if (p) p.lastId = id;
 }
 
@@ -272,6 +286,24 @@ export function stopSessionTimer(): void {
 export function resetSession(): void {
   state.session.currentSessionSeconds = 0;
   state.session.isSleeping = false;
+}
+
+/** 导出存档（家长备份用） */
+export function exportSnapshot(): string {
+  return JSON.stringify(state, null, 2);
+}
+
+/** 导入存档：只接受合法对象，失败不破坏现有数据 */
+export function importSnapshot(text: string): boolean {
+  try {
+    const parsed = JSON.parse(text) as Partial<AppState>;
+    if (!parsed || typeof parsed !== 'object' || typeof parsed.v !== 'number') return false;
+    Object.assign(state, mergeState(defaultState(), parsed));
+    persist();
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 /** 本次已用分钟（用于家长面板显示） */

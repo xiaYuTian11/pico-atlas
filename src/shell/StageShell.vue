@@ -12,7 +12,7 @@
  * 横屏时自动变成左右分栏（左图右文）。
  */
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-import type { Card } from '@/content/types';
+import type { Card, Lane } from '@/content/types';
 import { CARD_RENDERERS, GESTURE_LOCKED_TYPES } from '@/cards';
 import { state, toggleFavorite, markSeen, setLastId, isFavorite as isFav } from '@/state/store';
 import { playSfx, stopAll, unlockAudio, newSession, alive, sleep } from '@/audio/engine';
@@ -27,7 +27,7 @@ import ParentDrawer from '@/ui/ParentDrawer.vue';
 const props = defineProps<{
   cards: Card[];
   startIndex: number;
-  lane: 'look' | 'read' | 'play' | 'favorites';
+  lane: 'look' | 'read' | 'play' | 'favorites' | 'recent';
   /** 从哪个分区进来（用于返回） */
   sectionId?: string;
 }>();
@@ -38,6 +38,8 @@ const index = ref(props.startIndex);
 
 const card = computed<Card | undefined>(() => props.cards[index.value]);
 const section = computed(() => (props.sectionId ? getSection(props.sectionId) : undefined));
+/** 收藏/最近看过 不属于任何 lane，进度记到 look */
+const progressLane: Lane = props.lane === 'favorites' || props.lane === 'recent' ? 'look' : props.lane;
 const renderer = computed(() => (card.value ? CARD_RENDERERS[card.value.type] : null));
 
 const highlight = ref<HighlightTarget>(null);
@@ -85,6 +87,10 @@ function scheduleAutoRead(): void {
       beginReading('auto');
       void readCard(card.value!, ticket, hooks).then(() => {
         if (alive(ticket)) clearHighlight();
+        // 故事读完后给翻页提示（否则孩子会卡在同一页反复听）
+        if (alive(ticket) && card.value?.type === 'story' && canNext.value) {
+          showNextHint.value = true;
+        }
         endReading();
       });
     }
@@ -164,6 +170,7 @@ function goTo(next: number, opts: GoOpts = {}): void {
   if (next < 0 || next >= props.cards.length) return;
   stopLoop();
   endReading();
+  showNextHint.value = false;
   if (!opts.silent) {
     stopCruise();
     stopAll();
@@ -172,7 +179,7 @@ function goTo(next: number, opts: GoOpts = {}): void {
   index.value = next;
   const c = props.cards[next];
   if (c) {
-    markSeen(props.lane === 'favorites' ? 'look' : props.lane, c.id);
+    markSeen(progressLane, c.id);
     setLastId(props.lane, c.id);
   }
   if (!opts.silent) scheduleAutoRead();
@@ -180,6 +187,7 @@ function goTo(next: number, opts: GoOpts = {}): void {
 
 function step(delta: number): void {
   playSfx('pop');
+  showNextHint.value = false;
   goTo(index.value + delta);
 }
 
@@ -356,6 +364,8 @@ function onTouchEnd(e: TouchEvent): void {
 /* ---------------- 单卡循环（古诗词 / 故事） ---------------- */
 
 const looping = ref(false);
+/** 故事页读完后出现的"下一页"提示（孩子不知道要滑） */
+const showNextHint = ref(false);
 const canLoop = computed(() => card.value?.type === 'poem' || card.value?.type === 'story');
 
 function stopLoop(): void {
@@ -446,7 +456,7 @@ function onTwoFingerMove(e: TouchEvent): void {
 onMounted(() => {
   unlockAudio();
   if (card.value) {
-    markSeen(props.lane === 'favorites' ? 'look' : props.lane, card.value.id);
+    markSeen(progressLane, card.value.id);
     setLastId(props.lane, card.value.id);
   }
   scheduleAutoRead();
@@ -566,6 +576,13 @@ void PaIcon;
       </div>
     </div>
 
+    <!-- 故事翻页提示 -->
+    <Transition name="pa-next-hint">
+      <button v-if="showNextHint" type="button" class="pa-stage__next pa-hit" @click.stop="step(1)">
+        下一页 →
+      </button>
+    </Transition>
+
     <!-- 底栏 -->
     <BottomBar
       :can-prev="canPrev"
@@ -683,6 +700,48 @@ void PaIcon;
 }
 
 /* ---------- 卡片角标 ---------- */
+/* ---------- 故事翻页提示 ---------- */
+.pa-stage__next {
+  position: fixed;
+  right: calc(var(--pa-gutter) + 4px);
+  bottom: calc(var(--pa-bottombar-h) + 14px + env(safe-area-inset-bottom));
+  z-index: 5000;
+  padding: 12px 20px;
+  border-radius: var(--pa-r-pill);
+  background: var(--pa-accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  box-shadow: var(--pa-shadow-accent);
+  animation: paNextBob 1.6s var(--pa-ease-in-out) infinite;
+}
+.pa-stage__next:active {
+  transform: scale(0.94);
+}
+
+@keyframes paNextBob {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+.pa-next-hint-enter-active,
+.pa-next-hint-leave-active {
+  transition:
+    opacity 0.2s var(--pa-ease-out),
+    transform 0.2s var(--pa-ease-spring);
+}
+.pa-next-hint-enter-from,
+.pa-next-hint-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
 .pa-stage__loop {
   position: absolute;
   top: 10px;

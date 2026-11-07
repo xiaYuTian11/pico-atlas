@@ -558,20 +558,24 @@
     "zh": "一",
     "en": "one",
     "pinyin": "yī",
-    "count": 1,
     "emoji": "🍎",
     "palette": "var(--pa-pal-warm)",
     "sound": "pop",
+    "count": 1,
     "parentGuide": {
-      "explain": "一个苹果。用手指点一点这个苹果，数一数。",
-      "prompt": "宝宝能找到家里只有一个的东西吗？"
+      "explain": "一就是 1 个。可以用手指一个一个点着数给孩子听。",
+      "prompt": "问宝宝：桌上有 1 个苹果，吃掉一个，还剩几个？"
     },
     "levels": {
+      "L1": {},
       "L2": {
-        "sentence_zh": "一个红苹果"
+        "sentence_zh": "一个红苹果",
+        "sentence_en": "There are one apples."
       },
       "L3": {
-        "sentence_zh": "一个红苹果，圆圆的。"
+        "sentence_zh": "一个红苹果",
+        "sentence_en": "There are one apples.",
+        "fact": "1 就是 1 个，数一数就知道啦。"
       }
     }
   },
@@ -583,20 +587,24 @@
     "zh": "二",
     "en": "two",
     "pinyin": "èr",
-    "count": 2,
-    "emoji": "🍌",
+    "emoji": "🍎",
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
+    "count": 2,
     "parentGuide": {
-      "explain": "两根香蕉。一、二，点一点数一数。",
-      "prompt": "宝宝的两只小手，一共几只手呀？"
+      "explain": "二就是 2 个。可以用手指一个一个点着数给孩子听。",
+      "prompt": "问宝宝：桌上有 2 个苹果，吃掉一个，还剩几个？"
     },
     "levels": {
+      "L1": {},
       "L2": {
-        "sentence_zh": "两根黄香蕉"
+        "sentence_zh": "二个红苹果",
+        "sentence_en": "There are two apples."
       },
       "L3": {
-        "sentence_zh": "两根黄香蕉，弯弯的。"
+        "sentence_zh": "二个红苹果",
+        "sentence_en": "There are two apples.",
+        "fact": "2 就是 2 个，数一数就知道啦。"
       }
     }
   },
@@ -608,20 +616,24 @@
     "zh": "三",
     "en": "three",
     "pinyin": "sān",
-    "count": 3,
-    "emoji": "🍊",
-    "palette": "var(--pa-pal-sand)",
+    "emoji": "🍎",
+    "palette": "var(--pa-pal-warm)",
     "sound": "pop",
+    "count": 3,
     "parentGuide": {
-      "explain": "三个橘子。一、二、三，慢慢数。",
-      "prompt": "我们一起数一数桌上有几样东西？"
+      "explain": "三就是 3 个。可以用手指一个一个点着数给孩子听。",
+      "prompt": "问宝宝：桌上有 3 个苹果，吃掉一个，还剩几个？"
     },
     "levels": {
+      "L1": {},
       "L2": {
-        "sentence_zh": "三个小橘子"
+        "sentence_zh": "三个红苹果",
+        "sentence_en": "There are three apples."
       },
       "L3": {
-        "sentence_zh": "三个小橘子，橙橙的。"
+        "sentence_zh": "三个红苹果",
+        "sentence_en": "There are three apples.",
+        "fact": "3 就是 3 个，数一数就知道啦。"
       }
     }
   },
@@ -1639,7 +1651,7 @@
         "emoji": "😁",
         "sound": "chime"
       },
-      "requiredPasses": 8
+      "requiredPasses": 6
     }
   },
   {
@@ -1669,7 +1681,7 @@
         "emoji": "🛁",
         "sound": "chime"
       },
-      "requiredPasses": 8
+      "requiredPasses": 6
     }
   },
   {
@@ -1771,6 +1783,209 @@
       },
       "L3": {
         "sentence_zh": "上面尖尖，下面圆圆，就是水滴。"
+      }
+    }
+  },
+  {
+    "id": "count-4",
+    "lane": "play",
+    "type": "number",
+    "section": "numbers",
+    "zh": "四",
+    "en": "four",
+    "pinyin": "sì",
+    "emoji": "🍎",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "count": 4,
+    "parentGuide": {
+      "explain": "四就是 4 个。可以用手指一个一个点着数给孩子听。",
+      "prompt": "问宝宝：桌上有 4 个苹果，吃掉一个，还剩几个？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "四个红苹果",
+        "sentence_en": "There are four apples."
+      },
+      "L3": {
+        "sentence_zh": "四个红苹果",
+        "sentence_en": "There are four apples.",
+        "fact": "4 就是 4 个，数一数就知道啦。"
+      }
+    }
+  },
+  {
+    "id": "count-5",
+    "lane": "play",
+    "type": "number",
+    "section": "numbers",
+    "zh": "五",
+    "en": "five",
+    "pinyin": "wǔ",
+    "emoji": "🍎",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "count": 5,
+    "parentGuide": {
+      "explain": "五就是 5 个。可以用手指一个一个点着数给孩子听。",
+      "prompt": "问宝宝：桌上有 5 个苹果，吃掉一个，还剩几个？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "五个红苹果",
+        "sentence_en": "There are five apples."
+      },
+      "L3": {
+        "sentence_zh": "五个红苹果",
+        "sentence_en": "There are five apples.",
+        "fact": "5 比 4 多一个，比 6 少一个。"
+      }
+    }
+  },
+  {
+    "id": "count-6",
+    "lane": "play",
+    "type": "number",
+    "section": "numbers",
+    "zh": "六",
+    "en": "six",
+    "pinyin": "liù",
+    "emoji": "🍎",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "count": 6,
+    "parentGuide": {
+      "explain": "六就是 6 个。可以用手指一个一个点着数给孩子听。",
+      "prompt": "问宝宝：桌上有 6 个苹果，吃掉一个，还剩几个？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "六个红苹果",
+        "sentence_en": "There are six apples."
+      },
+      "L3": {
+        "sentence_zh": "六个红苹果",
+        "sentence_en": "There are six apples.",
+        "fact": "6 比 5 多一个，比 7 少一个。"
+      }
+    }
+  },
+  {
+    "id": "count-7",
+    "lane": "play",
+    "type": "number",
+    "section": "numbers",
+    "zh": "七",
+    "en": "seven",
+    "pinyin": "qī",
+    "emoji": "🍎",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "count": 7,
+    "parentGuide": {
+      "explain": "七就是 7 个。可以用手指一个一个点着数给孩子听。",
+      "prompt": "问宝宝：桌上有 7 个苹果，吃掉一个，还剩几个？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "七个红苹果",
+        "sentence_en": "There are seven apples."
+      },
+      "L3": {
+        "sentence_zh": "七个红苹果",
+        "sentence_en": "There are seven apples.",
+        "fact": "7 比 6 多一个，比 8 少一个。"
+      }
+    }
+  },
+  {
+    "id": "count-8",
+    "lane": "play",
+    "type": "number",
+    "section": "numbers",
+    "zh": "八",
+    "en": "eight",
+    "pinyin": "bā",
+    "emoji": "🍎",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "count": 8,
+    "parentGuide": {
+      "explain": "八就是 8 个。可以用手指一个一个点着数给孩子听。",
+      "prompt": "问宝宝：桌上有 8 个苹果，吃掉一个，还剩几个？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "八个红苹果",
+        "sentence_en": "There are eight apples."
+      },
+      "L3": {
+        "sentence_zh": "八个红苹果",
+        "sentence_en": "There are eight apples.",
+        "fact": "8 比 7 多一个，比 9 少一个。"
+      }
+    }
+  },
+  {
+    "id": "count-9",
+    "lane": "play",
+    "type": "number",
+    "section": "numbers",
+    "zh": "九",
+    "en": "nine",
+    "pinyin": "jiǔ",
+    "emoji": "🍎",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "count": 9,
+    "parentGuide": {
+      "explain": "九就是 9 个。可以用手指一个一个点着数给孩子听。",
+      "prompt": "问宝宝：桌上有 9 个苹果，吃掉一个，还剩几个？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "九个红苹果",
+        "sentence_en": "There are nine apples."
+      },
+      "L3": {
+        "sentence_zh": "九个红苹果",
+        "sentence_en": "There are nine apples.",
+        "fact": "9 比 8 多一个，比 10 少一个。"
+      }
+    }
+  },
+  {
+    "id": "count-10",
+    "lane": "play",
+    "type": "number",
+    "section": "numbers",
+    "zh": "十",
+    "en": "ten",
+    "pinyin": "shí",
+    "emoji": "🍎",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "count": 10,
+    "parentGuide": {
+      "explain": "十就是 10 个。可以用手指一个一个点着数给孩子听。",
+      "prompt": "问宝宝：桌上有 10 个苹果，吃掉一个，还剩几个？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "十个红苹果",
+        "sentence_en": "There are ten apples."
+      },
+      "L3": {
+        "sentence_zh": "十个红苹果",
+        "sentence_en": "There are ten apples.",
+        "fact": "10 比 9 多一个，比 11 少一个。"
       }
     }
   }

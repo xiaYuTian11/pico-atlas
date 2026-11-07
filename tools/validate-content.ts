@@ -3,6 +3,7 @@ import path from 'node:path';
 import { CardSchema, SectionSchema } from '../src/content/schema';
 import { SECTIONS } from '../src/content/sections';
 import rawCards from '../src/content/cards.json';
+import autoCards from '../src/content/cards-auto.json';
 
 /**
  * 内容校验 + 媒体缺失报告。
@@ -41,7 +42,7 @@ for (const s of SECTIONS) {
 
 // ---------- 2. 校验卡片 ----------
 const cardIds = new Set<string>();
-const cards = rawCards as unknown as Array<Record<string, unknown>>;
+const cards = [...(autoCards as Array<Record<string, unknown>>), ...(rawCards as Array<Record<string, unknown>>)];
 
 for (const c of cards) {
   const id = String(c.id ?? '<无 id>');
