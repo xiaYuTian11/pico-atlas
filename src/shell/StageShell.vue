@@ -532,7 +532,7 @@ void PaIcon;
       <div
         v-if="card"
         class="pa-stage__card"
-        :class="{ 'is-locked': gestureLocked }"
+        :class="{ 'is-locked': gestureLocked, 'has-next': showNextHint }"
         :style="{
           background: card.palette ?? 'var(--pa-card)',
           transform: `translateX(${dragX}px)`,
@@ -573,15 +573,15 @@ void PaIcon;
             if (target >= 0) goTo(target);
           }"
         />
+        <!-- 故事翻页提示 -->
+        <Transition name="pa-next-hint">
+          <button v-if="showNextHint" type="button" class="pa-stage__next pa-hit" @click.stop="step(1)">
+            下一页 →
+          </button>
+        </Transition>
       </div>
     </div>
 
-    <!-- 故事翻页提示 -->
-    <Transition name="pa-next-hint">
-      <button v-if="showNextHint" type="button" class="pa-stage__next pa-hit" @click.stop="step(1)">
-        下一页 →
-      </button>
-    </Transition>
 
     <!-- 底栏 -->
     <BottomBar
@@ -702,11 +702,12 @@ void PaIcon;
 /* ---------- 卡片角标 ---------- */
 /* ---------- 故事翻页提示 ---------- */
 .pa-stage__next {
-  position: fixed;
-  right: calc(var(--pa-gutter) + 4px);
-  bottom: calc(var(--pa-bottombar-h) + 14px + env(safe-area-inset-bottom));
-  z-index: 5000;
-  padding: 12px 20px;
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 5;
+  padding: 12px 22px;
   border-radius: var(--pa-r-pill);
   background: var(--pa-accent);
   color: #fff;
@@ -717,16 +718,21 @@ void PaIcon;
   animation: paNextBob 1.6s var(--pa-ease-in-out) infinite;
 }
 .pa-stage__next:active {
-  transform: scale(0.94);
+  transform: translateX(-50%) scale(0.94);
+}
+
+/* 提示出现时给正文腾位置，避免盖住文字 */
+.pa-stage__card.has-next :deep(.pa-story__content) {
+  padding-bottom: 74px;
 }
 
 @keyframes paNextBob {
   0%,
   100% {
-    transform: translateX(0);
+    transform: translateX(-50%) translateX(0);
   }
   50% {
-    transform: translateX(5px);
+    transform: translateX(-50%) translateX(6px);
   }
 }
 
@@ -739,7 +745,7 @@ void PaIcon;
 .pa-next-hint-enter-from,
 .pa-next-hint-leave-to {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateX(-50%) translateY(10px);
 }
 
 .pa-stage__loop {
