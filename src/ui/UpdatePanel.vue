@@ -78,12 +78,7 @@ async function install(): Promise<void> {
         {{ (info.size / 1024 / 1024).toFixed(1) }} MB
         <span v-if="!isNative()">· 浏览器环境会打开下载链接</span>
       </div>
-      <button
-        v-if="state !== 'downloading'"
-        type="button"
-        class="pa-update__install"
-        @click="install"
-      >
+      <button v-if="state !== 'downloading'" type="button" class="pa-update__install" @click="install">
         下载并安装
       </button>
       <div v-else class="pa-update__progress">

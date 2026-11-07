@@ -20,9 +20,9 @@ npm run media:sheet      # 审片：把所有插图拼成一张总览图
 
 ### 内容分两份
 
-| 文件 | 来源 | 用途 |
-| --- | --- | --- |
-| `src/content/cards.json` | 手写 | 精修版：短句、亲子锦囊、古诗、故事、益智题 |
+| 文件                          | 来源                       | 用途                                                         |
+| ----------------------------- | -------------------------- | ------------------------------------------------------------ |
+| `src/content/cards.json`      | 手写                       | 精修版：短句、亲子锦囊、古诗、故事、益智题                   |
 | `src/content/cards-auto.json` | `node tools/gen-cards.mjs` | 词库批量版：从 `tools/wordlist.json` 生成中英 + 拼音 + emoji |
 
 同 id 时**手写版覆盖词库版**。所以想把某张词库卡升级成精修卡：
@@ -57,22 +57,22 @@ npm run media:sheet      # 审片：把所有插图拼成一张总览图
   "type": "story",
   "art": {
     "subject": "a small white bunny with long floppy ears ... waking up in a burrow",
-    "seed": 4101,            // 同一故事的所有页锁同一个 seed，角色才像同一只
-    "cutout": false          // 场景图不抠背，抠了反而脏
-  }
+    "seed": 4101, // 同一故事的所有页锁同一个 seed，角色才像同一只
+    "cutout": false, // 场景图不抠背，抠了反而脏
+  },
 }
 ```
 
 字段全集见 `src/content/types.ts` 的 `CardArt`。
 
-| 字段 | 作用 | 缺省 |
-| --- | --- | --- |
-| `subject` | 主体描述（英文，给 SD 看） | 用 `en` |
-| `prompt` | 完全覆盖正向提示词 | — |
-| `scene_template` | 覆盖该类型的句式模板，`{subject}` 占位 | 按 `type` 取 |
-| `style_extra` | 追加风格词 | — |
-| `seed` | 固定随机种子 | 由 `id` 哈希 |
-| `cutout` | 是否去背合成纸底 | 场景类型 `false`，其余 `true` |
+| 字段             | 作用                                   | 缺省                          |
+| ---------------- | -------------------------------------- | ----------------------------- |
+| `subject`        | 主体描述（英文，给 SD 看）             | 用 `en`                       |
+| `prompt`         | 完全覆盖正向提示词                     | —                             |
+| `scene_template` | 覆盖该类型的句式模板，`{subject}` 占位 | 按 `type` 取                  |
+| `style_extra`    | 追加风格词                             | —                             |
+| `seed`           | 固定随机种子                           | 由 `id` 哈希                  |
+| `cutout`         | 是否去背合成纸底                       | 场景类型 `false`，其余 `true` |
 
 ### 出图的四个阶段（每一段都可单独重跑）
 
@@ -92,12 +92,12 @@ cards.json ──► SD 出 512px 原图 ──► rembg 去背 ──► 合成
 
 ### 太慢怎么办
 
-| 手段 | 效果 |
-| --- | --- |
-| `--steps 14` | 快 30%，细节略降 |
-| `--gen-size 448` | 快 25%，小图看不出差别 |
-| 换 LCM-LoRA（4–8 步） | 快 3 倍，水彩纹理变薄 |
-| 挂机跑一晚上 | 700 张 ≈ 17 小时（90s/张） |
+| 手段                  | 效果                       |
+| --------------------- | -------------------------- |
+| `--steps 14`          | 快 30%，细节略降           |
+| `--gen-size 448`      | 快 25%，小图看不出差别     |
+| 换 LCM-LoRA（4–8 步） | 快 3 倍，水彩纹理变薄      |
+| 挂机跑一晚上          | 700 张 ≈ 17 小时（90s/张） |
 
 ---
 
@@ -105,13 +105,13 @@ cards.json ──► SD 出 512px 原图 ──► rembg 去背 ──► 合成
 
 `python tools/gen_audio.py`，音色与韵律集中在文件顶部的 `VOICE` 表：
 
-| 场景 | 音色 | 语速 |
-| --- | --- | --- |
-| 中文主词 | zh-CN-XiaoxiaoNeural | -6% |
-| 中文短句 | 同上 | -8% |
-| 古诗 | 同上 | **-22%**（一句一顿） |
-| 故事 | 同上 | -12% |
-| 英文 | en-US-JennyNeural | -10% |
+| 场景     | 音色                 | 语速                 |
+| -------- | -------------------- | -------------------- |
+| 中文主词 | zh-CN-XiaoxiaoNeural | -6%                  |
+| 中文短句 | 同上                 | -8%                  |
+| 古诗     | 同上                 | **-22%**（一句一顿） |
+| 故事     | 同上                 | -12%                 |
+| 英文     | en-US-JennyNeural    | -10%                 |
 
 举措说明：
 
@@ -137,12 +137,12 @@ npm run media:sheet      # → assets/review/contact.png
 
 ## 4. 环境
 
-| 依赖 | 位置 | 说明 |
-| --- | --- | --- |
-| Python 3.13 | 系统 | `edge-tts` 装在系统 Python |
-| `.venv` | 仓库内 | torch cu124 + diffusers + rembg，出图用 |
-| HF 缓存 | `D:\dev\hf-cache` | 模型 2 GB，别放 C 盘 |
-| Android SDK | `D:\dev\android-sdk` | `ANDROID_HOME` 已写进用户环境变量 |
+| 依赖        | 位置                 | 说明                                    |
+| ----------- | -------------------- | --------------------------------------- |
+| Python 3.13 | 系统                 | `edge-tts` 装在系统 Python              |
+| `.venv`     | 仓库内               | torch cu124 + diffusers + rembg，出图用 |
+| HF 缓存     | `D:\dev\hf-cache`    | 模型 2 GB，别放 C 盘                    |
+| Android SDK | `D:\dev\android-sdk` | `ANDROID_HOME` 已写进用户环境变量       |
 
 重装出图环境：
 

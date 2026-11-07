@@ -6,7 +6,6 @@
 import { computed, ref } from 'vue';
 import type { Card, QuizSoundPayload, QuizOption } from '@/content/types';
 import { playSfx } from '@/audio/engine';
-import { audioSfx } from '@/content/media';
 
 const props = defineProps<{ card: Card; highlight: string | null }>();
 
@@ -43,10 +42,6 @@ function replay(): void {
   wrongId.value = null;
   playSfx('soft');
 }
-
-// 若本地有该拟声的真实录音，直接用它（比合成音真实得多）
-const realCue = computed(() => audioSfx(payload.value.soundCue));
-void realCue;
 </script>
 
 <template>

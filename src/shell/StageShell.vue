@@ -272,10 +272,10 @@ function onCardTap(e: MouseEvent): void {
 }
 
 function pulse(el: HTMLElement): void {
-  el.animate(
-    [{ transform: 'scale(1)' }, { transform: 'scale(0.94)' }, { transform: 'scale(1)' }],
-    { duration: 200, easing: 'cubic-bezier(.34,1.56,.64,1)' },
-  );
+  el.animate([{ transform: 'scale(1)' }, { transform: 'scale(0.94)' }, { transform: 'scale(1)' }], {
+    duration: 200,
+    easing: 'cubic-bezier(.34,1.56,.64,1)',
+  });
 }
 
 /* ---------------- 手势引擎 ---------------- */
@@ -344,9 +344,7 @@ function onTouchEnd(e: TouchEvent): void {
   const dt = Date.now() - startT;
 
   const isSwipe =
-    Math.abs(dx) >= SWIPE_MIN_DX &&
-    Math.abs(dx) > Math.abs(dy) * SWIPE_ANGLE_RATIO &&
-    dt < SWIPE_MAX_MS;
+    Math.abs(dx) >= SWIPE_MIN_DX && Math.abs(dx) > Math.abs(dy) * SWIPE_ANGLE_RATIO && dt < SWIPE_MAX_MS;
 
   if (isSwipe) {
     suppressClick = true;
@@ -568,10 +566,12 @@ void PaIcon;
           :card="card"
           :highlight="highlight"
           :poem-line-index="poemLineIndex"
-          @jump-to-story-page="(p: number) => {
-            const target = cards.findIndex((c) => c.storyId === card?.storyId && c.page === p);
-            if (target >= 0) goTo(target);
-          }"
+          @jump-to-story-page="
+            (p: number) => {
+              const target = cards.findIndex((c) => c.storyId === card?.storyId && c.page === p);
+              if (target >= 0) goTo(target);
+            }
+          "
         />
         <!-- 故事翻页提示 -->
         <Transition name="pa-next-hint">
@@ -581,7 +581,6 @@ void PaIcon;
         </Transition>
       </div>
     </div>
-
 
     <!-- 底栏 -->
     <BottomBar

@@ -73,11 +73,7 @@ function reset(): void {
         <span class="pa-habit__tool" aria-hidden="true">{{ payload.toolEmoji }}</span>
 
         <!-- 触摸层 -->
-        <div
-          class="pa-habit__touch"
-          @pointerdown.stop.prevent="down"
-          @pointermove.stop.prevent="scrub"
-        />
+        <div class="pa-habit__touch" @pointerdown.stop.prevent="down" @pointermove.stop.prevent="scrub" />
       </div>
 
       <div class="pa-habit__progress">
@@ -90,9 +86,7 @@ function reset(): void {
         {{ done ? payload.afterState.text : payload.beforeState.text }}
       </div>
       <div v-if="!done" class="pa-habit__hint">用{{ payload.toolLabel }}擦一擦</div>
-      <button v-if="done" type="button" class="pa-habit__reset pa-hit" @click.stop="reset">
-        再玩一次
-      </button>
+      <button v-if="done" type="button" class="pa-habit__reset pa-hit" @click.stop="reset">再玩一次</button>
     </div>
   </div>
 </template>

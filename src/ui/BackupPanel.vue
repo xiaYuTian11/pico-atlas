@@ -41,7 +41,12 @@ function doImport(): void {
     <div class="pa-backup__row">
       <button type="button" class="pa-backup__btn" @click="doExport">导出存档</button>
       <button type="button" class="pa-backup__btn" @click="copy" :disabled="!text">复制</button>
-      <button type="button" class="pa-backup__btn pa-backup__btn--primary" @click="doImport" :disabled="!text">
+      <button
+        type="button"
+        class="pa-backup__btn pa-backup__btn--primary"
+        @click="doImport"
+        :disabled="!text"
+      >
         从文本恢复
       </button>
     </div>

@@ -1,0 +1,10 @@
+dist
+android
+node_modules
+assets
+public/media
+prototype
+.venv
+release
+*.log
+package-lock.json

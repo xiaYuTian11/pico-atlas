@@ -16,10 +16,17 @@ const ART = {
   /* ---------- 认东西 ---------- */
   apple: { subject: 'a single shiny red apple with one green leaf and a small brown stem' },
   banana: { subject: 'a bunch of three ripe yellow bananas' },
-  strawberry: { subject: 'a single whole ripe red strawberry, plump and shiny, with tiny seeds and a green leafy crown' },
+  strawberry: {
+    subject: 'a single whole ripe red strawberry, plump and shiny, with tiny seeds and a green leafy crown',
+  },
   carrot: { subject: 'a single long pointed orange carrot with a fluffy green leafy top, standing upright' },
-  tomato: { subject: 'a single ripe round red tomato with a green star-shaped stem, fully red, shiny but flat' },
-  corn: { subject: 'a single bright yellow corn cob with rows of yellow kernels, small green husk leaves at the base' },
+  tomato: {
+    subject: 'a single ripe round red tomato with a green star-shaped stem, fully red, shiny but flat',
+  },
+  corn: {
+    subject:
+      'a single bright yellow corn cob with rows of yellow kernels, small green husk leaves at the base',
+  },
   cat: { subject: 'a cute ginger kitten sitting and looking at the viewer, whiskers and green eyes' },
   dog: { subject: 'a cute brown puppy sitting with floppy ears and a happy face' },
   rabbit: { subject: `${BUNNY}, sitting and looking at the viewer` },

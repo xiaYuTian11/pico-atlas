@@ -43,9 +43,7 @@ const modeMeta = computed(() => PLAY_MODE_META[state.prefs.playMode]);
 const modeLocked = computed(() => state.prefs.modeLocked);
 
 /** 模式键图标名，与 PaIcon 的 union 对齐 */
-const modeIcon = computed(
-  () => modeMeta.value.icon as 'flip' | 'loop' | 'tap' | 'mute',
-);
+const modeIcon = computed(() => modeMeta.value.icon as 'flip' | 'loop' | 'tap' | 'mute');
 
 function onMode(): void {
   if (modeLocked.value) {

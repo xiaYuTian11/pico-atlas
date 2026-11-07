@@ -8,14 +8,7 @@
  */
 import { computed } from 'vue';
 import type { AgeBand } from '@/content/types';
-import {
-  PLAY_MODES,
-  PLAY_MODE_META,
-  SPEECH_RATES,
-  state,
-  sessionMinutes,
-  resetSession,
-} from '@/state/store';
+import { PLAY_MODES, PLAY_MODE_META, SPEECH_RATES, state, sessionMinutes, resetSession } from '@/state/store';
 import { playSfx, speak, newSession } from '@/audio/engine';
 import { audioZh } from '@/content/media';
 import UpdatePanel from './UpdatePanel.vue';
@@ -217,7 +210,13 @@ function resetTimer(): void {
 
         <div class="pa-settings__footer">
           <div class="pa-settings__meta">
-            卡片 {{ state.progress.look.seen.length + state.progress.read.seen.length + state.progress.play.seen.length }} 张已看过
+            卡片
+            {{
+              state.progress.look.seen.length +
+              state.progress.read.seen.length +
+              state.progress.play.seen.length
+            }}
+            张已看过
           </div>
         </div>
       </div>

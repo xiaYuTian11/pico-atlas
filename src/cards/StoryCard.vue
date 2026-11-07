@@ -24,16 +24,12 @@ const emit = defineEmits<{ jumpToStoryPage: [page: number] }>();
 const band = computed(() => state.ageBand ?? 'L1');
 const text = computed(() => props.card.levels?.[band.value]?.text ?? props.card.zh);
 const isFinal = computed(() => props.card.page === props.card.pageCount);
-const group = computed(() =>
-  props.card.storyId ? storyGroup(props.card.storyId) : [],
-);
+const group = computed(() => (props.card.storyId ? storyGroup(props.card.storyId) : []));
 </script>
 
 <template>
   <div class="pa-story">
-    <div class="pa-story__badge">
-      {{ card.title }} · {{ card.page }} / {{ card.pageCount }}
-    </div>
+    <div class="pa-story__badge">{{ card.title }} · {{ card.page }} / {{ card.pageCount }}</div>
 
     <div class="pa-story__visual">
       <CardImage :card-id="card.id" :emoji="card.emoji" :alt="card.zh" />

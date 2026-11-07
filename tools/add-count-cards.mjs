@@ -44,7 +44,8 @@ for (let n = 1; n <= 10; n++) {
       L3: {
         sentence_zh: sentence(n),
         sentence_en: `There are ${EN[n]} apples.`,
-        fact: n >= 5 ? `${n} 比 ${n - 1} 多一个，比 ${n + 1} 少一个。` : `${n} 就是 ${n} 个，数一数就知道啦。`,
+        fact:
+          n >= 5 ? `${n} 比 ${n - 1} 多一个，比 ${n + 1} 少一个。` : `${n} 就是 ${n} 个，数一数就知道啦。`,
       },
     },
   });

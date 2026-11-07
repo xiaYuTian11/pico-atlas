@@ -77,9 +77,7 @@ function reset(): void {
 
     <div class="pa-peek__content">
       <div class="pa-peek__prompt">{{ card.zh }}</div>
-      <button v-if="solved" type="button" class="pa-peek__reset pa-hit" @click.stop="reset">
-        再猜一次
-      </button>
+      <button v-if="solved" type="button" class="pa-peek__reset pa-hit" @click.stop="reset">再猜一次</button>
     </div>
   </div>
 </template>

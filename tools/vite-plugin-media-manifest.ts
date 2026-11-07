@@ -10,7 +10,7 @@ import type { Plugin } from 'vite';
  *   700 张图会让构建产物爆炸。这里只生成"文件名清单"，
  *   文件本身仍由浏览器按需请求（且可被 Service Worker 缓存）。
  *
- * 开发期监听 public/media/ 变化，自动热更新清单 —— 
+ * 开发期监听 public/media/ 变化，自动热更新清单 ——
  * 你丢一张图进去，刷新页面就能看到，不用重启 dev server。
  */
 export function mediaManifest(): Plugin {

@@ -16,7 +16,10 @@ export type PlayMode = 'flip_and_read' | 'single_loop' | 'tap_to_read' | 'quiet_
 
 export const PLAY_MODES: PlayMode[] = ['flip_and_read', 'single_loop', 'tap_to_read', 'quiet_mute'];
 
-export const PLAY_MODE_META: Record<PlayMode, { zh: string; short: string; desc: string; icon: string; voice: 'flip' | 'loop' | 'tap' | 'mute' }> = {
+export const PLAY_MODE_META: Record<
+  PlayMode,
+  { zh: string; short: string; desc: string; icon: string; voice: 'flip' | 'loop' | 'tap' | 'mute' }
+> = {
   flip_and_read: {
     zh: '翻页即读',
     short: '翻页读',

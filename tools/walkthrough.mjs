@@ -51,11 +51,14 @@ async function main() {
     if (m.id && pending.has(m.id)) {
       const { res, rej } = pending.get(m.id);
       pending.delete(m.id);
-      m.error ? rej(new Error(JSON.stringify(m.error))) : res(m.result);
+      if (m.error) rej(new Error(JSON.stringify(m.error)));
+      else res(m.result);
       return;
     }
     if (m.method === 'Runtime.exceptionThrown') {
-      errors.push('[exception] ' + (m.params.exceptionDetails.exception?.description ?? m.params.exceptionDetails.text));
+      errors.push(
+        '[exception] ' + (m.params.exceptionDetails.exception?.description ?? m.params.exceptionDetails.text),
+      );
     }
     if (m.method === 'Runtime.consoleAPICalled' && ['error', 'warning'].includes(m.params.type)) {
       errors.push(
@@ -182,12 +185,16 @@ async function main() {
         await sleep(900);
         await shot(`card-${laneZh}-${slug}-${i}`);
         plan.push(`${laneZh}/${slug}/${i}`);
-        await evaluate(`(() => { const b = document.querySelector('.pa-stage__back, [aria-label="返回网格"], [aria-label="返回"]'); if (b) b.click(); return !!b; })()`);
+        await evaluate(
+          `(() => { const b = document.querySelector('.pa-stage__back, [aria-label="返回网格"], [aria-label="返回"]'); if (b) b.click(); return !!b; })()`,
+        );
         await sleep(500);
       }
     }
     // 回首页
-    await evaluate(`(() => { const b = document.querySelector('[aria-label="返回首页"]'); if (b) b.click(); return !!b; })()`);
+    await evaluate(
+      `(() => { const b = document.querySelector('[aria-label="返回首页"]'); if (b) b.click(); return !!b; })()`,
+    );
     await sleep(500);
   }
 

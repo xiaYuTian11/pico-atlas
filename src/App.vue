@@ -5,10 +5,10 @@
  * 路由状态很轻：就一个 screen 字符串 + 上下文。
  * 不用 vue-router（只有三个屏，没必要）。
  */
-import { computed, onMounted, onUnmounted, ref, onErrorCaptured } from 'vue';
+import { onMounted, onUnmounted, ref, onErrorCaptured } from 'vue';
 import { App as CapApp } from '@capacitor/app';
 import type { AgeBand, Card, Lane } from '@/content/types';
-import { cardsOfLane, cardsOfSection, getCard, populatedSections } from '@/content';
+import { cardsOfSection, getCard, populatedSections } from '@/content';
 import { initState, state, setAgeBand, startSessionTimer, stopSessionTimer } from '@/state/store';
 import { stopAll, unlockAudio } from '@/audio/engine';
 import AgeScreen from '@/shell/AgeScreen.vue';
@@ -62,7 +62,10 @@ function openLane(lane: Lane): void {
 function openCard(sectionId: string, cardId: string): void {
   const lane = gridLane.value;
   stageCards.value = cardsOfSection(sectionId);
-  stageIndex.value = Math.max(0, stageCards.value.findIndex((c) => c.id === cardId));
+  stageIndex.value = Math.max(
+    0,
+    stageCards.value.findIndex((c) => c.id === cardId),
+  );
   stageLane.value = lane;
   stageSection.value = sectionId;
   screen.value = 'stage';
@@ -200,10 +203,6 @@ onUnmounted(() => {
   stopAll();
   void backListener?.remove();
 });
-
-const currentCard = computed<Card | undefined>(() => stageCards.value[stageIndex.value]);
-void currentCard;
-void cardsOfLane;
 </script>
 
 <template>

@@ -41,9 +41,7 @@ export const SECTIONS: SectionDef[] = [
   { id: 'drawing', lane: 'play', zh: '画一画', icon: '🖍️', order: 11, tint: 'var(--pa-pal-sand)' },
 ];
 
-export const SECTION_MAP: Record<string, SectionDef> = Object.fromEntries(
-  SECTIONS.map((s) => [s.id, s]),
-);
+export const SECTION_MAP: Record<string, SectionDef> = Object.fromEntries(SECTIONS.map((s) => [s.id, s]));
 
 /** 某个入口下的所有分区，按 order 排序 */
 export function sectionsOfLane(lane: 'look' | 'read' | 'play'): SectionDef[] {

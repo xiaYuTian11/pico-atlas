@@ -17,10 +17,8 @@ const props = defineProps<{
 }>();
 
 const band = computed(() => state.ageBand ?? 'L1');
-const focusLines = computed(() => props.card.levels?.[band.value]?.focusLines ?? 4);
-void focusLines;
 const lines = computed(() => props.card.lines ?? []);
-const pinyinLines = computed(() => (band.value === 'L1' ? [] : props.card.pinyinLines ?? []));
+const pinyinLines = computed(() => (band.value === 'L1' ? [] : (props.card.pinyinLines ?? [])));
 
 function lineState(i: number): string {
   if (props.highlight === 'poemLine' && props.poemLineIndex === i) return 'is-speaking';
@@ -51,9 +49,7 @@ function lineState(i: number): string {
         </button>
       </div>
 
-      <div class="pa-poem__meta">
-        {{ card.dynasty }} · {{ card.author }}《{{ card.zh }}》
-      </div>
+      <div class="pa-poem__meta">{{ card.dynasty }} · {{ card.author }}《{{ card.zh }}》</div>
     </div>
   </div>
 </template>

@@ -166,12 +166,15 @@ function reset(): void {
 }
 
 onMounted(draw);
-watch(() => props.card.id, () => {
-  covered.clear();
-  progress.value = 0;
-  done.value = false;
-  setTimeout(draw, 60);
-});
+watch(
+  () => props.card.id,
+  () => {
+    covered.clear();
+    progress.value = 0;
+    done.value = false;
+    setTimeout(draw, 60);
+  },
+);
 window.addEventListener('resize', draw);
 </script>
 

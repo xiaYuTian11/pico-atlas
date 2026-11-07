@@ -290,18 +290,8 @@
     "sound": "water",
     "dynasty": "唐",
     "author": "骆宾王",
-    "lines": [
-      "鹅，鹅，鹅，",
-      "曲项向天歌。",
-      "白毛浮绿水，",
-      "红掌拨清波。"
-    ],
-    "pinyinLines": [
-      "é, é, é,",
-      "qū xiàng xiàng tiān gē.",
-      "bái máo fú lǜ shuǐ,",
-      "hóng zhǎng bō qīng bō."
-    ],
+    "lines": ["鹅，鹅，鹅，", "曲项向天歌。", "白毛浮绿水，", "红掌拨清波。"],
+    "pinyinLines": ["é, é, é,", "qū xiàng xiàng tiān gē.", "bái máo fú lǜ shuǐ,", "hóng zhǎng bō qīng bō."],
     "parentGuide": {
       "explain": "大白鹅弯着长脖子对天欢快地唱歌。雪白的羽毛浮在碧绿的水面上，红红的脚掌在清清的水波里轻轻划动。",
       "prompt": "找一找诗里有哪三种颜色？白、绿、红！"
@@ -334,12 +324,7 @@
     "sound": "pop",
     "dynasty": "唐",
     "author": "李绅",
-    "lines": [
-      "锄禾日当午，",
-      "汗滴禾下土。",
-      "谁知盘中餐，",
-      "粒粒皆辛苦。"
-    ],
+    "lines": ["锄禾日当午，", "汗滴禾下土。", "谁知盘中餐，", "粒粒皆辛苦。"],
     "pinyinLines": [
       "chú hé rì dāng wǔ,",
       "hàn dī hé xià tǔ.",
@@ -378,12 +363,7 @@
     "sound": "pop",
     "dynasty": "唐",
     "author": "李白",
-    "lines": [
-      "床前明月光，",
-      "疑是地上霜。",
-      "举头望明月，",
-      "低头思故乡。"
-    ],
+    "lines": ["床前明月光，", "疑是地上霜。", "举头望明月，", "低头思故乡。"],
     "pinyinLines": [
       "chuáng qián míng yuè guāng,",
       "yí shì dì shàng shuāng.",

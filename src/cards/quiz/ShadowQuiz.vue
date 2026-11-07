@@ -48,12 +48,7 @@ function replay(): void {
   <div class="pa-quiz-shadow">
     <div class="pa-quiz-shadow__visual">
       <div class="pa-quiz-shadow__target" :class="{ 'is-solved': solved }">
-        <img
-          v-if="shadowUrl"
-          :src="shadowUrl"
-          :alt="`${card.zh}的剪影`"
-          class="pa-quiz-shadow__img"
-        />
+        <img v-if="shadowUrl" :src="shadowUrl" :alt="`${card.zh}的剪影`" class="pa-quiz-shadow__img" />
         <span v-else class="pa-quiz-shadow__glyph">{{ payload.targetEmoji }}</span>
       </div>
 

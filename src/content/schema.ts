@@ -13,9 +13,7 @@ const hexOrToken = z
 
 export const CardSchema = z
   .object({
-    id: z
-      .string()
-      .regex(/^[a-z0-9-]+$/, 'id 只能是小写字母/数字/短横线'),
+    id: z.string().regex(/^[a-z0-9-]+$/, 'id 只能是小写字母/数字/短横线'),
     lane: z.enum(['look', 'read', 'play']),
     type: z.enum([
       'object',
@@ -66,9 +64,7 @@ export const CardSchema = z
     pairA: z.object({ zh: z.string(), en: z.string().optional(), emoji: z.string().optional() }).optional(),
     pairB: z.object({ zh: z.string(), en: z.string().optional(), emoji: z.string().optional() }).optional(),
 
-    parentGuide: z
-      .object({ explain: z.string().optional(), prompt: z.string().optional() })
-      .optional(),
+    parentGuide: z.object({ explain: z.string().optional(), prompt: z.string().optional() }).optional(),
 
     levels: z
       .object({

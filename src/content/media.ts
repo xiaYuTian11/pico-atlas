@@ -60,16 +60,12 @@ function pickAudio(candidates: string[]): string | undefined {
 
 /** 卡片主图：优先 webp，其次 png/jpg */
 export function cardImage(cardId: string): string | undefined {
-  return pickImage(
-    ['webp', 'png', 'jpg', 'jpeg'].map((ext) => `media/images/${cardId}.${ext}`),
-  );
+  return pickImage(['webp', 'png', 'jpg', 'jpeg'].map((ext) => `media/images/${cardId}.${ext}`));
 }
 
 /** 分区图标图（有真图则用真图，否则组件用 section.icon emoji） */
 export function sectionImage(sectionId: string): string | undefined {
-  return pickImage(
-    ['webp', 'png', 'jpg', 'jpeg'].map((ext) => `media/images/section/${sectionId}.${ext}`),
-  );
+  return pickImage(['webp', 'png', 'jpg', 'jpeg'].map((ext) => `media/images/section/${sectionId}.${ext}`));
 }
 
 /** 影子剪影图 */

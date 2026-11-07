@@ -14,30 +14,30 @@
 
   /* ---------- 颜色：文字 ---------- */
   --pa-ink: #2e2a26;
-  --pa-ink-muted: #6f665d;      /* 原 #8A8178，对比度不足，压深 */
-  --pa-ink-faint: #9a9086;      /* 原 #B9AFA4，仅用于家长区 */
+  --pa-ink-muted: #6f665d; /* 原 #8A8178，对比度不足，压深 */
+  --pa-ink-faint: #9a9086; /* 原 #B9AFA4，仅用于家长区 */
 
   /* ---------- 颜色：语义 ---------- */
-  --pa-accent: #f5904a;          /* 阳光橙，主强调 */
+  --pa-accent: #f5904a; /* 阳光橙，主强调 */
   --pa-accent-soft: #fff3eb;
   --pa-accent-deep: #d9713a;
-  --pa-blue: #2f6fc4;            /* 原 #3C7DD9，压深保证对比 */
+  --pa-blue: #2f6fc4; /* 原 #3C7DD9，压深保证对比 */
   --pa-blue-soft: #eaf2fb;
   --pa-green: #3f9b5f;
   --pa-green-soft: #edf7ef;
   --pa-red: #e0433f;
 
   /* ---------- 字号阶梯（孩子可见 ≥18px 红线）---------- */
-  --pa-fs-hero: clamp(30px, 9.2vw, 56px);   /* 主中文词 / 大数字 */
+  --pa-fs-hero: clamp(30px, 9.2vw, 56px); /* 主中文词 / 大数字 */
   --pa-fs-word: clamp(26px, 7.4vw, 48px);
   --pa-fs-en: clamp(19px, 5.2vw, 30px);
-  --pa-fs-sent: clamp(18px, 4.6vw, 22px);   /* 短句，下限 18 */
+  --pa-fs-sent: clamp(18px, 4.6vw, 22px); /* 短句，下限 18 */
   --pa-fs-poem: clamp(24px, 6.6vw, 30px);
   --pa-fs-story: clamp(22px, 6vw, 28px);
   --pa-fs-quiz: clamp(18px, 4.6vw, 24px);
-  --pa-fs-fact: 18px;                        /* 孩子可见下限，原 16 违规 */
-  --pa-fs-badge: 15px;                       /* 卡片角标：图标+数字，非关键文字 */
-  --pa-fs-parent: 14px;                      /* 仅家长区可见 */
+  --pa-fs-fact: 18px; /* 孩子可见下限，原 16 违规 */
+  --pa-fs-badge: 15px; /* 卡片角标：图标+数字，非关键文字 */
+  --pa-fs-parent: 14px; /* 仅家长区可见 */
   --pa-fs-parent-title: 18px;
 
   /* ---------- 触控：视觉尺寸 vs 热区 ----------
@@ -46,7 +46,7 @@
   --pa-touch-visual-sm: 48px;
   --pa-touch-visual-md: 56px;
   --pa-touch-visual-lg: 76px;
-  --pa-hit-expand: 8px;          /* 48px + 2*8 = 64px */
+  --pa-hit-expand: 8px; /* 48px + 2*8 = 64px */
 
   /* ---------- 圆角 ---------- */
   --pa-r-sm: 10px;
@@ -73,7 +73,7 @@
   --pa-topbar-h: 52px;
   --pa-bottombar-h: 88px;
   --pa-gutter: 16px;
-  --pa-content-max: 620px;        /* 平板竖屏居中舞台宽度 */
+  --pa-content-max: 620px; /* 平板竖屏居中舞台宽度 */
 
   /* ---------- 卡片调色板（低饱和，让插画主体艳）---------- */
   --pa-pal-warm: #fff1e8;

@@ -8,14 +8,18 @@
 ## 0. 两大核心哲学
 
 ### 0.1 一切皆卡片（All-as-Cards）
+
 应用内所有模块只有一种数据形态：**卡片（Card）**。没有详情页、没有树状二级子页面。
+
 - **识物**：1 件物品 = 1 张卡片。
 - **古诗**：1 首古诗 = 1 张卡片（**全诗完整呈现，逐句发光点读**）。
 - **故事**：1 个故事 = 连续 4~5 张卡片（依靠 `storyId` 与 `page / pageCount` 串联，末页提供连续画卷）。
 - **玩一玩益智互动**：每道益智关卡 = 1 张卡片（一屏一题，单关自成一体）。
 
 ### 0.2 内容不重复，只加深（Grow with Age）
+
 同一件物品跨年龄档**只扩展字段，不重复教学**：
+
 - **L1 (3–4 岁)**：纯大图 + 拟声词 + 极简中英文词。
 - **L2 (4–5 岁)**：同一张卡片自动长出拼音和短句描述。
 - **L3 (5–6 岁)**：同一张卡片自动长出生活小常识（Fact）与深层表达。
@@ -25,51 +29,51 @@
 ## 1. 卡片通用统一数据契约 (Universal Card Schema)
 
 ```typescript
-type CardType = 
-  | 'object'         // 识物百科
-  | 'poem'           // 经典古诗
-  | 'story'          // 微绘本故事
-  | 'number'         // 数数认知
-  | 'shape'          // 几何形状 (圆/正方/长方/三角/梯形/菱形/立体)
-  | 'color'          // 色彩认知 (红/黄/蓝/绿/橙/紫/粉等)
-  | 'opposite'       // 对比与空间方位 (大与小/长与短/上与下)
-  | 'drawing'        // 自由手指画板
-  | 'quiz_shadow'    // 益智：影子剪影配对
-  | 'quiz_sound'     // 益智：听声辨物寻踪
-  | 'quiz_sort'      // 益智：大小与颜色分类
-  | 'tracing'        // 益智：手眼轨迹描绘
-  | 'part_to_whole'  // 益智：视觉捉迷藏
-  | 'cause_habit';   // 益智：生活习惯因果
+type CardType =
+  | 'object' // 识物百科
+  | 'poem' // 经典古诗
+  | 'story' // 微绘本故事
+  | 'number' // 数数认知
+  | 'shape' // 几何形状 (圆/正方/长方/三角/梯形/菱形/立体)
+  | 'color' // 色彩认知 (红/黄/蓝/绿/橙/紫/粉等)
+  | 'opposite' // 对比与空间方位 (大与小/长与短/上与下)
+  | 'drawing' // 自由手指画板
+  | 'quiz_shadow' // 益智：影子剪影配对
+  | 'quiz_sound' // 益智：听声辨物寻踪
+  | 'quiz_sort' // 益智：大小与颜色分类
+  | 'tracing' // 益智：手眼轨迹描绘
+  | 'part_to_whole' // 益智：视觉捉迷藏
+  | 'cause_habit'; // 益智：生活习惯因果
 
 interface UniversalCard {
   // 1. 基础身份
-  id: string;               // 全局唯一标识，英文小写与短横线（如 "cat", "rabbit-1", "shadow-1"）
+  id: string; // 全局唯一标识，英文小写与短横线（如 "cat", "rabbit-1", "shadow-1"）
   lane: 'look' | 'read' | 'play'; // 所属三大入口之一
-  type: CardType;           // 内容类型
-  section: string;          // 卡片流内部排列分区（如 "fruits", "animals", "shadow"）
-  palette: string;          // 卡片低饱和背景色（如 "#FFF5E8"）
-  
+  type: CardType; // 内容类型
+  section: string; // 卡片流内部排列分区（如 "fruits", "animals", "shadow"）
+  palette: string; // 卡片低饱和背景色（如 "#FFF5E8"）
+
   // 2. 视觉资源
-  emoji: string;            // 原型占位 emoji
-  image?: string;           // 正式版绘本插图路径（如 "assets/images/cat.webp"）
-  gestureLock?: boolean;    // 是否锁定滑动手势（画板、轨迹类设为 true）
+  emoji: string; // 原型占位 emoji
+  image?: string; // 正式版绘本插图路径（如 "assets/images/cat.webp"）
+  gestureLock?: boolean; // 是否锁定滑动手势（画板、轨迹类设为 true）
 
   // 3. 核心文本
-  zh: string;               // 主中文名称 / 标题
-  en: string;               // 主英文对应词
-  pinyin?: string;          // 带调拼音（L2/L3 自动展示，L1 静默隐藏）
-  
+  zh: string; // 主中文名称 / 标题
+  en: string; // 主英文对应词
+  pinyin?: string; // 带调拼音（L2/L3 自动展示，L1 静默隐藏）
+
   // 4. 音频与拟声契约
-  sound?: string;           // 拟声词/环境音标识（如 "meow", "bark", "honk", "water"）
+  sound?: string; // 拟声词/环境音标识（如 "meow", "bark", "honk", "water"）
   audio?: {
-    zh?: string;            // 中文发音路径（如 "assets/audio/zh/cat.mp3"）
-    en?: string;            // 英文发音路径（如 "assets/audio/en/cat.mp3"）
+    zh?: string; // 中文发音路径（如 "assets/audio/zh/cat.mp3"）
+    en?: string; // 英文发音路径（如 "assets/audio/en/cat.mp3"）
   };
 
   // 5. 亲子抽屉（Parent Drawer · 供陪读家长查看）
   parentGuide?: {
-    explain?: string;       // 通俗白话讲解 / 背景
-    prompt?: string;        // 启发提问建议（如："问问宝宝大白鹅在水里怎么划水的呀？"）
+    explain?: string; // 通俗白话讲解 / 背景
+    prompt?: string; // 启发提问建议（如："问问宝宝大白鹅在水里怎么划水的呀？"）
   };
 
   // 6. 年龄深度扩展
@@ -80,7 +84,13 @@ interface UniversalCard {
   };
 
   // 7. 益智专用扩展负载 (Payload for Educational Mini-Games)
-  quizPayload?: QuizShadowPayload | QuizSoundPayload | QuizSortPayload | TracingPayload | PartToWholePayload | CauseHabitPayload;
+  quizPayload?:
+    | QuizShadowPayload
+    | QuizSoundPayload
+    | QuizSortPayload
+    | TracingPayload
+    | PartToWholePayload
+    | CauseHabitPayload;
 }
 ```
 
@@ -89,6 +99,7 @@ interface UniversalCard {
 ## 2. 核心模块与益智互动卡片 Schema 契约
 
 ### 2.1 识物卡片（type: object）
+
 - **特点**：大图突出，支持真实拟声，点击图片播放音效，点击文字朗读中英。
 
 ```json
@@ -143,18 +154,8 @@ interface UniversalCard {
   "en": "Ode to the Goose",
   "dynasty": "唐",
   "author": "骆宾王",
-  "lines": [
-    "鹅，鹅，鹅，",
-    "曲项向天歌。",
-    "白毛浮绿水，",
-    "红掌拨清波。"
-  ],
-  "pinyinLines": [
-    "é, é, é,",
-    "qū xiàng xiàng tiān gē.",
-    "bái máo fú lǜ shuǐ,",
-    "hóng zhǎng bō qīng bō."
-  ],
+  "lines": ["鹅，鹅，鹅，", "曲项向天歌。", "白毛浮绿水，", "红掌拨清波。"],
+  "pinyinLines": ["é, é, é,", "qū xiàng xiàng tiān gē.", "bái máo fú lǜ shuǐ,", "hóng zhǎng bō qīng bō."],
   "parentGuide": {
     "explain": "大白鹅弯着长长的脖子对天欢快歌唱。雪白的羽毛浮在碧绿的水面上，红红的脚掌在清凌凌的水波中轻轻划动。",
     "prompt": "找一找画面里大白鹅红红的脚掌在哪里？水是什么颜色的？"
@@ -168,6 +169,7 @@ interface UniversalCard {
 ```
 
 ### 2.3 几何图形卡片（type: shape）
+
 - **特点**：支持标准平面图形（圆、方、三角、长方、梯形、菱形、五边形、椭圆等）与立体几何（球体、立方体、圆柱体）。
 
 ```json
@@ -192,6 +194,7 @@ interface UniversalCard {
 ```
 
 ### 2.4 色彩卡片（type: color）
+
 - **特点**：大面积纯色块感知 + 2个生活具象代表物。
 
 ```json
@@ -217,6 +220,7 @@ interface UniversalCard {
 ```
 
 ### 2.5 对比与空间方位卡片（type: opposite）
+
 - **特点**：左右双格对比，直观感受相对概念。
 
 ```json
@@ -236,6 +240,7 @@ interface UniversalCard {
 ---
 
 ### 2.6 益智：影子剪影配对卡片 (type: quiz_shadow)
+
 - **目标**：形状抽象与轮廓知觉训练。
 
 ```json
@@ -251,9 +256,30 @@ interface UniversalCard {
     "targetShadowImage": "assets/images/shadow/cat_shadow.webp",
     "targetShadowEmoji": "🐱",
     "options": [
-      { "id": "opt-cat", "zh": "小猫", "emoji": "🐱", "image": "assets/images/cat.webp", "isCorrect": true, "sound": "meow" },
-      { "id": "opt-dog", "zh": "小狗", "emoji": "🐶", "image": "assets/images/dog.webp", "isCorrect": false, "sound": "pop" },
-      { "id": "opt-rabbit", "zh": "兔子", "emoji": "🐰", "image": "assets/images/rabbit.webp", "isCorrect": false, "sound": "pop" }
+      {
+        "id": "opt-cat",
+        "zh": "小猫",
+        "emoji": "🐱",
+        "image": "assets/images/cat.webp",
+        "isCorrect": true,
+        "sound": "meow"
+      },
+      {
+        "id": "opt-dog",
+        "zh": "小狗",
+        "emoji": "🐶",
+        "image": "assets/images/dog.webp",
+        "isCorrect": false,
+        "sound": "pop"
+      },
+      {
+        "id": "opt-rabbit",
+        "zh": "兔子",
+        "emoji": "🐰",
+        "image": "assets/images/rabbit.webp",
+        "isCorrect": false,
+        "sound": "pop"
+      }
     ]
   }
 }
@@ -262,6 +288,7 @@ interface UniversalCard {
 ---
 
 ### 2.4 益智：听声辨物寻踪卡片 (type: quiz_sound)
+
 - **目标**：听觉敏锐度与跨感官联结。
 
 ```json
@@ -277,9 +304,21 @@ interface UniversalCard {
     "soundCue": "train",
     "soundLabel": "呜——哐当哐当",
     "options": [
-      { "id": "opt-train", "zh": "火车", "emoji": "🚂", "image": "assets/images/train.webp", "isCorrect": true },
+      {
+        "id": "opt-train",
+        "zh": "火车",
+        "emoji": "🚂",
+        "image": "assets/images/train.webp",
+        "isCorrect": true
+      },
       { "id": "opt-car", "zh": "汽车", "emoji": "🚗", "image": "assets/images/car.webp", "isCorrect": false },
-      { "id": "opt-airplane", "zh": "飞机", "emoji": "✈️", "image": "assets/images/airplane.webp", "isCorrect": false }
+      {
+        "id": "opt-airplane",
+        "zh": "飞机",
+        "emoji": "✈️",
+        "image": "assets/images/airplane.webp",
+        "isCorrect": false
+      }
     ]
   }
 }
@@ -288,6 +327,7 @@ interface UniversalCard {
 ---
 
 ### 2.5 益智：大小与颜色分类归位卡片 (type: quiz_sort)
+
 - **目标**：比较概念与分类秩序感。
 
 ```json
@@ -305,10 +345,34 @@ interface UniversalCard {
       { "id": "bucket-small", "label": "小熊的碗", "size": "small", "emoji": "🧸" }
     ],
     "items": [
-      { "id": "big-apple-1", "label": "大苹果", "size": "large", "targetBucketId": "bucket-big", "emoji": "🍎" },
-      { "id": "small-apple-1", "label": "小苹果", "size": "small", "targetBucketId": "bucket-small", "emoji": "🍎" },
-      { "id": "big-apple-2", "label": "大苹果", "size": "large", "targetBucketId": "bucket-big", "emoji": "🍎" },
-      { "id": "small-apple-2", "label": "小苹果", "size": "small", "targetBucketId": "bucket-small", "emoji": "🍎" }
+      {
+        "id": "big-apple-1",
+        "label": "大苹果",
+        "size": "large",
+        "targetBucketId": "bucket-big",
+        "emoji": "🍎"
+      },
+      {
+        "id": "small-apple-1",
+        "label": "小苹果",
+        "size": "small",
+        "targetBucketId": "bucket-small",
+        "emoji": "🍎"
+      },
+      {
+        "id": "big-apple-2",
+        "label": "大苹果",
+        "size": "large",
+        "targetBucketId": "bucket-big",
+        "emoji": "🍎"
+      },
+      {
+        "id": "small-apple-2",
+        "label": "小苹果",
+        "size": "small",
+        "targetBucketId": "bucket-small",
+        "emoji": "🍎"
+      }
     ]
   }
 }
@@ -317,6 +381,7 @@ interface UniversalCard {
 ---
 
 ### 2.6 益智：手眼轨迹描绘卡片 (type: tracing)
+
 - **目标**：精细动作与前书写运笔控制。锁定全屏滑动手势 (`gestureLock: true`)。
 
 ```json
@@ -341,6 +406,7 @@ interface UniversalCard {
 ---
 
 ### 2.7 益智：局部看整体视觉捉迷藏卡片 (type: part_to_whole)
+
 - **目标**：视觉闭合能力与直觉推理。
 
 ```json
@@ -368,6 +434,7 @@ interface UniversalCard {
 ---
 
 ### 2.8 益智：生活习惯因果互动卡片 (type: cause_habit)
+
 - **目标**：自理认知与生活行为因果律。
 
 ```json
@@ -412,6 +479,7 @@ assets/audio/
 ## 4. 审核质检清单 (Content QA Checklist)
 
 每次新增内容时必须核对：
+
 - [ ] `id` 符合小写字母和短横线命名规范，全库唯一。
 - [ ] 物品与动物必须配置适合该年龄段的 `sound` 拟声标识。
 - [ ] 古诗必须包含完整的 4 句 `lines` 数组与对应拼音。

@@ -43,7 +43,9 @@ if (fs.existsSync(FEED)) {
   const feed = JSON.parse(fs.readFileSync(FEED, 'utf8'));
   feed.version = next;
   if (feed.url) {
-    feed.url = feed.url.replace(/\/v[^/]+\//, `/v${next}/`).replace(/pico-atlas-[^/]+\.apk$/, `pico-atlas-${next}.apk`);
+    feed.url = feed.url
+      .replace(/\/v[^/]+\//, `/v${next}/`)
+      .replace(/pico-atlas-[^/]+\.apk$/, `pico-atlas-${next}.apk`);
   }
   fs.writeFileSync(FEED, JSON.stringify(feed, null, 2) + '\n', 'utf8');
 }

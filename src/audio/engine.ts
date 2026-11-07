@@ -185,7 +185,12 @@ function speakAudio(url: string, ticket: number, timeoutMs: number): Promise<boo
   });
 }
 
-function speakWebSpeech(text: string, lang: 'zh' | 'en', ticket: number, timeoutMs: number): Promise<boolean> {
+function speakWebSpeech(
+  text: string,
+  lang: 'zh' | 'en',
+  ticket: number,
+  timeoutMs: number,
+): Promise<boolean> {
   return new Promise((resolve) => {
     if (!('speechSynthesis' in window) || !text) {
       resolve(false);
@@ -227,7 +232,9 @@ function ctx(): AudioContext | null {
     if (audioCtx.state === 'suspended') void audioCtx.resume();
     return audioCtx;
   }
-  const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  const AC =
+    window.AudioContext ??
+    (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
   if (!AC) return null;
   audioCtx = new AC();
   return audioCtx;
@@ -239,17 +246,7 @@ export function unlockAudio(): void {
   if (c && c.state === 'suspended') void c.resume();
 }
 
-type SfxName =
-  | 'pop'
-  | 'chime'
-  | 'meow'
-  | 'bark'
-  | 'didi'
-  | 'train'
-  | 'water'
-  | 'yawn'
-  | 'sparkle'
-  | 'soft';
+type SfxName = 'pop' | 'chime' | 'meow' | 'bark' | 'didi' | 'train' | 'water' | 'yawn' | 'sparkle' | 'soft';
 
 /**
  * 播一个音效。

@@ -42,7 +42,10 @@ for (const s of SECTIONS) {
 
 // ---------- 2. 校验卡片 ----------
 const cardIds = new Set<string>();
-const cards = [...(autoCards as Array<Record<string, unknown>>), ...(rawCards as Array<Record<string, unknown>>)];
+const cards = [
+  ...(autoCards as Array<Record<string, unknown>>),
+  ...(rawCards as Array<Record<string, unknown>>),
+];
 
 for (const c of cards) {
   const id = String(c.id ?? '<无 id>');
@@ -214,11 +217,19 @@ const outDir = path.resolve(process.cwd(), 'assets/queue');
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(
   path.join(outDir, 'missing-images.json'),
-  JSON.stringify(missingImages.map((m) => m.id).filter((v, i, a) => a.indexOf(v) === i), null, 2),
+  JSON.stringify(
+    missingImages.map((m) => m.id).filter((v, i, a) => a.indexOf(v) === i),
+    null,
+    2,
+  ),
 );
 fs.writeFileSync(
   path.join(outDir, 'missing-audio.json'),
-  JSON.stringify(missingAudio.map((m) => m.id).filter((v, i, a) => a.indexOf(v) === i), null, 2),
+  JSON.stringify(
+    missingAudio.map((m) => m.id).filter((v, i, a) => a.indexOf(v) === i),
+    null,
+    2,
+  ),
 );
 console.log(`${DIM}待生成清单已写入 assets/queue/${RESET}\n`);
 

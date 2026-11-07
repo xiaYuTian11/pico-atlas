@@ -38,7 +38,7 @@ function getJSON(pathname) {
         res.on('end', () => {
           try {
             resolve(JSON.parse(b));
-          } catch (e) {
+          } catch {
             reject(new Error(`bad json from ${pathname}: ${b.slice(0, 200)}`));
           }
         });
@@ -52,7 +52,13 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 async function main() {
   const targets = await getJSON('/json/list');
   if (args.includes('--list')) {
-    console.log(JSON.stringify(targets.map((t) => ({ id: t.id, type: t.type, url: t.url })), null, 2));
+    console.log(
+      JSON.stringify(
+        targets.map((t) => ({ id: t.id, type: t.type, url: t.url })),
+        null,
+        2,
+      ),
+    );
     return;
   }
   const page = targets.find((t) => t.type === 'page');
@@ -61,7 +67,7 @@ async function main() {
   const ws = new WebSocket(page.webSocketDebuggerUrl);
   await new Promise((res, rej) => {
     ws.onopen = res;
-    ws.onerror = (e) => rej(new Error('ws error ' + String(e?.message ?? e)));
+    ws.onerror = () => rej(new Error('ws 连接失败'));
   });
 
   let seq = 0;
@@ -82,11 +88,14 @@ async function main() {
       logs.push(`[console.${msg.params.type}] ${text}`);
     }
     if (msg.method === 'Runtime.exceptionThrown') {
-      logs.push(`[exception] ${msg.params.exceptionDetails.exception?.description ?? msg.params.exceptionDetails.text}`);
+      logs.push(
+        `[exception] ${msg.params.exceptionDetails.exception?.description ?? msg.params.exceptionDetails.text}`,
+      );
     }
     if (msg.method === 'Log.entryAdded') {
       const e = msg.params.entry;
-      if (e.level === 'error' || e.level === 'warning') logs.push(`[log.${e.level}] ${e.text} ${e.url ?? ''}`);
+      if (e.level === 'error' || e.level === 'warning')
+        logs.push(`[log.${e.level}] ${e.text} ${e.url ?? ''}`);
     }
   };
 

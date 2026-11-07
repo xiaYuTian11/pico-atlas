@@ -45,12 +45,32 @@ function tapShape(): void {
       >
         <svg viewBox="0 0 100 100" class="pa-shape__svg" aria-hidden="true">
           <circle v-if="shape === 'round'" cx="50" cy="50" r="42" :fill="shapeInfo.fill" />
-          <rect v-else-if="shape === 'square'" x="10" y="10" width="80" height="80" rx="10" :fill="shapeInfo.fill" />
-          <rect v-else-if="shape === 'rectangle'" x="6" y="24" width="88" height="52" rx="10" :fill="shapeInfo.fill" />
+          <rect
+            v-else-if="shape === 'square'"
+            x="10"
+            y="10"
+            width="80"
+            height="80"
+            rx="10"
+            :fill="shapeInfo.fill"
+          />
+          <rect
+            v-else-if="shape === 'rectangle'"
+            x="6"
+            y="24"
+            width="88"
+            height="52"
+            rx="10"
+            :fill="shapeInfo.fill"
+          />
           <polygon v-else-if="shape === 'triangle'" points="50,10 90,88 10,88" :fill="shapeInfo.fill" />
           <polygon v-else-if="shape === 'trapezoid'" points="26,22 74,22 92,84 8,84" :fill="shapeInfo.fill" />
           <polygon v-else-if="shape === 'diamond'" points="50,8 90,50 50,92 10,50" :fill="shapeInfo.fill" />
-          <polygon v-else-if="shape === 'pentagon'" points="50,8 90,36 74,88 26,88 10,36" :fill="shapeInfo.fill" />
+          <polygon
+            v-else-if="shape === 'pentagon'"
+            points="50,8 90,36 74,88 26,88 10,36"
+            :fill="shapeInfo.fill"
+          />
           <ellipse v-else-if="shape === 'oval'" cx="50" cy="50" rx="46" ry="32" :fill="shapeInfo.fill" />
         </svg>
       </button>

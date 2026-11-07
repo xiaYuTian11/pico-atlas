@@ -83,7 +83,7 @@ function itemsInBucket(bucketId: string): SortItem[] {
 
     <div v-if="!allDone" class="pa-quiz-sort__hint" :class="{ 'is-pick': !!selected }">
       <template v-if="selected">已选中「{{ selected.label }}」，放进哪个篮子？</template>
-      <template v-else>① 先点一个小图　② 再点上面的篮子</template>
+      <template v-else>① 先点一个小图 ② 再点上面的篮子</template>
     </div>
 
     <div class="pa-quiz-sort__pool">

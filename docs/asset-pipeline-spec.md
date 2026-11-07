@@ -23,33 +23,34 @@
 
 ### 1.1 音色标准选型 (Voice Roster)
 
-| 用途分类 | 选定音色标识 (Voice ID) | 角色定位与音质特点 |
-| :--- | :--- | :--- |
-| **中文词汇、古诗、故事主讲** | `zh-CN-XiaoxiaoNeural` | **温暖亲切的幼儿园女老师**：语气极其温润生动，带有自然的人类呼吸感与讲故事语气，彻底告别机械冰冷感。 |
-| **中文活泼提示、动物、益智** | `zh-CN-YunxiNeural` | **机灵阳光的小男孩童声**：语调欢快清脆，用于正面鼓励、动物叫声引出及通关表扬。 |
-| **英文启蒙单词与短句** | `en-US-AnaNeural` | **少儿启蒙美语外教音**：专为儿童英语教学研发，元音极其饱满清晰，辅音分明，慢速自然。 |
+| 用途分类                     | 选定音色标识 (Voice ID) | 角色定位与音质特点                                                                                   |
+| :--------------------------- | :---------------------- | :--------------------------------------------------------------------------------------------------- |
+| **中文词汇、古诗、故事主讲** | `zh-CN-XiaoxiaoNeural`  | **温暖亲切的幼儿园女老师**：语气极其温润生动，带有自然的人类呼吸感与讲故事语气，彻底告别机械冰冷感。 |
+| **中文活泼提示、动物、益智** | `zh-CN-YunxiNeural`     | **机灵阳光的小男孩童声**：语调欢快清脆，用于正面鼓励、动物叫声引出及通关表扬。                       |
+| **英文启蒙单词与短句**       | `en-US-AnaNeural`       | **少儿启蒙美语外教音**：专为儿童英语教学研发，元音极其饱满清晰，辅音分明，慢速自然。                 |
 
 ---
 
 ### 1.2 各内容模块详细生成参数表 (Audio Parameter Matrix)
 
-| 模块类型 | 音色标识 (Voice) | 语速 (Rate) | 音调 (Pitch) | 内部停顿 (Pause) | 听觉特征与设计依据 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **认东西：中文词条** | `zh-CN-XiaoxiaoNeural` | **`-24%`** | `+5Hz` | 词后留白 1000ms | 字正腔圆，每一个声调与韵母充分拉长，清晰饱满 |
-| **认东西：英文词条** | `en-US-AnaNeural` | **`-20%`** | `+0Hz` | 词后留白 800ms | 纯正美音，慢速自然，辅音爆破点明确不含糊 |
-| **认东西：中文短句 (L2/L3)** | `zh-CN-XiaoxiaoNeural` | **`-22%`** | `+3Hz` | 句末留白 900ms | 生活化亲切短句，像和宝宝日常温柔说话 |
-| **认东西：英文短句 (L2/L3)** | `en-US-AnaNeural` | **`-20%`** | `+0Hz` | 句末留白 900ms | 节奏欢快短小，慢速易模仿 |
-| **经典古诗词（整首）** | `zh-CN-XiaoxiaoNeural` | **`-22%`** | `+0Hz` | **每句停顿 800ms** | 抑扬顿挫、平仄分明，突出五言/七言韵脚的音律美 |
-| **经典古诗词（单句点读）** | `zh-CN-XiaoxiaoNeural` | **`-22%`** | `+0Hz` | 单句末留白 400ms | 点哪读哪，专注当前诗句的精准发音 |
-| **微绘本故事（单页）** | `zh-CN-XiaoxiaoNeural` | **`-22%`** | `+2Hz` | 句末留白 1000ms | 极具画面感，床边绘本温和陪伴感 |
-| **基础通识：数数与图形** | `zh-CN-XiaoxiaoNeural` | **`-24%`** | `+4Hz` | 停顿 900ms | 强调关键数字和图形特征（如“上面短，下面长”） |
-| **益智小游戏题目与反馈** | `zh-CN-YunxiNeural` | **`-18%`** | `+6Hz` | 停顿 600ms | 充满好奇感与正向激励（如“谁的黑影子呀？”） |
+| 模块类型                     | 音色标识 (Voice)       | 语速 (Rate) | 音调 (Pitch) | 内部停顿 (Pause)   | 听觉特征与设计依据                            |
+| :--------------------------- | :--------------------- | :---------- | :----------- | :----------------- | :-------------------------------------------- |
+| **认东西：中文词条**         | `zh-CN-XiaoxiaoNeural` | **`-24%`**  | `+5Hz`       | 词后留白 1000ms    | 字正腔圆，每一个声调与韵母充分拉长，清晰饱满  |
+| **认东西：英文词条**         | `en-US-AnaNeural`      | **`-20%`**  | `+0Hz`       | 词后留白 800ms     | 纯正美音，慢速自然，辅音爆破点明确不含糊      |
+| **认东西：中文短句 (L2/L3)** | `zh-CN-XiaoxiaoNeural` | **`-22%`**  | `+3Hz`       | 句末留白 900ms     | 生活化亲切短句，像和宝宝日常温柔说话          |
+| **认东西：英文短句 (L2/L3)** | `en-US-AnaNeural`      | **`-20%`**  | `+0Hz`       | 句末留白 900ms     | 节奏欢快短小，慢速易模仿                      |
+| **经典古诗词（整首）**       | `zh-CN-XiaoxiaoNeural` | **`-22%`**  | `+0Hz`       | **每句停顿 800ms** | 抑扬顿挫、平仄分明，突出五言/七言韵脚的音律美 |
+| **经典古诗词（单句点读）**   | `zh-CN-XiaoxiaoNeural` | **`-22%`**  | `+0Hz`       | 单句末留白 400ms   | 点哪读哪，专注当前诗句的精准发音              |
+| **微绘本故事（单页）**       | `zh-CN-XiaoxiaoNeural` | **`-22%`**  | `+2Hz`       | 句末留白 1000ms    | 极具画面感，床边绘本温和陪伴感                |
+| **基础通识：数数与图形**     | `zh-CN-XiaoxiaoNeural` | **`-24%`**  | `+4Hz`       | 停顿 900ms         | 强调关键数字和图形特征（如“上面短，下面长”）  |
+| **益智小游戏题目与反馈**     | `zh-CN-YunxiNeural`    | **`-18%`**  | `+6Hz`       | 停顿 600ms         | 充满好奇感与正向激励（如“谁的黑影子呀？”）    |
 
 ---
 
 ### 1.3 交互时间轴节奏规范 (Interactive Timing Windows)
 
 杜绝“一翻页就急着播”和“中英混杂”的压迫感：
+
 1. **翻页落定缓冲期**：卡片平滑滑入后，**必须留出 850ms 的完全静止留白**，让幼儿视线先落在主体大图上建立视觉认知；
 2. **中英双语切换留白**：中文发音播完后，**必须停顿 1000ms（整整 1 秒）**，再播放英文发音，为幼儿大脑留出清晰的语言语码切换窗口；
 3. **自动巡航连读间隔**：整张卡片发音结束至自动翻向下一张卡片之间，**预留 1200ms 观察思考期**；
@@ -139,6 +140,7 @@ flat 2D vector graphic of a [SUBJECT & COLOR DETAILS], thick bold clean outlines
 ```
 
 **关键设计词解析**：
+
 - `flat 2D vector graphic`：锁定纯扁平 2D 矢量结构，彻底杜绝突兀的 3D 光影与暗角；
 - `thick bold clean outlines`：粗黑/粗色圆润轮廓线，强化 3 岁幼儿的轮廓边界感知；
 - `vibrant saturated colors`：高饱和鲜艳色彩（鲜红、明黄、翠绿），刺激视觉敏感期发育；
@@ -171,6 +173,7 @@ flat 2D vector graphic of a [SUBJECT & COLOR DETAILS], thick bold clean outlines
 在批量流水线中，直接按照此映射表注入 `[SUBJECT]` 字段：
 
 ### 4.1 水果类 (Fruits)
+
 - **苹果 (apple)**:  
   `flat 2D vector graphic of a shiny bright red cartoon apple with a tiny green leaf on top, thick bold clean outlines, vibrant saturated red, isolated on pure solid white background, minimal clean clipart for preschool toddlers, simple and sweet, centered, no 3D, no realism, no shadow, no text, no watermark`
 - **香蕉 (banana)**:  
@@ -179,12 +182,14 @@ flat 2D vector graphic of a [SUBJECT & COLOR DETAILS], thick bold clean outlines
   `flat 2D vector graphic of a juicy green watermelon slice with red fruit pulp and tiny black seeds, thick bold clean outlines, vibrant saturated colors, isolated on pure solid white background, minimal clean clipart for toddlers, no 3D, no text`
 
 ### 4.2 蔬菜类 (Vegetables)
+
 - **胡萝卜 (carrot)**:  
   `flat 2D vector graphic of a bright orange crunchy carrot with fresh green leafy top, thick bold outlines, isolated on pure solid white background, minimal clean preschool art, no 3D, no text`
 - **西兰花 (broccoli)**:  
   `flat 2D vector graphic of a cute green broccoli tree shape, vibrant lush green, thick smooth outlines, isolated on pure solid white background, clean minimalist clipart for children, no shadow, no text`
 
 ### 4.3 动物与恐龙类 (Animals & Dinosaurs)
+
 - **小猫 (cat)**:  
   `flat 2D vector graphic of a lovely cute sitting orange tabby kitten with round face, big friendly eyes, thick clean outlines, soft pastel orange and cream, isolated on pure solid white background, adorable children storybook illustration, no room, no furniture, no 3D, no text`
 - **小白兔 (rabbit)**:  
@@ -193,18 +198,21 @@ flat 2D vector graphic of a [SUBJECT & COLOR DETAILS], thick bold clean outlines
   `flat 2D vector graphic of a friendly cute cartoon baby T-Rex dinosaur standing, green scales, round smiling face, short arms, thick bold outlines, isolated on pure solid white background, playful and approachable for toddlers, no scary teeth, no 3D, no text`
 
 ### 4.4 交通工具类 (Vehicles)
+
 - **小汽车 (car)**:  
   `flat 2D vector graphic of a cheerful little red cartoon toy car with round headlights and black tires, bold simple shapes, isolated on pure solid white background, toddler educational flashcard, no road, no shadow, no 3D, no text`
 - **消防车 (fire-engine)**:  
   `flat 2D vector graphic of a bright red fire truck with a little white ladder and blue emergency light, simple geometric shapes, isolated on pure solid white background, clean vector for children, no background, no 3D, no text`
 
 ### 4.5 几何图形类 (Shapes · 梯形、菱形)
+
 - **梯形 (trapezoid)**:  
   `flat 2D vector graphic of a geometric trapezoid shape styled as a cute orange terracotta flower pot with tiny green sprouts, perfectly symmetrical trapezoid outline, vibrant flat colors, isolated on pure solid white background, toddler geometry learning chart, no 3D, no realism, no text`
 - **菱形 (diamond / rhombus)**:  
   `flat 2D vector graphic of a symmetrical diamond rhombus shape styled as a colorful purple and yellow flying kite with ribbons, flat clean geometric vector, isolated on pure solid white background, educational preschool art, no sky, no 3D, no text`
 
 ### 4.6 经典古诗意境插画 (Poem Illustrations)
+
 - **《咏鹅》(yonge)**:  
   `charming children picture book illustration of a graceful white goose with a curved long neck floating on turquoise pond water ripples, red feet and beak, simple flat gouache style, peaceful and pure, isolated on solid white background, aesthetic Chinese storybook art for toddlers, minimal clean, no human, no 3D, no text`
 - **《悯农》(minnong)**:  
@@ -298,6 +306,7 @@ if __name__ == "__main__":
 在《小兔子找妈妈》或《小熊的红雨伞》等多页连续绘本故事中，最怕“第 1 页兔子长这样，第 2 页兔子变成了另一只”。
 
 ### 一致性四大控制技巧：
+
 1. **固定随机种子 (Fixed Seed)**：
    在同一个故事的连续 4 张卡片生成时，**严格固定相同的 `seed=2026`（或任意固定整数）**；
 2. **固定核心角色的特征 Anchor 锚点描述**：

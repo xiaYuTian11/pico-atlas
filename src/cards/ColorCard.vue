@@ -12,7 +12,7 @@ import CardText from './parts/CardText.vue';
 const props = defineProps<{ card: Card; highlight: string | null }>();
 
 const band = computed(() => state.ageBand ?? 'L1');
-const examples = computed(() => (band.value === 'L1' ? [] : props.card.examples ?? []));
+const examples = computed(() => (band.value === 'L1' ? [] : (props.card.examples ?? [])));
 
 function tapBlock(): void {
   playSfx('pop');

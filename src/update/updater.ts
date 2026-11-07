@@ -38,7 +38,9 @@ export interface UpdateInfo {
 }
 
 export function isNative(): boolean {
-  return !!(globalThis as { Capacitor?: { isNativePlatform?: () => boolean } }).Capacitor?.isNativePlatform?.();
+  return !!(
+    globalThis as { Capacitor?: { isNativePlatform?: () => boolean } }
+  ).Capacitor?.isNativePlatform?.();
 }
 
 /** 运行时版本号；Web 环境用构建期注入 */
