@@ -84,17 +84,19 @@ function onError(): void {
   transition: transform var(--pa-dur-base) var(--pa-ease-spring);
 }
 
-/* ---------- 小尺寸（网格格子里用）---------- */
+/* ---------- 小尺寸（网格格子里用）----------
+   网格格子已经是一张卡了，里面再套一层白纸就是"卡中卡"。
+   这里去掉纸框与内阴影，只留圆角裁剪。 */
 .pa-hero--small .pa-hero__paper {
-  padding: 6px;
+  padding: 0;
   border-radius: var(--pa-r-md);
-  box-shadow:
-    0 4px 12px rgba(120, 90, 60, 0.12),
-    inset 0 0 0 3px rgba(255, 255, 255, 0.9);
+  background: transparent;
+  box-shadow: none;
 }
 .pa-hero--small .pa-hero__paper img {
   max-width: 100%;
   max-height: 100%;
+  border-radius: var(--pa-r-md);
 }
 .pa-hero--small .pa-hero__emoji {
   font-size: clamp(38px, 11vw, 64px);

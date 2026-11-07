@@ -59,30 +59,60 @@
 
 ```
 pico-atlas/
-├── docs/                产品与内容文档
-│   ├── PRD.md           需求文档（待完善）
-│   └── content-spec.md  词条数据规范
-├── prototype/           原型（HTML，单文件可分享）
-└── assets/              图片、音频等素材
+├── src/                     应用源码（Vue 3 + TS）
+│   ├── content/             ★ 内容层：cards.json 是唯一内容入口
+│   ├── cards/               14 类卡片组件 + 注册表
+│   ├── shell/               三壳：Home / AtlasGrid / Stage
+│   ├── ui/                  底栏、家长层、晚安仪式
+│   ├── audio/               播放引擎（会话作废机制）
+│   └── state/               本地状态与防沉迷
+├── public/media/            ★ 素材：图片 <id>.webp、语音 audio/**
+├── tools/                   出图 / 出音 / 校验 / 审片 / 截图脚本
+├── android/                 Capacitor 安卓壳
+├── docs/                    产品与内容文档
+└── prototype/               早期 HTML 原型（仅作参考）
 ```
+
+---
+
+## 常用命令
+
+```powershell
+npm run dev            # 开发（http://127.0.0.1:5273）
+npm run typecheck      # 类型检查
+npm run validate       # 内容校验 + 缺素材体检
+
+npm run media:images   # 出图（本地 SD1.5，断点续跑）
+npm run media:audio    # 出语音（edge-tts）
+npm run media:sheet    # 审片总览图
+npm run media:report   # 素材体检
+
+npm run apk            # 构建 debug APK → android/app/build/outputs/apk/debug/
+```
+
+**加内容不改代码**：往 `src/content/cards.json` 加一条，把图丢进
+`public/media/images/<id>.webp`、语音丢进 `public/media/audio/**`。
+命名对上就生效，缺文件自动回退 emoji。详见 [`docs/art-pipeline.md`](docs/art-pipeline.md)。
 
 ---
 
 ## 技术栈
 
-**当前阶段：原型验证。** 先做可在浏览器/手机直接打开的单文件 HTML 原型，验证交互与内容形态，再决定技术栈。
+Vite + Vue 3 + TypeScript + Capacitor（Android）。
+选择依据见 [`docs/architecture-review.md`](docs/architecture-review.md)。
 
-候选方向（未定）：
-
-- 单文件 HTML + CSS + 原生 JS（原型阶段）
-- Tauri / Electron 桌面端
-- React Native / Flutter 移动端
+| 层 | 选型 | 理由 |
+| --- | --- | --- |
+| 界面 | Vue 3 SFC | 组件化撑得住 14 类卡片，又不引入路由负担 |
+| 构建 | Vite | 单页应用，秒级热更新 |
+| 原生壳 | Capacitor 6 | 一套 Web 代码出 APK，孩子用起来像原生应用 |
+| 素材 | 本地 SD1.5 + edge-tts | 全离线、零外包成本、可无限重跑 |
 
 ---
 
 ## 状态
 
-🚧 早期规划中 —— 需求梳理阶段。
+🚧 框架已跑通，样例内容（14 类 × 3 张）已入库，正在扩全量词库。
 
 ---
 
