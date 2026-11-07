@@ -1,0 +1,1714 @@
+[
+  {
+    "id": "apple",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "苹果",
+    "en": "apple",
+    "pinyin": "píng guǒ",
+    "emoji": "🍎",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "苹果红红的，长在苹果树上，咬一口又甜又脆。",
+      "prompt": "问问宝宝：苹果是什么颜色的？摸起来是滑滑的还是糙糙的？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "红红的苹果",
+        "sentence_en": "A red apple."
+      },
+      "L3": {
+        "sentence_zh": "苹果红红的，甜甜的。",
+        "sentence_en": "Apples are red and sweet.",
+        "fact": "苹果长在树上，秋天就熟了。"
+      }
+    },
+    "art": {
+      "subject": "a single shiny red apple with one green leaf and a small brown stem"
+    }
+  },
+  {
+    "id": "banana",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "香蕉",
+    "en": "banana",
+    "pinyin": "xiāng jiāo",
+    "emoji": "🍌",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "香蕉弯弯的，像天上的月牙，剥开皮就能吃。",
+      "prompt": "香蕉像天上的什么呀？我们一起数一数它有几瓣皮？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "黄黄的香蕉",
+        "sentence_en": "A yellow banana."
+      },
+      "L3": {
+        "sentence_zh": "香蕉弯弯的，像小月亮。",
+        "sentence_en": "A banana is curved like the moon.",
+        "fact": "香蕉要剥皮才能吃，猴子最爱吃香蕉。"
+      }
+    },
+    "art": {
+      "subject": "a bunch of three ripe yellow bananas"
+    }
+  },
+  {
+    "id": "strawberry",
+    "lane": "look",
+    "type": "object",
+    "section": "fruits",
+    "zh": "草莓",
+    "en": "strawberry",
+    "pinyin": "cǎo méi",
+    "emoji": "🍓",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "草莓红红的，身上有小点点，头上还戴着小绿帽。",
+      "prompt": "草莓身上有多少小点点呀？尝一口是酸的还是甜的？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "红红的草莓",
+        "sentence_en": "A red strawberry."
+      },
+      "L3": {
+        "sentence_zh": "草莓甜甜的，有点点。",
+        "sentence_en": "Strawberries are sweet and dotty.",
+        "fact": "草莓长在地上，不是长在树上。"
+      }
+    },
+    "art": {
+      "subject": "a single whole ripe red strawberry, plump and shiny, with tiny seeds and a green leafy crown"
+    }
+  },
+  {
+    "id": "carrot",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "胡萝卜",
+    "en": "carrot",
+    "pinyin": "hú luó bo",
+    "emoji": "🥕",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "胡萝卜埋在泥土里，橙橙的，小兔子最爱吃。",
+      "prompt": "是谁最喜欢吃胡萝卜呀？胡萝卜长在树上还是土里？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "橙色的胡萝卜",
+        "sentence_en": "An orange carrot."
+      },
+      "L3": {
+        "sentence_zh": "兔子爱吃胡萝卜。",
+        "sentence_en": "Rabbits love carrots.",
+        "fact": "胡萝卜长在土里，要拔出来才能吃。"
+      }
+    },
+    "art": {
+      "subject": "a single long pointed orange carrot with a fluffy green leafy top, standing upright"
+    }
+  },
+  {
+    "id": "tomato",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "西红柿",
+    "en": "tomato",
+    "pinyin": "xī hóng shì",
+    "emoji": "🍅",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "西红柿圆圆的，红红的，可以生吃也可以炒菜。",
+      "prompt": "西红柿和苹果长得有点像，哪里不一样呢？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "圆圆的西红柿",
+        "sentence_en": "A round tomato."
+      },
+      "L3": {
+        "sentence_zh": "西红柿又圆又红。",
+        "sentence_en": "Tomatoes are round and red.",
+        "fact": "西红柿可以生吃，也可以做菜。"
+      }
+    },
+    "art": {
+      "subject": "a single ripe round red tomato with a green star-shaped stem, fully red, shiny but flat"
+    }
+  },
+  {
+    "id": "corn",
+    "lane": "look",
+    "type": "object",
+    "section": "vegetables",
+    "zh": "玉米",
+    "en": "corn",
+    "pinyin": "yù mǐ",
+    "emoji": "🌽",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "玉米穿着一层层的绿衣裳，里面是一排排小黄粒。",
+      "prompt": "玉米粒一粒一粒排得整整齐齐，我们一起数一数？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "黄黄的玉米",
+        "sentence_en": "Yellow corn."
+      },
+      "L3": {
+        "sentence_zh": "玉米粒排得整整齐齐。",
+        "sentence_en": "Corn kernels line up in rows.",
+        "fact": "玉米外面的绿叶子叫苞叶。"
+      }
+    },
+    "art": {
+      "subject": "a single bright yellow corn cob with rows of yellow kernels, small green husk leaves at the base"
+    }
+  },
+  {
+    "id": "cat",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "猫",
+    "en": "cat",
+    "pinyin": "māo",
+    "emoji": "🐱",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "meow",
+    "parentGuide": {
+      "explain": "小猫走路轻悄悄的，长着长胡子，喜欢晒太阳。",
+      "prompt": "小猫咪是怎么叫的呀？我们一起学一学！"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "小猫喵喵叫",
+        "sentence_en": "A cat says meow."
+      },
+      "L3": {
+        "sentence_zh": "小猫喜欢晒太阳。",
+        "sentence_en": "Cats like to sit in the sun.",
+        "fact": "猫咪的胡须可以帮它量缝隙有多宽。"
+      }
+    },
+    "art": {
+      "subject": "a cute ginger kitten sitting and looking at the viewer, whiskers and green eyes"
+    }
+  },
+  {
+    "id": "dog",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "狗",
+    "en": "dog",
+    "pinyin": "gǒu",
+    "emoji": "🐶",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "bark",
+    "parentGuide": {
+      "explain": "狗狗鼻子很灵，高兴的时候会摇尾巴。",
+      "prompt": "小狗开心的时候会摇什么呀？小狗的鼻子能做什么？"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "小狗汪汪叫",
+        "sentence_en": "A dog says woof."
+      },
+      "L3": {
+        "sentence_zh": "小狗会摇尾巴。",
+        "sentence_en": "Dogs wag their tails.",
+        "fact": "狗狗的鼻子特别灵，能闻出很多味道。"
+      }
+    },
+    "art": {
+      "subject": "a cute brown puppy sitting with floppy ears and a happy face"
+    }
+  },
+  {
+    "id": "rabbit",
+    "lane": "look",
+    "type": "object",
+    "section": "animals",
+    "zh": "兔子",
+    "en": "rabbit",
+    "pinyin": "tù zi",
+    "emoji": "🐰",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "小兔子有长长的耳朵，一蹦一跳地走路，爱吃草和胡萝卜。",
+      "prompt": "小兔子是怎么走路的？我们学它蹦一蹦！"
+    },
+    "levels": {
+      "L1": {},
+      "L2": {
+        "sentence_zh": "可爱的小白兔",
+        "sentence_en": "A cute white rabbit."
+      },
+      "L3": {
+        "sentence_zh": "小兔子蹦蹦跳跳。",
+        "sentence_en": "Rabbits hop hop hop.",
+        "fact": "兔子的长耳朵可以转动，听四面八方的声音。"
+      }
+    },
+    "art": {
+      "subject": "a small white bunny with long floppy ears, pink inner ears, pink nose, big black eyes, sitting and looking at the viewer"
+    }
+  },
+  {
+    "id": "yonge",
+    "lane": "read",
+    "type": "poem",
+    "section": "poems",
+    "zh": "咏鹅",
+    "en": "Ode to the Goose",
+    "emoji": "🦢",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "water",
+    "dynasty": "唐",
+    "author": "骆宾王",
+    "lines": [
+      "鹅，鹅，鹅，",
+      "曲项向天歌。",
+      "白毛浮绿水，",
+      "红掌拨清波。"
+    ],
+    "pinyinLines": [
+      "é, é, é,",
+      "qū xiàng xiàng tiān gē.",
+      "bái máo fú lǜ shuǐ,",
+      "hóng zhǎng bō qīng bō."
+    ],
+    "parentGuide": {
+      "explain": "大白鹅弯着长脖子对天欢快地唱歌。雪白的羽毛浮在碧绿的水面上，红红的脚掌在清清的水波里轻轻划动。",
+      "prompt": "找一找诗里有哪三种颜色？白、绿、红！"
+    },
+    "levels": {
+      "L1": {
+        "focusLines": 2
+      },
+      "L2": {
+        "focusLines": 4
+      },
+      "L3": {
+        "focusLines": 4
+      }
+    },
+    "art": {
+      "subject": "a white goose with an orange beak and orange feet swimming on a green pond, curved neck singing up to the sky, soft willow branches, distant blue hills",
+      "scene_template": "{subject}"
+    }
+  },
+  {
+    "id": "minnong",
+    "lane": "read",
+    "type": "poem",
+    "section": "poems",
+    "zh": "悯农",
+    "en": "Sympathy for the Farmers",
+    "emoji": "🌾",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "dynasty": "唐",
+    "author": "李绅",
+    "lines": [
+      "锄禾日当午，",
+      "汗滴禾下土。",
+      "谁知盘中餐，",
+      "粒粒皆辛苦。"
+    ],
+    "pinyinLines": [
+      "chú hé rì dāng wǔ,",
+      "hàn dī hé xià tǔ.",
+      "shuí zhī pán zhōng cān,",
+      "lì lì jiē xīn kǔ."
+    ],
+    "parentGuide": {
+      "explain": "农民伯伯中午顶着大太阳锄地，汗水一滴滴落进泥土里。我们碗里的每一粒米饭，都是辛苦种出来的。",
+      "prompt": "吃饭的时候，我们怎么感谢种粮食的人呢？"
+    },
+    "levels": {
+      "L1": {
+        "focusLines": 2
+      },
+      "L2": {
+        "focusLines": 4
+      },
+      "L3": {
+        "focusLines": 4
+      }
+    },
+    "art": {
+      "subject": "a kind farmer in a straw hat hoeing rice seedlings under the hot noon sun, sweat drops falling into the soil, golden green rice field, simple warm scene",
+      "scene_template": "{subject}"
+    }
+  },
+  {
+    "id": "jingyesi",
+    "lane": "read",
+    "type": "poem",
+    "section": "poems",
+    "zh": "静夜思",
+    "en": "Thoughts on a Still Night",
+    "emoji": "🌙",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "pop",
+    "dynasty": "唐",
+    "author": "李白",
+    "lines": [
+      "床前明月光，",
+      "疑是地上霜。",
+      "举头望明月，",
+      "低头思故乡。"
+    ],
+    "pinyinLines": [
+      "chuáng qián míng yuè guāng,",
+      "yí shì dì shàng shuāng.",
+      "jǔ tóu wàng míng yuè,",
+      "dī tóu sī gù xiāng."
+    ],
+    "parentGuide": {
+      "explain": "床前洒满了明亮的月光，好像地上铺了一层白霜。抬起头看看月亮，低下头就想起了远方的家。",
+      "prompt": "晚上我们一起抬头看看月亮，它是什么形状的呀？"
+    },
+    "levels": {
+      "L1": {
+        "focusLines": 2
+      },
+      "L2": {
+        "focusLines": 4
+      },
+      "L3": {
+        "focusLines": 4
+      }
+    },
+    "art": {
+      "subject": "a quiet moonlit night, a big bright full moon outside a round window, moonlight shining like frost on the wooden floor, a small figure in a simple room looking up",
+      "scene_template": "{subject}"
+    }
+  },
+  {
+    "id": "rabbit-1",
+    "lane": "read",
+    "type": "story",
+    "section": "stories",
+    "storyId": "rabbit",
+    "page": 1,
+    "pageCount": 4,
+    "title": "小兔子找妈妈",
+    "zh": "小兔子",
+    "en": "Little Rabbit",
+    "emoji": "🐰",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "早晨太阳升起来，小兔子揉揉眼睛醒了，发现妈妈不在身边。",
+      "prompt": "小兔子起床后在找谁呀？"
+    },
+    "levels": {
+      "L1": {
+        "text": "太阳升起来了，小兔子揉揉眼睛醒了。"
+      },
+      "L2": {
+        "text": "早晨太阳升起来了，小兔子揉揉眼睛醒过来，咦，妈妈去哪儿了呢？"
+      },
+      "L3": {
+        "text": "早晨太阳升起来了，小兔子揉揉眼睛醒过来，咦，妈妈去哪儿了呢？它决定出门去找一找。"
+      }
+    },
+    "art": {
+      "subject": "a small white bunny with long floppy ears, pink inner ears, pink nose, big black eyes sleeping in a cozy burrow of soft hay and grass, waking up and rubbing its eyes, warm morning sunlight",
+      "seed": 4101,
+      "scene_template": "{subject}, storybook page illustration"
+    }
+  },
+  {
+    "id": "rabbit-2",
+    "lane": "read",
+    "type": "story",
+    "section": "stories",
+    "storyId": "rabbit",
+    "page": 2,
+    "pageCount": 4,
+    "title": "小兔子找妈妈",
+    "zh": "大树爷爷",
+    "en": "Big Tree",
+    "emoji": "🌳",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "小兔子很有礼貌，路上向大树爷爷打听妈妈去哪儿了。",
+      "prompt": "大树爷爷会对小兔子说什么呢？"
+    },
+    "levels": {
+      "L1": {
+        "text": "它跑去问大树爷爷，看见我妈妈了吗？"
+      },
+      "L2": {
+        "text": "它跑去问大树爷爷：爷爷爷爷，您看见我妈妈了吗？"
+      },
+      "L3": {
+        "text": "它跑去问大树爷爷：爷爷爷爷，您看见我妈妈了吗？大树爷爷笑着说：她往菜园那边去啦。"
+      }
+    },
+    "art": {
+      "subject": "a small white bunny with long floppy ears, pink inner ears, pink nose, big black eyes standing in a sunny meadow looking up and talking to a tall friendly oak tree with a gentle smiling face, wild flowers around",
+      "seed": 4101,
+      "scene_template": "{subject}"
+    }
+  },
+  {
+    "id": "rabbit-3",
+    "lane": "read",
+    "type": "story",
+    "section": "stories",
+    "storyId": "rabbit",
+    "page": 3,
+    "pageCount": 4,
+    "title": "小兔子找妈妈",
+    "zh": "红萝卜",
+    "en": "Carrot",
+    "emoji": "🥕",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "原来妈妈在菜园里，为全家人拔甜甜的红萝卜。",
+      "prompt": "菜园里有什么好吃的呀？"
+    },
+    "levels": {
+      "L1": {
+        "text": "原来妈妈在菜园里，拔了好多红萝卜。"
+      },
+      "L2": {
+        "text": "原来妈妈在菜园里，拔了好多红红的大萝卜。"
+      },
+      "L3": {
+        "text": "原来妈妈在菜园里，拔了好多红红的大萝卜，装满了一整个小篮子。"
+      }
+    },
+    "art": {
+      "subject": "two white rabbits standing in a vegetable garden: a big adult rabbit and a small baby rabbit, the adult pulling a huge red carrot out of the soil, the baby hopping toward it, a basket of carrots on the grass, four-legged animal characters only, no people",
+      "seed": 4102,
+      "scene_template": "{subject}"
+    }
+  },
+  {
+    "id": "rabbit-4",
+    "lane": "read",
+    "type": "story",
+    "section": "stories",
+    "storyId": "rabbit",
+    "page": 4,
+    "pageCount": 4,
+    "title": "小兔子找妈妈",
+    "zh": "抱抱妈妈",
+    "en": "Big Hug",
+    "emoji": "🤗",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "chime",
+    "parentGuide": {
+      "explain": "小兔子扑进妈妈温暖的怀抱，一家人团团圆圆。",
+      "prompt": "给身边的爸爸妈妈也来一个大大的抱抱吧！"
+    },
+    "levels": {
+      "L1": {
+        "text": "小兔子扑进妈妈怀里，开心地笑了。"
+      },
+      "L2": {
+        "text": "小兔子跑过去，开心地扑进妈妈温暖的怀抱！"
+      },
+      "L3": {
+        "text": "小兔子跑过去，开心地扑进妈妈温暖的怀抱！妈妈摸摸它的头说：宝宝，我们一起回家吧。"
+      }
+    },
+    "art": {
+      "subject": "a small white bunny with long floppy ears, pink inner ears, pink nose, big black eyes hugging the mother bunny tightly in the vegetable garden, both smiling, warm afternoon light",
+      "seed": 4101,
+      "scene_template": "{subject}"
+    }
+  },
+  {
+    "id": "count-1",
+    "lane": "play",
+    "type": "number",
+    "section": "numbers",
+    "zh": "一",
+    "en": "one",
+    "pinyin": "yī",
+    "count": 1,
+    "emoji": "🍎",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "一个苹果。用手指点一点这个苹果，数一数。",
+      "prompt": "宝宝能找到家里只有一个的东西吗？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "一个红苹果"
+      },
+      "L3": {
+        "sentence_zh": "一个红苹果，圆圆的。"
+      }
+    }
+  },
+  {
+    "id": "count-2",
+    "lane": "play",
+    "type": "number",
+    "section": "numbers",
+    "zh": "二",
+    "en": "two",
+    "pinyin": "èr",
+    "count": 2,
+    "emoji": "🍌",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "两根香蕉。一、二，点一点数一数。",
+      "prompt": "宝宝的两只小手，一共几只手呀？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "两根黄香蕉"
+      },
+      "L3": {
+        "sentence_zh": "两根黄香蕉，弯弯的。"
+      }
+    }
+  },
+  {
+    "id": "count-3",
+    "lane": "play",
+    "type": "number",
+    "section": "numbers",
+    "zh": "三",
+    "en": "three",
+    "pinyin": "sān",
+    "count": 3,
+    "emoji": "🍊",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "三个橘子。一、二、三，慢慢数。",
+      "prompt": "我们一起数一数桌上有几样东西？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "三个小橘子"
+      },
+      "L3": {
+        "sentence_zh": "三个小橘子，橙橙的。"
+      }
+    }
+  },
+  {
+    "id": "shape-circle",
+    "lane": "play",
+    "type": "shape",
+    "section": "shapes",
+    "zh": "圆形",
+    "en": "circle",
+    "pinyin": "yuán xíng",
+    "shape": "round",
+    "emoji": "⭕",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "examples": [
+      {
+        "zh": "皮球",
+        "emoji": "⚽"
+      },
+      {
+        "zh": "大西瓜",
+        "emoji": "🍉"
+      }
+    ],
+    "parentGuide": {
+      "explain": "圆形没有角，从哪儿摸都是滑滑的。",
+      "prompt": "家里有哪些东西是圆圆的？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "圆圆的，没有角"
+      },
+      "L3": {
+        "sentence_zh": "圆形没有角，转一圈还是圆的。",
+        "fact": "车轮做成圆形，才能滚得又快又稳。"
+      }
+    }
+  },
+  {
+    "id": "shape-square",
+    "lane": "play",
+    "type": "shape",
+    "section": "shapes",
+    "zh": "正方形",
+    "en": "square",
+    "pinyin": "zhèng fāng xíng",
+    "shape": "square",
+    "emoji": "🟦",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "examples": [
+      {
+        "zh": "方积木",
+        "emoji": "🧱"
+      },
+      {
+        "zh": "小手帕",
+        "emoji": "🟦"
+      }
+    ],
+    "parentGuide": {
+      "explain": "正方形有四条一样长的边，四个角都是尖尖的。",
+      "prompt": "我们一起数一数正方形有几个角？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "四条边一样长"
+      },
+      "L3": {
+        "sentence_zh": "正方形四条边一样长，四个角一样大。",
+        "fact": "魔方的每一面都是正方形。"
+      }
+    }
+  },
+  {
+    "id": "shape-triangle",
+    "lane": "play",
+    "type": "shape",
+    "section": "shapes",
+    "zh": "三角形",
+    "en": "triangle",
+    "pinyin": "sān jiǎo xíng",
+    "shape": "triangle",
+    "emoji": "🔺",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "examples": [
+      {
+        "zh": "三明治",
+        "emoji": "🥪"
+      },
+      {
+        "zh": "小红旗",
+        "emoji": "🚩"
+      }
+    ],
+    "parentGuide": {
+      "explain": "三角形有三条边、三个角，很结实不容易倒。",
+      "prompt": "数一数三角形有几个角？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "三条边，三个角"
+      },
+      "L3": {
+        "sentence_zh": "三角形有三条边、三个角。",
+        "fact": "三角形最结实，很多桥和塔都用三角形。"
+      }
+    }
+  },
+  {
+    "id": "color-red",
+    "lane": "play",
+    "type": "color",
+    "section": "colors",
+    "zh": "红色",
+    "en": "red",
+    "pinyin": "hóng sè",
+    "colorHex": "#FF4D4F",
+    "emoji": "🎨",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "examples": [
+      {
+        "zh": "消防车",
+        "emoji": "🚒"
+      },
+      {
+        "zh": "红苹果",
+        "emoji": "🍎"
+      }
+    ],
+    "parentGuide": {
+      "explain": "红色很亮很暖，像过年的灯笼。",
+      "prompt": "宝宝身上有红色的东西吗？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "红红的消防车"
+      },
+      "L3": {
+        "sentence_zh": "红色亮亮的，很暖。",
+        "fact": "消防车涂红色，是为了让人远远就能看见。"
+      }
+    }
+  },
+  {
+    "id": "color-yellow",
+    "lane": "play",
+    "type": "color",
+    "section": "colors",
+    "zh": "黄色",
+    "en": "yellow",
+    "pinyin": "huáng sè",
+    "colorHex": "#FFD666",
+    "emoji": "🎨",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "examples": [
+      {
+        "zh": "香蕉",
+        "emoji": "🍌"
+      },
+      {
+        "zh": "向日葵",
+        "emoji": "🌻"
+      }
+    ],
+    "parentGuide": {
+      "explain": "黄色像太阳一样明亮。",
+      "prompt": "天上有什么是黄黄的呀？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "黄黄的香蕉"
+      },
+      "L3": {
+        "sentence_zh": "黄色亮亮的，像太阳。",
+        "fact": "向日葵的花瓣是黄色的。"
+      }
+    }
+  },
+  {
+    "id": "color-blue",
+    "lane": "play",
+    "type": "color",
+    "section": "colors",
+    "zh": "蓝色",
+    "en": "blue",
+    "pinyin": "lán sè",
+    "colorHex": "#4096FF",
+    "emoji": "🎨",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "examples": [
+      {
+        "zh": "大海",
+        "emoji": "🌊"
+      },
+      {
+        "zh": "小海豚",
+        "emoji": "🐬"
+      }
+    ],
+    "parentGuide": {
+      "explain": "蓝色凉凉的，像大海和天空。",
+      "prompt": "我们抬头看看天，今天是什么颜色？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "蓝蓝的大海"
+      },
+      "L3": {
+        "sentence_zh": "蓝色凉凉的，像大海。",
+        "fact": "天空和大海看起来是蓝色的。"
+      }
+    }
+  },
+  {
+    "id": "opp-big-small",
+    "lane": "play",
+    "type": "opposite",
+    "section": "opposites",
+    "zh": "大 与 小",
+    "en": "Big & Small",
+    "emoji": "⚖️",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "pairA": {
+      "zh": "大象",
+      "en": "big",
+      "emoji": "🐘"
+    },
+    "pairB": {
+      "zh": "蚂蚁",
+      "en": "small",
+      "emoji": "🐜"
+    },
+    "parentGuide": {
+      "explain": "大象很大很大，蚂蚁很小很小。",
+      "prompt": "宝宝的手比妈妈的手大还是小？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "大象大，蚂蚁小"
+      },
+      "L3": {
+        "sentence_zh": "大象很大，蚂蚁很小。",
+        "fact": "大象是陆地上最大的动物。"
+      }
+    }
+  },
+  {
+    "id": "opp-long-short",
+    "lane": "play",
+    "type": "opposite",
+    "section": "opposites",
+    "zh": "长 与 短",
+    "en": "Long & Short",
+    "emoji": "⚖️",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "pairA": {
+      "zh": "长颈鹿",
+      "en": "long",
+      "emoji": "🦒"
+    },
+    "pairB": {
+      "zh": "小兔子",
+      "en": "short",
+      "emoji": "🐰"
+    },
+    "parentGuide": {
+      "explain": "长颈鹿的脖子很长，小兔子的脖子很短。",
+      "prompt": "比一比，谁的腿更长？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "长颈鹿脖子长"
+      },
+      "L3": {
+        "sentence_zh": "长颈鹿脖子长长的，小兔子脖子短短的。",
+        "fact": "长颈鹿的脖子虽然长，但骨头和我们的数量一样多。"
+      }
+    }
+  },
+  {
+    "id": "opp-up-down",
+    "lane": "play",
+    "type": "opposite",
+    "section": "opposites",
+    "zh": "上 与 下",
+    "en": "Up & Down",
+    "emoji": "⚖️",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "pop",
+    "pairA": {
+      "zh": "天上",
+      "en": "up",
+      "emoji": "☁️"
+    },
+    "pairB": {
+      "zh": "地下",
+      "en": "down",
+      "emoji": "🌱"
+    },
+    "parentGuide": {
+      "explain": "云在天上飘，种子在土里长。",
+      "prompt": "小鸟飞在上面还是下面？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "云在天上，根在地下"
+      },
+      "L3": {
+        "sentence_zh": "云在天上飘，树根在地下长。",
+        "fact": "小鸟在天上飞，蚯蚓在地里钻。"
+      }
+    }
+  },
+  {
+    "id": "quiz-shadow-cat",
+    "lane": "play",
+    "type": "quiz_shadow",
+    "section": "quiz_shadow",
+    "zh": "找影子：谁的影子？",
+    "en": "Shadow Match",
+    "emoji": "👤",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "meow",
+    "parentGuide": {
+      "explain": "看黑影子的轮廓，猜猜是哪个小动物。",
+      "prompt": "这个影子有尖尖的耳朵，是谁呢？"
+    },
+    "quizPayload": {
+      "targetEmoji": "🐱",
+      "options": [
+        {
+          "id": "opt-cat",
+          "zh": "小猫",
+          "emoji": "🐱",
+          "isCorrect": true,
+          "sound": "meow"
+        },
+        {
+          "id": "opt-dog",
+          "zh": "小狗",
+          "emoji": "🐶",
+          "isCorrect": false,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-rabbit",
+          "zh": "兔子",
+          "emoji": "🐰",
+          "isCorrect": false,
+          "sound": "pop"
+        }
+      ]
+    },
+    "art": {
+      "subject": "a single cute cat sitting in profile, clear simple outline, plain background",
+      "cutout": true
+    }
+  },
+  {
+    "id": "quiz-shadow-car",
+    "lane": "play",
+    "type": "quiz_shadow",
+    "section": "quiz_shadow",
+    "zh": "找影子：谁的影子？",
+    "en": "Shadow Match",
+    "emoji": "👤",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "看黑影子的轮廓，猜猜是什么车。",
+      "prompt": "这个影子有四个轮子，是什么呀？"
+    },
+    "quizPayload": {
+      "targetEmoji": "🚗",
+      "options": [
+        {
+          "id": "opt-car",
+          "zh": "汽车",
+          "emoji": "🚗",
+          "isCorrect": true,
+          "sound": "didi"
+        },
+        {
+          "id": "opt-train",
+          "zh": "火车",
+          "emoji": "🚂",
+          "isCorrect": false,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-plane",
+          "zh": "飞机",
+          "emoji": "✈️",
+          "isCorrect": false,
+          "sound": "pop"
+        }
+      ]
+    },
+    "art": {
+      "subject": "a single cute small red car seen from the side, clear simple outline, plain background",
+      "cutout": true
+    }
+  },
+  {
+    "id": "quiz-shadow-apple",
+    "lane": "play",
+    "type": "quiz_shadow",
+    "section": "quiz_shadow",
+    "zh": "找影子：谁的影子？",
+    "en": "Shadow Match",
+    "emoji": "👤",
+    "palette": "var(--pa-pal-warm)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "圆圆的黑影，头顶还有一片小叶子。",
+      "prompt": "哪个水果是圆圆的、头顶有小叶子？"
+    },
+    "quizPayload": {
+      "targetEmoji": "🍎",
+      "options": [
+        {
+          "id": "opt-apple",
+          "zh": "苹果",
+          "emoji": "🍎",
+          "isCorrect": true,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-banana",
+          "zh": "香蕉",
+          "emoji": "🍌",
+          "isCorrect": false,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-strawberry",
+          "zh": "草莓",
+          "emoji": "🍓",
+          "isCorrect": false,
+          "sound": "pop"
+        }
+      ]
+    },
+    "art": {
+      "subject": "a single red apple, clear simple outline, plain background",
+      "cutout": true
+    }
+  },
+  {
+    "id": "quiz-sound-dog",
+    "lane": "play",
+    "type": "quiz_sound",
+    "section": "quiz_sound",
+    "zh": "听一听：谁的声音？",
+    "en": "Sound Detective",
+    "emoji": "👂",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "bark",
+    "parentGuide": {
+      "explain": "先听声音，再选出是谁在叫。",
+      "prompt": "这个声音你听过吗？在哪里听过？"
+    },
+    "quizPayload": {
+      "soundCue": "bark",
+      "soundLabel": "汪汪汪",
+      "options": [
+        {
+          "id": "opt-dog",
+          "zh": "小狗",
+          "emoji": "🐶",
+          "isCorrect": true,
+          "sound": "bark"
+        },
+        {
+          "id": "opt-cat",
+          "zh": "小猫",
+          "emoji": "🐱",
+          "isCorrect": false,
+          "sound": "meow"
+        },
+        {
+          "id": "opt-duck",
+          "zh": "小鸭",
+          "emoji": "🦆",
+          "isCorrect": false,
+          "sound": "pop"
+        }
+      ]
+    }
+  },
+  {
+    "id": "quiz-sound-train",
+    "lane": "play",
+    "type": "quiz_sound",
+    "section": "quiz_sound",
+    "zh": "听一听：谁的声音？",
+    "en": "Sound Detective",
+    "emoji": "👂",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "train",
+    "parentGuide": {
+      "explain": "呜——哐当哐当，这是谁在跑？",
+      "prompt": "坐过火车吗？火车开起来是什么声音？"
+    },
+    "quizPayload": {
+      "soundCue": "train",
+      "soundLabel": "呜——哐当哐当",
+      "options": [
+        {
+          "id": "opt-train",
+          "zh": "火车",
+          "emoji": "🚂",
+          "isCorrect": true,
+          "sound": "train"
+        },
+        {
+          "id": "opt-car",
+          "zh": "汽车",
+          "emoji": "🚗",
+          "isCorrect": false,
+          "sound": "didi"
+        },
+        {
+          "id": "opt-plane",
+          "zh": "飞机",
+          "emoji": "✈️",
+          "isCorrect": false,
+          "sound": "pop"
+        }
+      ]
+    }
+  },
+  {
+    "id": "quiz-sound-water",
+    "lane": "play",
+    "type": "quiz_sound",
+    "section": "quiz_sound",
+    "zh": "听一听：这是什么声音？",
+    "en": "Sound Detective",
+    "emoji": "👂",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "water",
+    "parentGuide": {
+      "explain": "哗啦哗啦，是水在流动。",
+      "prompt": "洗手的时候，水是什么声音？"
+    },
+    "quizPayload": {
+      "soundCue": "water",
+      "soundLabel": "哗啦哗啦",
+      "options": [
+        {
+          "id": "opt-water",
+          "zh": "流水",
+          "emoji": "🌊",
+          "isCorrect": true,
+          "sound": "water"
+        },
+        {
+          "id": "opt-wind",
+          "zh": "风声",
+          "emoji": "🍃",
+          "isCorrect": false,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-bell",
+          "zh": "门铃",
+          "emoji": "🔔",
+          "isCorrect": false,
+          "sound": "chime"
+        }
+      ]
+    }
+  },
+  {
+    "id": "quiz-sort-size",
+    "lane": "play",
+    "type": "quiz_sort",
+    "section": "quiz_sort",
+    "zh": "分一分：大与小",
+    "en": "Sort Big & Small",
+    "emoji": "🧺",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "把大苹果放进大熊的碗，小苹果放进小熊的碗。",
+      "prompt": "哪个苹果大？我们放进大碗里。"
+    },
+    "quizPayload": {
+      "buckets": [
+        {
+          "id": "bucket-big",
+          "label": "大熊的碗",
+          "emoji": "🐻",
+          "size": "large"
+        },
+        {
+          "id": "bucket-small",
+          "label": "小熊的碗",
+          "emoji": "🧸",
+          "size": "small"
+        }
+      ],
+      "items": [
+        {
+          "id": "big-apple-1",
+          "label": "大苹果",
+          "size": "large",
+          "targetBucketId": "bucket-big",
+          "emoji": "🍎"
+        },
+        {
+          "id": "small-apple-1",
+          "label": "小苹果",
+          "size": "small",
+          "targetBucketId": "bucket-small",
+          "emoji": "🍎"
+        },
+        {
+          "id": "big-apple-2",
+          "label": "大苹果",
+          "size": "large",
+          "targetBucketId": "bucket-big",
+          "emoji": "🍎"
+        },
+        {
+          "id": "small-apple-2",
+          "label": "小苹果",
+          "size": "small",
+          "targetBucketId": "bucket-small",
+          "emoji": "🍎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "quiz-sort-color",
+    "lane": "play",
+    "type": "quiz_sort",
+    "section": "quiz_sort",
+    "zh": "分一分：红与黄",
+    "en": "Sort Red & Yellow",
+    "emoji": "🧺",
+    "palette": "var(--pa-pal-rose)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "红色的东西放红篮子，黄色的东西放黄篮子。",
+      "prompt": "草莓是什么颜色的？放哪个篮子？"
+    },
+    "quizPayload": {
+      "buckets": [
+        {
+          "id": "bucket-red",
+          "label": "红篮子",
+          "emoji": "🟥",
+          "colorKey": "red"
+        },
+        {
+          "id": "bucket-yellow",
+          "label": "黄篮子",
+          "emoji": "🟨",
+          "colorKey": "yellow"
+        }
+      ],
+      "items": [
+        {
+          "id": "red-strawberry",
+          "label": "草莓",
+          "colorKey": "red",
+          "targetBucketId": "bucket-red",
+          "emoji": "🍓"
+        },
+        {
+          "id": "yellow-banana",
+          "label": "香蕉",
+          "colorKey": "yellow",
+          "targetBucketId": "bucket-yellow",
+          "emoji": "🍌"
+        },
+        {
+          "id": "red-tomato",
+          "label": "西红柿",
+          "colorKey": "red",
+          "targetBucketId": "bucket-red",
+          "emoji": "🍅"
+        },
+        {
+          "id": "yellow-corn",
+          "label": "玉米",
+          "colorKey": "yellow",
+          "targetBucketId": "bucket-yellow",
+          "emoji": "🌽"
+        }
+      ]
+    }
+  },
+  {
+    "id": "quiz-sort-fruit-veg",
+    "lane": "play",
+    "type": "quiz_sort",
+    "section": "quiz_sort",
+    "zh": "分一分：水果与蔬菜",
+    "en": "Sort Fruit & Veg",
+    "emoji": "🧺",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "水果可以直接吃，蔬菜多半要煮一煮。",
+      "prompt": "苹果是水果还是蔬菜呀？"
+    },
+    "quizPayload": {
+      "buckets": [
+        {
+          "id": "bucket-fruit",
+          "label": "水果篮",
+          "emoji": "🍎"
+        },
+        {
+          "id": "bucket-veg",
+          "label": "蔬菜篮",
+          "emoji": "🥕"
+        }
+      ],
+      "items": [
+        {
+          "id": "f-apple",
+          "label": "苹果",
+          "targetBucketId": "bucket-fruit",
+          "emoji": "🍎"
+        },
+        {
+          "id": "v-carrot",
+          "label": "胡萝卜",
+          "targetBucketId": "bucket-veg",
+          "emoji": "🥕"
+        },
+        {
+          "id": "f-banana",
+          "label": "香蕉",
+          "targetBucketId": "bucket-fruit",
+          "emoji": "🍌"
+        },
+        {
+          "id": "v-corn",
+          "label": "玉米",
+          "targetBucketId": "bucket-veg",
+          "emoji": "🌽"
+        }
+      ]
+    }
+  },
+  {
+    "id": "trace-line",
+    "lane": "play",
+    "type": "tracing",
+    "section": "tracing",
+    "zh": "描一描：小雨滴浇花",
+    "en": "Rain to Flower",
+    "emoji": "✏️",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "water",
+    "gestureLock": true,
+    "parentGuide": {
+      "explain": "用手指沿着虚线，从小雨滴画到小花上。",
+      "prompt": "小雨滴落下来，花儿就喝饱水啦！"
+    },
+    "quizPayload": {
+      "pathShape": "vertical_line",
+      "startPoint": {
+        "label": "雨滴",
+        "emoji": "💧"
+      },
+      "endPoint": {
+        "label": "小花",
+        "emoji": "🌸"
+      }
+    }
+  },
+  {
+    "id": "trace-circle",
+    "lane": "play",
+    "type": "tracing",
+    "section": "tracing",
+    "zh": "描一描：圆圆的太阳",
+    "en": "Draw the Sun",
+    "emoji": "✏️",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "gestureLock": true,
+    "parentGuide": {
+      "explain": "沿着虚线转一圈，把太阳画圆。",
+      "prompt": "太阳是什么形状的呀？"
+    },
+    "quizPayload": {
+      "pathShape": "circle",
+      "startPoint": {
+        "label": "起点",
+        "emoji": "🌞"
+      },
+      "endPoint": {
+        "label": "回到起点",
+        "emoji": "🌞"
+      }
+    }
+  },
+  {
+    "id": "trace-wave",
+    "lane": "play",
+    "type": "tracing",
+    "section": "tracing",
+    "zh": "描一描：小鸭子游水",
+    "en": "Duck Swims",
+    "emoji": "✏️",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "water",
+    "gestureLock": true,
+    "parentGuide": {
+      "explain": "波浪线一上一下，像水波一样。",
+      "prompt": "小鸭子在水中游，水波是什么样子？"
+    },
+    "quizPayload": {
+      "pathShape": "wave",
+      "startPoint": {
+        "label": "岸边",
+        "emoji": "🦆"
+      },
+      "endPoint": {
+        "label": "水中央",
+        "emoji": "🌊"
+      }
+    }
+  },
+  {
+    "id": "peek-rabbit",
+    "lane": "play",
+    "type": "part_to_whole",
+    "section": "peek",
+    "zh": "猜一猜：草丛后面是谁？",
+    "en": "Who is Hiding?",
+    "emoji": "🫣",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "只露出一点点，让宝宝猜猜是什么。",
+      "prompt": "草丛后面露出两只长耳朵，是谁呀？"
+    },
+    "quizPayload": {
+      "coverType": "grass",
+      "partialClue": "露出两只长长的耳朵",
+      "wholeItem": {
+        "id": "rabbit",
+        "zh": "小兔子",
+        "emoji": "🐰",
+        "sound": "pop"
+      }
+    },
+    "art": {
+      "subject": "a small white bunny with long floppy ears, pink inner ears, pink nose, big black eyes hiding behind tall green grass, only its two long ears peeking out, playful",
+      "scene_template": "{subject}"
+    }
+  },
+  {
+    "id": "peek-elephant",
+    "lane": "play",
+    "type": "part_to_whole",
+    "section": "peek",
+    "zh": "猜一猜：树后面是谁？",
+    "en": "Who is Hiding?",
+    "emoji": "🫣",
+    "palette": "var(--pa-pal-stone)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "长长的鼻子露出来了，是谁呀？",
+      "prompt": "谁的鼻子长长的，会喷水？"
+    },
+    "quizPayload": {
+      "coverType": "tree",
+      "partialClue": "露出一条长长的鼻子",
+      "wholeItem": {
+        "id": "elephant",
+        "zh": "大象",
+        "emoji": "🐘",
+        "sound": "pop"
+      }
+    },
+    "art": {
+      "subject": "a cute grey baby elephant hiding behind a big tree trunk, only its long trunk peeking out, playful",
+      "scene_template": "{subject}"
+    }
+  },
+  {
+    "id": "peek-panda",
+    "lane": "play",
+    "type": "part_to_whole",
+    "section": "peek",
+    "zh": "猜一猜：竹林里是谁？",
+    "en": "Who is Hiding?",
+    "emoji": "🫣",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "黑黑的眼圈露出来了。",
+      "prompt": "谁的眼睛周围是黑黑的？"
+    },
+    "quizPayload": {
+      "coverType": "tree",
+      "partialClue": "露出两个黑黑的眼圈",
+      "wholeItem": {
+        "id": "panda",
+        "zh": "熊猫",
+        "emoji": "🐼",
+        "sound": "pop"
+      }
+    },
+    "art": {
+      "subject": "a cute panda hiding in a bamboo forest, only its black eye patches and round ears peeking out, playful",
+      "scene_template": "{subject}"
+    }
+  },
+  {
+    "id": "habit-teeth",
+    "lane": "play",
+    "type": "cause_habit",
+    "section": "habit",
+    "zh": "帮帮忙：给小熊刷牙",
+    "en": "Brush Teeth",
+    "emoji": "🪥",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "pop",
+    "parentGuide": {
+      "explain": "用手指当小牙刷，在小熊的牙齿上刷一刷。",
+      "prompt": "宝宝每天什么时候刷牙呀？"
+    },
+    "quizPayload": {
+      "tool": "toothbrush",
+      "toolLabel": "小牙刷",
+      "toolEmoji": "🪥",
+      "beforeState": {
+        "text": "牙齿上有小黄斑",
+        "emoji": "😬"
+      },
+      "afterState": {
+        "text": "牙齿白白亮晶晶！",
+        "emoji": "😁",
+        "sound": "chime"
+      },
+      "requiredPasses": 8
+    }
+  },
+  {
+    "id": "habit-muddy-dog",
+    "lane": "play",
+    "type": "cause_habit",
+    "section": "habit",
+    "zh": "帮帮忙：给小泥狗洗澡",
+    "en": "Wash the Dog",
+    "emoji": "🛁",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "water",
+    "parentGuide": {
+      "explain": "小狗玩泥巴变脏了，用手指给它擦干净。",
+      "prompt": "小狗洗干净以后，是不是又变漂亮了？"
+    },
+    "quizPayload": {
+      "tool": "sponge",
+      "toolLabel": "小海绵",
+      "toolEmoji": "🧽",
+      "beforeState": {
+        "text": "身上沾满泥巴",
+        "emoji": "🐶"
+      },
+      "afterState": {
+        "text": "干干净净香喷喷！",
+        "emoji": "🛁",
+        "sound": "chime"
+      },
+      "requiredPasses": 8
+    }
+  },
+  {
+    "id": "habit-flower",
+    "lane": "play",
+    "type": "cause_habit",
+    "section": "habit",
+    "zh": "帮帮忙：给花浇水",
+    "en": "Water the Flower",
+    "emoji": "🚿",
+    "palette": "var(--pa-pal-mint)",
+    "sound": "water",
+    "parentGuide": {
+      "explain": "花儿渴了，用手指点一点给它浇水。",
+      "prompt": "花儿喝了水，会怎么样呀？"
+    },
+    "quizPayload": {
+      "tool": "watering_can",
+      "toolLabel": "小水壶",
+      "toolEmoji": "🚿",
+      "beforeState": {
+        "text": "花儿垂着头",
+        "emoji": "🥀"
+      },
+      "afterState": {
+        "text": "花儿抬起头笑啦！",
+        "emoji": "🌻",
+        "sound": "chime"
+      },
+      "requiredPasses": 6
+    }
+  },
+  {
+    "id": "draw-free",
+    "lane": "play",
+    "type": "drawing",
+    "section": "drawing",
+    "zh": "画一画",
+    "en": "Finger Drawing",
+    "emoji": "🖍️",
+    "palette": "var(--pa-pal-sand)",
+    "sound": "pop",
+    "gestureLock": true,
+    "parentGuide": {
+      "explain": "用手指在方框里随便涂涂画画，想画什么都可以。",
+      "prompt": "今天想画什么呢？妈妈猜猜看。"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "想画什么都可以"
+      },
+      "L3": {
+        "sentence_zh": "用手指画，想画什么都可以。"
+      }
+    }
+  },
+  {
+    "id": "draw-sun",
+    "lane": "play",
+    "type": "drawing",
+    "section": "drawing",
+    "zh": "画一个大太阳",
+    "en": "Draw the Sun",
+    "emoji": "🌞",
+    "palette": "var(--pa-pal-cream)",
+    "sound": "pop",
+    "gestureLock": true,
+    "parentGuide": {
+      "explain": "先画一个圆，再画几条光线，就是太阳啦。",
+      "prompt": "太阳是什么颜色的？画给妈妈看看。"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "画一个圆圆的太阳"
+      },
+      "L3": {
+        "sentence_zh": "画个圆，再加上光线，就是太阳。"
+      }
+    }
+  },
+  {
+    "id": "draw-raindrop",
+    "lane": "play",
+    "type": "drawing",
+    "section": "drawing",
+    "zh": "画小水滴",
+    "en": "Draw a Drop",
+    "emoji": "💧",
+    "palette": "var(--pa-pal-sky)",
+    "sound": "pop",
+    "gestureLock": true,
+    "parentGuide": {
+      "explain": "水滴上面尖尖的，下面圆圆的。",
+      "prompt": "下雨的时候，水滴从哪里落下来？"
+    },
+    "levels": {
+      "L2": {
+        "sentence_zh": "画一颗小水滴"
+      },
+      "L3": {
+        "sentence_zh": "上面尖尖，下面圆圆，就是水滴。"
+      }
+    }
+  }
+]

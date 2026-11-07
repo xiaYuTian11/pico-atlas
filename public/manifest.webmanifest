@@ -1,0 +1,18 @@
+{
+  "name": "小图鉴 Pico Atlas",
+  "short_name": "小图鉴",
+  "description": "给 3–5 岁的第一本看图百科。一张图，一个词，一句诗，一个小故事。",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FDF8F3",
+  "theme_color": "#FDF8F3",
+  "icons": [
+    { "src": "./media/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "./media/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "./media/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

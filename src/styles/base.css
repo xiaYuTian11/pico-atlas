@@ -1,0 +1,148 @@
+/* ============================================================
+   全局基础样式与触控规范
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--pa-bg);
+  color: var(--pa-ink);
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  /* 幼儿使用：禁止选中、禁止长按菜单、禁止双击缩放 */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+
+/* ---------- 触控热区规范 ----------
+   视觉尺寸可以小于 64px，但热区必须 ≥64px。
+   用法：class="pa-hit" 的元素自动扩展热区到 64px。 */
+/* ---------- 通用按钮基线 ----------
+   清掉 UA 默认灰底/边框 —— 卡片里的中文英文都是 <button>，
+   不重置就会每行文字都顶着一个白框。 */
+button {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.pa-hit {
+  position: relative;
+}
+.pa-hit::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100%, var(--pa-hit-min));
+  height: max(100%, var(--pa-hit-min));
+  transform: translate(-50%, -50%);
+  border-radius: inherit;
+  /* 只扩热区，不参与绘制 */
+}
+
+/* ---------- 通用按钮基线 ---------- */
+.pa-btn {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--pa-dur-fast) var(--pa-ease-out);
+  background: transparent;
+  color: inherit;
+}
+.pa-btn:active {
+  transform: scale(0.94);
+}
+.pa-btn:disabled {
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+/* ---------- 焦点可见（键盘/辅助设备）---------- */
+:focus-visible {
+  outline: 3px solid var(--pa-accent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* ---------- 减少动效偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- 屏幕壳 ----------
+   三壳：home / grid / stage。同一时刻只有一个可见。 */
+.pa-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--pa-bg);
+  overflow: hidden;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ---------- 应用容器 ----------
+   竖屏：撑满；平板竖屏：居中限宽；横屏：交给 Stage 自己分栏。 */
+.pa-app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+@media (min-width: 700px) and (orientation: portrait) {
+  .pa-app {
+    max-width: var(--pa-content-max);
+  }
+}
+
+/* ---------- 无障碍：屏幕阅读器用 ---------- */
+.pa-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

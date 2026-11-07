@@ -1,0 +1,38 @@
+{
+  "name": "pico-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "小图鉴 Pico Atlas — 面向 3–5 岁的「一页一物」图文启蒙应用",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "build:only": "vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit",
+    "validate": "tsx tools/validate-content.ts",
+    "media:report": "python tools/media_report.py",
+    "media:images": ".venv\\Scripts\\python.exe tools/gen_images.py",
+    "media:audio": "python tools/gen_audio.py",
+    "media:sheet": ".venv\\Scripts\\python.exe tools/contact_sheet.py",
+    "review": "node tools/walkthrough.mjs",
+    "android:sync": "vite build && cap sync android",
+    "android:open": "cap open android",
+    "apk": "npm run build:only && npx cap sync android && cd android && gradlew.bat assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.3",
+    "@capacitor/core": "^6.2.3",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.3",
+    "@types/node": "^26.6.6",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7",
+    "vue-tsc": "^2.2.0",
+    "zod": "^3.24.1"
+  }
+}

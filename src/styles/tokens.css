@@ -1,0 +1,111 @@
+/* ============================================================
+   小图鉴 · Pico Atlas — 设计令牌 (Design Tokens)
+   单一事实来源。所有尺寸/颜色/动效都在这里定义，
+   组件里禁止出现魔法数字。
+   ============================================================ */
+
+:root {
+  /* ---------- 颜色：底 ---------- */
+  --pa-bg: #fdf8f3;
+  --pa-bg-elevated: #fffdf9;
+  --pa-card: #ffffff;
+  --pa-line: #efe6dc;
+  --pa-line-strong: #e2d5c7;
+
+  /* ---------- 颜色：文字 ---------- */
+  --pa-ink: #2e2a26;
+  --pa-ink-muted: #6f665d;      /* 原 #8A8178，对比度不足，压深 */
+  --pa-ink-faint: #9a9086;      /* 原 #B9AFA4，仅用于家长区 */
+
+  /* ---------- 颜色：语义 ---------- */
+  --pa-accent: #f5904a;          /* 阳光橙，主强调 */
+  --pa-accent-soft: #fff3eb;
+  --pa-accent-deep: #d9713a;
+  --pa-blue: #2f6fc4;            /* 原 #3C7DD9，压深保证对比 */
+  --pa-blue-soft: #eaf2fb;
+  --pa-green: #3f9b5f;
+  --pa-green-soft: #edf7ef;
+  --pa-red: #e0433f;
+
+  /* ---------- 字号阶梯（孩子可见 ≥18px 红线）---------- */
+  --pa-fs-hero: clamp(30px, 9.2vw, 56px);   /* 主中文词 / 大数字 */
+  --pa-fs-word: clamp(26px, 7.4vw, 48px);
+  --pa-fs-en: clamp(19px, 5.2vw, 30px);
+  --pa-fs-sent: clamp(18px, 4.6vw, 22px);   /* 短句，下限 18 */
+  --pa-fs-poem: clamp(24px, 6.6vw, 30px);
+  --pa-fs-story: clamp(22px, 6vw, 28px);
+  --pa-fs-quiz: clamp(18px, 4.6vw, 24px);
+  --pa-fs-fact: 18px;                        /* 孩子可见下限，原 16 违规 */
+  --pa-fs-badge: 15px;                       /* 卡片角标：图标+数字，非关键文字 */
+  --pa-fs-parent: 14px;                      /* 仅家长区可见 */
+  --pa-fs-parent-title: 18px;
+
+  /* ---------- 触控：视觉尺寸 vs 热区 ----------
+     红线是「热区 ≥64px」。视觉可以小，但 ::before 必须补到 64。 */
+  --pa-hit-min: 64px;
+  --pa-touch-visual-sm: 48px;
+  --pa-touch-visual-md: 56px;
+  --pa-touch-visual-lg: 76px;
+  --pa-hit-expand: 8px;          /* 48px + 2*8 = 64px */
+
+  /* ---------- 圆角 ---------- */
+  --pa-r-sm: 10px;
+  --pa-r-md: 16px;
+  --pa-r-lg: 24px;
+  --pa-r-xl: 32px;
+  --pa-r-pill: 999px;
+
+  /* ---------- 阴影 ---------- */
+  --pa-shadow-sm: 0 2px 8px rgba(120, 90, 60, 0.08);
+  --pa-shadow-md: 0 6px 20px rgba(120, 90, 60, 0.1);
+  --pa-shadow-lg: 0 12px 36px rgba(120, 90, 60, 0.13);
+  --pa-shadow-accent: 0 6px 22px rgba(245, 144, 74, 0.42);
+
+  /* ---------- 动效 ---------- */
+  --pa-dur-fast: 160ms;
+  --pa-dur-base: 240ms;
+  --pa-dur-slow: 380ms;
+  --pa-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --pa-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --pa-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ---------- 布局 ---------- */
+  --pa-topbar-h: 52px;
+  --pa-bottombar-h: 88px;
+  --pa-gutter: 16px;
+  --pa-content-max: 620px;        /* 平板竖屏居中舞台宽度 */
+
+  /* ---------- 卡片调色板（低饱和，让插画主体艳）---------- */
+  --pa-pal-warm: #fff1e8;
+  --pa-pal-cream: #fff9e0;
+  --pa-pal-sky: #eaf6fb;
+  --pa-pal-mint: #edf7f2;
+  --pa-pal-lilac: #f6edfc;
+  --pa-pal-rose: #fff0f4;
+  --pa-pal-sand: #fff7e6;
+  --pa-pal-stone: #f3f1ee;
+
+  /* ---------- 插画纸底（水彩方案统一色值）---------- */
+  --pa-paper: #fffdf8;
+}
+
+/* ---------- 暗色（晚安仪式 / 系统深色）---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pa-bg: #14120f;
+    --pa-bg-elevated: #1d1a16;
+    --pa-card: #23201b;
+    --pa-line: #322d26;
+    --pa-line-strong: #443d34;
+    --pa-ink: #f2ece5;
+    --pa-ink-muted: #b3a99d;
+    --pa-ink-faint: #8a8177;
+    --pa-accent-soft: #3a2a1e;
+    --pa-blue-soft: #1c2836;
+    --pa-green-soft: #1a2620;
+    --pa-paper: #f7f3ea;
+    --pa-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --pa-shadow-md: 0 6px 20px rgba(0, 0, 0, 0.5);
+    --pa-shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.6);
+  }
+}
