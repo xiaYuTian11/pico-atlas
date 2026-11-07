@@ -2,8 +2,8 @@
 /**
  * 古诗卡 —— 全诗 4 句完整呈现，逐句点读 + 卡拉OK高亮。
  *
- * L1：只高亮前 2 句（focusLines），其余半透明但仍可点
- * L2/L3：全诗高亮
+ * 所有年龄档都把整首读完（旧版 L1 只读前两句，孩子听到一半就停）。
+ * 年龄分层只影响“是否显示拼音”。
  */
 import { computed } from 'vue';
 import type { Card } from '@/content/types';
@@ -18,6 +18,7 @@ const props = defineProps<{
 
 const band = computed(() => state.ageBand ?? 'L1');
 const focusLines = computed(() => props.card.levels?.[band.value]?.focusLines ?? 4);
+void focusLines;
 const lines = computed(() => props.card.lines ?? []);
 const pinyinLines = computed(() => (band.value === 'L1' ? [] : props.card.pinyinLines ?? []));
 
@@ -41,7 +42,7 @@ function lineState(i: number): string {
           :key="i"
           type="button"
           class="pa-poem__line pa-hit"
-          :class="[lineState(i), { 'is-outside-focus': i >= focusLines }]"
+          :class="lineState(i)"
           :data-part="`poemLine:${i}`"
           :aria-label="`第 ${i + 1} 句：${line}`"
         >

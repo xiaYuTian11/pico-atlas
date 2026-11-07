@@ -130,10 +130,10 @@ async function readObject(card: Card, ticket: number, hooks: ReadHooks): Promise
 /* ---------------- 古诗：整首优先，逐句兜底 ---------------- */
 
 async function readPoem(card: Card, ticket: number, hooks: ReadHooks): Promise<boolean> {
-  const band = state.ageBand ?? 'L1';
-  const lv = levelOf(card, band);
-  const focusLines = lv.focusLines ?? card.lines?.length ?? 4;
   const lines = card.lines ?? [];
+  // 不管哪个年龄档，整首都要读完。
+  // （旧版 L1 只读前两句，孩子听到一半就停，是最容易被当成“坏了”的体验）
+  const focusLines = lines.length;
 
   const full = audioPoemFull(card.id);
   const lineUrls = lines.map((_, i) => audioPoemLine(card.id, i + 1));

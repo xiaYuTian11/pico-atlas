@@ -16,12 +16,44 @@ export type PlayMode = 'flip_and_read' | 'single_loop' | 'tap_to_read' | 'quiet_
 
 export const PLAY_MODES: PlayMode[] = ['flip_and_read', 'single_loop', 'tap_to_read', 'quiet_mute'];
 
-export const PLAY_MODE_META: Record<PlayMode, { zh: string; icon: string; voice: 'flip' | 'loop' | 'tap' | 'mute' }> = {
-  flip_and_read: { zh: '翻页即读', icon: 'flip', voice: 'flip' },
-  single_loop: { zh: '一直读这一页', icon: 'loop', voice: 'loop' },
-  tap_to_read: { zh: '点哪里读哪里', icon: 'tap', voice: 'tap' },
-  quiet_mute: { zh: '安静看书', icon: 'mute', voice: 'mute' },
+export const PLAY_MODE_META: Record<PlayMode, { zh: string; short: string; desc: string; icon: string; voice: 'flip' | 'loop' | 'tap' | 'mute' }> = {
+  flip_and_read: {
+    zh: '翻页即读',
+    short: '翻页读',
+    desc: '翻一页，读一页',
+    icon: 'flip',
+    voice: 'flip',
+  },
+  single_loop: {
+    zh: '一直读这一页',
+    short: '单页循环',
+    desc: '读完一遍，再读一遍',
+    icon: 'loop',
+    voice: 'loop',
+  },
+  tap_to_read: {
+    zh: '点哪里读哪里',
+    short: '点读',
+    desc: '点一下，才出声',
+    icon: 'tap',
+    voice: 'tap',
+  },
+  quiet_mute: {
+    zh: '安静看书',
+    short: '静音',
+    desc: '只翻图，不出声',
+    icon: 'mute',
+    voice: 'mute',
+  },
 };
+
+/** 可选语速档位（1 = 预烘焙音频原速） */
+export const SPEECH_RATES: Array<{ v: number; zh: string }> = [
+  { v: 0.8, zh: '慢' },
+  { v: 0.9, zh: '稍慢' },
+  { v: 1, zh: '正常' },
+  { v: 1.15, zh: '快' },
+];
 
 export interface LaneProgress {
   lastId: string | null;
@@ -44,6 +76,8 @@ export interface AppState {
     limitMinutes: number;
     /** 音效开关 */
     soundFx: boolean;
+    /** 朗读语速倍率：孩子们听不清就调慢 */
+    speechRate: number;
   };
   session: {
     /** 本次已用秒数 */
@@ -75,6 +109,7 @@ function defaultState(): AppState {
       cruiseHoldMs: 1400,
       limitMinutes: 15,
       soundFx: true,
+      speechRate: 1,
     },
     session: { currentSessionSeconds: 0, isSleeping: false },
     stats: { totalSeconds: 0, lastOpenAt: null },

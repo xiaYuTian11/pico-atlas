@@ -35,6 +35,9 @@ const emit = defineEmits<{
 
 const modeSpinning = ref(false);
 const modeBounce = ref(false);
+/** 切模式时浮在底栏上方的一句提示（图标 + 名字 + 一句说明） */
+const modeToast = ref<{ zh: string; desc: string } | null>(null);
+let modeToastTimer: ReturnType<typeof setTimeout> | null = null;
 
 const modeMeta = computed(() => PLAY_MODE_META[state.prefs.playMode]);
 const modeLocked = computed(() => state.prefs.modeLocked);
@@ -57,6 +60,11 @@ function onMode(): void {
     modeSpinning.value = false;
     modeBounce.value = false;
   }, 520);
+
+  // 可见提示：孩子不识字，也要能"看出"现在是什么模式
+  modeToast.value = { zh: PLAY_MODE_META[next].zh, desc: PLAY_MODE_META[next].desc };
+  if (modeToastTimer) clearTimeout(modeToastTimer);
+  modeToastTimer = setTimeout(() => (modeToast.value = null), 1900);
 
   // 三重确认之一：人声报读当前模式
   const url = audioMode(PLAY_MODE_META[next].voice);
@@ -96,16 +104,19 @@ function onFav(): void {
       <PaIcon name="chevron-left" />
     </button>
 
-    <button
-      type="button"
-      class="pa-bb-btn pa-bb-mode pa-hit"
-      :class="{ 'is-spinning': modeSpinning, 'is-bouncing': modeBounce, 'is-locked': modeLocked }"
-      :aria-label="`当前模式：${modeMeta.zh}，点一下切换`"
-      @click="onMode"
-    >
-      <PaIcon :name="modeIcon" />
-      <span v-if="modeLocked" class="pa-bb-lock" aria-hidden="true">🔒</span>
-    </button>
+    <div class="pa-bb-mode-wrap">
+      <button
+        type="button"
+        class="pa-bb-btn pa-bb-mode pa-hit"
+        :class="{ 'is-spinning': modeSpinning, 'is-bouncing': modeBounce, 'is-locked': modeLocked }"
+        :aria-label="`当前模式：${modeMeta.zh}，点一下切换`"
+        @click="onMode"
+      >
+        <PaIcon :name="modeIcon" />
+        <span v-if="modeLocked" class="pa-bb-lock" aria-hidden="true">🔒</span>
+      </button>
+      <span class="pa-bb-mode-label" aria-hidden="true">{{ modeMeta.short }}</span>
+    </div>
 
     <button
       type="button"
@@ -136,6 +147,17 @@ function onFav(): void {
     >
       <PaIcon name="chevron-right" />
     </button>
+
+    <!-- 切模式提示：飘在底栏上方，1.9s 后自动消失 -->
+    <Transition name="pa-mode-pill">
+      <div v-if="modeToast" class="pa-mode-pill" role="status" aria-live="polite">
+        <span class="pa-mode-pill-icon"><PaIcon :name="modeIcon" /></span>
+        <span class="pa-mode-pill-text">
+          <b>{{ modeToast.zh }}</b>
+          <i>{{ modeToast.desc }}</i>
+        </span>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -182,6 +204,23 @@ function onFav(): void {
 }
 
 /* 模式钮：视觉 48px，暖米底 */
+.pa-bb-mode-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  flex: 0 0 auto;
+}
+
+.pa-bb-mode-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: var(--pa-ink-muted);
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
 .pa-bb-mode {
   width: var(--pa-touch-visual-sm);
   height: var(--pa-touch-visual-sm);
@@ -248,6 +287,85 @@ function onFav(): void {
 }
 .pa-bb-play.is-playing {
   animation: paPlayPulse 1.4s var(--pa-ease-in-out) infinite;
+}
+
+/* 朗读中：外圈转一圈的进度环，让"正在读"这件事一眼可见 */
+.pa-bb-play.is-playing::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 3px solid rgba(245, 144, 74, 0.42);
+  border-top-color: rgba(245, 144, 74, 0.95);
+  animation: paPlayRing 1.1s linear infinite;
+  pointer-events: none;
+}
+.pa-bb-play {
+  position: relative;
+}
+@keyframes paPlayRing {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 切模式提示胶囊 */
+.pa-mode-pill {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--pa-bottombar-h) + 18px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px 10px 12px;
+  border-radius: var(--pa-r-pill);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 10px 34px rgba(120, 90, 60, 0.24);
+  z-index: 8000;
+  pointer-events: none;
+  max-width: 88vw;
+}
+.pa-mode-pill-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--pa-accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 34px;
+  padding: 7px;
+}
+.pa-mode-pill-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.pa-mode-pill-text b {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--pa-ink);
+  letter-spacing: 0.5px;
+}
+.pa-mode-pill-text i {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--pa-ink-muted);
+}
+
+.pa-mode-pill-enter-active,
+.pa-mode-pill-leave-active {
+  transition:
+    opacity 0.22s var(--pa-ease-out),
+    transform 0.22s var(--pa-ease-spring);
+}
+.pa-mode-pill-enter-from,
+.pa-mode-pill-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(12px) scale(0.94);
 }
 
 @keyframes paPlayPulse {

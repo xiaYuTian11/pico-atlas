@@ -131,21 +131,23 @@ watch(
         />
       </div>
 
-      <div class="pa-draw__sizes">
-        <button
-          v-for="s in sizes"
-          :key="s"
-          type="button"
-          class="pa-draw__size pa-hit"
-          :class="{ 'is-active': activeSize === s }"
-          :aria-label="s === sizes[0] ? '细笔' : '粗笔'"
-          @click.stop="pickSize(s)"
-        >
-          <span :style="{ width: `${s}px`, height: `${s}px` }" />
-        </button>
-      </div>
+      <div class="pa-draw__actions">
+        <div class="pa-draw__sizes">
+          <button
+            v-for="s in sizes"
+            :key="s"
+            type="button"
+            class="pa-draw__size pa-hit"
+            :class="{ 'is-active': activeSize === s }"
+            :aria-label="s === sizes[0] ? '细笔' : '粗笔'"
+            @click.stop="pickSize(s)"
+          >
+            <span :style="{ width: `${s}px`, height: `${s}px` }" />
+          </button>
+        </div>
 
-      <button type="button" class="pa-draw__clear pa-hit" @click.stop="clear">清空</button>
+        <button type="button" class="pa-draw__clear pa-hit" @click.stop="clear">清空重画</button>
+      </div>
     </div>
 
     <div class="pa-draw__content">
@@ -198,21 +200,22 @@ watch(
 .pa-draw__toolbar {
   flex: 0 0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 10px var(--pa-gutter) 4px;
-  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 10px 2px;
 }
 
 .pa-draw__colors {
   display: flex;
-  gap: 6px;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .pa-draw__color {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   box-shadow: var(--pa-shadow-sm);
   transition: transform var(--pa-dur-fast) var(--pa-ease-spring);
@@ -227,6 +230,12 @@ watch(
 .pa-draw__sizes {
   display: flex;
   gap: 6px;
+}
+
+.pa-draw__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .pa-draw__size {

@@ -11,11 +11,14 @@ import type { AgeBand } from '@/content/types';
 import {
   PLAY_MODES,
   PLAY_MODE_META,
+  SPEECH_RATES,
   state,
   sessionMinutes,
   resetSession,
 } from '@/state/store';
-import { playSfx } from '@/audio/engine';
+import { playSfx, speak, newSession } from '@/audio/engine';
+import { audioZh } from '@/content/media';
+import UpdatePanel from './UpdatePanel.vue';
 import PaIcon from './PaIcon.vue';
 
 const props = defineProps<{ open: boolean }>();
@@ -54,6 +57,17 @@ function setLimit(v: number): void {
 function toggleSound(): void {
   state.prefs.soundFx = !state.prefs.soundFx;
   playSfx('soft');
+}
+
+function setRate(v: number): void {
+  state.prefs.speechRate = v;
+  playSfx('soft');
+}
+
+/** 试听：用真卡片音频，听到的就是孩子听到的 */
+function previewRate(): void {
+  const ticket = newSession();
+  void speak({ url: audioZh('apple'), text: '苹果', lang: 'zh', ticket, timeoutMs: 4000 });
 }
 
 function clearFavorites(): void {
@@ -147,6 +161,27 @@ function resetTimer(): void {
           </div>
         </section>
 
+        <!-- 语速 -->
+        <section class="pa-settings__group">
+          <div class="pa-settings__label">
+            朗读语速
+            <span class="pa-settings__hint">（预烘焙语音实时变速，不变调）</span>
+          </div>
+          <div class="pa-settings__limits">
+            <button
+              v-for="r in SPEECH_RATES"
+              :key="r.v"
+              type="button"
+              class="pa-settings__limit"
+              :class="{ 'is-active': state.prefs.speechRate === r.v }"
+              @click="setRate(r.v)"
+            >
+              {{ r.zh }}
+            </button>
+            <button type="button" class="pa-settings__link" @click="previewRate">试听</button>
+          </div>
+        </section>
+
         <!-- 其他 -->
         <section class="pa-settings__group">
           <div class="pa-settings__label">其他</div>
@@ -162,6 +197,12 @@ function resetTimer(): void {
           <button type="button" class="pa-settings__danger" @click="clearFavorites">
             清空「我的最爱」（当前 {{ state.favorites.length }} 张）
           </button>
+        </section>
+
+        <!-- 关于与更新 -->
+        <section class="pa-settings__group">
+          <div class="pa-settings__label">关于与更新</div>
+          <UpdatePanel />
         </section>
 
         <div class="pa-settings__footer">

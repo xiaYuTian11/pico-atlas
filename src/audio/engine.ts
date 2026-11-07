@@ -148,6 +148,13 @@ function speakAudio(url: string, ticket: number, timeoutMs: number): Promise<boo
     const el = acquire(url);
     currentTrack = el;
 
+    // 语速：家长可在设置里调慢。preservesPitch 保证变速不变调（否则会变成小黄人）。
+    const rate = state.prefs.speechRate || 1;
+    el.preservesPitch = true;
+    (el as HTMLAudioElement & { webkitPreservesPitch?: boolean }).webkitPreservesPitch = true;
+    el.playbackRate = rate;
+    el.defaultPlaybackRate = rate;
+
     let settled = false;
     const finish = (ok: boolean): void => {
       if (settled) return;
@@ -197,7 +204,8 @@ function speakWebSpeech(text: string, lang: 'zh' | 'en', ticket: number, timeout
     try {
       const u = new SpeechSynthesisUtterance(text);
       u.lang = lang === 'en' ? 'en-US' : 'zh-CN';
-      u.rate = lang === 'en' ? 0.78 : 0.72;
+      const rate = state.prefs.speechRate || 1;
+      u.rate = Math.min(2, (lang === 'en' ? 0.78 : 0.72) * rate);
       u.pitch = 1.05;
       u.onend = () => {
         if (seq === speakSeq) finish(alive(ticket));

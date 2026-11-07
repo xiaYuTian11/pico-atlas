@@ -16,11 +16,13 @@ import { state } from '@/state/store';
 const props = defineProps<{
   card: Card;
   highlight: string | null;
+  /** 隐藏中文主词与拼音（数数卡自己把数字和中文放在图区了） */
+  hideZh?: boolean;
 }>();
 
 const band = computed(() => state.ageBand ?? 'L1');
 const lv = computed(() => props.card.levels?.[band.value] ?? {});
-const showPinyin = computed(() => band.value !== 'L1' && !!props.card.pinyin);
+const showPinyin = computed(() => !props.hideZh && band.value !== 'L1' && !!props.card.pinyin);
 const showFact = computed(() => band.value === 'L3' && !!lv.value.fact);
 
 function hl(part: string): string {
@@ -31,6 +33,7 @@ function hl(part: string): string {
 <template>
   <div class="pa-text">
     <button
+      v-if="!hideZh"
       type="button"
       class="pa-text__zh pa-hit"
       :class="hl('zh')"

@@ -46,6 +46,7 @@ function replay(): void {
 
 // 若本地有该拟声的真实录音，直接用它（比合成音真实得多）
 const realCue = computed(() => audioSfx(payload.value.soundCue));
+void realCue;
 </script>
 
 <template>
@@ -65,9 +66,7 @@ const realCue = computed(() => audioSfx(payload.value.soundCue));
       <div v-if="payload.soundLabel" class="pa-quiz-sound__label">
         {{ payload.soundLabel }}
       </div>
-      <div v-if="realCue === undefined" class="pa-quiz-sound__hint">
-        （合成音 · 可放真实录音到 media/audio/sfx）
-      </div>
+      <div class="pa-quiz-sound__hint">点上面的大啰叭，再听一次</div>
 
       <div class="pa-quiz-sound__options">
         <button

@@ -5,7 +5,8 @@
  * 路由状态很轻：就一个 screen 字符串 + 上下文。
  * 不用 vue-router（只有三个屏，没必要）。
  */
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, onErrorCaptured } from 'vue';
+import { App as CapApp } from '@capacitor/app';
 import type { AgeBand, Card, Lane } from '@/content/types';
 import { cardsOfLane, cardsOfSection, getCard, populatedSections } from '@/content';
 import { initState, state, setAgeBand, startSessionTimer, stopSessionTimer } from '@/state/store';
@@ -46,6 +47,8 @@ function toast(msg: string): void {
   toastMsg.value = msg;
   toastTrigger.value++;
 }
+
+let backListener: { remove: () => Promise<void> } | null = null;
 
 /* ---------------- 导航 ---------------- */
 
@@ -142,11 +145,47 @@ onMounted(async () => {
 
   window.addEventListener('pointerdown', onFirstGesture, { once: true });
   window.addEventListener('touchstart', onFirstGesture, { once: true });
+
+  // 安卓物理返回键：优先关浮层，其次退一层壳，最后才最小化（不直接退出）
+  try {
+    backListener = await CapApp.addListener('backButton', () => {
+      if (sleepOpen.value) return; // 晚安仪式必须长按，返回键不生效
+      if (settingsOpen.value) {
+        settingsOpen.value = false;
+        return;
+      }
+      if (gateOpen.value) {
+        gateOpen.value = false;
+        return;
+      }
+      if (screen.value === 'stage') {
+        backFromStage();
+        return;
+      }
+      if (screen.value === 'grid') {
+        backFromGrid();
+        return;
+      }
+      if (screen.value === 'age') return;
+      void CapApp.minimizeApp();
+    });
+  } catch {
+    /* 浏览器里没有插件，忽略 */
+  }
+});
+
+/* 任何组件抛错都不要白屏：退回首页 + 提示，孩子还能继续玩 */
+onErrorCaptured((err) => {
+  console.error('[pico-atlas] 组件异常', err);
+  toast('这一页打不开，换一张试试');
+  screen.value = 'home';
+  return false;
 });
 
 onUnmounted(() => {
   stopSessionTimer();
   stopAll();
+  void backListener?.remove();
 });
 
 const currentCard = computed<Card | undefined>(() => stageCards.value[stageIndex.value]);

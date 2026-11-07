@@ -1484,7 +1484,28 @@
         "zh": "小兔子",
         "emoji": "🐰",
         "sound": "pop"
-      }
+      },
+      "options": [
+        {
+          "id": "elephant",
+          "zh": "大象",
+          "emoji": "🐘",
+          "isCorrect": false
+        },
+        {
+          "id": "rabbit",
+          "zh": "小兔子",
+          "emoji": "🐰",
+          "isCorrect": true,
+          "sound": "chime"
+        },
+        {
+          "id": "panda",
+          "zh": "熊猫",
+          "emoji": "🐼",
+          "isCorrect": false
+        }
+      ]
     },
     "art": {
       "subject": "a small white bunny with long floppy ears, pink inner ears, pink nose, big black eyes hiding behind tall green grass, only its two long ears peeking out, playful",
@@ -1513,7 +1534,28 @@
         "zh": "大象",
         "emoji": "🐘",
         "sound": "pop"
-      }
+      },
+      "options": [
+        {
+          "id": "rabbit",
+          "zh": "小兔子",
+          "emoji": "🐰",
+          "isCorrect": false
+        },
+        {
+          "id": "elephant",
+          "zh": "大象",
+          "emoji": "🐘",
+          "isCorrect": true,
+          "sound": "chime"
+        },
+        {
+          "id": "panda",
+          "zh": "熊猫",
+          "emoji": "🐼",
+          "isCorrect": false
+        }
+      ]
     },
     "art": {
       "subject": "a cute grey baby elephant hiding behind a big tree trunk, only its long trunk peeking out, playful",
@@ -1542,7 +1584,28 @@
         "zh": "熊猫",
         "emoji": "🐼",
         "sound": "pop"
-      }
+      },
+      "options": [
+        {
+          "id": "rabbit",
+          "zh": "小兔子",
+          "emoji": "🐰",
+          "isCorrect": false
+        },
+        {
+          "id": "panda",
+          "zh": "熊猫",
+          "emoji": "🐼",
+          "isCorrect": true,
+          "sound": "chime"
+        },
+        {
+          "id": "elephant",
+          "zh": "大象",
+          "emoji": "🐘",
+          "isCorrect": false
+        }
+      ]
     },
     "art": {
       "subject": "a cute panda hiding in a bamboo forest, only its black eye patches and round ears peeking out, playful",

@@ -1,68 +1,50 @@
 <script setup lang="ts">
 /**
- * 视觉捉迷藏 —— 局部线索露出，猜整体是什么。
+ * 视觉捉迷藏 —— 图里只露出一部分，猜整体是什么。
  *
- * 遮挡物（草/树/栅栏/帘）用 CSS 渐变模拟，
- * 点击遮挡物会掀开一条缝，逐步露出答案。
+ * 关键：**线索必须看得见**。
+ * 旧版用一块不透明的色块盖住整张图，孩子只能读到一行字，等于没线索。
+ * 现在直接用卡片插画当谜面（插画本身就是"躲在草后/树后"的构图）。
  */
 import { computed, ref } from 'vue';
 import type { Card, PartToWholePayload, QuizOption } from '@/content/types';
 import { playSfx } from '@/audio/engine';
+import CardImage from '../parts/CardImage.vue';
 
 const props = defineProps<{ card: Card; highlight: string | null }>();
 
 const payload = computed(() => props.card.quizPayload as PartToWholePayload);
-const revealed = ref(false);
+const solved = ref(false);
 const wrongId = ref<string | null>(null);
 
-/** 干扰项：未提供则自动从题库外造两个通用项 */
 const options = computed<QuizOption[]>(() => {
   if (payload.value.options?.length) return payload.value.options;
-  const correct: QuizOption = {
-    id: payload.value.wholeItem.id,
-    zh: payload.value.wholeItem.zh,
-    emoji: payload.value.wholeItem.emoji,
-    isCorrect: true,
-    sound: payload.value.wholeItem.sound,
-  };
-  return [correct];
+  return [
+    {
+      id: payload.value.wholeItem.id,
+      zh: payload.value.wholeItem.zh,
+      emoji: payload.value.wholeItem.emoji,
+      isCorrect: true,
+      sound: payload.value.wholeItem.sound,
+    },
+  ];
 });
-
-const coverStyle = computed(() => {
-  switch (payload.value.coverType) {
-    case 'grass':
-      return 'linear-gradient(180deg, #c8e6a0 0%, #8fc45f 55%, #6ba344 100%)';
-    case 'tree':
-      return 'linear-gradient(180deg, #a98b6a 0%, #7d6248 60%, #5d4834 100%)';
-    case 'fence':
-      return 'repeating-linear-gradient(90deg, #d8b98c 0 14px, #c6a575 14px 28px)';
-    case 'curtain':
-      return 'linear-gradient(180deg, #e8d5ef 0%, #cba9dd 100%)';
-    default:
-      return 'linear-gradient(180deg, #c8e6a0 0%, #8fc45f 100%)';
-  }
-});
-
-function tapCover(): void {
-  playSfx('soft');
-  revealed.value = true;
-  setTimeout(() => playSfx('chime'), 220);
-}
 
 function choose(opt: QuizOption): void {
+  if (solved.value) return;
   if (!opt.isCorrect) {
     wrongId.value = opt.id;
     playSfx('pop');
     setTimeout(() => (wrongId.value = null), 340);
     return;
   }
-  revealed.value = true;
-  playSfx('chime');
-  setTimeout(() => playSfx('sparkle'), 200);
+  solved.value = true;
+  playSfx(opt.sound ?? 'chime');
+  setTimeout(() => playSfx('sparkle'), 180);
 }
 
 function reset(): void {
-  revealed.value = false;
+  solved.value = false;
   wrongId.value = null;
   playSfx('soft');
 }
@@ -71,26 +53,13 @@ function reset(): void {
 <template>
   <div class="pa-peek">
     <div class="pa-peek__visual">
-      <div class="pa-peek__stage" :class="{ 'is-revealed': revealed }">
-        <!-- 底下的答案 -->
-        <div class="pa-peek__answer">
-          <span class="pa-peek__answer-emoji">{{ payload.wholeItem.emoji }}</span>
-        </div>
-
-        <!-- 遮挡物 -->
-        <button
-          v-if="!revealed"
-          type="button"
-          class="pa-peek__cover"
-          :style="{ background: coverStyle }"
-          aria-label="点一下掀开"
-          @click.stop="tapCover"
-        >
-          <span class="pa-peek__clue">{{ payload.partialClue }}</span>
-        </button>
+      <div class="pa-peek__stage" :class="{ 'is-solved': solved }">
+        <CardImage :card-id="card.id" :emoji="payload.wholeItem.emoji" :alt="card.zh" />
+        <div v-if="!solved" class="pa-peek__clue">{{ payload.partialClue }}</div>
+        <div v-else class="pa-peek__answer">是{{ payload.wholeItem.zh }}呀！</div>
       </div>
 
-      <div v-if="options.length > 1" class="pa-peek__options">
+      <div v-if="options.length > 1 && !solved" class="pa-peek__options">
         <button
           v-for="opt in options"
           :key="opt.id"
@@ -100,16 +69,15 @@ function reset(): void {
           :aria-label="opt.zh"
           @click.stop="choose(opt)"
         >
-          {{ opt.emoji }}
+          <span class="pa-peek__opt-emoji">{{ opt.emoji }}</span>
+          <span class="pa-peek__opt-zh">{{ opt.zh }}</span>
         </button>
       </div>
     </div>
 
     <div class="pa-peek__content">
-      <div class="pa-peek__prompt">
-        {{ revealed ? `是${payload.wholeItem.zh}呀！` : card.zh }}
-      </div>
-      <button v-if="revealed" type="button" class="pa-peek__reset pa-hit" @click.stop="reset">
+      <div class="pa-peek__prompt">{{ card.zh }}</div>
+      <button v-if="solved" type="button" class="pa-peek__reset pa-hit" @click.stop="reset">
         再猜一次
       </button>
     </div>
@@ -132,86 +100,101 @@ function reset(): void {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  padding: 10px var(--pa-gutter);
+  gap: clamp(10px, 2.4vh, 20px);
+  padding: 10px var(--pa-gutter) 6px;
 }
 
+/* ---------- 谜面图 ---------- */
 .pa-peek__stage {
   position: relative;
-  width: min(62vw, 280px);
-  height: min(52vw, 240px);
+  width: 100%;
+  max-width: min(84vw, 360px);
+  flex: 1 1 auto;
+  min-height: 0;
   border-radius: var(--pa-r-lg);
   overflow: hidden;
-  box-shadow: var(--pa-shadow-md);
   background: var(--pa-paper);
+  box-shadow: var(--pa-shadow-md);
+  transition: transform var(--pa-dur-slow) var(--pa-ease-spring);
+}
+.pa-peek__stage.is-solved {
+  transform: scale(1.03);
+  box-shadow:
+    var(--pa-shadow-md),
+    0 0 0 4px var(--pa-green-soft);
+}
+
+/* 提示：贴着图底部的一条小胶囊 */
+.pa-peek__clue {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  font-size: var(--pa-fs-fact);
+  font-weight: 800;
+  color: #fff;
+  background: rgba(46, 42, 38, 0.55);
+  padding: 6px 14px;
+  border-radius: var(--pa-r-pill);
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+  max-width: 92%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pa-peek__answer {
   position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform var(--pa-dur-slow) var(--pa-ease-spring);
-}
-.pa-peek__stage.is-revealed .pa-peek__answer {
-  transform: scale(1.12);
-}
-
-.pa-peek__answer-emoji {
-  font-size: clamp(64px, 20vw, 110px);
-  line-height: 1;
-  filter: drop-shadow(0 8px 18px rgba(120, 90, 60, 0.2));
-}
-
-.pa-peek__cover {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 12px;
-  transition: transform var(--pa-dur-slow) var(--pa-ease-out);
-}
-
-.pa-peek__cover:active {
-  transform: scale(0.97);
-}
-
-.pa-peek__clue {
-  font-size: var(--pa-fs-fact);
-  font-weight: 800;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  font-size: var(--pa-fs-quiz);
+  font-weight: 900;
   color: #fff;
-  background: rgba(46, 42, 38, 0.45);
-  padding: 6px 14px;
+  background: rgba(63, 155, 95, 0.92);
+  padding: 8px 20px;
   border-radius: var(--pa-r-pill);
-  backdrop-filter: blur(4px);
-  text-align: center;
+  box-shadow: 0 6px 18px rgba(63, 155, 95, 0.4);
+  white-space: nowrap;
 }
 
+/* ---------- 三选一 ---------- */
 .pa-peek__options {
   display: flex;
-  gap: 12px;
+  gap: clamp(8px, 2.4vw, 16px);
   justify-content: center;
   flex-wrap: wrap;
+  flex: 0 0 auto;
 }
 
 .pa-peek__opt {
-  width: clamp(60px, 18vw, 88px);
-  height: clamp(60px, 18vw, 88px);
+  width: clamp(76px, 22vw, 104px);
+  min-height: clamp(76px, 22vw, 104px);
   border-radius: var(--pa-r-md);
   background: #fff;
   box-shadow: var(--pa-shadow-md);
-  font-size: clamp(28px, 8.5vw, 44px);
-  line-height: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 2px;
+  padding: 8px 4px;
   transition: transform var(--pa-dur-fast) var(--pa-ease-spring);
 }
-
+.pa-peek__opt:active {
+  transform: scale(0.94);
+}
 .pa-peek__opt.is-wrong {
   animation: paJelly4 0.34s var(--pa-ease-in-out);
+}
+.pa-peek__opt-emoji {
+  font-size: clamp(34px, 10vw, 50px);
+  line-height: 1;
+}
+.pa-peek__opt-zh {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--pa-ink-muted);
 }
 
 @keyframes paJelly4 {

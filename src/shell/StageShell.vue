@@ -16,6 +16,7 @@ import type { Card } from '@/content/types';
 import { CARD_RENDERERS, GESTURE_LOCKED_TYPES } from '@/cards';
 import { state, toggleFavorite, markSeen, setLastId, isFavorite as isFav } from '@/state/store';
 import { playSfx, stopAll, unlockAudio, newSession, alive, sleep } from '@/audio/engine';
+import { reading, beginReading, endReading } from '@/state/runtime';
 import { readCard, autoReadsOnFlip, TIMING, type HighlightTarget } from '@/audio/playback';
 import { audioMode } from '@/content/media';
 import { getSection } from '@/content';
@@ -81,8 +82,10 @@ function scheduleAutoRead(): void {
     if (mode === 'single_loop') {
       void runLoop(ticket);
     } else {
+      beginReading('auto');
       void readCard(card.value!, ticket, hooks).then(() => {
         if (alive(ticket)) clearHighlight();
+        endReading();
       });
     }
   }, TIMING.flipSettleMs);
@@ -90,6 +93,7 @@ function scheduleAutoRead(): void {
 
 /** 单卡循环 */
 async function runLoop(ticket: number): Promise<void> {
+  beginReading('loop');
   while (alive(ticket) && state.prefs.playMode === 'single_loop' && !isPlaying.value) {
     if (!card.value) return;
     await readCard(card.value, ticket, hooks);
@@ -97,13 +101,15 @@ async function runLoop(ticket: number): Promise<void> {
     if (!alive(ticket)) return;
     await new Promise((r) => setTimeout(r, TIMING.loopGapMs));
   }
+  endReading();
 }
 
 /** 自动巡航 */
 async function toggleCruise(): Promise<void> {
   unlockAudio();
   stopLoop();
-  if (isPlaying.value) {
+  // 正在朗读（含翻页自动读）时，这个键就是"停"
+  if (isPlaying.value || reading.value) {
     stopCruise();
     return;
   }
@@ -112,6 +118,7 @@ async function toggleCruise(): Promise<void> {
   isPlaying.value = true;
   cruiseTicket = newSession();
   const t = cruiseTicket;
+  beginReading('cruise');
 
   const mode = state.prefs.playMode;
   while (alive(t) && isPlaying.value) {
@@ -144,6 +151,7 @@ function stopCruise(): void {
   isPlaying.value = false;
   stopAll();
   clearHighlight();
+  endReading();
 }
 
 /* ---------------- 导航 ---------------- */
@@ -155,6 +163,7 @@ interface GoOpts {
 function goTo(next: number, opts: GoOpts = {}): void {
   if (next < 0 || next >= props.cards.length) return;
   stopLoop();
+  endReading();
   if (!opts.silent) {
     stopCruise();
     stopAll();
@@ -221,7 +230,11 @@ function onCardTap(e: MouseEvent): void {
       stopCruise();
       stopAll();
       void import('@/audio/playback').then(({ readPart }) => {
-        void readPart(card.value!, 'poemLine', i).then(() => clearHighlight());
+        beginReading('manual');
+        void readPart(card.value!, 'poemLine', i).then(() => {
+          clearHighlight();
+          endReading();
+        });
       });
       return;
     }
@@ -229,7 +242,11 @@ function onCardTap(e: MouseEvent): void {
     stopCruise();
     stopAll();
     void import('@/audio/playback').then(({ readPart }) => {
-      void readPart(card.value!, part as HighlightTarget).then(() => clearHighlight());
+      beginReading('manual');
+      void readPart(card.value!, part as HighlightTarget).then(() => {
+        clearHighlight();
+        endReading();
+      });
     });
     pulse(target);
     return;
@@ -361,6 +378,7 @@ async function toggleLoop(): Promise<void> {
   stopCruise();
   const t = newSession();
   looping.value = true;
+  beginReading('loop');
   while (looping.value && alive(t) && card.value) {
     await readCard(card.value, t, hooks);
     clearHighlight();
@@ -368,6 +386,7 @@ async function toggleLoop(): Promise<void> {
     if (!(await sleep(TIMING.loopGapMs, t))) break;
   }
   looping.value = false;
+  endReading();
 }
 
 /* ---------------- 收藏 ---------------- */
@@ -551,7 +570,7 @@ void PaIcon;
     <BottomBar
       :can-prev="canPrev"
       :can-next="canNext"
-      :is-playing="isPlaying"
+      :is-playing="isPlaying || reading"
       :is-favorite="favNow"
       :index="index"
       :total="cards.length"

@@ -4,10 +4,40 @@
  * 两侧都可点，点了会放大回弹。
  */
 import type { Card } from '@/content/types';
+import { computed } from 'vue';
 import { playSfx } from '@/audio/engine';
 import CardText from './parts/CardText.vue';
 
-defineProps<{ card: Card; highlight: string | null }>();
+const props = defineProps<{ card: Card; highlight: string | null }>();
+
+/**
+ * 对比卡不能只是"左右两张图" —— 差异必须看得见。
+ *   大/小  → 两个 emoji 直接不同尺寸
+ *   长/短  → 横向拉伸 / 压缩
+ *   上/下  → 竖直错位
+ */
+const sideStyle = computed<{ a: Record<string, string>; b: Record<string, string> }>(() => {
+  const id = props.card.id;
+  if (id.includes('big-small')) {
+    return {
+      a: { fontSize: 'clamp(84px, 26vw, 140px)' } as Record<string, string>,
+      b: { fontSize: 'clamp(30px, 9vw, 46px)' } as Record<string, string>,
+    };
+  }
+  if (id.includes('long-short')) {
+    return {
+      a: { transform: 'scaleX(1.45)' } as Record<string, string>,
+      b: { transform: 'scaleX(0.72)' } as Record<string, string>,
+    };
+  }
+  if (id.includes('up-down')) {
+    return {
+      a: { transform: 'translateY(-28px)' } as Record<string, string>,
+      b: { transform: 'translateY(28px)' } as Record<string, string>,
+    };
+  }
+  return { a: {}, b: {} };
+});
 
 function tapSide(): void {
   playSfx('pop');
@@ -18,17 +48,17 @@ function tapSide(): void {
   <div class="pa-opp">
     <div class="pa-opp__visual">
       <button type="button" class="pa-opp__side pa-hit" :aria-label="card.pairA?.zh" @click.stop="tapSide">
-        <span class="pa-opp__emoji">{{ card.pairA?.emoji }}</span>
+        <span class="pa-opp__emoji" :style="sideStyle.a">{{ card.pairA?.emoji }}</span>
         <span class="pa-opp__label">{{ card.pairA?.zh }}</span>
-        <span class="pa-opp__en">{{ card.pairA?.en }}</span>
+        <span class="pa-opp__tag">{{ card.zh.split(' ')[0] }}</span>
       </button>
 
       <div class="pa-opp__vs" aria-hidden="true">·</div>
 
       <button type="button" class="pa-opp__side pa-hit" :aria-label="card.pairB?.zh" @click.stop="tapSide">
-        <span class="pa-opp__emoji">{{ card.pairB?.emoji }}</span>
+        <span class="pa-opp__emoji" :style="sideStyle.b">{{ card.pairB?.emoji }}</span>
         <span class="pa-opp__label">{{ card.pairB?.zh }}</span>
-        <span class="pa-opp__en">{{ card.pairB?.en }}</span>
+        <span class="pa-opp__tag">{{ card.zh.split(' ').slice(-1)[0] }}</span>
       </button>
     </div>
 
@@ -74,6 +104,7 @@ function tapSide(): void {
   font-size: clamp(48px, 15vw, 88px);
   line-height: 1;
   filter: drop-shadow(0 6px 16px rgba(120, 90, 60, 0.2));
+  transition: transform var(--pa-dur-base) var(--pa-ease-spring);
 }
 
 .pa-opp__label {
@@ -87,6 +118,15 @@ function tapSide(): void {
   font-size: var(--pa-fs-fact);
   font-weight: 600;
   color: var(--pa-blue);
+}
+
+/* 大 / 小 这类单字对比标签 */
+.pa-opp__tag {
+  font-size: clamp(20px, 6vw, 28px);
+  font-weight: 900;
+  color: var(--pa-accent-deep);
+  letter-spacing: 2px;
+  line-height: 1.1;
 }
 
 .pa-opp__vs {

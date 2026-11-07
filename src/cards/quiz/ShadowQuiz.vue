@@ -106,8 +106,8 @@ function replay(): void {
 
 /* ---------- 剪影框 ---------- */
 .pa-quiz-shadow__target {
-  width: min(38vw, 160px);
-  height: min(38vw, 160px);
+  width: min(58vw, 240px);
+  height: min(58vw, 240px);
   border-radius: var(--pa-r-lg);
   background: rgba(46, 42, 38, 0.08);
   border: 3px dashed var(--pa-ink-faint);
@@ -132,7 +132,7 @@ function replay(): void {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: brightness(0) opacity(0.55);
+  filter: none;
 }
 
 /* 无剪影图时：用 emoji 压黑模拟 */
