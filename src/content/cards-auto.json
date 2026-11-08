@@ -167,7 +167,7 @@
     "palette": "var(--pa-pal-warm)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute cherry"
+      "subject": "three shiny red cherries with green stems, connected by one stem"
     },
     "levels": {
       "L1": {},
@@ -271,7 +271,7 @@
     "palette": "var(--pa-pal-warm)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute kiwi"
+      "subject": "a kiwi fruit cut in half, showing bright green flesh and tiny black seeds"
     },
     "levels": {
       "L1": {},
@@ -297,7 +297,7 @@
     "palette": "var(--pa-pal-warm)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute coconut"
+      "subject": "a whole brown coconut with a straw"
     },
     "levels": {
       "L1": {},
@@ -323,7 +323,7 @@
     "palette": "var(--pa-pal-warm)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute melon"
+      "subject": "a striped green cantaloupe melon, whole"
     },
     "levels": {
       "L1": {},
@@ -375,7 +375,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute cabbage"
+      "subject": "a round green cabbage with tightly layered leaves"
     },
     "levels": {
       "L1": {},
@@ -401,7 +401,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute potato"
+      "subject": "a single oval brown potato with a few eyes"
     },
     "levels": {
       "L1": {},
@@ -583,7 +583,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute chili"
+      "subject": "a single bright red chili pepper with a green stem"
     },
     "levels": {
       "L1": {},
@@ -609,7 +609,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute pea"
+      "subject": "a green pea pod opened to show round green peas inside"
     },
     "levels": {
       "L1": {},
@@ -661,7 +661,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute lettuce"
+      "subject": "a head of fresh green lettuce with ruffled leaves"
     },
     "levels": {
       "L1": {},
@@ -1753,7 +1753,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute bread"
+      "subject": "a loaf of bread with a sliced end, no face, no character"
     },
     "levels": {
       "L1": {},
@@ -1883,7 +1883,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute milk"
+      "subject": "a glass of milk with a straw, no face, no character"
     },
     "levels": {
       "L1": {},
@@ -1909,7 +1909,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute bun"
+      "subject": "two steamed buns on a bamboo steamer, no face, no character"
     },
     "levels": {
       "L1": {},
@@ -1935,7 +1935,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute dumpling"
+      "subject": "a plate of steamed dumplings, no face, no character"
     },
     "levels": {
       "L1": {},
@@ -2013,7 +2013,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute candy"
+      "subject": "a colourful wrapped candy, no face, no character"
     },
     "levels": {
       "L1": {},
@@ -2039,7 +2039,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute chocolate"
+      "subject": "a chocolate bar with a bite taken, no face, no character"
     },
     "levels": {
       "L1": {},
@@ -2065,7 +2065,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute honey"
+      "subject": "a honey jar with a wooden dipper and a bee, no face, no character"
     },
     "levels": {
       "L1": {},
@@ -2819,7 +2819,7 @@
     "palette": "var(--pa-pal-stone)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute broom"
+      "subject": "a straw broom leaning against a wall, no person"
     },
     "levels": {
       "L1": {},
@@ -2845,7 +2845,7 @@
     "palette": "var(--pa-pal-stone)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute towel"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -2871,7 +2871,7 @@
     "palette": "var(--pa-pal-stone)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute mirror"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3027,7 +3027,7 @@
     "palette": "var(--pa-pal-sky)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute fan"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3105,7 +3105,7 @@
     "palette": "var(--pa-pal-sky)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute phone"
+      "subject": "a smartphone standing upright with a bright blue screen, simple illustration"
     },
     "levels": {
       "L1": {},
@@ -3209,7 +3209,7 @@
     "palette": "var(--pa-pal-sky)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute vacuum"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3261,7 +3261,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute blocks"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3365,7 +3365,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute doll"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3391,7 +3391,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute puzzle"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3573,7 +3573,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute eye"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3599,7 +3599,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute nose"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3625,7 +3625,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute mouth"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3651,7 +3651,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute ear"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3677,7 +3677,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute hand"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3703,7 +3703,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute foot"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3729,7 +3729,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute hair"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3755,7 +3755,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute tooth"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3781,7 +3781,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute tongue"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3807,7 +3807,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute cheek"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3833,7 +3833,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute sun"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3859,7 +3859,8 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute moon"
+      "subject": "a round yellow full moon in the night sky with a few stars, simple illustration",
+      "cutout": false
     },
     "levels": {
       "L1": {},
@@ -3885,7 +3886,8 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute star"
+      "subject": "five yellow five-pointed stars in the night sky, simple illustration",
+      "cutout": false
     },
     "levels": {
       "L1": {},
@@ -3911,7 +3913,8 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute cloud"
+      "subject": "two fluffy white clouds in a blue sky, simple illustration",
+      "cutout": false
     },
     "levels": {
       "L1": {},
@@ -3937,7 +3940,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute rain"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3963,7 +3966,8 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute snow"
+      "subject": "a snowflake pattern with small white snowflakes falling, simple illustration",
+      "cutout": false
     },
     "levels": {
       "L1": {},
@@ -3989,7 +3993,8 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute rainbow"
+      "subject": "a seven colour rainbow arching over a small green hill, simple illustration",
+      "cutout": false
     },
     "levels": {
       "L1": {},
@@ -4015,7 +4020,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute wind"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -4041,7 +4046,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute lightning"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -4067,7 +4072,8 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute sea"
+      "subject": "blue ocean waves meeting a sandy beach with a small sailboat far away, simple illustration",
+      "cutout": false
     },
     "levels": {
       "L1": {},
@@ -4093,7 +4099,8 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute mountain"
+      "subject": "a tall blue-grey mountain with snow on top and green foothills, simple illustration",
+      "cutout": false
     },
     "levels": {
       "L1": {},
@@ -4119,7 +4126,8 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute stone"
+      "subject": "three smooth grey pebbles of different sizes on sand, simple illustration",
+      "cutout": false
     },
     "levels": {
       "L1": {},
@@ -4145,7 +4153,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute beach"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -4171,7 +4179,8 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute fire"
+      "subject": "a small campfire with orange flames and logs, on a paper background",
+      "cutout": false
     },
     "levels": {
       "L1": {},
@@ -4197,7 +4206,7 @@
     "palette": "var(--pa-pal-lilac)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute hat"
+      "subject": "a straw sun hat with a pink ribbon, no person, isolated"
     },
     "levels": {
       "L1": {},
@@ -4275,7 +4284,7 @@
     "palette": "var(--pa-pal-lilac)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute coat"
+      "subject": "a small blue children winter coat on a hanger, no person"
     },
     "levels": {
       "L1": {},
@@ -4301,7 +4310,7 @@
     "palette": "var(--pa-pal-lilac)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute dress"
+      "subject": "a pink children dress on a hanger, no person"
     },
     "levels": {
       "L1": {},
@@ -4353,7 +4362,7 @@
     "palette": "var(--pa-pal-lilac)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute scarf"
+      "subject": "a knitted woollen scarf on a wooden hook, no person, isolated"
     },
     "levels": {
       "L1": {},
@@ -4431,7 +4440,7 @@
     "palette": "var(--pa-pal-lilac)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute glasses"
+      "subject": "a pair of round eyeglasses, no person"
     },
     "levels": {
       "L1": {},
@@ -4483,7 +4492,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute teacher"
+      "subject": "a smiling teacher standing in front of a blackboard with a book, simple storybook"
     },
     "levels": {
       "L1": {},
@@ -4587,7 +4596,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute farmer"
+      "subject": "a smiling farmer in a straw hat holding a basket of vegetables, simple storybook"
     },
     "levels": {
       "L1": {},
@@ -4639,7 +4648,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute driver"
+      "subject": "a smiling bus driver in uniform sitting in a bus with a steering wheel, simple storybook"
     },
     "levels": {
       "L1": {},
@@ -4665,7 +4674,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute painter"
+      "subject": "a smiling painter holding a palette and a brush, standing at an easel, simple storybook"
     },
     "levels": {
       "L1": {},
@@ -4769,7 +4778,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute grass"
+      "subject": "a patch of green grass with a few small white flowers, simple illustration"
     },
     "levels": {
       "L1": {},
@@ -4821,7 +4830,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute seed"
+      "subject": "a few small brown seeds with one tiny green sprout, close up"
     },
     "levels": {
       "L1": {},
@@ -5003,7 +5012,7 @@
     "palette": "var(--pa-pal-stone)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute school"
+      "subject": "a small primary school building with a flag and a playground, no people"
     },
     "levels": {
       "L1": {},
@@ -5107,7 +5116,7 @@
     "palette": "var(--pa-pal-stone)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute zoo"
+      "subject": "a zoo entrance gate with a wooden sign and a fence, no people"
     },
     "levels": {
       "L1": {},
@@ -5133,7 +5142,7 @@
     "palette": "var(--pa-pal-stone)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute library"
+      "subject": "a small library building with big windows and books visible inside, no people"
     },
     "levels": {
       "L1": {},
@@ -5185,7 +5194,7 @@
     "palette": "var(--pa-pal-stone)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute station"
+      "subject": "a small train station platform with a roof and a bench, no people"
     },
     "levels": {
       "L1": {},

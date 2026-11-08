@@ -62,6 +62,9 @@ def sha_seed(text: str, base: int = 0) -> int:
     return (int(h[:8], 16) + base) % (2**31 - 1)
 
 
+ART_TYPES = {"object", "poem", "story", "quiz_shadow", "part_to_whole"}
+
+
 def load_cards() -> list[dict]:
     """手写版 + 词库版合并（同 id 以手写版为准）。"""
     merged: dict[str, dict] = {}
@@ -202,6 +205,12 @@ def main() -> int:
         if ids and c["id"] not in ids:
             continue
         if types and c.get("type") not in types:
+            continue
+        # 只有"会渲染插图"的类型才值得画；其余是矢量/交互动画
+        if c.get("type") not in ART_TYPES:
+            continue
+        # 明确标了 skip 的（身体部位这类）直接用 emoji
+        if (c.get("art") or {}).get("skip"):
             continue
         out = OUT_DIR / f"{c['id']}.webp"
         if out.exists() and not args.force:

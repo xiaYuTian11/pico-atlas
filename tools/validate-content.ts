@@ -119,7 +119,8 @@ for (const c of cards) {
   // 主图：只有"真的会渲染插图"的类型才要求有图
   // （数数/图形/颜色/对比/描红/画板/分类是矢量与交互，不靠插画）
   const IMAGE_TYPES = ['object', 'poem', 'story', 'quiz_shadow', 'part_to_whole'];
-  if (IMAGE_TYPES.includes(type)) {
+  const artSkip = !!(c.art as { skip?: boolean } | undefined)?.skip;
+  if (IMAGE_TYPES.includes(type) && !artSkip) {
     checkImage(id, `images/${id}`, '主图', true);
   }
 

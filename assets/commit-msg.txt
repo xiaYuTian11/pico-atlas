@@ -1,0 +1,18 @@
+feat: 补全插图管线与素材，修正出图提示词
+
+素材
+- 200 张识物图全部产出，重跑 40 余张提示词有歧义的（樱桃/猕猴桃/白菜/土豆/辣椒/豌豆/生菜/椰子）
+- 抽象自然现象（太阳/雨/风/雷电/沙滩）改为 emoji 呈现，SD 画出来是个圆饼
+- 身体部位、镜子/毛巾/电风扇/吸尘器/积木/娃娃/拼图 标记 art.skip，不再出图
+- 自然风景类（大海/山/石头/火/彩虹/月亮/星星/云/雪）关闭 rembg 抠图，保留方形场景
+- 服装类加 no person，职业类补道具描述，食物类加 no face
+
+工具
+- gen_images.py 只处理会渲染插图的类型（object/poem/story/quiz_shadow/part_to_whole），跳过矢量与交互卡
+- gen-cards.mjs 加 SUBJECT 精确描述表、SKIP_IMAGE、NO_CUTOUT
+- contact_sheet.py 改为读双文件合并、支持分页（--per），257 张图不再拼成一万像素长图
+- validate-content.ts 尊重 art.skip
+
+无障碍与巡检
+- Home/AtlasGrid/Stage 加 data-lane / data-section / data-card / data-back 钩子
+- walkthrough.mjs 重写：全站 27 分区 137 张卡逐个点开，0 报错 0 个 404

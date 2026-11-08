@@ -23,8 +23,19 @@ from PIL import Image, ImageDraw, ImageFont  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 CARDS = ROOT / "src" / "content" / "cards.json"
+CARDS_AUTO = ROOT / "src" / "content" / "cards-auto.json"
 IMG = ROOT / "public" / "media" / "images"
 OUT = ROOT / "assets" / "review"
+
+
+def load_cards() -> list[dict]:
+    merged: dict[str, dict] = {}
+    if CARDS_AUTO.exists():
+        for c in json.loads(CARDS_AUTO.read_text(encoding="utf-8")):
+            merged[c["id"]] = c
+    for c in json.loads(CARDS.read_text(encoding="utf-8")):
+        merged[c["id"]] = c
+    return list(merged.values())
 
 
 def load_font(size: int):
@@ -40,9 +51,10 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--cols", type=int, default=6)
     ap.add_argument("--size", type=int, default=200)
+    ap.add_argument("--per", type=int, default=48, help="每页多少张")
     args = ap.parse_args()
 
-    cards = json.loads(CARDS.read_text(encoding="utf-8"))
+    cards = load_cards()
     have = [(c, IMG / f"{c['id']}.webp") for c in cards if (IMG / f"{c['id']}.webp").exists()]
     if not have:
         print("还没有任何插图")
@@ -51,26 +63,28 @@ def main() -> int:
     cols = args.cols
     cell = args.size
     label_h = 26
-    rows = (len(have) + cols - 1) // cols
-    sheet = Image.new("RGB", (cols * cell, rows * (cell + label_h)), (252, 248, 243))
-    draw = ImageDraw.Draw(sheet)
-    font = load_font(15)
-
-    for i, (card, path) in enumerate(have):
-        r, c = divmod(i, cols)
-        x, y = c * cell, r * (cell + label_h)
-        with Image.open(path) as im:
-            im = im.convert("RGB")
-            im.thumbnail((cell - 8, cell - 8), Image.LANCZOS)
-            sheet.paste(im, (x + (cell - im.width) // 2, y + (cell - im.height) // 2))
-        label = f"{card.get('zh', card['id'])}"
-        w = draw.textlength(label, font=font)
-        draw.text((x + (cell - w) / 2, y + cell + 3), label, fill=(70, 62, 54), font=font)
-
     OUT.mkdir(parents=True, exist_ok=True)
-    dst = OUT / "contact.png"
-    sheet.save(dst)
-    print(f"{len(have)} 张 -> {dst.relative_to(ROOT)}  ({sheet.width}×{sheet.height})")
+    for page, start in enumerate(range(0, len(have), args.per), 1):
+        chunk = have[start : start + args.per]
+        rows = (len(chunk) + cols - 1) // cols
+        sheet = Image.new("RGB", (cols * cell, rows * (cell + label_h)), (252, 248, 243))
+        draw = ImageDraw.Draw(sheet)
+        font = load_font(15)
+
+        for i, (card, path) in enumerate(chunk):
+            r, c = divmod(i, cols)
+            x, y = c * cell, r * (cell + label_h)
+            with Image.open(path) as im:
+                im = im.convert("RGB")
+                im.thumbnail((cell - 8, cell - 8), Image.LANCZOS)
+                sheet.paste(im, (x + (cell - im.width) // 2, y + (cell - im.height) // 2))
+            label = f"{card.get('zh', card['id'])}"
+            w = draw.textlength(label, font=font)
+            draw.text((x + (cell - w) / 2, y + cell + 3), label, fill=(70, 62, 54), font=font)
+
+        dst = OUT / f"contact-{page}.png"
+        sheet.save(dst)
+        print(f"{len(chunk)} 张 -> {dst.relative_to(ROOT)} ({sheet.width}x{sheet.height})")
     return 0
 
 

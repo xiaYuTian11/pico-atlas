@@ -84,7 +84,7 @@ function sectionIcon(id: string, fallback: string): string | undefined {
   <div class="pa-grid pa-screen">
     <!-- 顶栏 -->
     <header class="pa-grid__top">
-      <button type="button" class="pa-grid__back pa-hit" aria-label="返回首页" @click="emit('back')">
+      <button type="button" class="pa-grid__back pa-hit" aria-label="返回首页" data-back @click="emit('back')">
         <PaIcon name="home" />
       </button>
       <div class="pa-grid__title">
@@ -104,6 +104,7 @@ function sectionIcon(id: string, fallback: string): string | undefined {
         :class="{ 'is-active': s.id === activeSectionId }"
         :aria-selected="s.id === activeSectionId"
         :aria-label="s.zh"
+        :data-section="s.id"
         @click="pickSection(s.id)"
       >
         <span class="pa-grid__tab-icon">
@@ -122,6 +123,7 @@ function sectionIcon(id: string, fallback: string): string | undefined {
         type="button"
         class="pa-grid__cell"
         :class="{ 'is-seen': seenOf(c.id) }"
+        :data-card="c.id"
         :style="{ background: c.palette ?? 'var(--pa-card)' }"
         :aria-label="c.zh"
         @click="openCard(c)"

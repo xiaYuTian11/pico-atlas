@@ -75,6 +75,7 @@ void PaIcon;
         class="pa-home__entry"
         :style="{ background: lane.tint }"
         :aria-label="`${lane.zh}，共 ${counts[lane.id]} 张卡片`"
+        :data-lane="lane.id"
         @click="go(lane.id)"
       >
         <span class="pa-home__entry-icon">

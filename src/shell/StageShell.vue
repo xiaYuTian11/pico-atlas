@@ -496,7 +496,7 @@ void PaIcon;
   <div class="pa-stage-screen pa-screen">
     <!-- 顶栏 -->
     <header class="pa-stage__top">
-      <button type="button" class="pa-stage__home pa-hit" aria-label="返回" @click="back">
+      <button type="button" class="pa-stage__home pa-hit" aria-label="返回" data-back @click="back">
         <PaIcon name="home" />
       </button>
 
