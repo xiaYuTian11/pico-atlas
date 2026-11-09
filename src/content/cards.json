@@ -6784,5 +6784,210 @@
       "seed": 5016,
       "scene_template": "{subject}, storybook page illustration"
     }
+  },
+  {
+    "id": "quiz-sound-duck",
+    "lane": "play",
+    "type": "quiz_sound",
+    "section": "quiz_sound",
+    "zh": "听一听：这是什么声音？",
+    "en": "What Sound?",
+    "emoji": "👂",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "duck",
+    "parentGuide": {
+      "explain": "嘎嘎嘎，扁嘴巴的小鸭子在叫。",
+      "prompt": "小鸭子怎么叫的呀？"
+    },
+    "quizPayload": {
+      "soundCue": "duck",
+      "options": [
+        {
+          "id": "opt-小鸭子",
+          "zh": "小鸭子",
+          "emoji": "🦆",
+          "isCorrect": true,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-小鸡",
+          "zh": "小鸡",
+          "emoji": "🐔",
+          "isCorrect": false,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-小鹅",
+          "zh": "小鹅",
+          "emoji": "🦢",
+          "isCorrect": false,
+          "sound": "pop"
+        }
+      ]
+    }
+  },
+  {
+    "id": "quiz-sound-rooster",
+    "lane": "play",
+    "type": "quiz_sound",
+    "section": "quiz_sound",
+    "zh": "听一听：这是什么声音？",
+    "en": "What Sound?",
+    "emoji": "👂",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "rooster",
+    "parentGuide": {
+      "explain": "喔喔喔，大公鸡在叫太阳起床呢。",
+      "prompt": "是谁在天亮的时候打鸣呀？"
+    },
+    "quizPayload": {
+      "soundCue": "rooster",
+      "options": [
+        {
+          "id": "opt-大公鸡",
+          "zh": "大公鸡",
+          "emoji": "🐓",
+          "isCorrect": true,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-小鸭子",
+          "zh": "小鸭子",
+          "emoji": "🦆",
+          "isCorrect": false,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-小鸟",
+          "zh": "小鸟",
+          "emoji": "🐦",
+          "isCorrect": false,
+          "sound": "pop"
+        }
+      ]
+    }
+  },
+  {
+    "id": "quiz-sound-rain",
+    "lane": "play",
+    "type": "quiz_sound",
+    "section": "quiz_sound",
+    "zh": "听一听：这是什么声音？",
+    "en": "What Sound?",
+    "emoji": "👂",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "rain",
+    "parentGuide": {
+      "explain": "哗啦啦，雨点从天上落下来啦。",
+      "prompt": "宝宝下雨天要打什么呀？"
+    },
+    "quizPayload": {
+      "soundCue": "rain",
+      "options": [
+        {
+          "id": "opt-下雨了",
+          "zh": "下雨了",
+          "emoji": "🌧️",
+          "isCorrect": true,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-刮大风",
+          "zh": "刮大风",
+          "emoji": "🌬️",
+          "isCorrect": false,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-敲小鼓",
+          "zh": "敲小鼓",
+          "emoji": "🥁",
+          "isCorrect": false,
+          "sound": "pop"
+        }
+      ]
+    }
+  },
+  {
+    "id": "quiz-sound-sheep",
+    "lane": "play",
+    "type": "quiz_sound",
+    "section": "quiz_sound",
+    "zh": "听一听：这是什么声音？",
+    "en": "What Sound?",
+    "emoji": "👂",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "sheep",
+    "parentGuide": {
+      "explain": "咩——小羊在喊妈妈呢。",
+      "prompt": "小羊的毛毛软不软呀？"
+    },
+    "quizPayload": {
+      "soundCue": "sheep",
+      "options": [
+        {
+          "id": "opt-小羊",
+          "zh": "小羊",
+          "emoji": "🐑",
+          "isCorrect": true,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-小牛",
+          "zh": "小牛",
+          "emoji": "🐮",
+          "isCorrect": false,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-小猫",
+          "zh": "小猫",
+          "emoji": "🐱",
+          "isCorrect": false,
+          "sound": "pop"
+        }
+      ]
+    }
+  },
+  {
+    "id": "quiz-sound-bird",
+    "lane": "play",
+    "type": "quiz_sound",
+    "section": "quiz_sound",
+    "zh": "听一听：这是什么声音？",
+    "en": "What Sound?",
+    "emoji": "👂",
+    "palette": "var(--pa-pal-lilac)",
+    "sound": "bird",
+    "parentGuide": {
+      "explain": "叽叽喳喳，小鸟在枝头唱歌。",
+      "prompt": "小鸟唱歌好听吗？"
+    },
+    "quizPayload": {
+      "soundCue": "bird",
+      "options": [
+        {
+          "id": "opt-小鸟",
+          "zh": "小鸟",
+          "emoji": "🐦",
+          "isCorrect": true,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-小鸡",
+          "zh": "小鸡",
+          "emoji": "🐔",
+          "isCorrect": false,
+          "sound": "pop"
+        },
+        {
+          "id": "opt-蜜蜂",
+          "zh": "蜜蜂",
+          "emoji": "🐝",
+          "isCorrect": false,
+          "sound": "pop"
+        }
+      ]
+    }
   }
 ]

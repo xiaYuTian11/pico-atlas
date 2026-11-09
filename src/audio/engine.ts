@@ -246,7 +246,22 @@ export function unlockAudio(): void {
   if (c && c.state === 'suspended') void c.resume();
 }
 
-type SfxName = 'pop' | 'chime' | 'meow' | 'bark' | 'didi' | 'train' | 'water' | 'yawn' | 'sparkle' | 'soft';
+type SfxName =
+  | 'pop'
+  | 'chime'
+  | 'meow'
+  | 'bark'
+  | 'didi'
+  | 'train'
+  | 'water'
+  | 'yawn'
+  | 'sparkle'
+  | 'soft'
+  | 'duck'
+  | 'rooster'
+  | 'rain'
+  | 'sheep'
+  | 'bird';
 
 /**
  * 播一个音效。
@@ -337,7 +352,7 @@ function synth(name: SfxName): void {
     src.stop(t + delay + dur + 0.02);
   };
 
-  /** 滑音 + 颤音：猫叫、羊叫这类"活物"的声音 */
+  /** 滑音 + 颤音：猫叫、羊叫这类"活物"的声音（delay 可选，支持多声连叫） */
   const voice = (
     startFreq: number,
     midFreq: number,
@@ -345,13 +360,14 @@ function synth(name: SfxName): void {
     dur: number,
     peak: number,
     vibratoHz = 6,
+    delay = 0,
   ): void => {
     const osc = c.createOscillator();
     const gain = c.createGain();
     osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(startFreq, t);
-    osc.frequency.linearRampToValueAtTime(midFreq, t + dur * 0.45);
-    osc.frequency.linearRampToValueAtTime(endFreq, t + dur);
+    osc.frequency.setValueAtTime(startFreq, t + delay);
+    osc.frequency.linearRampToValueAtTime(midFreq, t + delay + dur * 0.45);
+    osc.frequency.linearRampToValueAtTime(endFreq, t + delay + dur);
 
     const lfo = c.createOscillator();
     const lfoGain = c.createGain();
@@ -362,21 +378,21 @@ function synth(name: SfxName): void {
 
     const formant = c.createBiquadFilter();
     formant.type = 'bandpass';
-    formant.frequency.setValueAtTime(midFreq * 2.4, t);
+    formant.frequency.setValueAtTime(midFreq * 2.4, t + delay);
     formant.Q.value = 1.6;
 
-    gain.gain.setValueAtTime(0.001, t);
-    gain.gain.linearRampToValueAtTime(peak, t + 0.06);
-    gain.gain.setValueAtTime(peak, t + dur * 0.7);
-    gain.gain.exponentialRampToValueAtTime(0.002, t + dur);
+    gain.gain.setValueAtTime(0.001, t + delay);
+    gain.gain.linearRampToValueAtTime(peak, t + delay + 0.06);
+    gain.gain.setValueAtTime(peak, t + delay + dur * 0.7);
+    gain.gain.exponentialRampToValueAtTime(0.002, t + delay + dur);
 
     osc.connect(formant);
     formant.connect(gain);
     gain.connect(master);
-    osc.start(t);
-    osc.stop(t + dur + 0.02);
-    lfo.start(t);
-    lfo.stop(t + dur + 0.02);
+    osc.start(t + delay);
+    osc.stop(t + delay + dur + 0.02);
+    lfo.start(t + delay);
+    lfo.stop(t + delay + dur + 0.02);
   };
 
   switch (name) {
@@ -427,6 +443,39 @@ function synth(name: SfxName): void {
 
     case 'soft':
       tone(300, 'sine', 0.13, 0.09);
+      break;
+
+    case 'duck':
+      // 嘎嘎：两声短促的哑嗓音，频带比猫低
+      voice(320, 560, 380, 0.14, 0.2, 9);
+      voice(300, 540, 360, 0.14, 0.18, 9, 0.18);
+      break;
+
+    case 'rooster':
+      // 喔喔喔：三段上行滑音，嗓音明亮
+      voice(400, 620, 520, 0.22, 0.16, 5);
+      voice(520, 880, 760, 0.3, 0.15, 5, 0.24);
+      voice(480, 700, 420, 0.34, 0.13, 5, 0.56);
+      break;
+
+    case 'rain':
+      // 哗哗：宽频噪声从高空洒下，高频渐软
+      noise(1.3, 'highpass', 1800, 0.4, 0.16, 0, 900);
+      noise(1.3, 'bandpass', 700, 0.5, 0.12);
+      break;
+
+    case 'sheep':
+      // 咩：颤音明显的鼻音嗓，两头滑落
+      voice(520, 430, 330, 0.55, 0.17, 7);
+      noise(0.5, 'bandpass', 900, 1.2, 0.03, 0.05);
+      break;
+
+    case 'bird':
+      // 叽叽喳喳：高频短音三连，像雀鸟枝头蹦跳
+      tone(2600, 'sine', 0.07, 0.1, 0, 3200);
+      tone(2900, 'sine', 0.06, 0.09, 0.1, 2400);
+      tone(2500, 'sine', 0.07, 0.08, 0.19, 3300);
+      tone(3100, 'sine', 0.05, 0.07, 0.28, 2600);
       break;
 
     case 'pop':

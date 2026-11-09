@@ -1,7 +1,7 @@
 {
   "_说明": "应用内升级的备用更新源。发布新版本时把这里改成最新版信息即可（GitHub Releases 能读到时会优先用 Releases）。",
-  "version": "0.2.0",
-  "url": "https://github.com/xiaYuTian11/pico-atlas/releases/download/v0.2.0/pico-atlas-0.2.0.apk",
+  "version": "0.2.1",
+  "url": "https://github.com/xiaYuTian11/pico-atlas/releases/download/v0.2.1/pico-atlas-0.2.1.apk",
   "size": 38044090,
   "notes": "大扩容：古诗20首/故事68页/益智题全扩容 + 息屏听书（+383条语音）"
 }
