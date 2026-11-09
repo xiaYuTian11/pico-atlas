@@ -1,6 +1,6 @@
 {
   "name": "pico-atlas",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "小图鉴 Pico Atlas — 面向 3–5 岁的「一页一物」图文启蒙应用",
