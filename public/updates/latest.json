@@ -1,7 +1,7 @@
 {
   "_说明": "应用内升级的备用更新源。发布新版本时把这里改成最新版信息即可（GitHub Releases 能读到时会优先用 Releases）。",
-  "version": "0.1.1",
-  "url": "https://github.com/xiaYuTian11/pico-atlas/releases/download/v0.1.1/pico-atlas-0.1.1.apk",
+  "version": "0.2.0",
+  "url": "https://github.com/xiaYuTian11/pico-atlas/releases/download/v0.2.0/pico-atlas-0.2.0.apk",
   "size": 27543988,
   "notes": "找影子修复；全库语音响度归一；点词即读词"
 }

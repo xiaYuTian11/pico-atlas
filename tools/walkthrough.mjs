@@ -66,7 +66,19 @@ await send('Runtime.enable');
 await send('Network.enable');
 await send('Page.enable');
 
-// 进入首页（跳过年龄选择，用默认档）
+// 进入首页；无存档时注入默认档（新 profile 首访会卡在年龄选择页）
+await send('Page.navigate', { url: APP });
+await sleep(1200);
+await evaluate(`
+  (() => {
+    const KEY = 'pico-atlas:v2';
+    let s = null;
+    try { s = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { s = null; }
+    if (!s || !s.ageBand) {
+      localStorage.setItem(KEY, JSON.stringify({ v: 2, ageBand: 'L2' }));
+    }
+  })()
+`);
 await send('Page.navigate', { url: APP });
 await sleep(2500);
 

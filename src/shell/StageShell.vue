@@ -16,6 +16,7 @@ import type { Card, Lane } from '@/content/types';
 import { CARD_RENDERERS, GESTURE_LOCKED_TYPES } from '@/cards';
 import { state, toggleFavorite, markSeen, setLastId, isFavorite as isFav } from '@/state/store';
 import { playSfx, stopAll, unlockAudio, newSession, alive, sleep } from '@/audio/engine';
+import { engageListen, releaseListen } from '@/audio/keepawake';
 import { reading, beginReading, endReading } from '@/state/runtime';
 import { readCard, readPart, autoReadsOnFlip, TIMING, type HighlightTarget } from '@/audio/playback';
 import { audioMode } from '@/content/media';
@@ -412,10 +413,19 @@ function onToggleFav(): void {
 
 function onVisibility(): void {
   if (document.hidden) {
+    // 息屏时正在读（翻页即读巡航 / 单页循环 / 手动朗读中）→ 进入听书态：
+    // 唤醒锁让 WebView 计时器与音频继续跑，不硬停。家长可从通知栏停止。
+    if (isPlaying.value || reading.value) {
+      void engageListen();
+      return;
+    }
     stopLoop();
     stopCruise();
     stopAll();
     clearHighlight();
+  } else {
+    // 回到前台：释放听书锁（幂等；若仍在读则由朗读结束钩子再处理）
+    void releaseListen();
   }
 }
 
