@@ -114,7 +114,8 @@ Vite + Vue 3 + TypeScript + Capacitor（Android）。
 
 ## 状态
 
-🚧 框架已跑通，样例内容（14 类 × 3 张）已入库，正在扩全量词库。
+📦 v0.1.0 已发版（GitHub Release，含 APK）。257 张卡片、素材全量齐备，安卓壳已入库。
+后续发版流程见 [`docs/updates.md`](docs/updates.md)。
 
 ---
 

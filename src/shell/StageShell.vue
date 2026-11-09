@@ -17,7 +17,7 @@ import { CARD_RENDERERS, GESTURE_LOCKED_TYPES } from '@/cards';
 import { state, toggleFavorite, markSeen, setLastId, isFavorite as isFav } from '@/state/store';
 import { playSfx, stopAll, unlockAudio, newSession, alive, sleep } from '@/audio/engine';
 import { reading, beginReading, endReading } from '@/state/runtime';
-import { readCard, autoReadsOnFlip, TIMING, type HighlightTarget } from '@/audio/playback';
+import { readCard, readPart, autoReadsOnFlip, TIMING, type HighlightTarget } from '@/audio/playback';
 import { audioMode } from '@/content/media';
 import { getSection } from '@/content';
 import BottomBar from '@/ui/BottomBar.vue';
@@ -237,24 +237,20 @@ function onCardTap(e: MouseEvent): void {
       highlight.value = 'poemLine';
       stopCruise();
       stopAll();
-      void import('@/audio/playback').then(({ readPart }) => {
-        beginReading('manual');
-        void readPart(card.value!, 'poemLine', i).then(() => {
-          clearHighlight();
-          endReading();
-        });
+      beginReading('manual');
+      void readPart(card.value!, 'poemLine', i).then(() => {
+        clearHighlight();
+        endReading();
       });
       return;
     }
     highlight.value = part as HighlightTarget;
     stopCruise();
     stopAll();
-    void import('@/audio/playback').then(({ readPart }) => {
-      beginReading('manual');
-      void readPart(card.value!, part as HighlightTarget).then(() => {
-        clearHighlight();
-        endReading();
-      });
+    beginReading('manual');
+    void readPart(card.value!, part as HighlightTarget).then(() => {
+      clearHighlight();
+      endReading();
     });
     pulse(target);
     return;

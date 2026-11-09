@@ -84,7 +84,7 @@ async function readObject(card: Card, ticket: number, hooks: ReadHooks): Promise
 
   // 1. 中文主词
   hooks.onHighlight('zh');
-  const ok1 = await speak({
+  await speak({
     url: audioZh(card.id),
     text: card.zh,
     lang: 'zh',
@@ -123,8 +123,8 @@ async function readObject(card: Card, ticket: number, hooks: ReadHooks): Promise
     }
   }
 
-  // 单卡循环模式下，object 卡在 tap_to_read 时不该自动读
-  return ok1 || true;
+  // 逐段朗读是否被打断由 alive(ticket) 判断；能走到这里就是完整读完
+  return true;
 }
 
 /* ---------------- 古诗：整首优先，逐句兜底 ---------------- */
@@ -237,7 +237,6 @@ async function readQuizPrompt(card: Card, ticket: number, hooks: ReadHooks): Pro
 /* ---------------- 单卡点击：点哪读哪 ---------------- */
 
 export async function readPart(card: Card, part: HighlightTarget, poemLineIndex?: number): Promise<void> {
-  const ticket = newSession();
   const mode = state.prefs.playMode;
 
   // 任何点击都先作废进行中的播放（强打断）
@@ -248,13 +247,16 @@ export async function readPart(card: Card, part: HighlightTarget, poemLineIndex?
   if (mode === 'quiet_mute') {
     // 静音态也要有声音反馈？不 —— 静音就是静音。
     // 但必须有视觉反馈，由调用方（组件）负责。
-    void ticket;
     return;
   }
 
   switch (part) {
     case 'zh': {
+      // 先给即时反馈（拟声/气泡音），再读中文词。
+      // CardText 的 aria-label 承诺「点一下听中文」，不能只响音效。
+      // 点图区播拟声的路径在 StageShell.onCardTap 里，与此处不重叠。
       playSfx(card.sound ?? 'pop');
+      await speak({ url: audioZh(card.id), text: card.zh, lang: 'zh', ticket: t });
       break;
     }
     case 'en':

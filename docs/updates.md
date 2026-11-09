@@ -9,15 +9,18 @@
 
 | 方式                   | 能不能用         | 说明                                                      |
 | ---------------------- | ---------------- | --------------------------------------------------------- |
-| **GitHub Releases**    | 需要仓库**公开** | 匿名读 API；私库会 404（除非把 token 塞进包里，绝不建议） |
-| **latest.json 备用源** | 可以，私库也能用 | 放在任意公开地址（gist / 对象存储 / CDN），改 URL 即可    |
+| **GitHub Releases**    | 需要仓库**公开** | 匿名读 API **及匿名下载资产都要求 public**；私库全 404（已实测：带 token 200、匿名 404） |
+| **latest.json 备用源** | 同样需要 public  | gist 本身可达，但 latest.json 里的 `url` 指向 GitHub Release 资产——私库下同样下载不到 |
 | 应用商店               | 不适用           | 自用侧载，不上架                                          |
+
+**结论：想在 App 内在线更新，仓库必须转 public**（Settings → General → Danger Zone → Change visibility）。
+私库状态下更新面板会提示"连不上更新源"或下载失败，属预期行为。
 
 代码里的两个常量在 `src/update/updater.ts`：
 
 ```ts
 export const UPDATE_REPO = 'xiaYuTian11/pico-atlas';
-export const UPDATE_FEED = `https://raw.githubusercontent.com/${UPDATE_REPO}/main/public/updates/latest.json`;
+export const UPDATE_FEED = `https://gist.githubusercontent.com/xiaYuTian11/9d35ae995de3782a380e948b1ab0dd9c/raw/latest.json`;
 ```
 
 **当前仓库是 private** —— 所以现在点「检查更新」会提示"连不上更新源"。
@@ -40,8 +43,9 @@ gh release create v0.1.1 "android/app/build/outputs/apk/debug/app-debug.apk#pico
   --title "v0.1.1" --notes "修复：古诗读完四句；新增语速设置"
 ```
 
-如果走备用源，同时把 `public/updates/latest.json` 的 `version / url / notes / size` 更新，
-提交到 main（`raw.githubusercontent.com` 会跟着更新）。
+如果走备用源，同时把 `public/updates/latest.json` 的 `version / url / notes / size` 更新
+（`size` 填真实字节数，可用 `ls -l` 查），提交到 main 后，
+**gist 上也要同步改一份**（当前 UPDATE_FEED 读的是 gist，不是仓库 raw 地址）。
 
 ---
 
