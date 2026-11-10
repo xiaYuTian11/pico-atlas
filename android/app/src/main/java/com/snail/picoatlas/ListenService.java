@@ -41,11 +41,17 @@ public class ListenService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null && "stop".equals(intent.getAction())) {
+            KeepAwakePlugin.onServiceStopped();
             stopSelf();
             return START_NOT_STICKY;
         }
         String title = intent != null ? intent.getStringExtra("title") : null;
-        startForeground(NOTI_ID, buildNotification(title == null ? "小图鉴" : title));
+        Notification notification = buildNotification(title == null ? "小图鉴" : title);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startForeground(NOTI_ID, notification, android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK);
+        } else {
+            startForeground(NOTI_ID, notification);
+        }
         if (wakeLock != null && !wakeLock.isHeld()) {
             // 6 小时上限：一场听书远用不完，兜底防泄漏
             wakeLock.acquire(6 * 60 * 60 * 1000L);

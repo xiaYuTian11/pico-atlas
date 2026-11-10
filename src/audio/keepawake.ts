@@ -14,6 +14,10 @@ interface KeepAwakePlugin {
   start(options: { title?: string }): Promise<void>;
   stop(): Promise<void>;
   isRunning(): Promise<{ running: boolean }>;
+  addListener(
+    eventName: 'stopRequested',
+    listener: (data: { action: string }) => void,
+  ): Promise<{ remove: () => void }>;
 }
 
 const KeepAwakeAudio = registerPlugin<KeepAwakePlugin>('KeepAwakeAudio');
@@ -43,5 +47,14 @@ export async function releaseListen(): Promise<void> {
     await KeepAwakeAudio.stop();
   } catch {
     // 同上
+  }
+}
+
+/** 监听原生通知栏"停止"操作 */
+export function onStopRequested(callback: () => void): Promise<{ remove: () => void }> {
+  try {
+    return KeepAwakeAudio.addListener('stopRequested', () => callback());
+  } catch {
+    return Promise.resolve({ remove: () => {} });
   }
 }

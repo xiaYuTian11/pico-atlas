@@ -9,6 +9,8 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
+import java.lang.ref.WeakReference;
+
 /**
  * 息屏听书插件（web 侧 src/audio/keepawake.ts 与之对应）。
  *
@@ -19,6 +21,25 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 public class KeepAwakePlugin extends Plugin {
 
     private boolean running = false;
+    private static WeakReference<KeepAwakePlugin> instanceRef;
+
+    @Override
+    public void load() {
+        super.load();
+        instanceRef = new WeakReference<>(this);
+    }
+
+    public static void onServiceStopped() {
+        if (instanceRef != null) {
+            KeepAwakePlugin plugin = instanceRef.get();
+            if (plugin != null) {
+                plugin.running = false;
+                JSObject ret = new JSObject();
+                ret.put("action", "stop");
+                plugin.notifyListeners("stopRequested", ret);
+            }
+        }
+    }
 
     @PluginMethod
     public void start(PluginCall call) {

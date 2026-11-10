@@ -1,7 +1,7 @@
 {
   "_说明": "应用内升级的备用更新源。发布新版本时把这里改成最新版信息即可（GitHub Releases 能读到时会优先用 Releases）。",
-  "version": "0.2.1",
-  "url": "https://github.com/xiaYuTian11/pico-atlas/releases/download/v0.2.1/pico-atlas-0.2.1.apk",
-  "size": 38129510,
-  "notes": "听声音扩容至 8 题（新增鸭子/公鸡/下雨/小羊/小鸟）；上版含古诗20首/故事68页/息屏听书"
+  "version": "0.2.2",
+  "url": "https://github.com/xiaYuTian11/pico-atlas/releases/download/v0.2.2/pico-atlas-0.2.2.apk",
+  "size": 38129946,
+  "notes": "息屏听书闭环：通知栏点停止立即停止网页声音、播放完毕自动撤销通知与唤醒锁"
 }

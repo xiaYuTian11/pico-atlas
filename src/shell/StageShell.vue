@@ -16,7 +16,7 @@ import type { Card, Lane } from '@/content/types';
 import { CARD_RENDERERS, GESTURE_LOCKED_TYPES } from '@/cards';
 import { state, toggleFavorite, markSeen, setLastId, isFavorite as isFav } from '@/state/store';
 import { playSfx, stopAll, unlockAudio, newSession, alive, sleep } from '@/audio/engine';
-import { engageListen, releaseListen } from '@/audio/keepawake';
+import { engageListen, releaseListen, onStopRequested } from '@/audio/keepawake';
 import { reading, beginReading, endReading } from '@/state/runtime';
 import { readCard, readPart, autoReadsOnFlip, TIMING, type HighlightTarget } from '@/audio/playback';
 import { audioMode } from '@/content/media';
@@ -457,6 +457,15 @@ function onTwoFingerMove(e: TouchEvent): void {
   }
 }
 
+let stopSub: { remove: () => void } | null = null;
+
+// 息屏态下，如果播放完毕，自动释放前台服务和 WakeLock，不让通知栏一直挂着
+watch([isPlaying, reading], ([p, r]) => {
+  if (!p && !r && document.hidden) {
+    void releaseListen();
+  }
+});
+
 onMounted(() => {
   unlockAudio();
   if (card.value) {
@@ -466,6 +475,16 @@ onMounted(() => {
   scheduleAutoRead();
   document.addEventListener('visibilitychange', onVisibility);
   document.addEventListener('keydown', onKey);
+
+  void onStopRequested(() => {
+    stopCruise();
+    stopLoop();
+    stopAll();
+    clearHighlight();
+    void releaseListen();
+  }).then((sub) => {
+    stopSub = sub;
+  });
 });
 
 onUnmounted(() => {
@@ -474,6 +493,7 @@ onUnmounted(() => {
   if (flipTimer) clearTimeout(flipTimer);
   document.removeEventListener('visibilitychange', onVisibility);
   document.removeEventListener('keydown', onKey);
+  void stopSub?.remove();
 });
 
 watch(index, () => {
