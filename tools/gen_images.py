@@ -64,6 +64,55 @@ def sha_seed(text: str, base: int = 0) -> int:
 
 ART_TYPES = {"object", "poem", "story", "quiz_shadow", "part_to_whole"}
 
+# SD1.5 的文本编码器只吃 77 个 token，超出部分**从尾部静默截断**。
+# 风格词全写在尾部，一截就丢，出来的图风格跑偏。所以这里主动做预算控制。
+CLIP_TOKEN_LIMIT = 77
+_tok_holder: dict = {}
+
+
+def _tokenizer():
+    """CLIP 分词器，只用来数 token；没装/没缓存时退回按词估算。"""
+    if "tok" not in _tok_holder:
+        try:
+            from transformers import CLIPTokenizer
+
+            _tok_holder["tok"] = CLIPTokenizer.from_pretrained(
+                CFG.get("clip_tokenizer", "openai/clip-vit-large-patch14")
+            )
+        except Exception:  # 离线 / 没装 transformers → 估算
+            _tok_holder["tok"] = None
+    return _tok_holder["tok"]
+
+
+def count_tokens(text: str) -> int:
+    tok = _tokenizer()
+    if tok is not None:
+        return len(tok(text, truncation=False)["input_ids"])
+    return int(len(text.split()) * 1.35) + 1
+
+
+def fit_prompt(body: str, style: str, limit: int = CLIP_TOKEN_LIMIT) -> str:
+    """拼 body + style，保证不超过 token 上限。
+
+    SD1.5 超出 77 token 会**从尾部静默截断**，而风格词全长在尾部。
+    所以反过来做：先保主体，再按“从不可见端往回丢”的顺序降级：
+      1. 丢掉风格词尾部的短语（风格被保成同一个词头，截面不会跑偏）
+      2. 还不够，再从主体末尾按短语丢
+    """
+    body_parts = [p.strip() for p in body.split(",") if p.strip()]
+    style_parts = [p.strip() for p in style.split(",") if p.strip()]
+    if not body_parts:
+        return ", ".join(style_parts)
+
+    def n(b: list[str], s: list[str]) -> int:
+        return count_tokens(", ".join(b + s))
+
+    while style_parts and n(body_parts, style_parts) > limit and len(style_parts) > 2:
+        style_parts.pop()
+    while body_parts and n(body_parts, style_parts) > limit and len(body_parts) > 1:
+        body_parts.pop()
+    return ", ".join(body_parts + style_parts)
+
 
 def load_cards() -> list[dict]:
     """手写版 + 词库版合并（同 id 以手写版为准）。"""
@@ -74,6 +123,10 @@ def load_cards() -> list[dict]:
     for c in json.loads(CARDS.read_text(encoding="utf-8")):
         merged[c["id"]] = c
     return list(merged.values())
+
+
+# 主语已自带冠词/数量词时，模板里的 "a single" 会变成 "a single three dumplings" 这种病句
+ARTICLES = ("a ", "an ", "the ", "one ", "two ", "three ", "four ", "some ", "several ", "many ")
 
 
 def build_prompt(card: dict) -> tuple[str, str, int, bool]:
@@ -87,21 +140,44 @@ def build_prompt(card: dict) -> tuple[str, str, int, bool]:
         subject = en
 
     template = art.get("scene_template") or TYPE_HINTS.get(ctype, "{subject}")
+    if template.startswith("a single ") and str(subject).lower().startswith(ARTICLES):
+        template = template[len("a single ") :]
     body = template.replace("{subject}", subject)
 
     extra = art.get("style_extra", "")
-    prompt = f"{body}, {STYLE}"
     if extra:
-        prompt = f"{body}, {extra}, {STYLE}"
+        body = f"{body}, {extra}"
     if art.get("prompt"):
-        prompt = f"{art['prompt']}, {STYLE}"
+        body = str(art["prompt"])
 
+    prompt = fit_prompt(body, STYLE)
     cutout = art.get("cutout")
     if cutout is None:
         cutout = ctype not in SCENE_TYPES
 
     seed = int(art.get("seed") or sha_seed(card["id"]))
     return prompt, NEG, seed, cutout
+
+
+_rembg_holder: dict = {}
+
+
+def rembg_session():
+    """rembg 抠图 session（模型名可在 art.config.json 的 rembg_model 改）。
+
+    首次用某个模型时会下载权重（u2net 约 176MB，birefnet 更大）。
+    没网/下不下来时这里不报错，交给 postprocess 的 except 保底（保留原图）。
+    """
+    if "session" not in _rembg_holder:
+        name = CFG.get("rembg_model", "u2net")
+        try:
+            from rembg import new_session
+
+            _rembg_holder["session"] = new_session(name)
+        except Exception as exc:
+            print(f"  [warn] rembg 模型 {name} 不可用，抠图保底成保留原图：{exc}", flush=True)
+            _rembg_holder["session"] = None
+    return _rembg_holder["session"]
 
 
 def make_pipe(model: str):
@@ -147,7 +223,7 @@ def postprocess(src_png: Path, dst_webp: Path, cutout: bool, size: int, quality:
         try:
             from rembg import remove
 
-            cut = remove(img)  # RGBA
+            cut = remove(img, session=rembg_session())  # RGBA
             # 主体稍微内缩，避免贴边
             canvas = Image.new("RGB", (size, size), PAPER)
             subject = cut
@@ -194,6 +270,11 @@ def main() -> int:
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--no-cutout", action="store_true")
+    ap.add_argument(
+        "--repost",
+        action="store_true",
+        help="不跑 SD，用 assets/gen_raw/ 里的原图重新后处理（调抠图/调色/尺寸时用）",
+    )
     args = ap.parse_args()
 
     cards = load_cards()
@@ -213,7 +294,11 @@ def main() -> int:
         if (c.get("art") or {}).get("skip"):
             continue
         out = OUT_DIR / f"{c['id']}.webp"
-        if out.exists() and not args.force:
+        if args.repost:
+            # 重做后处理：只要有原图就值得重跑
+            if not (RAW_DIR / f"{c['id']}.png").exists():
+                continue
+        elif out.exists() and not args.force:
             continue
         todo.append(c)
 
@@ -231,6 +316,16 @@ def main() -> int:
             print(f"\n--- {c['id']} (seed={s}, cutout={cut})\n{p}")
         return 0
 
+    if args.repost:
+        for c in todo:
+            _p, _n, _s, cutout = build_prompt(c)
+            if args.no_cutout:
+                cutout = False
+            postprocess(RAW_DIR / f"{c['id']}.png", OUT_DIR / f"{c['id']}.webp", cutout, args.size, args.quality)
+            print(f"[repost] {c['id']}", flush=True)
+        print(f"完成：重新后处理 {len(todo)} 张")
+        return 0
+
     import torch
 
     RAW_DIR.mkdir(parents=True, exist_ok=True)
@@ -238,10 +333,11 @@ def main() -> int:
 
     pipe = make_pipe(args.model)
     txt_pipe_holder["pipe"] = pipe
-    txt_pipe_holder["pipe"] = pipe
 
     for i, card in enumerate(todo, 1):
         prompt, neg, seed, cutout = build_prompt(card)
+        if count_tokens(prompt) > CLIP_TOKEN_LIMIT:  # 兜底提醒：仍然超长就会丢风格词
+            print(f"  [warn] {card['id']} 提示词 {count_tokens(prompt)} token，超出上限", flush=True)
         if args.no_cutout:
             cutout = False
         gen = torch.Generator(device="cuda").manual_seed(seed)

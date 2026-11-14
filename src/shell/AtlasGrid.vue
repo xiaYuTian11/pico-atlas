@@ -8,7 +8,7 @@
  *
  * 点格子 → 进入 Stage，且 currentList = 该分区全部卡片，索引精确对位。
  */
-import { computed, ref, watch } from 'vue';
+import { computed, onUnmounted, ref, watch } from 'vue';
 import type { Card, Lane, SectionDef } from '@/content/types';
 import { populatedSections, cardsOfSection, getSection } from '@/content';
 import { state } from '@/state/store';
@@ -36,6 +36,7 @@ function recomputePerPage(): void {
 }
 recomputePerPage();
 window.addEventListener('resize', recomputePerPage);
+onUnmounted(() => window.removeEventListener('resize', recomputePerPage));
 
 const totalPages = computed(() => Math.max(1, Math.ceil(cards.value.length / perPage.value)));
 const visibleCards = computed(() =>

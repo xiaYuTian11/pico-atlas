@@ -49,8 +49,10 @@ function setLimit(v: number): void {
 }
 
 function toggleSound(): void {
-  state.prefs.soundFx = !state.prefs.soundFx;
+  const turningOff = state.prefs.soundFx;
+  // 先响再关：否则关掉的那一下就“点了没反应”，违背“每个点击都要有反馈”
   playSfx('soft');
+  state.prefs.soundFx = !turningOff;
 }
 
 function setRate(v: number): void {

@@ -177,6 +177,12 @@ export const state = reactive<AppState>(defaultState());
 
 let saveTimer: ReturnType<typeof setTimeout> | null = null;
 
+/** 本地自然日。不能用 toISOString：那是 UTC，北京时间凌晨 0–8 点会被算成同一天。 */
+function localDay(d: Date = new Date()): string {
+  const p = (n: number): string => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+
 function persist(): void {
   if (saveTimer) clearTimeout(saveTimer);
   // 防抖：狂点收藏时不疯狂写盘
@@ -200,9 +206,9 @@ export async function initState(): Promise<void> {
   if (loaded) Object.assign(state, mergeState(defaultState(), loaded));
 
   // 防沉迷按自然日重置：跨天开新局，不把昨天的时长算到今天
-  const today = new Date().toISOString().slice(0, 10);
-  const lastDay = (state.stats.lastOpenAt ?? '').slice(0, 10);
-  if (lastDay !== today) state.session.currentSessionSeconds = 0;
+  const lastOpen = state.stats.lastOpenAt ? new Date(state.stats.lastOpenAt) : null;
+  const lastDay = lastOpen && !Number.isNaN(lastOpen.getTime()) ? localDay(lastOpen) : '';
+  if (lastDay !== localDay()) state.session.currentSessionSeconds = 0;
 
   state.stats.lastOpenAt = new Date().toISOString();
   state.session.isSleeping = false;

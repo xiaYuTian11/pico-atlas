@@ -5,7 +5,7 @@
  * 支持多色、粗细两档，清空按钮。
  * 触摸由画布独占，翻页只能走底栏 ‹ ›。
  */
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import type { Card } from '@/content/types';
 import { playSfx } from '@/audio/engine';
 
@@ -93,6 +93,7 @@ onMounted(() => {
   setup();
   window.addEventListener('resize', setup);
 });
+onUnmounted(() => window.removeEventListener('resize', setup));
 
 watch(
   () => props.card.id,

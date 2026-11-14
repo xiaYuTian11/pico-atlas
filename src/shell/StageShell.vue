@@ -19,7 +19,6 @@ import { playSfx, stopAll, unlockAudio, newSession, alive, sleep } from '@/audio
 import { engageListen, releaseListen, onStopRequested } from '@/audio/keepawake';
 import { reading, beginReading, endReading } from '@/state/runtime';
 import { readCard, readPart, autoReadsOnFlip, TIMING, type HighlightTarget } from '@/audio/playback';
-import { audioMode } from '@/content/media';
 import { getSection } from '@/content';
 import BottomBar from '@/ui/BottomBar.vue';
 import PaIcon from '@/ui/PaIcon.vue';
@@ -59,6 +58,16 @@ const gestureLocked = computed(
 
 let cruiseTicket = 0;
 let flipTimer: ReturnType<typeof setTimeout> | null = null;
+/**
+ * 手动点读的序号。点读是异步的，旧的那次结束时也会清高亮——
+ * 不认序号的话，快速点两处就会出现“第二处的高亮被上一次的收尾抹掉”。
+ */
+let manualSeq = 0;
+
+/** 接管手动点读（新的点击 / 翻页 / 巡航时调用） */
+function takeOverManual(): void {
+  manualSeq++;
+}
 
 const hooks = {
   onHighlight(target: HighlightTarget, lineIdx?: number): void {
@@ -87,9 +96,11 @@ function scheduleAutoRead(): void {
     } else {
       beginReading('auto');
       void readCard(card.value!, ticket, hooks).then(() => {
-        if (alive(ticket)) clearHighlight();
+        // 被打断（翻页/暂停/切模式）时不回写状态：新的持有者已经在跑了
+        if (!alive(ticket)) return;
+        clearHighlight();
         // 故事读完后给翻页提示（否则孩子会卡在同一页反复听）
-        if (alive(ticket) && card.value?.type === 'story' && canNext.value) {
+        if (card.value?.type === 'story' && canNext.value) {
           showNextHint.value = true;
         }
         endReading();
@@ -151,13 +162,16 @@ async function toggleCruise(): Promise<void> {
     }
   }
 
-  if (alive(t)) stopCruise();
+  // 不管是因为读完、用户按停，还是被别处的新会话作废，
+  // 只要还是"播放中"就必须收拾干净；否则按钮会永远停在播放态。
+  if (isPlaying.value) stopCruise();
 }
 
 function stopCruise(): void {
   isPlaying.value = false;
   stopAll();
   clearHighlight();
+  takeOverManual();
   endReading();
 }
 
@@ -170,6 +184,7 @@ interface GoOpts {
 function goTo(next: number, opts: GoOpts = {}): void {
   if (next < 0 || next >= props.cards.length) return;
   stopLoop();
+  takeOverManual();
   endReading();
   showNextHint.value = false;
   if (!opts.silent) {
@@ -232,6 +247,8 @@ function onCardTap(e: MouseEvent): void {
 
   if (part) {
     stopLoop();
+    takeOverManual();
+    const seq = manualSeq;
     if (part.startsWith('poemLine:')) {
       const i = Number(part.split(':')[1]);
       poemLineIndex.value = i;
@@ -240,6 +257,7 @@ function onCardTap(e: MouseEvent): void {
       stopAll();
       beginReading('manual');
       void readPart(card.value!, 'poemLine', i).then(() => {
+        if (seq !== manualSeq) return; // 已经被新的点击/翻页接管
         clearHighlight();
         endReading();
       });
@@ -250,6 +268,7 @@ function onCardTap(e: MouseEvent): void {
     stopAll();
     beginReading('manual');
     void readPart(card.value!, part as HighlightTarget).then(() => {
+      if (seq !== manualSeq) return;
       clearHighlight();
       endReading();
     });
@@ -513,9 +532,6 @@ watch(
     scheduleAutoRead();
   },
 );
-
-void audioMode;
-void PaIcon;
 </script>
 
 <template>

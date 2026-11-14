@@ -156,16 +156,35 @@ function speakAudio(url: string, ticket: number, timeoutMs: number): Promise<boo
     el.defaultPlaybackRate = rate;
 
     let settled = false;
+    let guard: ReturnType<typeof setTimeout> | undefined;
     const finish = (ok: boolean): void => {
       if (settled) return;
       settled = true;
-      clearTimeout(guard);
+      if (guard !== undefined) clearTimeout(guard);
+      el.removeEventListener('loadedmetadata', onMeta);
       el.onended = null;
       el.onerror = null;
       resolve(ok);
     };
 
-    const guard = setTimeout(() => finish(alive(ticket)), timeoutMs);
+    /**
+     * 卡死保护。默认用 8 秒兜底，但故事 L3 有的读到 10 秒——
+     * 固定 8 秒会在朗读还没结束时就当“读完了”，自动巡航直接翻页，
+     * 孩子听到一半被切掉。所以拿到真实时长后按「时长 / 语速 + 余量」重算。
+     */
+    const armGuard = (ms: number): void => {
+      if (settled) return;
+      if (guard !== undefined) clearTimeout(guard);
+      guard = setTimeout(() => finish(alive(ticket)), ms);
+    };
+    const onMeta = (): void => {
+      const dur = el.duration;
+      if (Number.isFinite(dur) && dur > 0) armGuard((dur / rate) * 1000 + 1200);
+    };
+
+    el.addEventListener('loadedmetadata', onMeta);
+    armGuard(timeoutMs);
+    onMeta(); // 预加载过的话 metadata 已经在了，不会再有事件，这里直接按真实时长重算
 
     el.onended = () => finish(alive(ticket));
     el.onerror = () => {
@@ -197,6 +216,7 @@ function speakWebSpeech(
       return;
     }
     const seq = ++speakSeq;
+    const rate = state.prefs.speechRate || 1;
     let settled = false;
     const finish = (ok: boolean): void => {
       if (settled) return;
@@ -204,12 +224,13 @@ function speakWebSpeech(
       clearTimeout(guard);
       resolve(ok);
     };
-    const guard = setTimeout(() => finish(alive(ticket)), timeoutMs);
+    // 按字数估个说话时长来定超时：短句 8 秒够，故事整段就不够了。
+    const estimatedMs = ((lang === 'en' ? 80 : 240) * text.length) / Math.min(2, 0.75 * rate);
+    const guard = setTimeout(() => finish(alive(ticket)), Math.max(timeoutMs, estimatedMs + 1500));
 
     try {
       const u = new SpeechSynthesisUtterance(text);
       u.lang = lang === 'en' ? 'en-US' : 'zh-CN';
-      const rate = state.prefs.speechRate || 1;
       u.rate = Math.min(2, (lang === 'en' ? 0.78 : 0.72) * rate);
       u.pitch = 1.05;
       u.onend = () => {

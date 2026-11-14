@@ -15,6 +15,10 @@ npm run media:audio      # 出语音（edge-tts，免费）
 npm run media:sheet      # 审片：把所有插图拼成一张总览图
 ```
 
+体检按 **两份卡片 JSON 合并后** 的全量来算（`cards.json` + `cards-auto.json`），
+和运行时一致 —— 只看 `cards.json` 会漏报一半。影子题只算剪影 `_shadow`，
+它的主图不参与渲染，不计入缺失。
+
 加一张卡片 = 往 `cards.json`（或词库 `cards-auto.json`）里加一条，
 跑一次 `media:images` + `media:audio`。**永远不需要改 `.vue`。**
 
@@ -85,7 +89,11 @@ cards.json ──► SD 出 512px 原图 ──► rembg 去背 ──► 合成
 
 ### 为什么是这套参数
 
-- **fp16 / 512px / 20 步**：GTX 1050Ti 4G 上约 90 秒一张。fp32 反而更慢（Pascal 架构 fp16 单元少，但显存省一半，整体仍更快）。
+- **fp16 / 512px / 20 步**：GTX 1050Ti 4G 上实测约 **26 秒一张**（含 rembg 抠图与 WebP 后处理）。fp32 反而更慢（Pascal 架构 fp16 单元少，但显存省一半，整体仍更快）。
+- **提示词必须 ≤ 77 token**：SD1.5 的文本编码器只吃 77 个 token，**超出部分从尾部静默截断**。
+  而风格词全写在尾部，一超长就被悄悄丢掉，图的风格就跑。
+  `gen_images.py` 的 `fit_prompt()` 会先删风格词尾部的短语、再删主体尾部的短语，
+  保证拼出来的提示词一定落在预算内（`--dry-run` 可以看最终提示词）。
 - **统一纸底 `#FFFDF8`**：700 张图来自 700 次独立推理，背景白一定不一样。先去背、再合成同一个纸色，才能看起来像一本书。
 - **固定 seed**：同一 id 重跑得到同一张，不会"每跑一次全家都变了"。
 - **风格词锁 "watercolor wash + cold-press paper texture + thin dark contour"**：水彩的柔 + 轮廓的清晰，两头都要。
@@ -97,7 +105,7 @@ cards.json ──► SD 出 512px 原图 ──► rembg 去背 ──► 合成
 | `--steps 14`          | 快 30%，细节略降           |
 | `--gen-size 448`      | 快 25%，小图看不出差别     |
 | 换 LCM-LoRA（4–8 步） | 快 3 倍，水彩纹理变薄      |
-| 挂机跑一晚上          | 700 张 ≈ 17 小时（90s/张） |
+| 挂着跑一晚            | 700 张 ≈ 5–6 小时（26s/张，实测） |
 
 ---
 
@@ -136,7 +144,6 @@ npm run media:sheet      # → assets/review/contact.png
 ---
 
 ## 4. 环境
-
 | 依赖        | 位置                 | 说明                                    |
 | ----------- | -------------------- | --------------------------------------- |
 | Python 3.13 | 系统                 | `edge-tts` 装在系统 Python              |
@@ -150,4 +157,8 @@ npm run media:sheet      # → assets/review/contact.png
 python -m venv .venv
 .venv\Scripts\python.exe -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
 .venv\Scripts\python.exe -m pip install diffusers transformers accelerate safetensors rembg onnxruntime pillow
+.venv\Scripts\python.exe tools/fetch_rembg_model.py u2net   # 预先下抠图模型（约 176MB），否则第一次出图会卡在这里
 ```
+
+> 抠图模型在 `~/.rembg`（或 `~/.u2net`）。没有它 `gen_images.py` 不会报错，
+> 只是抠图步骤会被跳过（图直接铺在原背景上）。想先下好就用上面那条命令。

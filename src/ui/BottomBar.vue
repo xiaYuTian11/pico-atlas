@@ -12,7 +12,7 @@
  */
 import { computed, ref } from 'vue';
 import { PLAY_MODE_META, state, cyclePlayMode } from '@/state/store';
-import { playSfx, speak, newSession, alive } from '@/audio/engine';
+import { playSfx, speak, newSession } from '@/audio/engine';
 import { audioMode } from '@/content/media';
 import PaIcon from './PaIcon.vue';
 
@@ -64,7 +64,7 @@ function onMode(): void {
   if (modeToastTimer) clearTimeout(modeToastTimer);
   modeToastTimer = setTimeout(() => (modeToast.value = null), 1900);
 
-  // 三重确认之一：人声报读当前模式
+  // 三重确认之一：人声报读当前模式（缺音频时 speak 会回退 WebSpeech）
   const url = audioMode(PLAY_MODE_META[next].voice);
   const ticket = newSession();
   void speak({
@@ -73,10 +73,6 @@ function onMode(): void {
     lang: 'zh',
     ticket,
     timeoutMs: 2600,
-  }).then(() => {
-    if (alive(ticket)) {
-      /* 播完就静默，不再叠加 toast —— 孩子看图标 + 听人声就够了 */
-    }
   });
 }
 

@@ -56,10 +56,8 @@ const SUBJECT = {
   // 食物类：SD 很喜欢给它加脸，必须明确 no face / no character
   milk: 'a glass of milk with a straw, no face, no character',
   bun: 'two steamed buns on a bamboo steamer, no face, no character',
-  dumpling: 'a plate of steamed dumplings, no face, no character',
   bread: 'a loaf of bread with a sliced end, no face, no character',
   candy: 'a colourful wrapped candy, no face, no character',
-  chocolate: 'a chocolate bar with a bite taken, no face, no character',
   honey: 'a honey jar with a wooden dipper and a bee, no face, no character',
   // 职业：要用具体道具，不能只写角色名
   driver: 'a smiling bus driver in uniform sitting in a bus with a steering wheel, simple storybook',
@@ -67,7 +65,7 @@ const SUBJECT = {
   teacher: 'a smiling teacher standing in front of a blackboard with a book, simple storybook',
   farmer: 'a smiling farmer in a straw hat holding a basket of vegetables, simple storybook',
   // 场地方：要建筑，不是人
-  school: 'a small primary school building with a flag and a playground, no people',
+  school: 'a red brick school building with a clock above the door, a bell tower and a yellow school bus parked in front, no people, no text',
   library: 'a small library building with big windows and books visible inside, no people',
   station: 'a small train station platform with a roof and a bench, no people',
   zoo: 'a zoo entrance gate with a wooden sign and a fence, no people',
@@ -79,7 +77,16 @@ const SUBJECT = {
   grass: 'a patch of green grass with a few small white flowers, simple illustration',
   // 抽象/自然现象：SD 会画成圆圈或小动物，必须给具体画面
   broom: 'a straw broom leaning against a wall, no person',
-  phone: 'a smartphone standing upright with a bright blue screen, simple illustration',
+  phone: 'a cute mobile phone with a rounded body and a small camera dot, blank pale blue screen, no text, no letters',
+  computer: 'a desktop computer with a wide monitor, a keyboard and a mouse on a small wooden desk, blank pale screen, no text, no letters',
+  hospital: 'a small hospital building with a big red cross sign on the wall and a white ambulance parked at the entrance, no people, no text',
+  home: 'a cosy little house with a red pitched roof, a round window and a chimney, no text',
+  supermarket: 'a small corner shop front with a striped awning, baskets of fruit outside and a shopping cart, no text, no letters',
+  balloon: 'a colourful striped hot air balloon floating in the sky with a small wicker basket hanging below it, no text',
+  ball: 'a bright rubber play ball with red yellow and blue stripes, no face',
+  stone: 'a little pile of smooth pebbles stacked together, grey and brown, simple illustration, no face',
+  dumpling: 'three crescent-shaped dumplings with pleated edges on a small white plate, no face, no text',
+  chocolate: 'a bar of milk chocolate in a partly opened brown wrapper, one square broken off beside it, no face, no text',
   fire: 'a small campfire with orange flames and logs, on a paper background',
   rain: 'rain drops falling from a small grey cloud, simple illustration',
   snow: 'a snowflake pattern with small white snowflakes falling, simple illustration',
@@ -87,7 +94,6 @@ const SUBJECT = {
   lightning: 'a bright yellow lightning bolt in a dark cloud, simple illustration',
   rainbow: 'a seven colour rainbow arching over a small green hill, simple illustration',
   sea: 'blue ocean waves meeting a sandy beach with a small sailboat far away, simple illustration',
-  stone: 'three smooth grey pebbles of different sizes on sand, simple illustration',
   cloud: 'two fluffy white clouds in a blue sky, simple illustration',
   star: 'five yellow five-pointed stars in the night sky, simple illustration',
   moon: 'a round yellow full moon in the night sky with a few stars, simple illustration',
@@ -147,6 +153,11 @@ const SKIP_IMAGE = new Set([
   // 单独一个词画不出来的
   'mirror',
   'towel',
+  // SD1.5 死活画不对的：手机/饺子/巧克力跑了好几轮都出“坨”而不是实物，
+  // 而 📱 🥟 🍫 这三个 emoji 一眼就认得出，所以直接跳过插图
+  'phone',
+  'dumpling',
+  'chocolate',
   'fan',
   'vacuum',
   'blocks',

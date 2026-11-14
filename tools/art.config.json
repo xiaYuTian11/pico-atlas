@@ -6,7 +6,7 @@
   "gen_size": 512,
   "out_size": 768,
   "webp_quality": 82,
-  "style": "children's picture book illustration, hand painted watercolor wash, visible cold-press paper texture, gentle color bleed, soft edges with clean thin dark contour, muted-bright cheerful palette, flat matte, plain warm off-white paper background",
+  "style": "children's picture book illustration, hand painted watercolor wash, visible cold-press paper texture, plain warm off-white paper background, soft edges with clean thin dark contour, muted-bright cheerful palette, gentle color bleed, flat matte",
   "negative": "photo, photorealistic, 3d render, cgi, oil painting, gradient, glossy, shiny highlight, text, letters, signature, handwriting, watermark, frame, border, dark background, blurry, deformed, extra limbs, human, person, girl, boy, multiple objects",
   "type_templates": {
     "object": "a single {subject}, centered, filling most of the frame, isolated on a plain background",

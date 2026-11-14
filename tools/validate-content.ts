@@ -117,8 +117,9 @@ for (const c of cards) {
   const type = String(c.type);
 
   // 主图：只有"真的会渲染插图"的类型才要求有图
-  // （数数/图形/颜色/对比/描红/画板/分类是矢量与交互，不靠插画）
-  const IMAGE_TYPES = ['object', 'poem', 'story', 'quiz_shadow', 'part_to_whole'];
+  // （数数/图形/颜色/对比/描红/画板/分类是矢量与交互，不靠插画；
+  //   影子题渲染的是剪影 _shadow，主图不参与，所以它不在这个名单里）
+  const IMAGE_TYPES = ['object', 'poem', 'story', 'part_to_whole'];
   const artSkip = !!(c.art as { skip?: boolean } | undefined)?.skip;
   if (IMAGE_TYPES.includes(type) && !artSkip) {
     checkImage(id, `images/${id}`, '主图', true);
@@ -151,8 +152,8 @@ for (const c of cards) {
     }
   }
 
-  // 影子卡额外要剪影图
-  if (type === 'quiz_shadow') checkImage(id, `images/${id}_shadow`, '剪影图', false);
+  // 影子卡要剪影图（ShadowQuiz 唯一渲染的图，必需）
+  if (type === 'quiz_shadow') checkImage(id, `images/${id}_shadow`, '剪影图', true);
 }
 
 // 分区图标图（可选，缺了用 emoji）

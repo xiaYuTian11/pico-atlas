@@ -1935,7 +1935,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a plate of steamed dumplings, no face, no character"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -2039,7 +2039,7 @@
     "palette": "var(--pa-pal-cream)",
     "sound": "pop",
     "art": {
-      "subject": "a chocolate bar with a bite taken, no face, no character"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -2429,7 +2429,7 @@
     "palette": "var(--pa-pal-sky)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute balloon"
+      "subject": "a colourful striped hot air balloon floating in the sky with a small wicker basket hanging below it, no text"
     },
     "levels": {
       "L1": {},
@@ -3105,7 +3105,7 @@
     "palette": "var(--pa-pal-sky)",
     "sound": "pop",
     "art": {
-      "subject": "a smartphone standing upright with a bright blue screen, simple illustration"
+      "skip": true
     },
     "levels": {
       "L1": {},
@@ -3131,7 +3131,7 @@
     "palette": "var(--pa-pal-sky)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute computer"
+      "subject": "a desktop computer with a wide monitor, a keyboard and a mouse on a small wooden desk, blank pale screen, no text, no letters"
     },
     "levels": {
       "L1": {},
@@ -3313,7 +3313,7 @@
     "palette": "var(--pa-pal-rose)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute ball"
+      "subject": "a bright rubber play ball with red yellow and blue stripes, no face"
     },
     "levels": {
       "L1": {},
@@ -4126,7 +4126,7 @@
     "palette": "var(--pa-pal-mint)",
     "sound": "pop",
     "art": {
-      "subject": "three smooth grey pebbles of different sizes on sand, simple illustration",
+      "subject": "a little pile of smooth pebbles stacked together, grey and brown, simple illustration, no face",
       "cutout": false
     },
     "levels": {
@@ -4986,7 +4986,7 @@
     "palette": "var(--pa-pal-stone)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute home"
+      "subject": "a cosy little house with a red pitched roof, a round window and a chimney, no text"
     },
     "levels": {
       "L1": {},
@@ -5012,7 +5012,7 @@
     "palette": "var(--pa-pal-stone)",
     "sound": "pop",
     "art": {
-      "subject": "a small primary school building with a flag and a playground, no people"
+      "subject": "a red brick school building with a clock above the door, a bell tower and a yellow school bus parked in front, no people, no text"
     },
     "levels": {
       "L1": {},
@@ -5038,7 +5038,7 @@
     "palette": "var(--pa-pal-stone)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute hospital"
+      "subject": "a small hospital building with a big red cross sign on the wall and a white ambulance parked at the entrance, no people, no text"
     },
     "levels": {
       "L1": {},
@@ -5090,7 +5090,7 @@
     "palette": "var(--pa-pal-stone)",
     "sound": "pop",
     "art": {
-      "subject": "a single cute supermarket"
+      "subject": "a small corner shop front with a striped awning, baskets of fruit outside and a shopping cart, no text, no letters"
     },
     "levels": {
       "L1": {},
