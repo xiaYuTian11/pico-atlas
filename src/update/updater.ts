@@ -12,7 +12,12 @@ import { registerPlugin } from '@capacitor/core';
 
 export interface UpdaterPlugin {
   getVersion(): Promise<{ version: string; code: number }>;
-  download(options: { url: string; fileName?: string }): Promise<{ path: string; size: number }>;
+  download(options: {
+    url: string;
+    fileName?: string;
+    /** 更新源声明的总字节数：服务端不给 Content-Length 时用它算进度 */
+    expectedSize?: number;
+  }): Promise<{ path: string; size: number }>;
   install(options: { path: string }): Promise<void>;
   addListener(
     eventName: 'downloadProgress',
@@ -140,8 +145,9 @@ export interface DownloadResult {
 export async function downloadAndInstall(
   url: string,
   version: string,
-  onProgress?: (percent: number) => void,
+  options: { expectedSize?: number; onProgress?: (percent: number) => void } = {},
 ): Promise<DownloadResult> {
+  const { expectedSize, onProgress } = options;
   if (!isNative()) {
     // 浏览器里直接开新窗口，不做应用内安装
     window.open(url, '_blank');
@@ -150,9 +156,21 @@ export async function downloadAndInstall(
   let listener: { remove: () => void } | null = null;
   try {
     if (onProgress) {
-      listener = await AppUpdater.addListener('downloadProgress', (d) => onProgress(d.percent));
+      // 百分比只增不减：即便原生那边因为网络重传/长度纠偏给出更小的值，
+      // 界面也不回退（回退看起来就是「乱跳」）。
+      let shown = 0;
+      listener = await AppUpdater.addListener('downloadProgress', (d) => {
+        const p = Math.max(shown, Math.min(100, Math.round(d.percent)));
+        if (p === shown) return;
+        shown = p;
+        onProgress(p);
+      });
     }
-    const file = await AppUpdater.download({ url, fileName: `pico-atlas-${version}.apk` });
+    const file = await AppUpdater.download({
+      url,
+      fileName: `pico-atlas-${version}.apk`,
+      ...(expectedSize && expectedSize > 0 ? { expectedSize } : {}),
+    });
     await AppUpdater.install({ path: file.path });
     return { ok: true, path: file.path };
   } catch (e) {

@@ -59,6 +59,9 @@ public class AppUpdaterPlugin extends Plugin {
             return;
         }
         final String name = (fileName == null || fileName.isEmpty()) ? "update.apk" : fileName;
+        // 服务端不给 Content-Length（chunked / 重定向后缺失）时的兜底总大小，
+        // 由 JS 侧从更新源元数据里带下来。
+        final Long expectedTotal = call.getLong("expectedSize");
 
         new Thread(
             () -> {
@@ -77,6 +80,10 @@ public class AppUpdaterPlugin extends Plugin {
 
                     conn = (HttpURLConnection) new URL(url).openConnection();
                     conn.setInstanceFollowRedirects(true);
+                    // 必须显式禁用 gzip：Android 默认带 Accept-Encoding: gzip，
+                    // 一旦服务端压缩，Content-Length 是压缩后长度、读到的是解压后字节，
+                    // 百分比就会先冲过 100% 再回退——“进度条乱跳”的根因之一。
+                    conn.setRequestProperty("Accept-Encoding", "identity");
                     conn.setConnectTimeout(20000);
                     conn.setReadTimeout(60000);
                     conn.connect();
@@ -88,6 +95,9 @@ public class AppUpdaterPlugin extends Plugin {
                     }
 
                     long total = conn.getContentLengthLong();
+                    if (total <= 0 && expectedTotal != null && expectedTotal > 0) {
+                        total = expectedTotal;
+                    }
                     long received = 0;
                     int lastPercent = -1;
 
@@ -99,8 +109,10 @@ public class AppUpdaterPlugin extends Plugin {
                             os.write(buf, 0, n);
                             received += n;
                             if (total > 0) {
-                                int percent = (int) (received * 100 / total);
-                                if (percent != lastPercent) {
+                                // 钳在 99%：真实收尾由下载完成时统一发 100%，
+                                // 杜绝“到 100% 又倒退”和超限溢出。
+                                int percent = (int) Math.min(99, received * 100 / total);
+                                if (percent > lastPercent) {
                                     lastPercent = percent;
                                     JSObject p = new JSObject();
                                     p.put("percent", percent);
@@ -111,6 +123,19 @@ public class AppUpdaterPlugin extends Plugin {
                             }
                         }
                     }
+
+                    // 下载不完整就别交给安装器（否则只会报“解析包错误”）
+                    long got = out.length();
+                    if (total > 0 && got < total) {
+                        call.reject("download incomplete: " + got + "/" + total);
+                        return;
+                    }
+
+                    JSObject done = new JSObject();
+                    done.put("percent", 100);
+                    done.put("received", got);
+                    done.put("total", total > 0 ? total : got);
+                    notifyListeners("downloadProgress", done);
 
                     JSObject ret = new JSObject();
                     ret.put("path", out.getAbsolutePath());

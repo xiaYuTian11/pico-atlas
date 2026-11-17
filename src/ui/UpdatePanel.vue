@@ -40,7 +40,10 @@ async function install(): Promise<void> {
   if (!info.value?.url) return;
   state.value = 'downloading';
   progress.value = 0;
-  const r = await downloadAndInstall(info.value.url, info.value.latest, (p) => (progress.value = p));
+  const r = await downloadAndInstall(info.value.url, info.value.latest, {
+    expectedSize: info.value.size,
+    onProgress: (p) => (progress.value = p),
+  });
   if (r.ok) {
     message.value = '已调起安装器，按提示完成安装即可';
   } else if (r.error === 'web') {

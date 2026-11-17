@@ -1,7 +1,7 @@
 {
   "_说明": "应用内升级的备用更新源。发布新版本时把这里改成最新版信息即可（GitHub Releases 能读到时会优先用 Releases）。",
-  "version": "0.2.3",
-  "url": "https://github.com/xiaYuTian11/pico-atlas/releases/download/v0.2.3/pico-atlas-0.2.3.apk",
-  "size": 43668981,
-  "notes": "补全古诗/故事插图 94 张（不再用 emoji 回退）；修复出图提示词超长与播放时序缺陷；签名固定，可直接覆盖安装"
+  "version": "0.2.4",
+  "url": "https://github.com/xiaYuTian11/pico-atlas/releases/download/v0.2.4/pico-atlas-0.2.4.apk",
+  "size": 43669661,
+  "notes": "修复更新下载进度条乱跳：禁用 gzip 长度错配、百分比只增不减、服务端不给总大小时用元数据兜底、下载不完整直接拒绝安装"
 }
