@@ -1,7 +1,7 @@
 {
   "_说明": "应用内升级的备用更新源。发布新版本时把这里改成最新版信息即可（GitHub Releases 能读到时会优先用 Releases）。",
-  "version": "0.2.2",
-  "url": "https://github.com/xiaYuTian11/pico-atlas/releases/download/v0.2.2/pico-atlas-0.2.2.apk",
-  "size": 38129946,
-  "notes": "息屏听书闭环：通知栏点停止立即停止网页声音、播放完毕自动撤销通知与唤醒锁"
+  "version": "0.2.3",
+  "url": "https://github.com/xiaYuTian11/pico-atlas/releases/download/v0.2.3/pico-atlas-0.2.3.apk",
+  "size": 43668981,
+  "notes": "补全古诗/故事插图 94 张（不再用 emoji 回退）；修复出图提示词超长与播放时序缺陷；签名固定，可直接覆盖安装"
 }

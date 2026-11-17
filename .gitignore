@@ -62,3 +62,6 @@ gen_images.log
 gen_audio.log
 pyinstall.log
 
+
+# 签名密钥：不入库（含私钥）。备份与指纹见 docs/updates.md
+android/keystore/

@@ -23,15 +23,40 @@ export const UPDATE_REPO = 'xiaYuTian11/pico-atlas';
 export const UPDATE_FEED = `https://gist.githubusercontent.com/xiaYuTian11/9d35ae995de3782a380e948b1ab0dd9c/raw/latest.json`;
 ```
 
-**当前仓库是 private** —— 所以现在点「检查更新」会提示"连不上更新源"。
-两条路选一条：
-
-1. 把仓库改成 public（最简单；代码里本来也没有隐私内容）；
-2. 或把 `public/updates/latest.json` 同步到一个公开地址，改 `UPDATE_FEED`。
+**当前仓库是 public**（已从 private 转出）—— 「检查更新」可直接读 GitHub Releases 匿名下载，
+`latest.json` 的 gist 作为备用源。同签名前提下，应用内「下载并安装」与手动下载安装都是**覆盖升级**，不需要卸载。
 
 ---
 
-## 2. 发一个新版本（三步）
+## 2. 签名与覆盖安装（改这里前必读）
+
+Android 要求**覆盖安装的 APK 与已装版本签名完全一致**，否则报「签名不兼容」，
+只能先卸载旧版（连带丢存档）。所以签名密钥一旦确定就不能再变。
+
+| 项 | 值 |
+| --- | --- |
+| 密钥文件 | `android/keystore/pico-atlas.keystore`（**不入库**，含私钥） |
+| keystore 口令 | `android` |
+| 别名 / 别名口令 | `androiddebugkey` / `android` |
+| 证书 SHA-256 | `f0b3d92095b0be4b853cb3925685d7b62bae8b90575aa1b466dbc5ff45774bc2` |
+
+**这份密钥就是 v0.2.0 / v0.2.1 / v0.2.2 的签名密钥**（实测三版指纹一致），
+`android/app/build.gradle` 的 `signingConfigs.pico` 显式指向它，debug 与 release 都用它。
+因此从 v0.2.2 起的所有后续版本都能直接覆盖安装。
+
+> v0.1.0 用的是另一份签名，从它升到 0.2.x 必须卸载一次，属历史遗留，不再追。
+
+**必须做的备份**：把该文件另存一份到仓库外（当前本机还有一份在 `~/.android/debug.keystore`）。
+丢失后果 = 之后所有版本都无法覆盖安装，所有设备都得卸载重装一次。
+
+密钥文件缺失时**构建会直接失败**并提示，不会再静默产出一份签名不同的包。
+
+每次发版还要确认 `versionCode` 递增（`tools/bump-version.mjs` 会自动按 `主*10000+次*100+修订` 计算，
+如 `0.2.3` → `203`），否则覆盖安装报「版本降级」。
+
+---
+
+## 3. 发一个新版本（三步）
 
 ```powershell
 # 1) 改版本号（三处保持一致）
@@ -49,7 +74,7 @@ gh release create v0.1.1 "android/app/build/outputs/apk/debug/app-debug.apk#pico
 
 ---
 
-## 3. 客户端流程
+## 4. 客户端流程
 
 ```
 家长设置 → 关于与更新 → 检查更新
@@ -69,7 +94,7 @@ gh release create v0.1.1 "android/app/build/outputs/apk/debug/app-debug.apk#pico
 
 ---
 
-## 4. 为什么不做"热更新"
+## 5. 为什么不做"热更新"
 
 Capacitor 的 Web 资源打在 APK 里，运行时替换需要 `@capgo/capacitor-updater` 之类的插件
 把 web 包解到应用目录并切换加载路径。

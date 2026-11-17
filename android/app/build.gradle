@@ -1,5 +1,16 @@
 apply plugin: 'com.android.application'
 
+// 固定签名：必须与已发布版本（v0.2.0 / v0.2.1 / v0.2.2）使用同一份密钥，
+// 否则覆盖安装会报「签名不兼容」，逼用户卸载重装、丢存档。
+// 密钥文件不入库，见 docs/updates.md「签名与覆盖安装」。
+def picoKeystore = rootProject.file('keystore/pico-atlas.keystore')
+if (!picoKeystore.exists()) {
+    throw new GradleException(
+        "缺少签名密钥 ${picoKeystore}\n" +
+        "没有它会构建出签名不一致的包（装不上旧版本）。" +
+        "请从备份恢复该文件，或用 tools/new-keystore.sh 重新生成并从下一个版本起重新开始覆盖安装。")
+}
+
 android {
     namespace "com.snail.picoatlas"
     compileSdk rootProject.ext.compileSdkVersion
@@ -7,8 +18,8 @@ android {
         applicationId "com.snail.picoatlas"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 202
-        versionName "0.2.2"
+        versionCode 203
+        versionName "0.2.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -16,9 +27,22 @@ android {
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        pico {
+            storeFile picoKeystore
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
     buildTypes {
+        debug {
+            // 显式指定，避免换机器后自动生成的 debug.keystore 改掉签名
+            signingConfig signingConfigs.pico
+        }
         release {
             minifyEnabled false
+            signingConfig signingConfigs.pico
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
