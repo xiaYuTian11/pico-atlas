@@ -54,7 +54,14 @@ function pickSection(id: string): void {
   const sec = getSection(id);
   if (sec) {
     const ticket = newSession();
-    void speak({ url: audioSection(id), text: sec.zh, lang: 'zh', ticket, timeoutMs: 1600 });
+    void speak({
+      url: audioSection(id),
+      text: sec.zh,
+      lang: 'zh',
+      ticket,
+      timeoutMs: 1600,
+      rateKey: 'object',
+    });
   }
 }
 

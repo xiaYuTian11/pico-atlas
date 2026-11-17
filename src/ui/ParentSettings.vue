@@ -6,18 +6,51 @@
  * 孩子端只有"点一下换模式"，家长端才能精确设定，
  * 还能锁定模式防止孩子改掉。
  */
-import { computed } from 'vue';
-import type { AgeBand } from '@/content/types';
-import { PLAY_MODES, PLAY_MODE_META, SPEECH_RATES, state, sessionMinutes, resetSession } from '@/state/store';
+import { computed, ref, watch } from 'vue';
+import type { AgeBand, Card } from '@/content/types';
+import { DAILY_LANES, dailyPicks } from '@/content/daily';
+import {
+  PLAY_MODES,
+  PLAY_MODE_META,
+  RATE_GROUPS,
+  SPEECH_RATES,
+  rateFor,
+  state,
+  sessionMinutes,
+  resetSession,
+  type RateKey,
+} from '@/state/store';
 import { playSfx, speak, newSession } from '@/audio/engine';
-import { audioZh } from '@/content/media';
+import { audioZh, cardImage } from '@/content/media';
 import UpdatePanel from './UpdatePanel.vue';
 import BackupPanel from './BackupPanel.vue';
 import PaIcon from './PaIcon.vue';
 
 const props = defineProps<{ open: boolean }>();
-const emit = defineEmits<{ close: [] }>();
+const emit = defineEmits<{ close: []; openCard: [sectionId: string, cardId: string] }>();
 void props;
+
+/** 今日推荐：每次打开面板重算一次 —— 跨午夜或刚看完几张时能跟上 */
+const daily = ref<Record<'look' | 'read' | 'play', Card[]>>({ look: [], read: [], play: [] });
+function refreshDaily(): void {
+  daily.value = {
+    look: dailyPicks('look'),
+    read: dailyPicks('read'),
+    play: dailyPicks('play'),
+  };
+}
+watch(
+  () => props.open,
+  (open) => {
+    if (open) refreshDaily();
+  },
+  { immediate: true },
+);
+
+function openDaily(c: Card): void {
+  playSfx('pop');
+  emit('openCard', c.section, c.id);
+}
 
 const AGE_OPTIONS: Array<{ id: AgeBand; zh: string; desc: string }> = [
   { id: 'L1', zh: '3–4 岁', desc: '纯大图 + 拟声 + 简短中英' },
@@ -55,15 +88,22 @@ function toggleSound(): void {
   state.prefs.soundFx = !turningOff;
 }
 
-function setRate(v: number): void {
-  state.prefs.speechRate = v;
+function setRate(key: RateKey, v: number): void {
+  state.prefs.speechRates = { ...state.prefs.speechRates, [key]: v };
   playSfx('soft');
 }
 
-/** 试听：用真卡片音频，听到的就是孩子听到的 */
-function previewRate(): void {
+/** 试听：用真卡片音频 + 该类别的档位，听到的就是孩子听到的 */
+function previewRate(key: RateKey): void {
   const ticket = newSession();
-  void speak({ url: audioZh('apple'), text: '苹果', lang: 'zh', ticket, timeoutMs: 4000 });
+  void speak({
+    url: audioZh('apple'),
+    text: '苹果',
+    lang: 'zh',
+    ticket,
+    timeoutMs: 4000,
+    rate: rateFor(key),
+  });
 }
 
 function clearFavorites(): void {
@@ -157,24 +197,56 @@ function resetTimer(): void {
           </div>
         </section>
 
-        <!-- 语速 -->
+        <!-- 语速：按内容类型分开设，古诗/故事通常要比识物慢 -->
         <section class="pa-settings__group">
           <div class="pa-settings__label">
             朗读语速
-            <span class="pa-settings__hint">（预烘焙语音实时变速，不变调）</span>
+            <span class="pa-settings__hint">（按内容分别调，不变调）</span>
           </div>
-          <div class="pa-settings__limits">
-            <button
-              v-for="r in SPEECH_RATES"
-              :key="r.v"
-              type="button"
-              class="pa-settings__limit"
-              :class="{ 'is-active': state.prefs.speechRate === r.v }"
-              @click="setRate(r.v)"
-            >
-              {{ r.zh }}
-            </button>
-            <button type="button" class="pa-settings__link" @click="previewRate">试听</button>
+          <div v-for="g in RATE_GROUPS" :key="g.key" class="pa-settings__rate-row">
+            <div class="pa-settings__rate-name">
+              {{ g.zh }}
+              <span class="pa-settings__hint">{{ g.desc }}</span>
+            </div>
+            <div class="pa-settings__limits">
+              <button
+                v-for="r in SPEECH_RATES"
+                :key="r.v"
+                type="button"
+                class="pa-settings__limit"
+                :class="{ 'is-active': rateFor(g.key) === r.v }"
+                @click="setRate(g.key, r.v)"
+              >
+                {{ r.zh }}
+              </button>
+              <button type="button" class="pa-settings__link" @click="previewRate(g.key)">试听</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 今日推荐 -->
+        <section class="pa-settings__group">
+          <div class="pa-settings__label">
+            今日推荐
+            <span class="pa-settings__hint">（每类三张，点一下直接打开）</span>
+          </div>
+          <div v-for="l in DAILY_LANES" :key="l.id" class="pa-settings__rate-row">
+            <div class="pa-settings__rate-name">{{ l.zh }}</div>
+            <div class="pa-settings__daily">
+              <button
+                v-for="c in daily[l.id]"
+                :key="c.id"
+                type="button"
+                class="pa-settings__daily-item"
+                @click="openDaily(c)"
+              >
+                <span class="pa-settings__daily-emoji">
+                  <img v-if="cardImage(c.id)" :src="cardImage(c.id)" alt="" />
+                  <template v-else>{{ c.emoji }}</template>
+                </span>
+                <span class="pa-settings__daily-zh">{{ c.zh }}</span>
+              </button>
+            </div>
           </div>
         </section>
 
@@ -411,6 +483,65 @@ function resetTimer(): void {
   border-color: var(--pa-accent);
   background: var(--pa-accent-soft);
   color: var(--pa-accent-deep);
+}
+
+/* ---------- 语速（按内容分类） ---------- */
+.pa-settings__rate-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 0;
+}
+.pa-settings__rate-row + .pa-settings__rate-row {
+  border-top: 1px solid var(--pa-line);
+}
+
+.pa-settings__rate-name {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: var(--pa-fs-parent);
+  font-weight: 800;
+  color: var(--pa-ink);
+}
+
+/* ---------- 今日推荐 ---------- */
+.pa-settings__daily {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pa-settings__daily-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border-radius: var(--pa-r-pill);
+  background: var(--pa-card);
+  box-shadow: var(--pa-shadow-sm);
+  font-size: var(--pa-fs-parent);
+  font-weight: 700;
+  color: var(--pa-ink);
+}
+.pa-settings__daily-item:active {
+  transform: scale(0.96);
+}
+
+.pa-settings__daily-emoji {
+  font-size: 20px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+.pa-settings__daily-emoji img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .pa-settings__stat {

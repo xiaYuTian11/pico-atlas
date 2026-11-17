@@ -58,6 +58,26 @@ export const SPEECH_RATES: Array<{ v: number; zh: string }> = [
   { v: 1.15, zh: '快' },
 ];
 
+/** 可以单独调语速的内容类别（孩子不同内容需要的节奏不一样） */
+export type RateKey = 'object' | 'poem' | 'story' | 'number';
+
+export const RATE_GROUPS: Array<{ key: RateKey; zh: string; desc: string }> = [
+  { key: 'object', zh: '识物短词', desc: '单词 + 短句' },
+  { key: 'poem', zh: '古诗词', desc: '建议偏慢' },
+  { key: 'story', zh: '故事插画', desc: '建议偏慢' },
+  { key: 'number', zh: '数数 / 益智', desc: '点数时需要更慢' },
+];
+
+/** 取某类内容的语速：优先分类档位，其次全局，最后原速 */
+export function rateFor(key?: RateKey): number {
+  const prefs = state.prefs;
+  if (key) {
+    const v = prefs.speechRates?.[key];
+    if (typeof v === 'number' && v > 0) return v;
+  }
+  return prefs.speechRate || 1;
+}
+
 export interface LaneProgress {
   lastId: string | null;
   seen: string[];
@@ -81,8 +101,12 @@ export interface AppState {
     limitMinutes: number;
     /** 音效开关 */
     soundFx: boolean;
-    /** 朗读语速倍率：孩子们听不清就调慢 */
+    /** 朗读语速倍率：孩子们听不清就调慢（全局兑底值） */
     speechRate: number;
+    /** 按内容类型分别设的语速，缺省则用 speechRate */
+    speechRates: Partial<Record<RateKey, number>>;
+    /** 已播过引导语的内容类型（每类只引导一次，不反复打扰） */
+    guidedTypes: RateKey[];
   };
   session: {
     /** 本次已用秒数 */
@@ -116,6 +140,8 @@ function defaultState(): AppState {
       limitMinutes: 15,
       soundFx: true,
       speechRate: 1,
+      speechRates: {},
+      guidedTypes: [],
     },
     session: { currentSessionSeconds: 0, isSleeping: false },
     stats: { totalSeconds: 0, lastOpenAt: null },
@@ -124,11 +150,24 @@ function defaultState(): AppState {
 
 /** 深合并，保证旧存档升级后不缺字段 */
 function mergeState(base: AppState, loaded: Partial<AppState>): AppState {
+  const mergedPrefs = { ...base.prefs, ...(loaded.prefs ?? {}) };
+  // 旧存档只有全局 speechRate：用户调过的值平移到四个分类，别让设置"突然变回原速"
+  if (!loaded.prefs?.speechRates) {
+    const legacy = loaded.prefs?.speechRate;
+    if (typeof legacy === 'number' && legacy > 0 && legacy !== 1) {
+      mergedPrefs.speechRates = {
+        object: legacy,
+        poem: legacy,
+        story: legacy,
+        number: legacy,
+      };
+    }
+  }
   return {
     ...base,
     ...loaded,
     progress: { ...base.progress, ...(loaded.progress ?? {}) },
-    prefs: { ...base.prefs, ...(loaded.prefs ?? {}) },
+    prefs: mergedPrefs,
     session: { ...base.session, ...(loaded.session ?? {}) },
     stats: { ...base.stats, ...(loaded.stats ?? {}) },
     favorites: Array.isArray(loaded.favorites) ? loaded.favorites : [],

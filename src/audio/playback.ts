@@ -9,8 +9,28 @@ import {
   audioZh,
   audioQuiz,
 } from '@/content/media';
-import { state, type PlayMode } from '@/state/store';
+import { state, type PlayMode, type RateKey } from '@/state/store';
 import { alive, newSession, playSfx, sleep, speak, stopAll } from './engine';
+
+/** 卡片类型 → 语速分类（家长可以给古诗/故事单独调慢） */
+export function rateKeyOf(card: Card): RateKey {
+  switch (card.type) {
+    case 'poem':
+      return 'poem';
+    case 'story':
+      return 'story';
+    case 'number':
+    case 'quiz_shadow':
+    case 'quiz_sound':
+    case 'quiz_sort':
+    case 'tracing':
+    case 'part_to_whole':
+    case 'cause_habit':
+      return 'number';
+    default:
+      return 'object';
+  }
+}
 
 /**
  * 播放编排 —— 把"卡片 + 年龄档 + 播放模式"翻译成一条朗读时间轴。
@@ -81,6 +101,7 @@ export async function readCard(card: Card, ticket: number, hooks: ReadHooks): Pr
 
 async function readObject(card: Card, ticket: number, hooks: ReadHooks): Promise<boolean> {
   const band = state.ageBand ?? 'L1';
+  const rateKey = rateKeyOf(card);
 
   // 1. 中文主词
   hooks.onHighlight('zh');
@@ -89,6 +110,7 @@ async function readObject(card: Card, ticket: number, hooks: ReadHooks): Promise
     text: card.zh,
     lang: 'zh',
     ticket,
+    rateKey,
   });
   if (!alive(ticket)) return false;
   hooks.onHighlight(null);
@@ -99,7 +121,7 @@ async function readObject(card: Card, ticket: number, hooks: ReadHooks): Promise
   // 3. 英文主词
   if (card.en) {
     hooks.onHighlight('en');
-    await speak({ url: audioEn(card.id), text: card.en, lang: 'en', ticket });
+    await speak({ url: audioEn(card.id), text: card.en, lang: 'en', ticket, rateKey });
     if (!alive(ticket)) return false;
     hooks.onHighlight(null);
   }
@@ -110,14 +132,14 @@ async function readObject(card: Card, ticket: number, hooks: ReadHooks): Promise
     if (lv.sentence_zh) {
       if (!(await sleep(600, ticket))) return false;
       hooks.onHighlight('sentenceZh');
-      await speak({ url: audioSentZh(card.id, band), text: lv.sentence_zh, lang: 'zh', ticket });
+      await speak({ url: audioSentZh(card.id, band), text: lv.sentence_zh, lang: 'zh', ticket, rateKey });
       if (!alive(ticket)) return false;
       hooks.onHighlight(null);
     }
     if (lv.sentence_en) {
       if (!(await sleep(800, ticket))) return false;
       hooks.onHighlight('sentenceEn');
-      await speak({ url: audioSentEn(card.id, band), text: lv.sentence_en, lang: 'en', ticket });
+      await speak({ url: audioSentEn(card.id, band), text: lv.sentence_en, lang: 'en', ticket, rateKey });
       if (!alive(ticket)) return false;
       hooks.onHighlight(null);
     }
@@ -130,6 +152,7 @@ async function readObject(card: Card, ticket: number, hooks: ReadHooks): Promise
 /* ---------------- 古诗：整首优先，逐句兜底 ---------------- */
 
 async function readPoem(card: Card, ticket: number, hooks: ReadHooks): Promise<boolean> {
+  const rateKey: RateKey = 'poem';
   const lines = card.lines ?? [];
   // 不管哪个年龄档，整首都要读完。
   // （旧版 L1 只读前两句，孩子听到一半就停，是最容易被当成“坏了”的体验）
@@ -145,7 +168,7 @@ async function readPoem(card: Card, ticket: number, hooks: ReadHooks): Promise<b
       if (!alive(ticket)) return false;
       hooks.onHighlight('poemLine', i);
       if (i < focusLines) {
-        await speak({ url: lineUrls[i], text: lines[i], lang: 'zh', ticket });
+        await speak({ url: lineUrls[i], text: lines[i], lang: 'zh', ticket, rateKey });
         if (!alive(ticket)) return false;
         if (!(await sleep(TIMING.poemLineGapMs, ticket))) return false;
       } else {
@@ -168,7 +191,7 @@ async function readPoem(card: Card, ticket: number, hooks: ReadHooks): Promise<b
       idx++;
       if (idx < lines.length) hooks.onHighlight('poemLine', idx);
     }, perLine);
-    const ok = await speak({ url: full, text: lines.join(''), lang: 'zh', ticket });
+    const ok = await speak({ url: full, text: lines.join(''), lang: 'zh', ticket, rateKey });
     clearInterval(ticker);
     hooks.onHighlight(null);
     return ok;
@@ -181,7 +204,7 @@ async function readPoem(card: Card, ticket: number, hooks: ReadHooks): Promise<b
     const lineAudio = audioPoemLine(card.id, i + 1);
     // L1 只读前 focusLines 句；其余只高亮不读
     if (i < focusLines) {
-      await speak({ url: lineAudio, text: lines[i], lang: 'zh', ticket });
+      await speak({ url: lineAudio, text: lines[i], lang: 'zh', ticket, rateKey });
       if (!alive(ticket)) return false;
       if (!(await sleep(TIMING.poemLineGapMs, ticket))) return false;
     } else {
@@ -215,7 +238,13 @@ async function readStory(card: Card, ticket: number, hooks: ReadHooks): Promise<
   const text = lv.text ?? card.zh;
 
   hooks.onHighlight('storyText');
-  const ok = await speak({ url: audioStory(card.id, band), text, lang: 'zh', ticket });
+  const ok = await speak({
+    url: audioStory(card.id, band),
+    text,
+    lang: 'zh',
+    ticket,
+    rateKey: 'story',
+  });
   hooks.onHighlight(null);
   return ok;
 }
@@ -229,6 +258,7 @@ async function readQuizPrompt(card: Card, ticket: number, hooks: ReadHooks): Pro
     text: card.zh,
     lang: 'zh',
     ticket,
+    rateKey: rateKeyOf(card),
   });
   hooks.onHighlight(null);
   return ok;
@@ -238,6 +268,7 @@ async function readQuizPrompt(card: Card, ticket: number, hooks: ReadHooks): Pro
 
 export async function readPart(card: Card, part: HighlightTarget, poemLineIndex?: number): Promise<void> {
   const mode = state.prefs.playMode;
+  const rateKey = rateKeyOf(card);
 
   // 任何点击都先作废进行中的播放（强打断）
   // 注意：newSession 已递增，所以 stopAll 只需清音频
@@ -256,22 +287,34 @@ export async function readPart(card: Card, part: HighlightTarget, poemLineIndex?
       // CardText 的 aria-label 承诺「点一下听中文」，不能只响音效。
       // 点图区播拟声的路径在 StageShell.onCardTap 里，与此处不重叠。
       playSfx(card.sound ?? 'pop');
-      await speak({ url: audioZh(card.id), text: card.zh, lang: 'zh', ticket: t });
+      await speak({ url: audioZh(card.id), text: card.zh, lang: 'zh', ticket: t, rateKey });
       break;
     }
     case 'en':
-      await speak({ url: audioEn(card.id), text: card.en ?? '', lang: 'en', ticket: t });
+      await speak({ url: audioEn(card.id), text: card.en ?? '', lang: 'en', ticket: t, rateKey });
       break;
     case 'sentenceZh': {
       const band = state.ageBand ?? 'L1';
       const lv = levelOf(card, band);
-      await speak({ url: audioSentZh(card.id, band), text: lv.sentence_zh ?? '', lang: 'zh', ticket: t });
+      await speak({
+        url: audioSentZh(card.id, band),
+        text: lv.sentence_zh ?? '',
+        lang: 'zh',
+        ticket: t,
+        rateKey,
+      });
       break;
     }
     case 'sentenceEn': {
       const band = state.ageBand ?? 'L1';
       const lv = levelOf(card, band);
-      await speak({ url: audioSentEn(card.id, band), text: lv.sentence_en ?? '', lang: 'en', ticket: t });
+      await speak({
+        url: audioSentEn(card.id, band),
+        text: lv.sentence_en ?? '',
+        lang: 'en',
+        ticket: t,
+        rateKey,
+      });
       break;
     }
     case 'poemLine': {
@@ -282,13 +325,20 @@ export async function readPart(card: Card, part: HighlightTarget, poemLineIndex?
         text: lines[i] ?? '',
         lang: 'zh',
         ticket: t,
+        rateKey,
       });
       break;
     }
     case 'storyText': {
       const band = state.ageBand ?? 'L1';
       const lv = levelOf(card, band);
-      await speak({ url: audioStory(card.id, band), text: lv.text ?? card.zh, lang: 'zh', ticket: t });
+      await speak({
+        url: audioStory(card.id, band),
+        text: lv.text ?? card.zh,
+        lang: 'zh',
+        ticket: t,
+        rateKey,
+      });
       break;
     }
     default:

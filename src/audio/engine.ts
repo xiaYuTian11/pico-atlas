@@ -16,7 +16,7 @@
  */
 
 import { audioSfx } from '@/content/media';
-import { state } from '@/state/store';
+import { rateFor, state, type RateKey } from '@/state/store';
 
 let sessionId = 0;
 let currentTrack: HTMLAudioElement | null = null;
@@ -111,6 +111,10 @@ interface SpeakOptions {
   ticket: number;
   /** 超时保护（毫秒），防止卡死 */
   timeoutMs?: number;
+  /** 内容类别，用于取分类语速（缺省用全局档） */
+  rateKey?: RateKey;
+  /** 临时覆盖语速（引导语、报数等不想跟随家长档位时用） */
+  rate?: number;
 }
 
 /**
@@ -119,6 +123,7 @@ interface SpeakOptions {
  */
 export async function speak(opts: SpeakOptions): Promise<boolean> {
   const { url, text, lang = 'zh', ticket, timeoutMs = 8000 } = opts;
+  const rate = opts.rate && opts.rate > 0 ? opts.rate : rateFor(opts.rateKey);
 
   if (!alive(ticket)) return false;
   if (state.prefs.playMode === 'quiet_mute') {
@@ -138,18 +143,17 @@ export async function speak(opts: SpeakOptions): Promise<boolean> {
   }
 
   if (url) {
-    return speakAudio(url, ticket, timeoutMs);
+    return speakAudio(url, ticket, timeoutMs, rate);
   }
-  return speakWebSpeech(text, lang, ticket, timeoutMs);
+  return speakWebSpeech(text, lang, ticket, timeoutMs, rate);
 }
 
-function speakAudio(url: string, ticket: number, timeoutMs: number): Promise<boolean> {
+function speakAudio(url: string, ticket: number, timeoutMs: number, rate: number): Promise<boolean> {
   return new Promise((resolve) => {
     const el = acquire(url);
     currentTrack = el;
 
-    // 语速：家长可在设置里调慢。preservesPitch 保证变速不变调（否则会变成小黄人）。
-    const rate = state.prefs.speechRate || 1;
+    // 语速：家长可在设置里按内容类型分别调慢。preservesPitch 保证变速不变调（否则会变成小黄人）。
     el.preservesPitch = true;
     (el as HTMLAudioElement & { webkitPreservesPitch?: boolean }).webkitPreservesPitch = true;
     el.playbackRate = rate;
@@ -209,6 +213,7 @@ function speakWebSpeech(
   lang: 'zh' | 'en',
   ticket: number,
   timeoutMs: number,
+  rate: number,
 ): Promise<boolean> {
   return new Promise((resolve) => {
     if (!('speechSynthesis' in window) || !text) {
@@ -216,7 +221,6 @@ function speakWebSpeech(
       return;
     }
     const seq = ++speakSeq;
-    const rate = state.prefs.speechRate || 1;
     let settled = false;
     const finish = (ok: boolean): void => {
       if (settled) return;

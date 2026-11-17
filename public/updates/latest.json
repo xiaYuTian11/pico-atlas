@@ -1,7 +1,7 @@
 {
   "_说明": "应用内升级的备用更新源。发布新版本时把这里改成最新版信息即可（GitHub Releases 能读到时会优先用 Releases）。",
-  "version": "0.2.4",
-  "url": "https://github.com/xiaYuTian11/pico-atlas/releases/download/v0.2.4/pico-atlas-0.2.4.apk",
-  "size": 43669661,
-  "notes": "修复更新下载进度条乱跳：禁用 gzip 长度错配、百分比只增不减、服务端不给总大小时用元数据兜底、下载不完整直接拒绝安装"
+  "version": "0.2.5",
+  "url": "https://github.com/xiaYuTian11/pico-atlas/releases/download/v0.2.5/pico-atlas-0.2.5.apk",
+  "size": 43894051,
+  "notes": "数数卡补上「基数原则」：数一个报一个，数完说出总数并三选一确认，答错重数不惩罚；语速按内容分别调（识物/古诗/故事/数数益智）；家长端新增「今日推荐」每类三张，进卡首次播引导语"
 }

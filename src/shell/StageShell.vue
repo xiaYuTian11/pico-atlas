@@ -14,11 +14,19 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import type { Card, Lane } from '@/content/types';
 import { CARD_RENDERERS, GESTURE_LOCKED_TYPES } from '@/cards';
-import { state, toggleFavorite, markSeen, setLastId, isFavorite as isFav } from '@/state/store';
-import { playSfx, stopAll, unlockAudio, newSession, alive, sleep } from '@/audio/engine';
+import { state, toggleFavorite, markSeen, setLastId, isFavorite as isFav, type RateKey } from '@/state/store';
+import { playSfx, stopAll, unlockAudio, newSession, alive, sleep, speak } from '@/audio/engine';
 import { engageListen, releaseListen, onStopRequested } from '@/audio/keepawake';
 import { reading, beginReading, endReading } from '@/state/runtime';
-import { readCard, readPart, autoReadsOnFlip, TIMING, type HighlightTarget } from '@/audio/playback';
+import {
+  readCard,
+  readPart,
+  autoReadsOnFlip,
+  rateKeyOf,
+  TIMING,
+  type HighlightTarget,
+} from '@/audio/playback';
+import { audioGuide } from '@/content/media';
 import { getSection } from '@/content';
 import BottomBar from '@/ui/BottomBar.vue';
 import PaIcon from '@/ui/PaIcon.vue';
@@ -81,21 +89,66 @@ function clearHighlight(): void {
   poemLineIndex.value = null;
 }
 
+/** 引导语文案（与 tools/gen_audio.py 的 GUIDE_LINES 一致），音频缺失时用 TTS 兜底 */
+const GUIDE_TEXT: Record<RateKey, string> = {
+  object: '先看看图，再听我说。',
+  poem: '听我读一遍，你也可以跟着读。',
+  story: '我们来看一个小故事。',
+  number: '点一点，数一数，一起数吧。',
+};
+
+/**
+ * 每类内容第一次进入时播一句引导。
+ * 孩子不识字，没有这句话就只会对着图乱点，家长又不可能一直在旁边。
+ * 只播一次：反复播会变成噪音。
+ */
+async function maybeGuide(c: Card, ticket: number): Promise<void> {
+  const key = rateKeyOf(c);
+  if (state.prefs.guidedTypes?.includes(key)) return;
+  const done = await speak({
+    url: audioGuide(key),
+    text: GUIDE_TEXT[key],
+    lang: 'zh',
+    ticket,
+    rateKey: key,
+    timeoutMs: 6000,
+  });
+  // 只在真的说完后记账：被翻页打断就留给下次，不能把这一类永久标成“已引导”
+  if (done && alive(ticket) && !state.prefs.guidedTypes?.includes(key)) {
+    state.prefs.guidedTypes = [...(state.prefs.guidedTypes ?? []), key];
+  }
+}
+
 /** 翻页落定后的自动朗读（含 700ms 视觉认知窗口） */
 function scheduleAutoRead(): void {
   if (flipTimer) clearTimeout(flipTimer);
   const mode = state.prefs.playMode;
-  if (!autoReadsOnFlip(mode)) return;
   if (isPlaying.value) return;
 
   flipTimer = setTimeout(() => {
     if (!card.value) return;
+    const c = card.value;
     const ticket = newSession();
+
+    if (!autoReadsOnFlip(mode)) {
+      // 不自动朗读的模式（点读/静音）也要给一次引导，否则孩子进来毫无方向
+      void maybeGuide(c, ticket);
+      return;
+    }
+
     if (mode === 'single_loop') {
-      void runLoop(ticket);
+      // 单卡循环也要引导：家长把默认模式锁成它的时候，这里是唯一入口
+      void (async () => {
+        await maybeGuide(c, ticket);
+        if (!alive(ticket)) return;
+        await runLoop(ticket);
+      })();
     } else {
       beginReading('auto');
-      void readCard(card.value!, ticket, hooks).then(() => {
+      void (async () => {
+        await maybeGuide(c, ticket);
+        if (!alive(ticket)) return;
+        await readCard(c, ticket, hooks);
         // 被打断（翻页/暂停/切模式）时不回写状态：新的持有者已经在跑了
         if (!alive(ticket)) return;
         clearHighlight();
@@ -104,7 +157,7 @@ function scheduleAutoRead(): void {
           showNextHint.value = true;
         }
         endReading();
-      });
+      })();
     }
   }, TIMING.flipSettleMs);
 }

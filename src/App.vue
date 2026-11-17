@@ -34,6 +34,8 @@ const stageCards = ref<Card[]>([]);
 const stageIndex = ref(0);
 const stageLane = ref<Lane | 'favorites' | 'recent'>('look');
 const stageSection = ref<string | undefined>(undefined);
+/** 从「今日推荐」直接打开的：退出时回首页，不要把孩子撂在网格页 */
+const stageFromDaily = ref(false);
 
 /* 浮层 */
 const gateOpen = ref(false);
@@ -53,6 +55,7 @@ let backListener: { remove: () => Promise<void> } | null = null;
 /* ---------------- 导航 ---------------- */
 
 function openLane(lane: Lane): void {
+  stageFromDaily.value = false;
   gridLane.value = lane;
   const secs = populatedSections(lane);
   gridSection.value = secs[0]?.id;
@@ -72,6 +75,7 @@ function openCard(sectionId: string, cardId: string): void {
 }
 
 function openFavorites(): void {
+  stageFromDaily.value = false;
   stageCards.value = state.favorites.map((id) => getCard(id)).filter((c): c is Card => !!c);
   if (stageCards.value.length === 0) {
     toast('还没有收藏的卡片');
@@ -85,6 +89,7 @@ function openFavorites(): void {
 
 /** 最近看过：按时间倒序复习 */
 function openRecent(): void {
+  stageFromDaily.value = false;
   stageCards.value = state.recent.map((id) => getCard(id)).filter((c): c is Card => !!c);
   if (stageCards.value.length === 0) {
     toast('还没有看过的卡片');
@@ -101,8 +106,24 @@ function backFromGrid(): void {
   screen.value = 'home';
 }
 
+/** 家长从「今日推荐」直接打开某张卡 */
+function openDailyCard(sectionId: string, cardId: string): void {
+  settingsOpen.value = false;
+  const card = getCard(cardId);
+  if (!card) return;
+  gridLane.value = card.lane;
+  stageFromDaily.value = true;
+  stopAll();
+  openCard(sectionId, cardId);
+}
+
 function backFromStage(): void {
   stopAll();
+  if (stageFromDaily.value) {
+    stageFromDaily.value = false;
+    screen.value = 'home';
+    return;
+  }
   // 从最爱 / 最近看过进 → 回首页；从分区进 → 回网格
   if (stageLane.value === 'favorites' || stageLane.value === 'recent') {
     screen.value = 'home';
@@ -238,7 +259,11 @@ onUnmounted(() => {
 
       <!-- 浮层 -->
       <ParentGate :open="gateOpen" @unlock="onGateUnlock" @close="gateOpen = false" />
-      <ParentSettings :open="settingsOpen" @close="settingsOpen = false" />
+      <ParentSettings
+        :open="settingsOpen"
+        @close="settingsOpen = false"
+        @open-card="openDailyCard"
+      />
       <SleepRitual :open="sleepOpen" @close="onSleepClose" />
       <PaToast :message="toastMsg" :trigger="toastTrigger" />
     </template>

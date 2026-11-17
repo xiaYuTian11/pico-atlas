@@ -73,6 +73,8 @@ function onMode(): void {
     lang: 'zh',
     ticket,
     timeoutMs: 2600,
+    // 导航语音跟随“识物/日常”语速档，否则家长调慢后这里依旧原速，听着割裂
+    rateKey: 'object',
   });
 }
 

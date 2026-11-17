@@ -18,6 +18,9 @@
   media/audio/story/<id>_<band>.mp3  故事单页正文
   media/audio/quiz/<id>.mp3          益智题面
   media/audio/ui/mode_<mode>.mp3     模式切换人声
+  media/audio/ui/guide_<type>.mp3    进卡引导语（每类内容一句，只播一次）
+  media/audio/ui/count_<key>.mp3     数数提示（提问 / 重数 / 答对）
+  media/audio/count/total_<n>.mp3    数数总数确认（“一共有五个”）
 
 韵律策略（解决"语调不对"）：
   - 古诗：整首放慢 22%，句间用"。"制造停顿；逐句单独生成，句尾自然降调
@@ -31,7 +34,9 @@
   python tools/gen_audio.py --ids apple,banana
   python tools/gen_audio.py --types poem,story
   python tools/gen_audio.py --all --force
-  python tools/gen_audio.py --ui            # 只出 4 条模式语音
+  python tools/gen_audio.py --ui            # 模式语音 + 数数提示语 + 分区报读
+  python tools/gen_audio.py --count         # 数数卡的总数确认语音
+  python tools/gen_audio.py --guide         # 四类内容的进卡引导语
 """
 
 from __future__ import annotations
@@ -66,6 +71,31 @@ MODE_LINES = {
     "loop": "这一页，再读一遍",
     "tap": "点一点，读一读",
     "mute": "安静看书，不出声音",
+}
+
+# 数数卡的「基数确认」环节：数完必须说总数，否则孩子只记住“念数歌”。
+CN_NUM = {1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八", 9: "九", 10: "十"}
+
+COUNT_TOTAL_LINES = {
+    # 汉语习惯：1 用“一个”、2 用“两个”，其余用数字
+    1: "一共有一个",
+    2: "一共有两个",
+    **{n: f"一共有{zh}个" for n, zh in CN_NUM.items() if n >= 3},
+}
+
+# 数数交互里的提示语
+COUNT_UI_LINES = {
+    "count_ask": "一共几个呀？",
+    "count_retry": "我们再数一次。",
+    "count_yes": "对啦，你真棒！",
+}
+
+# 进卡引导语：每类内容第一次进入时播一句，之后不再重复
+GUIDE_LINES = {
+    "object": "先看看图，再听我说。",
+    "poem": "听我读一遍，你也可以跟着读。",
+    "story": "我们来看一个小故事。",
+    "number": "点一点，数一数，一起数吧。",
 }
 
 
@@ -188,7 +218,9 @@ def main() -> int:
     ap.add_argument("--ids", default="")
     ap.add_argument("--types", default="")
     ap.add_argument("--all", action="store_true")
-    ap.add_argument("--ui", action="store_true", help="只生成模式切换的 4 条人声")
+    ap.add_argument("--ui", action="store_true", help="只生成模式切换与数数提示人声")
+    ap.add_argument("--count", action="store_true", help="只生成数数卡的总数确认语音")
+    ap.add_argument("--guide", action="store_true", help="只生成四类内容的进卡引导语")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
@@ -200,6 +232,14 @@ def main() -> int:
             jobs.append((OUT / "ui" / f"mode_{key}.mp3", line, "zh_sent"))
         for key, line in SECTION_LINES:
             jobs.append((OUT / "section" / f"{key}.mp3", line, "zh_sent"))
+        for key, line in COUNT_UI_LINES.items():
+            jobs.append((OUT / "ui" / f"{key}.mp3", line, "zh_sent"))
+    elif args.count:
+        for n, line in COUNT_TOTAL_LINES.items():
+            jobs.append((OUT / "count" / f"total_{n}.mp3", line, "zh_sent"))
+    elif args.guide:
+        for key, line in GUIDE_LINES.items():
+            jobs.append((OUT / "ui" / f"guide_{key}.mp3", line, "zh_sent"))
     else:
         ids = {s.strip() for s in args.ids.split(",") if s.strip()}
         types = {s.strip() for s in args.types.split(",") if s.strip()}

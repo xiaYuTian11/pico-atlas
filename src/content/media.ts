@@ -137,6 +137,31 @@ export function audioMode(mode: 'flip' | 'loop' | 'tap' | 'mute'): string | unde
   return pickAudio(['mp3', 'm4a'].map((ext) => `media/audio/ui/mode_${mode}.${ext}`));
 }
 
+/** 数数：报第 n 个（“一”“二”…），复用数数卡的中文主词音频 */
+export function audioCountNum(n: number): string | undefined {
+  return pickAudio(
+    ['mp3', 'm4a'].flatMap((ext) => [
+      `media/audio/zh/count-${n}.${ext}`,
+      `media/audio/count/num_${n}.${ext}`,
+    ]),
+  );
+}
+
+/** 数数：数完说总数（“一共有五个”） */
+export function audioCountTotal(n: number): string | undefined {
+  return pickAudio(['mp3', 'm4a'].map((ext) => `media/audio/count/total_${n}.${ext}`));
+}
+
+/** 数数交互的提示语（提问 / 重数 / 答对） */
+export function audioCountUi(key: 'count_ask' | 'count_retry' | 'count_yes'): string | undefined {
+  return pickAudio(['mp3', 'm4a'].map((ext) => `media/audio/ui/${key}.${ext}`));
+}
+
+/** 进卡引导语（每类内容一句，只在首次进入时播） */
+export function audioGuide(key: 'object' | 'poem' | 'story' | 'number'): string | undefined {
+  return pickAudio(['mp3', 'm4a'].map((ext) => `media/audio/ui/guide_${key}.${ext}`));
+}
+
 /** 是否有任何媒体资源（用于开发期提示） */
 export function hasAnyMedia(): boolean {
   return imageSet.size > 0 || audioSet.size > 0;
